@@ -44,13 +44,13 @@ const personal = {
   bio: 'Seorang Full Stack Developer dan UI/UX Designer yang aktif mengembangkan berbagai solusi digital modern, mulai dari website, software, hingga sistem berbasis performa tinggi. Memiliki ketertarikan besar pada web development, server management, dan optimasi sistem, dengan fokus menciptakan aplikasi yang responsif, efisien, dan nyaman digunakan.',
   avatar: '/images/portfolio/foto_rama.png',
   location: 'Sukabumi, Jawa Barat',
-  email: 'aderamadhaniputra@gmail.com',
+  email: 'aderamadhaniputra35@gmail.com',
   phone: '+62 857-9518-5561',
   whatsapp: 'https://wa.me/6285795185561',
-  website: 'https://rama.server.my.id',
+  website: 'https://rama-x2.my.id',
   github: 'https://github.com/Rama-X2',
   linkedin: 'https://linkedin.com/in/rama-xd',
-  instagram: 'https://instagram.com/',
+  instagram: 'https://instagram.com/rama_tcp',
 }
 
 const skills = [
@@ -214,6 +214,30 @@ const projects = [
     liveUrl: '#',
     githubUrl: 'https://github.com/Rama-X2',
     category: 'Kernel Development',
+    featured: false,
+  },
+  {
+    id: 7,
+    title: 'Statistika & Probabilitas EAS – Kalkulator Regresi & Slovin',
+    description:
+      'Aplikasi web interaktif sebagai tugas Evaluasi Akhir Semester (EAS) mata kuliah Statistika dan Probabilitas. Terdiri dari dua kalkulator: (1) Analisis Regresi Linier Sederhana untuk load testing server – menghitung hubungan antara jumlah concurrent users dengan response time, lengkap dengan grafik scatter plot, persamaan regresi, dan prediksi kapasitas maksimal. (2) Kalkulator Rumus Slovin untuk menentukan ukuran sampel minimum dari suatu populasi dengan tingkat error tertentu.',
+    image: '/images/portfolio/banner_statistika.png',
+    technologies: ['HTML', 'Tailwind CSS', 'JavaScript', 'Chart.js', 'Vercel'],
+    liveUrl: 'https://statistika-dan-probabilitas-eas.vercel.app',
+    githubUrl: 'https://github.com/Rama-X2/Statistika-dan-Probabilitas-EAS',
+    category: 'Web App – Academic',
+    featured: false,
+  },
+  {
+    id: 8,
+    title: 'Digital Image Compare Tools',
+    description:
+      'Aplikasi web berbasis browser untuk membandingkan kualitas dan karakteristik teknis gambar digital secara side-by-side. Mendukung eksperimen Bit Depth (1-bit hingga 32-bit), kompresi JPEG, format TIFF, serta upscaling resolusi. Setiap gambar yang diunggah dianalisis dan ditampilkan dengan metadata lengkap: ukuran file, resolusi, color mode, dan estimasi bit depth. Cocok untuk belajar pengolahan citra digital dan membandingkan trade-off kualitas vs ukuran file.',
+    image: '/images/portfolio/banner_digital-image-compare.png',
+    technologies: ['HTML', 'CSS', 'JavaScript', 'Canvas API', 'Vercel'],
+    liveUrl: 'https://digital-image-compare-rama-x2.vercel.app',
+    githubUrl: 'https://github.com/Rama-X2/Digital-Image-Compare-Tools',
+    category: 'Web Tool – Image Processing',
     featured: false,
   },
 ]
