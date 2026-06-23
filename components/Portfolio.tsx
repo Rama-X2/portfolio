@@ -67,7 +67,7 @@ const skills = [
 const experiences = [
   {
     position: 'IT Support & System Developer',
-    period: '2021 – Sekarang',
+    period: '2023 – Sekarang',
     descriptions: [
       'Melakukan troubleshooting, maintenance, dan optimasi perangkat komputer serta smartphone.',
       'Menangani instalasi sistem operasi, driver, dan konfigurasi software.',
@@ -89,7 +89,7 @@ const experiences = [
   },
   {
     position: 'Personal Software & Experimental Projects',
-    period: '2023 – Sekarang',
+    period: '2021 – Sekarang',
     descriptions: [
       'Mengembangkan berbagai project software dan eksperimen teknologi secara mandiri.',
       'Melakukan optimasi sistem, debugging, dan tuning performa pada berbagai environment.',
@@ -146,18 +146,6 @@ const achievements = [
 const projects = [
   {
     id: 1,
-    title: 'Rama Store – Gaming Topup Platform',
-    description:
-      'Modern gaming top-up platform dengan real-time transaction processing, multi-game support, dan animasi yang menarik. Dibangun menggunakan Next.js, TypeScript, dan Framer Motion.',
-    image: '/images/portfolio/banner_rama-store.png',
-    technologies: ['Next.js', 'TypeScript', 'Framer Motion', 'Tailwind CSS', 'Node.js'],
-    liveUrl: 'https://rama-store.vercel.app',
-    githubUrl: 'https://github.com/Rama-X2/rama-store',
-    category: 'Web Development',
-    featured: true,
-  },
-  {
-    id: 2,
     title: 'BumiTani – Premium Agricultural E-Commerce',
     description:
       'Website e-commerce pertanian modern premium dengan database 72 produk (bibit, nutrisi, pakan, peralatan, pestisida, dan pupuk) dalam 6 kategori. Dilengkapi filter dan pencarian real-time, detail modal produk, sistem keranjang LocalStorage, serta checkout via WhatsApp.',
@@ -169,7 +157,7 @@ const projects = [
     featured: true,
   },
   {
-    id: 3,
+    id: 2,
     title: 'PojokCoffee – Toko Kopi Online',
     description:
       'Platform e-commerce premium didedikasikan untuk para pecinta kopi dengan berbagai biji kopi pilihan seluruh Indonesia. Dilengkapi fitur pencarian & filter produk, detail tasting notes asal kopi, keranjang belanja dinamis, blog informatif, dan desain responsif.',
@@ -177,6 +165,18 @@ const projects = [
     technologies: ['HTML', 'Tailwind CSS', 'Preline UI', 'JavaScript', 'LocalStorage'],
     liveUrl: 'https://pojok-coffee-ex.vercel.app',
     githubUrl: 'https://github.com/Rama-X2/exchange',
+    category: 'Web Development',
+    featured: true,
+  },
+  {
+    id: 3,
+    title: 'Rama Store – Gaming Topup Platform',
+    description:
+      'Modern gaming top-up platform dengan real-time transaction processing, multi-game support, dan animasi yang menarik. Dibangun menggunakan Next.js, TypeScript, dan Framer Motion.',
+    image: '/images/portfolio/banner_rama-store.png',
+    technologies: ['Next.js', 'TypeScript', 'Framer Motion', 'Tailwind CSS', 'Node.js'],
+    liveUrl: 'https://rama-store.vercel.app',
+    githubUrl: 'https://github.com/Rama-X2/rama-store',
     category: 'Web Development',
     featured: true,
   },
