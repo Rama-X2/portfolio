@@ -866,7 +866,7 @@ export default function Portfolio() {
                       onClick={() => setSelectedProject(project)}
                     >
                       {/* Project image */}
-                      <div className="relative aspect-[16/9] overflow-hidden">
+                      <div className="relative h-40 sm:h-44 overflow-hidden">
                         <Image src={project.image} alt={project.title} fill
                           className="object-cover group-hover:scale-105 transition-transform duration-500" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -1046,7 +1046,7 @@ export default function Portfolio() {
                 </motion.button>
               </div>
 
-              <div className="relative aspect-[16/9] rounded-xl mb-5 overflow-hidden">
+              <div className="relative h-44 md:h-56 rounded-xl mb-5 overflow-hidden">
                 <Image src={selectedProject.image} alt={selectedProject.title} fill className="object-cover" />
                 {selectedProject.featured && (
                   <div className="absolute top-3 right-3 px-3 py-1 bg-yellow-500/90 text-black rounded-full text-xs font-bold">
