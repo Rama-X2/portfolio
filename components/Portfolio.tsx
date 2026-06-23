@@ -164,7 +164,7 @@ const projects = [
     image: '/images/portfolio/banner_bumi-tani.png',
     technologies: ['HTML', 'Tailwind CSS', 'JavaScript', 'LocalStorage', 'Vercel'],
     liveUrl: 'https://bumi-tani-v2.vercel.app',
-    githubUrl: 'https://github.com/Rama-X2/web-tani-pupuk',
+    githubUrl: 'https://github.com/Rama-X2/Bumi-Tani-v2',
     category: 'Web Development',
     featured: true,
   },
@@ -176,7 +176,7 @@ const projects = [
     image: '/images/portfolio/banner_pojok-coffee.png',
     technologies: ['HTML', 'Tailwind CSS', 'Preline UI', 'JavaScript', 'LocalStorage'],
     liveUrl: 'https://pojok-coffee-ex.vercel.app',
-    githubUrl: 'https://github.com/Rama-X2/pojok-coffee',
+    githubUrl: 'https://github.com/Rama-X2/exchange',
     category: 'Web Development',
     featured: true,
   },
@@ -200,7 +200,7 @@ const projects = [
     image: '/images/portfolio/banner_rama_server.png',
     technologies: ['React', 'Chart.js', 'Material-UI', 'Express.js', 'MongoDB'],
     liveUrl: 'https://rama.server.my.id/dashboard/rama-server',
-    githubUrl: 'https://github.com/Rama-X2/rama-server-dashboard',
+    githubUrl: 'https://github.com/Rama-X2/andora-ex-wami-ram',
     category: 'Dashboard',
     featured: true,
   },
@@ -1038,7 +1038,7 @@ export default function Portfolio() {
       {/* ── Certificate Modal ─── */}
       <AnimatePresence>
         {selectedCert && (
-          <motion.div className="portfolio-modal" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          <motion.div className="portfolio-modal cert-modal-wrap" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             onClick={() => setSelectedCert(null)}>
             <motion.div className="portfolio-modal-content" onClick={(e) => e.stopPropagation()}
               initial={{ scale: 0.88, y: 40 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 40 }}>

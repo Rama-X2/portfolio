@@ -224,7 +224,6 @@
   .whatsapp-btn:hover {
     background: #1da851;
     box-shadow: 0 6px 32px rgba(37, 211, 102, 0.6);
-    padding-right: 20px;
   }
   .whatsapp-label {
     display: none;
@@ -233,6 +232,9 @@
   @media (min-width: 640px) {
     .whatsapp-btn {
       bottom: 28px;
+    }
+    .whatsapp-btn:hover {
+      padding-right: 20px;
     }
     .whatsapp-label {
       display: inline;
@@ -404,4 +406,11 @@ body.modal-open {
   overflow: hidden !important;
   height: 100vh !important;
   overscroll-behavior: none !important;
+}
+
+/* Center certificate modal on mobile */
+@media (max-width: 640px) {
+  .portfolio-modal.cert-modal-wrap {
+    align-items: center !important;
+  }
 }
