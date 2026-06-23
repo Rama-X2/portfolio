@@ -218,18 +218,6 @@ const projects = [
   },
   {
     id: 7,
-    title: 'Kernel Overclocking by Rama',
-    description:
-      'Project kustomisasi kernel dengan fokus pada overclocking CPU/GPU, governor tuning, serta optimasi I/O scheduler dan thermal control.',
-    image: '/images/portfolio/kernel.jpg',
-    technologies: ['Android SDK', 'Shell Script', 'Linux Kernel', 'C', 'C++'],
-    liveUrl: '#',
-    githubUrl: 'https://github.com/Rama-X2',
-    category: 'Kernel Development',
-    featured: false,
-  },
-  {
-    id: 8,
     title: 'Digital Image Compare Tools',
     description:
       'Aplikasi web berbasis browser untuk membandingkan kualitas dan karakteristik teknis gambar digital secara side-by-side. Mendukung eksperimen Bit Depth (1-bit hingga 32-bit), kompresi JPEG, format TIFF, serta upscaling resolusi. Setiap gambar yang diunggah dianalisis dan ditampilkan dengan metadata lengkap: ukuran file, resolusi, color mode, dan estimasi bit depth. Cocok untuk belajar pengolahan citra digital dan membandingkan trade-off kualitas vs ukuran file.',
@@ -241,7 +229,7 @@ const projects = [
     featured: false,
   },
   {
-    id: 9,
+    id: 8,
     title: 'Thermal Breaker Miyabi Core',
     description:
       'Modul optimasi thermal Magisk tingkat lanjut yang dirancang khusus untuk mengurangi throttling agresif pada sistem Android dengan tetap menjaga perlindungan keamanan hardware.',
@@ -253,7 +241,7 @@ const projects = [
     featured: false,
   },
   {
-    id: 10,
+    id: 9,
     title: 'GMS Breaker Miyabi Core',
     description:
       'Modul optimasi proses latar belakang GMS (Google Play Services) secara agresif untuk meningkatkan stabilitas CPU, mengurangi penggunaan RAM, dan meningkatkan efisiensi baterai tanpa mengganggu akun Google.',
@@ -265,7 +253,7 @@ const projects = [
     featured: false,
   },
   {
-    id: 11,
+    id: 10,
     title: 'Redmi 10A GPU Performance Unlock',
     description:
       'Modifikasi sistem untuk membuka performa GPU maksimal (Extreme GPU Max OPP Lock) dan Engine Anti-Override pada perangkat Redmi 10A (Helio G25) tanpa menimbulkan konflik thermal.',
@@ -277,7 +265,7 @@ const projects = [
     featured: false,
   },
   {
-    id: 12,
+    id: 11,
     title: 'MTK WiFi MAC Randomization Fix',
     description:
       'Modul Magisk untuk mengatasi masalah atau menonaktifkan randomisasi MAC WiFi pada perangkat berprosesor MTK Helio G25 (seperti Redmi 9A/10A) yang menjalankan Android 13 SuperiorOS.',
@@ -286,6 +274,18 @@ const projects = [
     liveUrl: 'https://github.com/Rama-X2/MTK-WiFi-MAC-Randomization-Fix',
     githubUrl: 'https://github.com/Rama-X2/MTK-WiFi-MAC-Randomization-Fix',
     category: 'System Fix',
+    featured: false,
+  },
+  {
+    id: 12,
+    title: 'Kernel Overclocking by Rama',
+    description:
+      'Project kustomisasi kernel dengan fokus pada overclocking CPU/GPU, governor tuning, serta optimasi I/O scheduler dan thermal control.',
+    image: '/images/portfolio/kernel.jpg',
+    technologies: ['Android SDK', 'Shell Script', 'Linux Kernel', 'C', 'C++'],
+    liveUrl: '#',
+    githubUrl: 'https://github.com/Rama-X2',
+    category: 'Kernel Development',
     featured: false,
   },
 ]
