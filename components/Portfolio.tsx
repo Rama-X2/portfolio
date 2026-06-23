@@ -450,19 +450,19 @@ export default function Portfolio() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="fixed top-[66px] right-4 w-52 md:hidden z-30 p-2 rounded-2xl glass-card shadow-glow bg-[#0c0a1e]/95"
+            className="fixed top-[62px] right-4 w-44 md:hidden z-30 p-1.5 rounded-xl glass-card shadow-glow bg-[#0c0a1e]/95"
           >
             {sections.map((s) => (
               <button
                 key={s.id}
                 onClick={() => navClick(s.id)}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl mb-1 transition-all ${
+                className={`w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg mb-0.5 transition-all text-xs ${
                   activeSection === s.id
                     ? 'bg-gradient-to-r from-primary to-secondary text-white'
                     : 'text-gray-400 hover:text-white hover:bg-white/10'
                 }`}
               >
-                <s.icon className="w-5 h-5" />
+                <s.icon className="w-4 h-4" />
                 <span className="font-medium">{s.name}</span>
               </button>
             ))}
