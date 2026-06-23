@@ -1044,10 +1044,11 @@ export default function Portfolio() {
         {showResume && (
           <motion.div className="portfolio-modal" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             onClick={() => setShowResume(false)}>
-            <motion.div className="portfolio-modal-content max-w-3xl" onClick={(e) => e.stopPropagation()}
+            <motion.div className="resume-modal-content" onClick={(e) => e.stopPropagation()}
               initial={{ scale: 0.88, y: 40 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 40 }}>
 
-              <div className="flex justify-between items-center mb-4">
+              {/* Header */}
+              <div className="flex justify-between items-center mb-4 flex-shrink-0">
                 <h2 className="text-lg font-bold gradient-text">Resume / CV</h2>
                 <motion.button onClick={() => setShowResume(false)}
                   className="p-2 text-gray-400 hover:text-white"
@@ -1056,24 +1057,42 @@ export default function Portfolio() {
                 </motion.button>
               </div>
 
-              <div className="relative rounded-xl overflow-hidden mb-4" style={{ aspectRatio: '0.707/1' }}>
-                <Image src="/gambar-resume/cv-resume-ade-rama.png" alt="Resume Ade Ramadhani Putra"
-                  fill className="object-contain bg-white/5" />
+              {/* Scrollable image area */}
+              <div className="resume-img-scroll">
+                <img
+                  src="/gambar-resume/cv-resume-ade-rama.png"
+                  alt="Resume Ade Ramadhani Putra"
+                  className="resume-img"
+                />
               </div>
 
-              <motion.a
-                href="/gambar-resume/CV Resume - Ade Rama.png"
-                download
-                className="btn-primary w-full flex items-center justify-center gap-2"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <FileText className="w-4 h-4" /> Download Resume
-              </motion.a>
+              {/* Action buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 mt-4 flex-shrink-0">
+                <motion.a
+                  href="/gambar-resume/cv-resume-ade-rama.png"
+                  download="CV-Resume-Ade-Ramadhani-Putra.png"
+                  className="btn-primary flex-1 flex items-center justify-center gap-2"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <FileText className="w-4 h-4" /> Download Resume
+                </motion.a>
+                <motion.a
+                  href="/gambar-resume/cv-resume-ade-rama.png"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline flex-1 flex items-center justify-center gap-2"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <ExternalLink className="w-4 h-4" /> Buka di Tab Baru
+                </motion.a>
+              </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
+
     </div>
   )
 }
