@@ -240,6 +240,54 @@ const projects = [
     category: 'Web Tool – Image Processing',
     featured: false,
   },
+  {
+    id: 9,
+    title: 'Thermal Breaker Miyabi Core',
+    description:
+      'Modul optimasi thermal Magisk tingkat lanjut yang dirancang khusus untuk mengurangi throttling agresif pada sistem Android dengan tetap menjaga perlindungan keamanan hardware.',
+    image: '/images/portfolio/thermal-breaker.png',
+    technologies: ['Magisk', 'Shell Script', 'Android', 'Thermal Tuning'],
+    liveUrl: '#',
+    githubUrl: 'https://github.com/Rama-X2/thermal-breaker-miyabi-core',
+    category: 'System Tuning',
+    featured: false,
+  },
+  {
+    id: 10,
+    title: 'GMS Breaker Miyabi Core',
+    description:
+      'Modul optimasi proses latar belakang GMS (Google Play Services) secara agresif untuk meningkatkan stabilitas CPU, mengurangi penggunaan RAM, dan meningkatkan efisiensi baterai tanpa mengganggu akun Google.',
+    image: '/images/portfolio/gms-breaker.png',
+    technologies: ['Magisk', 'Shell Script', 'Android', 'Process Management'],
+    liveUrl: '#',
+    githubUrl: 'https://github.com/Rama-X2/gms-breaker-miyabi-core',
+    category: 'System Tuning',
+    featured: false,
+  },
+  {
+    id: 11,
+    title: 'Redmi 10A GPU Performance Unlock',
+    description:
+      'Modifikasi sistem untuk membuka performa GPU maksimal (Extreme GPU Max OPP Lock) dan Engine Anti-Override pada perangkat Redmi 10A (Helio G25) tanpa menimbulkan konflik thermal.',
+    image: '/images/portfolio/gpu-unlock.png',
+    technologies: ['Magisk', 'Shell Script', 'Android', 'Overclocking'],
+    liveUrl: '#',
+    githubUrl: 'https://github.com/Rama-X2/Redmi-10A_GPU_Performance_Unlock',
+    category: 'Kernel & GPU Tuning',
+    featured: false,
+  },
+  {
+    id: 12,
+    title: 'MTK WiFi MAC Randomization Fix',
+    description:
+      'Modul Magisk untuk mengatasi masalah atau menonaktifkan randomisasi MAC WiFi pada perangkat berprosesor MTK Helio G25 (seperti Redmi 9A/10A) yang menjalankan Android 13 SuperiorOS.',
+    image: '/images/portfolio/wifi-mac-fix.png',
+    technologies: ['Magisk', 'Shell Script', 'Android', 'Networking'],
+    liveUrl: '#',
+    githubUrl: 'https://github.com/Rama-X2/MTK-WiFi-MAC-Randomization-Fix',
+    category: 'System Fix',
+    featured: false,
+  },
 ]
 
 // ─── Navigation Sections ───────────────────────────────────────────────────────
