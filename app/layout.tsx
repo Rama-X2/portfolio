@@ -7,6 +7,9 @@ export const metadata: Metadata = {
     'Full Stack Developer & UI/UX Designer | Portfolio profesional Ade Ramadhani Putra. Spesialis web development, server management, dan optimasi sistem.',
   keywords: ['portfolio', 'full stack developer', 'UI/UX designer', 'Rama', 'Next.js', 'web developer sukabumi'],
   authors: [{ name: 'Ade Ramadhani Putra' }],
+  icons: {
+    icon: '/favicon.png',
+  },
   openGraph: {
     title: 'Portfolio – Ade Ramadhani Putra',
     description: 'Full Stack Developer & UI/UX Designer',
