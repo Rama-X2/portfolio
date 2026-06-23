@@ -450,7 +450,7 @@ export default function Portfolio() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="fixed top-[60px] left-0 right-0 md:hidden z-30 px-4 pb-4 mobile-menu"
+            className="fixed top-[66px] right-4 w-52 md:hidden z-30 p-2 rounded-2xl glass-card shadow-glow bg-[#0c0a1e]/95"
           >
             {sections.map((s) => (
               <button
