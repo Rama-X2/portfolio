@@ -293,9 +293,9 @@ const projects = [
 // ─── Navigation Sections ───────────────────────────────────────────────────────
 const sections = [
   { id: 'home',         name: 'Home',         icon: Home      },
+  { id: 'projects',     name: 'Projects',     icon: Globe     },
   { id: 'about',        name: 'About',        icon: User      },
   { id: 'achievements', name: 'Achievements', icon: Trophy    },
-  { id: 'projects',     name: 'Projects',     icon: Globe     },
   { id: 'contact',      name: 'Contact',      icon: Mail      },
 ]
 
@@ -390,85 +390,87 @@ export default function Portfolio() {
       </motion.a>
 
       {/* ── Header ─── */}
-      <header className="sticky top-0 z-40 header-glass px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
-        <motion.button
-          className="flex items-center gap-2 md:gap-3"
-          onClick={() => navClick('home')}
-          whileHover={{ scale: 1.04 }}
-        >
-          <div className="avatar-ring w-9 h-9 md:w-10 md:h-10 flex-shrink-0">
-            <Image
-              src={personal.avatar}
-              alt={personal.name}
-              width={40}
-              height={40}
-              className="w-full h-full object-cover rounded-full"
-            />
-          </div>
-          <div className="text-left hidden xs:block">
-            <p className="text-sm font-bold leading-tight gradient-text">{personal.name}</p>
-            <p className="text-[10px] text-gray-400 leading-tight">{personal.title}</p>
-          </div>
-        </motion.button>
-
-        {/* Desktop nav */}
-        <nav className="hidden md:flex space-x-1">
-          {sections.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => setActiveSection(s.id)}
-              className={`nav-btn ${activeSection === s.id ? 'nav-btn-active' : ''}`}
-            >
-              <s.icon className="w-4 h-4" />
-              <span>{s.name}</span>
-            </button>
-          ))}
-        </nav>
-
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? (
-            <X className="w-6 h-6" />
-          ) : (
-            <div className="space-y-1.5">
-              <div className="w-6 h-0.5 bg-current" />
-              <div className="w-6 h-0.5 bg-current" />
-              <div className="w-6 h-0.5 bg-current" />
-            </div>
-          )}
-        </button>
-      </header>
-
-      {/* Mobile dropdown nav */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden z-30 px-4 pb-4 mobile-menu"
+      <header className="sticky top-0 z-40 header-glass flex flex-col">
+        <div className="w-full px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
+          <motion.button
+            className="flex items-center gap-2 md:gap-3"
+            onClick={() => navClick('home')}
+            whileHover={{ scale: 1.04 }}
           >
+            <div className="avatar-ring w-9 h-9 md:w-10 md:h-10 flex-shrink-0">
+              <Image
+                src={personal.avatar}
+                alt={personal.name}
+                width={40}
+                height={40}
+                className="w-full h-full object-cover rounded-full"
+              />
+            </div>
+            <div className="text-left hidden xs:block">
+              <p className="text-sm font-bold leading-tight gradient-text">{personal.name}</p>
+              <p className="text-[10px] text-gray-400 leading-tight">{personal.title}</p>
+            </div>
+          </motion.button>
+
+          {/* Desktop nav */}
+          <nav className="hidden md:flex space-x-1">
             {sections.map((s) => (
               <button
                 key={s.id}
-                onClick={() => navClick(s.id)}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl mb-1 transition-all ${
-                  activeSection === s.id
-                    ? 'bg-gradient-to-r from-primary to-secondary text-white'
-                    : 'text-gray-400 hover:text-white hover:bg-white/10'
-                }`}
+                onClick={() => setActiveSection(s.id)}
+                className={`nav-btn ${activeSection === s.id ? 'nav-btn-active' : ''}`}
               >
-                <s.icon className="w-5 h-5" />
-                <span className="font-medium">{s.name}</span>
+                <s.icon className="w-4 h-4" />
+                <span>{s.name}</span>
               </button>
             ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </nav>
+
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <div className="space-y-1.5">
+                <div className="w-6 h-0.5 bg-current" />
+                <div className="w-6 h-0.5 bg-current" />
+                <div className="w-6 h-0.5 bg-current" />
+              </div>
+            )}
+          </button>
+        </div>
+
+        {/* Mobile dropdown nav */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden z-30 px-4 pb-4 mobile-menu"
+            >
+              {sections.map((s) => (
+                <button
+                  key={s.id}
+                  onClick={() => navClick(s.id)}
+                  className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl mb-1 transition-all ${
+                    activeSection === s.id
+                      ? 'bg-gradient-to-r from-primary to-secondary text-white'
+                      : 'text-gray-400 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <s.icon className="w-5 h-5" />
+                  <span className="font-medium">{s.name}</span>
+                </button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
 
       {/* ── Layout ─── */}
       <div className="flex flex-1">
@@ -619,8 +621,8 @@ export default function Portfolio() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                   {[
                     { id: 'about',        icon: User,    label: 'About Me',     sub: 'Siapa saya',          color: '#6366f1' },
-                    { id: 'achievements', icon: Trophy,  label: 'Achievements', sub: 'Sertifikat & penghargaan', color: '#f59e0b' },
                     { id: 'projects',     icon: Globe,   label: 'Projects',     sub: 'Karya & portfolio',   color: '#10b981' },
+                    { id: 'achievements', icon: Trophy,  label: 'Achievements', sub: 'Sertifikat & penghargaan', color: '#f59e0b' },
                     { id: 'contact',      icon: Mail,    label: 'Contact',      sub: 'Hubungi saya',        color: '#ec4899' },
                   ].map((item, i) => (
                     <motion.button
