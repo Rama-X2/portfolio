@@ -158,27 +158,27 @@ const projects = [
   },
   {
     id: 2,
-    title: 'Rama Server Dashboard',
+    title: 'BumiTani – Premium Agricultural E-Commerce',
     description:
-      'Dashboard manajemen server lengkap untuk operasi bisnis, menggabungkan analitik, kontrol jaringan, dan wawasan pengguna.',
-    image: '/images/portfolio/banner_rama_server.png',
-    technologies: ['React', 'Chart.js', 'Material-UI', 'Express.js', 'MongoDB'],
-    liveUrl: 'https://rama.server.my.id/dashboard/rama-server',
-    githubUrl: 'https://github.com/Rama-X2/rama-server-dashboard',
-    category: 'Dashboard',
+      'Website e-commerce pertanian modern premium dengan database 72 produk (bibit, nutrisi, pakan, peralatan, pestisida, dan pupuk) dalam 6 kategori. Dilengkapi filter dan pencarian real-time, detail modal produk, sistem keranjang LocalStorage, serta checkout via WhatsApp.',
+    image: '/images/portfolio/banner_bumi-tani.png',
+    technologies: ['HTML', 'Tailwind CSS', 'JavaScript', 'LocalStorage', 'Vercel'],
+    liveUrl: 'https://bumi-tani-v2.vercel.app',
+    githubUrl: 'https://github.com/Rama-X2/web-tani-pupuk',
+    category: 'Web Development',
     featured: true,
   },
   {
     id: 3,
-    title: 'Biodata – Tugas Kuliah Pertemuan 11',
+    title: 'PojokCoffee – Toko Kopi Online',
     description:
-      'Website biodata digital sederhana menggunakan HTML dengan CSS inline. Dibuat ringan, cepat, dan mudah diakses di semua perangkat.',
-    image: '/images/portfolio/biodata-aderama.png',
-    technologies: ['HTML', 'CSS'],
-    liveUrl: 'https://biodata-aderama.vercel.app',
-    githubUrl: 'https://github.com/Rama-X2/biodata_tugas_kuliah_pertemuan_11',
-    category: 'Static Website',
-    featured: false,
+      'Platform e-commerce premium didedikasikan untuk para pecinta kopi dengan berbagai biji kopi pilihan seluruh Indonesia. Dilengkapi fitur pencarian & filter produk, detail tasting notes asal kopi, keranjang belanja dinamis, blog informatif, dan desain responsif.',
+    image: '/images/portfolio/banner_pojok-coffee.png',
+    technologies: ['HTML', 'Tailwind CSS', 'Preline UI', 'JavaScript', 'LocalStorage'],
+    liveUrl: 'https://pojok-coffee-ex.vercel.app',
+    githubUrl: 'https://github.com/Rama-X2/pojok-coffee',
+    category: 'Web Development',
+    featured: true,
   },
   {
     id: 4,
@@ -194,6 +194,18 @@ const projects = [
   },
   {
     id: 5,
+    title: 'Rama Server Dashboard',
+    description:
+      'Dashboard manajemen server lengkap untuk operasi bisnis, menggabungkan analitik, kontrol jaringan, dan wawasan pengguna.',
+    image: '/images/portfolio/banner_rama_server.png',
+    technologies: ['React', 'Chart.js', 'Material-UI', 'Express.js', 'MongoDB'],
+    liveUrl: 'https://rama.server.my.id/dashboard/rama-server',
+    githubUrl: 'https://github.com/Rama-X2/rama-server-dashboard',
+    category: 'Dashboard',
+    featured: true,
+  },
+  {
+    id: 6,
     title: 'RISING UI 2.5 – Evolution X for POCO F5',
     description:
       'Modul kustomisasi UI eksklusif untuk ROM Evolution X pada POCO F5. Peningkatan visual dari lockscreen, status bar, hingga animasi sistem.',
@@ -205,7 +217,7 @@ const projects = [
     featured: false,
   },
   {
-    id: 6,
+    id: 7,
     title: 'Kernel Overclocking by Rama',
     description:
       'Project kustomisasi kernel dengan fokus pada overclocking CPU/GPU, governor tuning, serta optimasi I/O scheduler dan thermal control.',
@@ -214,18 +226,6 @@ const projects = [
     liveUrl: '#',
     githubUrl: 'https://github.com/Rama-X2',
     category: 'Kernel Development',
-    featured: false,
-  },
-  {
-    id: 7,
-    title: 'Statistika & Probabilitas EAS – Kalkulator Regresi & Slovin',
-    description:
-      'Aplikasi web interaktif sebagai tugas Evaluasi Akhir Semester (EAS) mata kuliah Statistika dan Probabilitas. Terdiri dari dua kalkulator: (1) Analisis Regresi Linier Sederhana untuk load testing server – menghitung hubungan antara jumlah concurrent users dengan response time, lengkap dengan grafik scatter plot, persamaan regresi, dan prediksi kapasitas maksimal. (2) Kalkulator Rumus Slovin untuk menentukan ukuran sampel minimum dari suatu populasi dengan tingkat error tertentu.',
-    image: '/images/portfolio/banner_statistika.png',
-    technologies: ['HTML', 'Tailwind CSS', 'JavaScript', 'Chart.js', 'Vercel'],
-    liveUrl: 'https://statistika-dan-probabilitas-eas.vercel.app',
-    githubUrl: 'https://github.com/Rama-X2/Statistika-dan-Probabilitas-EAS',
-    category: 'Web App – Academic',
     featured: false,
   },
   {
