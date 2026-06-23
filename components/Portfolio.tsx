@@ -282,6 +282,21 @@ export default function Portfolio() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [handleKeyDown])
 
+  useEffect(() => {
+    const isModalOpen = showResume || !!selectedProject || !!selectedCert
+    if (isModalOpen) {
+      document.body.classList.add('modal-open')
+      document.documentElement.classList.add('modal-open')
+    } else {
+      document.body.classList.remove('modal-open')
+      document.documentElement.classList.remove('modal-open')
+    }
+    return () => {
+      document.body.classList.remove('modal-open')
+      document.documentElement.classList.remove('modal-open')
+    }
+  }, [showResume, selectedProject, selectedCert])
+
   const navClick = (id: string) => {
     setActiveSection(id)
     setMenuOpen(false)

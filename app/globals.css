@@ -393,3 +393,11 @@
     padding: 1.25rem;
   }
 }
+
+/* Lock scroll when modal is open */
+html.modal-open,
+body.modal-open {
+  overflow: hidden !important;
+  height: 100vh !important;
+  overscroll-behavior: none !important;
+}
