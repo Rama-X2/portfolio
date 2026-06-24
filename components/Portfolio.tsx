@@ -457,10 +457,11 @@ export default function Portfolio() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="fixed top-[62px] right-4 w-44 md:hidden z-30 p-1.5 rounded-xl glass-card shadow-glow bg-[#0c0a1e]/95"
+            initial={{ opacity: 0, scale: 0.92, y: -8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.92, y: -8 }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
+            className="fixed top-[62px] right-4 w-44 md:hidden z-30 p-1.5 rounded-xl glass-card shadow-glow bg-[#0c0a1e]/95 origin-top-right"
           >
             {sections.map((s) => (
               <button
@@ -483,7 +484,7 @@ export default function Portfolio() {
       {/* ── Layout ─── */}
       <div className="flex flex-1 pt-[60px] md:pt-[72px]">
         {/* Sidebar desktop */}
-        <aside className="hidden lg:flex flex-col w-60 p-5 m-4 mr-0 rounded-2xl sidebar-glass flex-shrink-0">
+        <aside className="hidden lg:flex flex-col w-60 p-5 m-4 mr-0 rounded-2xl sidebar-glass flex-shrink-0 sticky top-[88px] h-[calc(100vh-104px)] self-start overflow-y-auto custom-scrollbar">
           <div className="space-y-1">
             {sections.map((s, i) => (
               <motion.button
