@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Portfolio – Ade Ramadhani Putra',
+  title: 'Rama-X2',
   description:
     'Full Stack Developer & UI/UX Designer | Portfolio profesional Ade Ramadhani Putra. Spesialis web development, server management, dan optimasi sistem.',
   keywords: ['portfolio', 'full stack developer', 'UI/UX designer', 'Rama', 'Next.js', 'web developer sukabumi'],
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     icon: '/favicon.png',
   },
   openGraph: {
-    title: 'Portfolio – Ade Ramadhani Putra',
+    title: 'Rama-X2',
     description: 'Full Stack Developer & UI/UX Designer',
     url: 'https://rama.server.my.id',
     siteName: 'Ade Ramadhani Portfolio',

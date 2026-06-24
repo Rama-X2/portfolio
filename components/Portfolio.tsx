@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   User,
@@ -315,6 +315,15 @@ export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [showResume, setShowResume] = useState(false)
 
+  const mainRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollTop = 0
+    }
+    window.scrollTo({ top: 0 })
+  }, [activeSection])
+
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -539,7 +548,7 @@ export default function Portfolio() {
         </aside>
 
         {/* ── Content ─── */}
-        <main className="flex-1 p-3 md:p-5 lg:p-6 overflow-y-auto custom-scrollbar min-w-0">
+        <main ref={mainRef} className="flex-1 p-3 md:p-5 lg:p-6 overflow-y-auto custom-scrollbar min-w-0">
           <AnimatePresence mode="wait">
 
             {/* ════════════════════════════════ HOME ═══ */}
