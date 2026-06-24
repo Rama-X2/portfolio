@@ -23,6 +23,7 @@ import {
   Send,
   Home,
   Briefcase,
+  Folder,
   FileText,
   MessageCircle,
   Trophy,
@@ -294,8 +295,8 @@ const projects = [
 const sections = [
   { id: 'home',         name: 'Home',         icon: Home      },
   { id: 'about',        name: 'About',        icon: User      },
-  { id: 'projects',     name: 'Projects',     icon: Globe     },
-  { id: 'achievements', name: 'Achievements', icon: Trophy    },
+  { id: 'projects',     name: 'Projects',     icon: Folder    },
+  { id: 'achievements', name: 'Achievements', icon: Award     },
   { id: 'contact',      name: 'Contact',      icon: Mail      },
 ]
 
@@ -619,8 +620,8 @@ export default function Portfolio() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                   {[
                     { id: 'about',        icon: User,    label: 'About Me',     sub: 'Siapa saya',          color: '#6366f1' },
-                    { id: 'projects',     icon: Globe,   label: 'Projects',     sub: 'Karya & portfolio',   color: '#10b981' },
-                    { id: 'achievements', icon: Trophy,  label: 'Achievements', sub: 'Sertifikat & penghargaan', color: '#f59e0b' },
+                    { id: 'projects',     icon: Folder,  label: 'Projects',     sub: 'Karya & portfolio',   color: '#10b981' },
+                    { id: 'achievements', icon: Award,   label: 'Achievements', sub: 'Sertifikat & penghargaan', color: '#f59e0b' },
                     { id: 'contact',      icon: Mail,    label: 'Contact',      sub: 'Hubungi saya',        color: '#ec4899' },
                   ].map((item, i) => (
                     <motion.button
