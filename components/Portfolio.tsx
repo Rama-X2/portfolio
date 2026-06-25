@@ -767,7 +767,7 @@ export default function Portfolio() {
                     {experiences.map((exp, i) => (
                       <motion.div key={i}
                         {...fadeUp(i * 0.12)}
-                        className="glass-card rounded-xl p-5 md:p-6 relative overflow-hidden render-optimized"
+                        className="glass-card rounded-xl p-5 md:p-6 relative overflow-hidden"
                         whileHover={{ y: -2 }}
                       >
                         <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl" style={{ backgroundColor: exp.color }} />
@@ -857,7 +857,7 @@ export default function Portfolio() {
                   {achievements.map((item, i) => (
                     <motion.div key={item.id}
                       {...fadeUp(i * 0.1)}
-                      className="glass-card rounded-2xl overflow-hidden cursor-pointer group render-optimized"
+                      className="glass-card rounded-2xl overflow-hidden cursor-pointer group"
                       whileHover={{ y: -5, scale: 1.01 }}
                       onClick={() => setSelectedCert(item)}
                     >
@@ -911,7 +911,7 @@ export default function Portfolio() {
                       initial={{ opacity: 0, y: 24 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.08 }}
-                      className="glass-card rounded-2xl overflow-hidden cursor-pointer group render-optimized"
+                      className="glass-card rounded-2xl overflow-hidden cursor-pointer group"
                       whileHover={{ y: -5, scale: 1.01 }}
                       onClick={() => setSelectedProject(project)}
                     >
