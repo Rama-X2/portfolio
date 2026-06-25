@@ -1293,8 +1293,11 @@ export default function Portfolio() {
                   <p className="text-xs text-primary">{selectedProject.category}</p>
                 </div>
                 <motion.button onClick={() => setSelectedProject(null)}
-                  className="p-2 text-gray-400 hover:text-white transition-colors"
-                  whileHover={{ scale: 1.1, rotate: 90 }}>
+                  className="p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg transition-all"
+                  whileHover={{ scale: 1.05, rotate: 90 }}
+                  whileTap={{ scale: 0.95 }}
+                  title="Close"
+                >
                   <X className="w-5 h-5" />
                 </motion.button>
               </div>
@@ -1350,8 +1353,11 @@ export default function Portfolio() {
                   <p className="text-xs text-primary mt-0.5">{selectedCert.issuer}</p>
                 </div>
                 <motion.button onClick={() => setSelectedCert(null)}
-                  className="p-2 text-gray-400 hover:text-white transition-colors"
-                  whileHover={{ scale: 1.1, rotate: 90 }}>
+                  className="p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg transition-all"
+                  whileHover={{ scale: 1.05, rotate: 90 }}
+                  whileTap={{ scale: 0.95 }}
+                  title="Close"
+                >
                   <X className="w-5 h-5" />
                 </motion.button>
               </div>
@@ -1381,8 +1387,11 @@ export default function Portfolio() {
               <div className="flex justify-between items-center mb-4 flex-shrink-0">
                 <h2 className="text-lg font-bold gradient-text">Resume / CV</h2>
                 <motion.button onClick={() => setShowResume(false)}
-                  className="p-2 text-gray-400 hover:text-white"
-                  whileHover={{ scale: 1.1, rotate: 90 }}>
+                  className="p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg transition-all"
+                  whileHover={{ scale: 1.05, rotate: 90 }}
+                  whileTap={{ scale: 0.95 }}
+                  title="Close"
+                >
                   <X className="w-5 h-5" />
                 </motion.button>
               </div>
