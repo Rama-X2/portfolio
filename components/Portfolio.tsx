@@ -44,7 +44,7 @@ const personal = {
   name: 'Ade Ramadhani Putra',
   title: 'Full Stack Developer & UI/UX Designer',
   bio: 'Seorang Full Stack Developer dan UI/UX Designer yang aktif mengembangkan berbagai solusi digital modern, mulai dari website, software, hingga sistem berbasis performa tinggi. Memiliki ketertarikan besar pada web development, server management, dan optimasi sistem, dengan fokus menciptakan aplikasi yang responsif, efisien, dan nyaman digunakan.',
-  avatar: '/images/portfolio/foto_rama.webp',
+  avatar: '/images/portfolio/foto_rama.png',
   location: 'Sukabumi, Jawa Barat',
   email: 'aderamadhaniputra35@gmail.com',
   phone: '+62 857-9518-5561',
@@ -151,7 +151,7 @@ const projects = [
     title: 'BumiTani – Premium Agricultural E-Commerce',
     description:
       'Website e-commerce pertanian modern premium dengan database 72 produk (bibit, nutrisi, pakan, peralatan, pestisida, dan pupuk) dalam 6 kategori. Dilengkapi filter dan pencarian real-time, detail modal produk, sistem keranjang LocalStorage, serta checkout via WhatsApp.',
-    image: '/images/portfolio/banner_bumi-tani.webp',
+    image: '/images/portfolio/banner_bumi-tani.png',
     technologies: ['HTML', 'Tailwind CSS', 'JavaScript', 'LocalStorage', 'Vercel'],
     liveUrl: 'https://bumi-tani-v2.vercel.app',
     githubUrl: 'https://github.com/Rama-X2/Bumi-Tani-v2',
@@ -175,7 +175,7 @@ const projects = [
     title: 'Rama Store – Gaming Topup Platform',
     description:
       'Modern gaming top-up platform dengan real-time transaction processing, multi-game support, dan animasi yang menarik. Dibangun menggunakan Next.js, TypeScript, dan Framer Motion.',
-    image: '/images/portfolio/banner_rama-store.webp',
+    image: '/images/portfolio/banner_rama-store.png',
     technologies: ['Next.js', 'TypeScript', 'Framer Motion', 'Tailwind CSS', 'Node.js'],
     liveUrl: 'https://rama-store.vercel.app',
     githubUrl: 'https://github.com/Rama-X2/rama-store',
@@ -187,7 +187,7 @@ const projects = [
     title: 'Custom ROM by Rama – Basic AOSP',
     description:
       'ROM custom ringan berbasis Android 15 (Vanilla Ice Cream) yang disempurnakan dengan asisten AI cerdas menggunakan TensorFlow dan NLP.',
-    image: '/images/portfolio/banner_rom-pixel.webp',
+    image: '/images/portfolio/banner_rom-pixel.png',
     technologies: ['AOSP', 'Android 15', 'Shell Script', 'Python', 'TensorFlow'],
     liveUrl: 'https://rama.server.my.id/custom-rom-by_rama',
     githubUrl: 'https://github.com/Rama-X2/Rom-Pixel',
@@ -199,7 +199,7 @@ const projects = [
     title: 'Rama Server Dashboard',
     description:
       'Dashboard manajemen server lengkap untuk operasi bisnis, menggabungkan analitik, kontrol jaringan, dan wawasan pengguna.',
-    image: '/images/portfolio/banner_rama_server.webp',
+    image: '/images/portfolio/banner_rama_server.png',
     technologies: ['React', 'Chart.js', 'Material-UI', 'Express.js', 'MongoDB'],
     liveUrl: 'https://rama.server.my.id/dashboard/rama-server',
     githubUrl: 'https://github.com/Rama-X2/andora-ex-wami-ram',
@@ -211,7 +211,7 @@ const projects = [
     title: 'RISING UI 2.5 – Evolution X for POCO F5',
     description:
       'Modul kustomisasi UI eksklusif untuk ROM Evolution X pada POCO F5. Peningkatan visual dari lockscreen, status bar, hingga animasi sistem.',
-    image: '/images/portfolio/kernel_poco-f5.webp',
+    image: '/images/portfolio/kernel_poco-f5.png',
     technologies: ['Android AOSP', 'Evolution X', 'Magisk Module', 'OMS'],
     liveUrl: 'https://rama.server.my.id/rising-ui-2.5',
     githubUrl: 'https://github.com/Rama-X2/RISING-UI-2.5',
@@ -223,7 +223,7 @@ const projects = [
     title: 'Digital Image Compare Tools',
     description:
       'Aplikasi web berbasis browser untuk membandingkan kualitas dan karakteristik teknis gambar digital secara side-by-side. Mendukung eksperimen Bit Depth (1-bit hingga 32-bit), kompresi JPEG, format TIFF, serta upscaling resolusi. Setiap gambar yang diunggah dianalisis dan ditampilkan dengan metadata lengkap: ukuran file, resolusi, color mode, dan estimasi bit depth. Cocok untuk belajar pengolahan citra digital dan membandingkan trade-off kualitas vs ukuran file.',
-    image: '/images/portfolio/banner_digital-image-compare.webp',
+    image: '/images/portfolio/banner_digital-image-compare.png',
     technologies: ['HTML', 'CSS', 'JavaScript', 'Canvas API', 'Vercel'],
     liveUrl: 'https://digital-image-compare-rama-x2.vercel.app',
     githubUrl: 'https://github.com/Rama-X2/Digital-Image-Compare-Tools',
@@ -235,7 +235,7 @@ const projects = [
     title: 'Thermal Breaker Miyabi Core',
     description:
       'Modul optimasi thermal Magisk tingkat lanjut yang dirancang khusus untuk mengurangi throttling agresif pada sistem Android dengan tetap menjaga perlindungan keamanan hardware.',
-    image: '/images/portfolio/thermal-breaker.webp',
+    image: '/images/portfolio/thermal-breaker.png',
     technologies: ['Magisk', 'Shell Script', 'Android', 'Thermal Tuning'],
     liveUrl: 'https://github.com/Rama-X2/thermal-breaker-miyabi-core',
     githubUrl: 'https://github.com/Rama-X2/thermal-breaker-miyabi-core',
@@ -247,7 +247,7 @@ const projects = [
     title: 'GMS Breaker Miyabi Core',
     description:
       'Modul optimasi proses latar belakang GMS (Google Play Services) secara agresif untuk meningkatkan stabilitas CPU, mengurangi penggunaan RAM, dan meningkatkan efisiensi baterai tanpa mengganggu akun Google.',
-    image: '/images/portfolio/gms-breaker.webp',
+    image: '/images/portfolio/gms-breaker.png',
     technologies: ['Magisk', 'Shell Script', 'Android', 'Process Management'],
     liveUrl: 'https://github.com/Rama-X2/gms-breaker-miyabi-core',
     githubUrl: 'https://github.com/Rama-X2/gms-breaker-miyabi-core',
@@ -259,7 +259,7 @@ const projects = [
     title: 'Redmi 10A GPU Performance Unlock',
     description:
       'Modifikasi sistem untuk membuka performa GPU maksimal (Extreme GPU Max OPP Lock) dan Engine Anti-Override pada perangkat Redmi 10A (Helio G25) tanpa menimbulkan konflik thermal.',
-    image: '/images/portfolio/gpu-unlock.webp',
+    image: '/images/portfolio/gpu-unlock.png',
     technologies: ['Magisk', 'Shell Script', 'Android', 'Overclocking'],
     liveUrl: 'https://github.com/Rama-X2/Redmi-10A_GPU_Performance_Unlock',
     githubUrl: 'https://github.com/Rama-X2/Redmi-10A_GPU_Performance_Unlock',
@@ -271,7 +271,7 @@ const projects = [
     title: 'MTK WiFi MAC Randomization Fix',
     description:
       'Modul Magisk untuk mengatasi masalah atau menonaktifkan randomisasi MAC WiFi pada perangkat berprosesor MTK Helio G25 (seperti Redmi 9A/10A) yang menjalankan Android 13 SuperiorOS.',
-    image: '/images/portfolio/wifi-mac-fix.webp',
+    image: '/images/portfolio/wifi-mac-fix.png',
     technologies: ['Magisk', 'Shell Script', 'Android', 'Networking'],
     liveUrl: 'https://github.com/Rama-X2/MTK-WiFi-MAC-Randomization-Fix',
     githubUrl: 'https://github.com/Rama-X2/MTK-WiFi-MAC-Randomization-Fix',
@@ -283,7 +283,7 @@ const projects = [
     title: 'Kernel Overclocking by Rama',
     description:
       'Project kustomisasi kernel dengan fokus pada overclocking CPU/GPU, governor tuning, serta optimasi I/O scheduler dan thermal control.',
-    image: '/images/portfolio/kernel-lappland.webp',
+    image: '/images/portfolio/kernel-lappland.png',
     technologies: ['Android SDK', 'Shell Script', 'Linux Kernel', 'C', 'C++'],
     liveUrl: '#',
     githubUrl: 'https://github.com/Rama-X2',
@@ -767,7 +767,7 @@ export default function Portfolio() {
                     {experiences.map((exp, i) => (
                       <motion.div key={i}
                         {...fadeUp(i * 0.12)}
-                        className="glass-card rounded-xl p-5 md:p-6 relative overflow-hidden"
+                        className="glass-card rounded-xl p-5 md:p-6 relative overflow-hidden render-optimized"
                         whileHover={{ y: -2 }}
                       >
                         <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl" style={{ backgroundColor: exp.color }} />
@@ -857,7 +857,7 @@ export default function Portfolio() {
                   {achievements.map((item, i) => (
                     <motion.div key={item.id}
                       {...fadeUp(i * 0.1)}
-                      className="glass-card rounded-2xl overflow-hidden cursor-pointer group"
+                      className="glass-card rounded-2xl overflow-hidden cursor-pointer group render-optimized"
                       whileHover={{ y: -5, scale: 1.01 }}
                       onClick={() => setSelectedCert(item)}
                     >
@@ -911,7 +911,7 @@ export default function Portfolio() {
                       initial={{ opacity: 0, y: 24 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.08 }}
-                      className="glass-card rounded-2xl overflow-hidden cursor-pointer group"
+                      className="glass-card rounded-2xl overflow-hidden cursor-pointer group render-optimized"
                       whileHover={{ y: -5, scale: 1.01 }}
                       onClick={() => setSelectedProject(project)}
                     >

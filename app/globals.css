@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -49,7 +50,7 @@
     z-index: -1;
     animation: blobFloat 8s ease-in-out infinite;
     will-change: transform;
-    transform: translateZ(0);
+    transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
   }
   .blob-1 {
@@ -90,9 +91,9 @@
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.10);
     transition: all 0.3s ease;
-    transform: translateZ(0);
-    backface-visibility: hidden;
     will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
   }
   .glass-card:hover {
     background: rgba(255, 255, 255, 0.07);
@@ -105,7 +106,8 @@
     -webkit-backdrop-filter: blur(24px);
     background: rgba(12, 10, 30, 0.85);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    transform: translateZ(0);
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
   }
 
@@ -115,7 +117,8 @@
     -webkit-backdrop-filter: blur(20px);
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    transform: translateZ(0);
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
   }
 
@@ -125,7 +128,8 @@
     -webkit-backdrop-filter: blur(24px);
     background: rgba(12, 10, 30, 0.97);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    transform: translateZ(0);
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
   }
 
@@ -136,7 +140,8 @@
     background: rgba(12, 10, 30, 0.95);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding-bottom: env(safe-area-inset-bottom);
-    transform: translateZ(0);
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
   }
 
@@ -264,9 +269,9 @@
 
 /* ── Keyframes ─── */
 @keyframes blobFloat {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%       { transform: translate(20px, -20px) scale(1.05); }
-  66%       { transform: translate(-15px, 15px) scale(0.97); }
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33%       { transform: translate3d(20px, -20px, 0) scale(1.05); }
+  66%       { transform: translate3d(-15px, 15px, 0) scale(0.97); }
 }
 
 @keyframes pulse {
@@ -275,6 +280,9 @@
 }
 
 /* ── Scrollbar ─── */
+.custom-scrollbar {
+  -webkit-overflow-scrolling: touch;
+}
 .custom-scrollbar::-webkit-scrollbar {
   width: 5px;
 }
@@ -426,4 +434,10 @@ body.modal-open {
   .portfolio-modal.cert-modal-wrap {
     align-items: center !important;
   }
+}
+
+/* ── Performance Optimization Utility ─── */
+.render-optimized {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 300px;
 }
