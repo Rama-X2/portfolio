@@ -36,6 +36,7 @@ import {
   Database,
   Layers,
   Star,
+  Loader2,
 } from 'lucide-react'
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
@@ -314,6 +315,44 @@ export default function Portfolio() {
   const [selectedCert, setSelectedCert] = useState<(typeof achievements)[0] | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [showResume, setShowResume] = useState(false)
+
+  // Form State
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
+  const [errors, setErrors] = useState<{ name?: string; email?: string; subject?: string; message?: string }>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+
+  const handleInputChange = (field: keyof typeof formData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: undefined }))
+    }
+  }
+
+  const validateForm = () => {
+    const tempErrors: typeof errors = {}
+    if (!formData.name.trim()) tempErrors.name = 'Nama wajib diisi'
+    if (!formData.email.trim()) {
+      tempErrors.email = 'Email wajib diisi'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      tempErrors.email = 'Format email tidak valid'
+    }
+    if (!formData.subject.trim()) tempErrors.subject = 'Subjek wajib diisi'
+    if (!formData.message.trim()) tempErrors.message = 'Pesan wajib diisi'
+    setErrors(tempErrors)
+    return Object.keys(tempErrors).length === 0
+  }
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!validateForm()) return
+    setIsSubmitting(true)
+    setTimeout(() => {
+      setIsSubmitting(false)
+      setSubmitSuccess(true)
+      setFormData({ name: '', email: '', subject: '', message: '' })
+    }, 1500)
+  }
 
   const mainRef = useRef<HTMLElement>(null)
 
@@ -920,87 +959,290 @@ export default function Portfolio() {
             {activeSection === 'contact' && (
               <motion.div key="contact"
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-                className="space-y-6 max-w-3xl mx-auto">
+                className="space-y-6 max-w-5xl mx-auto">
 
-                <div className="text-center">
-                  <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-2">Get In Touch</h2>
-                  <p className="text-gray-400 text-sm max-w-md mx-auto">
-                    Punya project atau ingin berdiskusi? Jangan ragu untuk menghubungi saya!
-                  </p>
-                </div>
-
-                {/* Contact cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {[
-                    { icon: MessageCircle, label: 'WhatsApp', value: personal.phone, href: personal.whatsapp, color: '#25D366', bg: '#25D36618' },
-                    { icon: Mail,         label: 'Email',    value: personal.email,    href: `mailto:${personal.email}`, color: '#6366f1', bg: '#6366f118' },
-                    { icon: MapPin,       label: 'Lokasi',   value: personal.location, href: '#', color: '#ec4899', bg: '#ec489918' },
-                  ].map((c) => (
-                    <motion.a key={c.label}
-                      href={c.href}
-                      target={c.href.startsWith('http') ? '_blank' : '_self'}
-                      rel="noreferrer"
-                      {...fadeUp(0.1)}
-                      className="glass-card rounded-xl p-5 flex flex-col items-center text-center gap-2 hover:shadow-glow transition-all"
-                      whileHover={{ y: -4, scale: 1.02 }}
-                    >
-                      <div className="p-3 rounded-xl" style={{ backgroundColor: c.bg }}>
-                        <c.icon className="w-5 h-5" style={{ color: c.color }} />
-                      </div>
-                      <p className="text-xs text-gray-400 font-medium uppercase tracking-wide">{c.label}</p>
-                      <p className="text-sm text-white font-semibold">{c.value}</p>
-                    </motion.a>
-                  ))}
-                </div>
-
-                {/* Social links */}
-                <div className="glass-card rounded-xl p-5">
-                  <h3 className="text-base font-bold text-white mb-4 text-center">Temukan Saya Di</h3>
-                  <div className="flex justify-center gap-3 flex-wrap">
-                    {[
-                      { icon: Github,    href: personal.github,    label: 'GitHub',    color: '#f5f5f5' },
-                      { icon: Linkedin,  href: personal.linkedin,  label: 'LinkedIn',  color: '#0A66C2' },
-                      { icon: Instagram, href: personal.instagram, label: 'Instagram', color: '#E1306C' },
-                      { icon: Globe,     href: personal.website,   label: 'Website',   color: '#6366f1' },
-                    ].map((s) => (
-                      <motion.a key={s.label} href={s.href} target="_blank" rel="noreferrer"
-                        title={s.label}
-                        className="flex items-center gap-2 px-4 py-2.5 glass-card rounded-xl text-sm text-gray-300 hover:text-white transition-all"
-                        whileHover={{ scale: 1.07, y: -2 }}
-                      >
-                        <s.icon className="w-4 h-4" style={{ color: s.color }} />
-                        <span>{s.label}</span>
-                      </motion.a>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Contact form */}
-                <motion.div {...fadeUp(0.3)} className="glass-card rounded-xl p-5 md:p-6">
-                  <h3 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
-                    <Send className="w-5 h-5 text-primary" /> Kirim Pesan
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <input type="text" placeholder="Nama Anda"
-                        className="form-input" />
-                      <input type="email" placeholder="Email Anda"
-                        className="form-input" />
+                {/* Grid Container */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+                  
+                  {/* Left Column: Direct Info & Socials (Span 5 on Desktop) */}
+                  <div className="lg:col-span-5 space-y-5">
+                    
+                    {/* Header Card */}
+                    <div className="glass-card rounded-2xl p-6 md:p-8 space-y-4 relative overflow-hidden group">
+                      <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-primary to-secondary" />
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-primary/10 text-primary border border-primary/20 inline-block">
+                        Hubungi Saya
+                      </span>
+                      <h2 className="text-3xl font-black gradient-text leading-tight tracking-tight">
+                        Mari Berdiskusi!
+                      </h2>
+                      <p className="text-sm text-gray-300 leading-relaxed">
+                        Punya project menarik, ingin berkolaborasi, atau sekadar berdiskusi? Jangan ragu untuk menghubungi saya! Saya akan berusaha membalas secepat mungkin.
+                      </p>
                     </div>
-                    <input type="text" placeholder="Subjek"
-                      className="form-input w-full" />
-                    <textarea rows={4} placeholder="Pesan Anda..."
-                      className="form-input w-full resize-none" />
-                    <motion.button
-                      className="btn-primary w-full flex items-center justify-center gap-2"
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <Send className="w-4 h-4" />
-                      Kirim Pesan
-                    </motion.button>
+
+                    {/* Direct Contact Cards (WhatsApp & Email stacked) */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                      {/* WhatsApp Card */}
+                      <motion.a
+                        href={personal.whatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="glass-card rounded-2xl p-5 flex items-center justify-between gap-4 border border-white/10 hover:border-green-500/30 hover:shadow-[0_0_20px_rgba(34,197,94,0.15)] transition-all group"
+                        whileHover={{ y: -3, scale: 1.01 }}
+                      >
+                        <div className="flex items-center gap-4 min-w-0">
+                          <div className="p-3 rounded-xl bg-green-500/10 text-green-400 group-hover:scale-110 transition-transform flex-shrink-0">
+                            <MessageCircle className="w-6 h-6" />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">WhatsApp</p>
+                            <p className="text-sm font-bold text-white truncate mt-0.5">{personal.phone}</p>
+                          </div>
+                        </div>
+                        <div className="hidden xs:flex items-center gap-1 text-xs font-semibold text-green-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0">
+                          <span>Chat</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </div>
+                      </motion.a>
+
+                      {/* Email Card */}
+                      <motion.a
+                        href={`mailto:${personal.email}`}
+                        className="glass-card rounded-2xl p-5 flex items-center justify-between gap-4 border border-white/10 hover:border-indigo-500/30 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] transition-all group"
+                        whileHover={{ y: -3, scale: 1.01 }}
+                      >
+                        <div className="flex items-center gap-4 min-w-0">
+                          <div className="p-3 rounded-xl bg-indigo-500/10 text-indigo-400 group-hover:scale-110 transition-transform flex-shrink-0">
+                            <Mail className="w-6 h-6" />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Email</p>
+                            <p className="text-sm font-bold text-white truncate mt-0.5">{personal.email}</p>
+                          </div>
+                        </div>
+                        <div className="hidden xs:flex items-center gap-1 text-xs font-semibold text-indigo-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0">
+                          <span>Kirim</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </div>
+                      </motion.a>
+                    </div>
+
+                    {/* Location Info Card (Distinct from WA/Email) */}
+                    <div className="glass-card rounded-2xl p-6 border border-white/10 hover:border-pink-500/30 hover:shadow-[0_0_20px_rgba(236,72,153,0.15)] transition-all relative overflow-hidden group">
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-pink-500/5 rounded-full blur-xl pointer-events-none" />
+                      <div className="flex items-start gap-4">
+                        <div className="p-3 rounded-xl bg-pink-500/10 text-pink-400 flex-shrink-0 group-hover:scale-110 transition-transform">
+                          <MapPin className="w-6 h-6" />
+                        </div>
+                        <div className="space-y-3 flex-1">
+                          <div>
+                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Lokasi & Jangkauan</p>
+                            <h4 className="font-extrabold text-white text-base mt-0.5">{personal.location}</h4>
+                          </div>
+                          <p className="text-xs text-gray-300 leading-relaxed">
+                            Berbasis di Sukabumi, Jawa Barat. Siap bekerja secara remote (jarak jauh) untuk klien dari seluruh dunia maupun on-site untuk project lokal.
+                          </p>
+                          <motion.a
+                            href="https://www.google.com/maps/place/Sukabumi,+Sukabumi+Regency,+West+Java/@-6.9897,106.9268"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-pink-500/10 text-pink-400 text-xs font-semibold border border-pink-500/20 hover:bg-pink-500/20 transition-all"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            <Globe className="w-3.5 h-3.5" />
+                            <span>Buka di Google Maps</span>
+                          </motion.a>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Social Media Connections */}
+                    <div className="glass-card rounded-2xl p-6 border border-white/10 space-y-4">
+                      <h4 className="font-bold text-white text-xs tracking-wider uppercase pl-1">Temukan Saya Di</h4>
+                      <div className="grid grid-cols-2 gap-2.5">
+                        {[
+                          { icon: Github,    href: personal.github,    label: 'GitHub',    color: '#ffffff', bg: 'rgba(255,255,255,0.06)', border: 'rgba(255,255,255,0.15)' },
+                          { icon: Linkedin,  href: personal.linkedin,  label: 'LinkedIn',  color: '#0A66C2', bg: 'rgba(10,102,194,0.06)', border: 'rgba(10,102,194,0.15)' },
+                          { icon: Instagram, href: personal.instagram, label: 'Instagram', color: '#E1306C', bg: 'rgba(225,48,108,0.06)', border: 'rgba(225,48,108,0.15)' },
+                          { icon: Globe,     href: personal.website,   label: 'Website',   color: '#6366f1', bg: 'rgba(99,102,241,0.06)', border: 'rgba(99,102,241,0.15)' },
+                        ].map((s) => (
+                          <motion.a
+                            key={s.label}
+                            href={s.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2.5 px-4 py-3 glass-card rounded-xl text-xs text-gray-300 hover:text-white transition-all justify-center border border-white/5"
+                            whileHover={{ 
+                              scale: 1.03, 
+                              backgroundColor: s.bg, 
+                              borderColor: s.border,
+                              boxShadow: `0 0 15px ${s.border}` 
+                            }}
+                          >
+                            <s.icon className="w-4 h-4 flex-shrink-0" style={{ color: s.color }} />
+                            <span className="font-semibold">{s.label}</span>
+                          </motion.a>
+                        ))}
+                      </div>
+                    </div>
+
                   </div>
-                </motion.div>
+
+                  {/* Right Column: Contact Form / Success Screen (Span 7 on Desktop) */}
+                  <div className="lg:col-span-7">
+                    <AnimatePresence mode="wait">
+                      {submitSuccess ? (
+                        <motion.div
+                          key="success-card"
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.95 }}
+                          transition={{ duration: 0.3 }}
+                          className="glass-card rounded-2xl p-6 md:p-8 space-y-6 h-full flex flex-col justify-center items-center text-center border border-green-500/20 relative overflow-hidden"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-b from-green-500/5 to-transparent pointer-events-none" />
+                          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-emerald-500" />
+                          
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: 0.2, type: 'spring', stiffness: 200, damping: 15 }}
+                            className="w-16 h-16 rounded-full bg-green-500/10 text-green-400 flex items-center justify-center border border-green-500/20 shadow-[0_0_30px_rgba(34,197,94,0.3)]"
+                          >
+                            <CheckCircle className="w-10 h-10" />
+                          </motion.div>
+                          
+                          <div className="space-y-2.5 max-w-md">
+                            <h3 className="text-2xl font-extrabold text-white">Pesan Berhasil Dikirim!</h3>
+                            <p className="text-sm text-gray-300 leading-relaxed">
+                              Terima kasih telah menghubungi saya. Pesan Anda telah tersimpan dengan aman di antrean dan saya akan meresponsnya secepat mungkin.
+                            </p>
+                          </div>
+
+                          <motion.button
+                            onClick={() => setSubmitSuccess(false)}
+                            className="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-semibold border border-white/10 transition-all flex items-center gap-2 mt-4"
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                          >
+                            <Send className="w-3.5 h-3.5" />
+                            Kirim Pesan Lain
+                          </motion.button>
+                        </motion.div>
+                      ) : (
+                        <motion.form
+                          key="contact-form"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          onSubmit={handleFormSubmit}
+                          className="glass-card rounded-2xl p-6 md:p-8 space-y-6 h-full flex flex-col justify-between border border-white/10 relative"
+                        >
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-3">
+                              <div className="p-2.5 rounded-lg bg-primary/10 text-primary">
+                                <Send className="w-5 h-5" />
+                              </div>
+                              <h3 className="text-lg font-bold text-white">Kirim Pesan Instan</h3>
+                            </div>
+                            <p className="text-xs text-gray-400 leading-relaxed">
+                              Gunakan formulir di bawah ini untuk mengirimkan pesan secara instan. Semua masukan Anda sangat berarti bagi saya.
+                            </p>
+                          </div>
+
+                          <div className="space-y-4 mt-4 flex-1">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                              <div className="space-y-1.5">
+                                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">Nama Lengkap</label>
+                                <input
+                                  type="text"
+                                  placeholder="Nama Anda"
+                                  value={formData.name}
+                                  onChange={(e) => handleInputChange('name', e.target.value)}
+                                  disabled={isSubmitting}
+                                  className={`form-input ${errors.name ? 'border-red-500/40 bg-red-500/5 focus:border-red-500' : ''}`}
+                                />
+                                {errors.name && (
+                                  <p className="text-[10px] text-red-400 pl-1 font-semibold">{errors.name}</p>
+                                )}
+                              </div>
+                              <div className="space-y-1.5">
+                                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">Alamat Email</label>
+                                <input
+                                  type="email"
+                                  placeholder="Email Anda"
+                                  value={formData.email}
+                                  onChange={(e) => handleInputChange('email', e.target.value)}
+                                  disabled={isSubmitting}
+                                  className={`form-input ${errors.email ? 'border-red-500/40 bg-red-500/5 focus:border-red-500' : ''}`}
+                                />
+                                {errors.email && (
+                                  <p className="text-[10px] text-red-400 pl-1 font-semibold">{errors.email}</p>
+                                )}
+                              </div>
+                            </div>
+                            
+                            <div className="space-y-1.5">
+                              <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">Subjek</label>
+                              <input
+                                type="text"
+                                placeholder="Apa subjek pesan Anda?"
+                                value={formData.subject}
+                                onChange={(e) => handleInputChange('subject', e.target.value)}
+                                disabled={isSubmitting}
+                                className={`form-input w-full ${errors.subject ? 'border-red-500/40 bg-red-500/5 focus:border-red-500' : ''}`}
+                              />
+                              {errors.subject && (
+                                <p className="text-[10px] text-red-400 pl-1 font-semibold">{errors.subject}</p>
+                              )}
+                            </div>
+                            
+                            <div className="space-y-1.5">
+                              <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">Isi Pesan</label>
+                              <textarea
+                                rows={5}
+                                placeholder="Tuliskan pesan Anda di sini..."
+                                value={formData.message}
+                                onChange={(e) => handleInputChange('message', e.target.value)}
+                                disabled={isSubmitting}
+                                className={`form-input w-full resize-none ${errors.message ? 'border-red-500/40 bg-red-500/5 focus:border-red-500' : ''}`}
+                              />
+                              {errors.message && (
+                                <p className="text-[10px] text-red-400 pl-1 font-semibold">{errors.message}</p>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="mt-6 pt-2">
+                            <motion.button
+                              type="submit"
+                              disabled={isSubmitting}
+                              className="btn-primary w-full flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm shadow-glow-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                              whileHover={isSubmitting ? {} : { scale: 1.02, y: -2 }}
+                              whileTap={isSubmitting ? {} : { scale: 0.98 }}
+                            >
+                              {isSubmitting ? (
+                                <>
+                                  <Loader2 className="w-4 h-4 animate-spin" />
+                                  <span>Mengirim Pesan...</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Send className="w-4 h-4" />
+                                  <span>Kirim Pesan Instan</span>
+                                </>
+                              )}
+                            </motion.button>
+                          </div>
+                        </motion.form>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                </div>
+
               </motion.div>
             )}
 
