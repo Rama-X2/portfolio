@@ -20,18 +20,18 @@ portfolio-web/
 │   │   └── cv-resume-ade-rama.png
 │   ├── gambar-sertifikat/
 │   └── images/
-│       └── portfolio/    # Aset gambar proyek & cover portfolio
-│           ├── foto_rama.png
-│           ├── banner_rama-store.png
-│           ├── banner_bumi-tani.png
+│       └── portfolio/    # Aset gambar proyek & cover portfolio (teroptimasi WebP)
+│           ├── foto_rama.webp
+│           ├── banner_rama-store.webp
+│           ├── banner_bumi-tani.webp
 │           ├── banner_homelab.webp       # Screenshot web HomeLab (baru)
-│           ├── banner_rom-pixel.png
-│           ├── banner_rama_server.png
-│           ├── kernel_poco-f5.png
-│           ├── kernel.jpg
-│           ├── anya.jpg
-│           ├── patrick.jpg
-│           └── patrick_galon.jpg
+│           ├── banner_rom-pixel.webp
+│           ├── banner_rama_server.webp
+│           ├── kernel_poco-f5.webp
+│           ├── kernel.webp
+│           ├── anya.webp
+│           ├── patrick.webp
+│           └── patrick_galon.webp
 ├── package.json
 ├── tailwind.config.js
 ├── postcss.config.js
