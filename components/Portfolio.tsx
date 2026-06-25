@@ -316,6 +316,56 @@ export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [showResume, setShowResume] = useState(false)
 
+  // Refs for scroll reset on open
+  const projectModalRef = useRef<HTMLDivElement>(null)
+  const certModalRef = useRef<HTMLDivElement>(null)
+  const resumeScrollRef = useRef<HTMLDivElement>(null)
+
+  // Reset scroll of project modal to top when a project is selected
+  useEffect(() => {
+    if (selectedProject) {
+      if (projectModalRef.current) {
+        projectModalRef.current.scrollTop = 0
+      }
+      const timer = setTimeout(() => {
+        if (projectModalRef.current) {
+          projectModalRef.current.scrollTop = 0
+        }
+      }, 50)
+      return () => clearTimeout(timer)
+    }
+  }, [selectedProject])
+
+  // Reset scroll of cert modal to top when a cert is selected
+  useEffect(() => {
+    if (selectedCert) {
+      if (certModalRef.current) {
+        certModalRef.current.scrollTop = 0
+      }
+      const timer = setTimeout(() => {
+        if (certModalRef.current) {
+          certModalRef.current.scrollTop = 0
+        }
+      }, 50)
+      return () => clearTimeout(timer)
+    }
+  }, [selectedCert])
+
+  // Reset scroll of resume modal to top when resume is opened
+  useEffect(() => {
+    if (showResume) {
+      if (resumeScrollRef.current) {
+        resumeScrollRef.current.scrollTop = 0
+      }
+      const timer = setTimeout(() => {
+        if (resumeScrollRef.current) {
+          resumeScrollRef.current.scrollTop = 0
+        }
+      }, 50)
+      return () => clearTimeout(timer)
+    }
+  }, [showResume])
+
   // Form State
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
   const [errors, setErrors] = useState<{ name?: string; email?: string; subject?: string; message?: string }>({})
@@ -1284,7 +1334,7 @@ export default function Portfolio() {
         {selectedProject && (
           <motion.div className="portfolio-modal" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             onClick={() => setSelectedProject(null)}>
-            <motion.div className="portfolio-modal-content" onClick={(e) => e.stopPropagation()}
+            <motion.div ref={projectModalRef} className="portfolio-modal-content" onClick={(e) => e.stopPropagation()}
               initial={{ scale: 0.88, y: 40 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 40 }}>
 
               <div className="flex justify-between items-start mb-4">
@@ -1341,7 +1391,7 @@ export default function Portfolio() {
         {selectedCert && (
           <motion.div className="portfolio-modal cert-modal-wrap" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             onClick={() => setSelectedCert(null)}>
-            <motion.div className="portfolio-modal-content" onClick={(e) => e.stopPropagation()}
+            <motion.div ref={certModalRef} className="portfolio-modal-content" onClick={(e) => e.stopPropagation()}
               initial={{ scale: 0.88, y: 40 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 40 }}>
 
               <div className="flex justify-between items-start mb-4">
@@ -1388,7 +1438,7 @@ export default function Portfolio() {
               </div>
 
               {/* Scrollable image area */}
-              <div className="resume-img-scroll">
+              <div ref={resumeScrollRef} className="resume-img-scroll">
                 <img
                   src="/gambar-resume/cv-resume-ade-rama.png"
                   alt="Resume Ade Ramadhani Putra"
