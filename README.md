@@ -55,7 +55,7 @@ portfolio-web/
 
 ---
 
-## 🗂️ Daftar Project Aktif (12 Project Showcase)
+## Daftar Project Aktif (12 Project Showcase)
 
 1.  **BumiTani – Premium Agricultural E-Commerce** (Featured)
     *   Website e-commerce pertanian modern premium: database 72 produk, filter pencarian real-time, keranjang belanja LocalStorage, checkout WhatsApp.
