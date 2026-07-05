@@ -94,4 +94,4 @@ portfolio-web/
 
 ---
 
-> Dibuat secara eksklusif oleh **Ade Ramadhani Putra** | [rama.server.my.id](https://rama.server.my.id)
+> Dibuat secara eksklusif oleh **Ade Ramadhani Putra** | [rama-x2.my.id](https://rama-x2.my.id)
