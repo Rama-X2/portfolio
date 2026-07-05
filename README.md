@@ -1,10 +1,10 @@
-# 🌟 Rama Portfolio Web
+# 🌸 Rama Portfolio Web
 
 Website portofolio standalone milik **Ade Ramadhani Putra**, memuat rangkuman profil, keahlian, riwayat pengalaman, pencapaian sertifikasi, serta pameran proyek-proyek digital aktif.
 
 ---
 
-## 📁 Struktur Folder
+## Struktur Folder
 
 ```text
 portfolio-web/
@@ -41,7 +41,7 @@ portfolio-web/
 
 ---
 
-## ✨ Fitur & Struktur Portofolio
+## Fitur & Struktur Portofolio
 
 *   **About** - Profil profesional lengkap beserta biografi, rangkuman pendidikan, dan statistik stats keahlian.
 *   **Skills** - Progress bar dinamis beranimasi untuk representasi tingkat penguasaan setiap keahlian teknis.
