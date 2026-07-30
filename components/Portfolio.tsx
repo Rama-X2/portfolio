@@ -148,13 +148,40 @@ const education = [
 const achievements = [
   {
     id: 1,
+    title: 'Cisco Networking Academy – Ethical Hacker',
+    issuer: 'Cisco Networking Academy',
+    date: '22 Juli 2026',
+    dateEn: 'July 22, 2026',
+    image: '/gambar-sertifikat/cisco-ethical-hacker-certificate.png',
+    verifyUrl: 'https://www.credly.com/badges/d6d1ef95-849b-4e56-8501-a7b67c7574e9/public_url',
+  },
+  {
+    id: 2,
+    title: 'Cisco Networking Academy – Introduction to Cybersecurity',
+    issuer: 'Cisco Networking Academy',
+    date: '20 Juli 2026',
+    dateEn: 'July 20, 2026',
+    image: '/gambar-sertifikat/cisco-introduction-to-cybersecurity.png',
+    verifyUrl: 'https://www.credly.com/badges/dc1ad136-5dfd-41ac-a802-ad0f89fcddd8/public_url',
+  },
+  {
+    id: 3,
+    title: 'Cisco Networking Academy – Networking Basics',
+    issuer: 'Cisco Networking Academy',
+    date: '20 Juli 2026',
+    dateEn: 'July 20, 2026',
+    image: '/gambar-sertifikat/cisco-networking-basics.png',
+    verifyUrl: 'https://www.credly.com/badges/a504b2a0-83c5-4901-802c-2b3c2ed5bdb8/public_url',
+  },
+  {
+    id: 4,
     title: 'DevCoach #200: Integrasi IT & AI powered by Asah!',
     issuer: 'DevCoach × Asah!',
     date: '2025',
     image: '/gambar-sertifikat/devcoach-200-integrasi-it-ai-powered-by-asah-certificate-1.png',
   },
   {
-    id: 2,
+    id: 5,
     title: 'IDCamp x Dicoding Live #10 – UiPath Agentic Automation: Introduction and Use Case',
     issuer: 'Indosat Ooredoo Hutchison Digital Camp',
     date: '10 Juli 2025',
@@ -162,7 +189,7 @@ const achievements = [
     image: '/gambar-sertifikat/idcamp-x-dicoding-live-10-uipath-agentic-automation-introduction-and-use-case-certificate-1.png',
   },
   {
-    id: 3,
+    id: 6,
     title: 'IDCamp Alumni Dialogue #5 – Debunking the Myth of Intelligent Automation: Prepare for the Future Workforce',
     issuer: 'Indosat Ooredoo Hutchison Digital Camp',
     date: '22 Juli 2025',
@@ -347,7 +374,7 @@ const translations = {
   id: {
     nav: { home: 'Home', about: 'About', projects: 'Projects', achievements: 'Achievements', contact: 'Contact' },
     personal: {
-      greeting: '👋 Halo, saya',
+      greeting: 'Halo, saya',
       bio: 'Seorang Full Stack Developer dan UI/UX Designer yang aktif mengembangkan berbagai solusi digital modern, mulai dari website, software, hingga sistem berbasis performa tinggi. Memiliki ketertarikan besar pada web development, server management, dan optimasi sistem, dengan fokus menciptakan aplikasi yang responsif, efisien, dan nyaman digunakan.',
       location: 'Sukabumi, Jawa Barat',
       available: 'Available for new opportunities',
@@ -414,7 +441,7 @@ const translations = {
   en: {
     nav: { home: 'Home', about: 'About', projects: 'Projects', achievements: 'Achievements', contact: 'Contact' },
     personal: {
-      greeting: "👋 Hi, I'm",
+      greeting: "Hi, I'm",
       bio: 'A Full Stack Developer and UI/UX Designer actively creating modern digital solutions, from websites and software to high-performance systems. Passionate about web development, server management, and system optimization, focusing on building responsive, efficient, and user-friendly applications.',
       location: 'Sukabumi, West Java, Indonesia',
       available: 'Available for new opportunities',
@@ -1581,9 +1608,24 @@ export default function Portfolio() {
                 <Image src={selectedCert.image} alt={selectedCert.title} fill className="object-contain bg-white/5" />
               </div>
 
-              <div className="flex items-center gap-1.5 text-sm text-gray-400">
-                <Calendar className="w-4 h-4" />
-                <span>{lang === 'en' && selectedCert.dateEn ? selectedCert.dateEn : selectedCert.date}</span>
+              <div className="flex items-center justify-between gap-3 text-sm text-gray-400">
+                <div className="flex items-center gap-1.5">
+                  <Calendar className="w-4 h-4" />
+                  <span>{lang === 'en' && selectedCert.dateEn ? selectedCert.dateEn : selectedCert.date}</span>
+                </div>
+                {(selectedCert as any).verifyUrl && (
+                  <motion.a
+                    href={(selectedCert as any).verifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30 text-xs font-semibold transition-all"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span>{lang === 'en' ? 'Verify on Credly' : 'Verifikasi di Credly'}</span>
+                  </motion.a>
+                )}
               </div>
             </motion.div>
           </motion.div>
