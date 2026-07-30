@@ -10,14 +10,10 @@ import {
   ExternalLink,
   Github,
   Mail,
-  Phone,
   MapPin,
   Award,
   Zap,
-  ChevronLeft,
-  ChevronRight,
   X,
-  Building2,
   Linkedin,
   Instagram,
   Send,
@@ -26,7 +22,6 @@ import {
   Folder,
   FileText,
   MessageCircle,
-  Trophy,
   GraduationCap,
   Calendar,
   CheckCircle,
@@ -43,7 +38,6 @@ import {
 const personal = {
   name: 'Ade Ramadhani Putra',
   title: 'Full Stack Developer & UI/UX Designer',
-  bio: 'Seorang Full Stack Developer dan UI/UX Designer yang aktif mengembangkan berbagai solusi digital modern, mulai dari website, software, hingga sistem berbasis performa tinggi. Memiliki ketertarikan besar pada web development, server management, dan optimasi sistem, dengan fokus menciptakan aplikasi yang responsif, efisien, dan nyaman digunakan.',
   avatar: '/images/portfolio/foto_rama.png',
   location: 'Sukabumi, Jawa Barat',
   email: 'aderamadhaniputra35@gmail.com',
@@ -69,34 +63,58 @@ const skills = [
 const experiences = [
   {
     position: 'IT Support & System Developer',
+    positionEn: 'IT Support & System Developer',
     period: '2023 – Sekarang',
+    periodEn: '2023 – Present',
     descriptions: [
       'Melakukan troubleshooting, maintenance, dan optimasi perangkat komputer serta smartphone.',
       'Menangani instalasi sistem operasi, driver, dan konfigurasi software.',
       'Mengembangkan dan memodifikasi sistem Android seperti custom ROM, tweaking, dan optimasi performa.',
       'Membantu pengguna dalam perbaikan software serta peningkatan stabilitas perangkat.',
     ],
+    descriptionsEn: [
+      'Troubleshooting, maintaining, and optimizing computer hardware and smartphones.',
+      'Managing OS installations, driver setups, and software configurations.',
+      'Developing and tweaking Android systems, custom ROMs, and performance tuning.',
+      'Assisting users with software repairs and enhancing device stability.',
+    ],
     color: '#6366f1',
   },
   {
     position: 'Full Stack Web Developer',
+    positionEn: 'Full Stack Web Developer',
     period: '2024 – Sekarang',
+    periodEn: '2024 – Present',
     descriptions: [
       'Mengembangkan website dan aplikasi berbasis web modern dengan fokus pada performa dan pengalaman pengguna.',
       'Membuat sistem CRUD, dashboard admin, dan landing page responsif menggunakan PHP, JavaScript, dan MySQL.',
       'Mengelola deployment website dan konfigurasi hosting berbasis Linux serta cloud platform.',
       'Mendesain antarmuka modern yang responsif dan mudah digunakan.',
     ],
+    descriptionsEn: [
+      'Developing modern web applications and websites focused on speed, security, and user experience.',
+      'Building CRUD systems, admin dashboards, and responsive landing pages using PHP, JavaScript, and MySQL.',
+      'Managing website deployments and cloud/Linux-based server hosting configurations.',
+      'Designing clean, modern, and user-friendly interfaces.',
+    ],
     color: '#8b5cf6',
   },
   {
     position: 'Personal Software & Experimental Projects',
+    positionEn: 'Personal Software & Experimental Projects',
     period: '2021 – Sekarang',
+    periodEn: '2021 – Present',
     descriptions: [
       'Mengembangkan berbagai project software dan eksperimen teknologi secara mandiri.',
       'Melakukan optimasi sistem, debugging, dan tuning performa pada berbagai environment.',
       'Mengeksplorasi pengembangan berbasis Linux, Android, dan web technology.',
       'Mendesain tools dan solusi digital untuk kebutuhan personal maupun pembelajaran.',
+    ],
+    descriptionsEn: [
+      'Independently building software projects and experimenting with cutting-edge tech.',
+      'Performing system optimization, debugging, and performance tuning across various environments.',
+      'Exploring Linux system administration, Android internals, and modern web frameworks.',
+      'Designing custom tools and digital solutions for personal and educational needs.',
     ],
     color: '#06b6d4',
   },
@@ -106,16 +124,22 @@ const education = [
   {
     institution: 'Universitas Linggabuana PGRI Sukabumi',
     degree: 'S1 Teknik Informatika',
+    degreeEn: 'B.S. in Informatics Engineering',
     period: 'Sedang Berjalan (Ongoing)',
+    periodEn: 'Ongoing',
     location: 'Sukabumi, Jawa Barat',
+    locationEn: 'Sukabumi, West Java',
     logo: '/logo-kampus/logo-kampus.jpeg',
     ongoing: true,
   },
   {
     institution: 'MA Al-Ma\'arij Hegarmanah',
     degree: 'IPS',
+    degreeEn: 'Social Sciences (IPS)',
     period: '2021 – 2024',
+    periodEn: '2021 – 2024',
     location: 'Sukabumi, Jawa Barat',
+    locationEn: 'Sukabumi, West Java',
     logo: null,
     ongoing: false,
   },
@@ -133,14 +157,16 @@ const achievements = [
     id: 2,
     title: 'IDCamp x Dicoding Live #10 – UiPath Agentic Automation: Introduction and Use Case',
     issuer: 'Indosat Ooredoo Hutchison Digital Camp',
-    date: 'Kamis, 10 Juli 2025',
+    date: '10 Juli 2025',
+    dateEn: 'July 10, 2025',
     image: '/gambar-sertifikat/idcamp-x-dicoding-live-10-uipath-agentic-automation-introduction-and-use-case-certificate-1.png',
   },
   {
     id: 3,
     title: 'IDCamp Alumni Dialogue #5 – Debunking the Myth of Intelligent Automation: Prepare for the Future Workforce',
     issuer: 'Indosat Ooredoo Hutchison Digital Camp',
-    date: 'Selasa, 22 Juli 2025',
+    date: '22 Juli 2025',
+    dateEn: 'July 22, 2025',
     image: '/gambar-sertifikat/idcamp-alumni-dialogue-5-debunking-the-myth-of-intelligent-automation-prepare-for-the-future-workfor-1.png',
   },
 ]
@@ -151,6 +177,8 @@ const projects = [
     title: 'BumiTani – Premium Agricultural E-Commerce',
     description:
       'Website e-commerce pertanian modern premium dengan database 72 produk (bibit, nutrisi, pakan, peralatan, pestisida, dan pupuk) dalam 6 kategori. Dilengkapi filter dan pencarian real-time, detail modal produk, sistem keranjang LocalStorage, serta checkout via WhatsApp.',
+    descriptionEn:
+      'Premium modern agricultural e-commerce website with a database of 72 products across 6 categories. Features real-time search & filters, product modal details, LocalStorage shopping cart, and direct checkout.',
     image: '/images/portfolio/banner_bumi-tani.png',
     technologies: ['HTML', 'Tailwind CSS', 'JavaScript', 'LocalStorage', 'Vercel'],
     liveUrl: 'https://bumi-tani-v2.vercel.app',
@@ -163,6 +191,8 @@ const projects = [
     title: 'HomeLab – Premium Powder Drink E-Commerce',
     description:
       'Platform e-commerce dan editorial web premium yang dirancang khusus untuk mempresentasikan lini produk bubuk minuman premium. Fokus pada estetika high-end, performa ringan tanpa overhead framework berat, serta pengalaman belanja (UI/UX) yang sangat halus, lengkap dengan catalog filter, search real-time, shopping cart localStorage, dan fast checkout.',
+    descriptionEn:
+      'Premium powder drink e-commerce platform & web editorial. Features high-end minimalist aesthetics, real-time search, catalog filter, shopping cart, and fast checkout.',
     image: '/images/portfolio/banner_homelab.webp',
     technologies: ['HTML', 'Tailwind CSS', 'JavaScript', 'LocalStorage', 'Vercel'],
     liveUrl: 'https://homelab-sample.vercel.app',
@@ -175,6 +205,8 @@ const projects = [
     title: 'Rama Store – Gaming Topup Platform',
     description:
       'Modern gaming top-up platform dengan real-time transaction processing, multi-game support, dan animasi yang menarik. Dibangun menggunakan Next.js, TypeScript, dan Framer Motion.',
+    descriptionEn:
+      'Modern gaming top-up platform with real-time transaction processing, multi-game support, and fluid animations. Built with Next.js, TypeScript, and Framer Motion.',
     image: '/images/portfolio/banner_rama-store.png',
     technologies: ['Next.js', 'TypeScript', 'Framer Motion', 'Tailwind CSS', 'Node.js'],
     liveUrl: 'https://rama-store.vercel.app',
@@ -187,6 +219,8 @@ const projects = [
     title: 'Custom ROM by Rama – Basic AOSP',
     description:
       'ROM custom ringan berbasis Android 15 (Vanilla Ice Cream) yang disempurnakan dengan asisten AI cerdas menggunakan TensorFlow dan NLP.',
+    descriptionEn:
+      'Lightweight custom ROM based on Android 15 (Vanilla Ice Cream) enhanced with a smart AI assistant using TensorFlow and NLP.',
     image: '/images/portfolio/banner_rom-pixel.png',
     technologies: ['AOSP', 'Android 15', 'Shell Script', 'Python', 'TensorFlow'],
     liveUrl: 'https://rama.server.my.id/custom-rom-by_rama',
@@ -199,6 +233,8 @@ const projects = [
     title: 'Rama Server Dashboard',
     description:
       'Dashboard manajemen server lengkap untuk operasi bisnis, menggabungkan analitik, kontrol jaringan, dan wawasan pengguna.',
+    descriptionEn:
+      'Comprehensive server management dashboard integrating analytics, network control, and user insights.',
     image: '/images/portfolio/banner_rama_server.png',
     technologies: ['React', 'Chart.js', 'Material-UI', 'Express.js', 'MongoDB'],
     liveUrl: 'https://rama.server.my.id/dashboard/rama-server',
@@ -211,6 +247,8 @@ const projects = [
     title: 'RISING UI 2.5 – Evolution X for POCO F5',
     description:
       'Modul kustomisasi UI eksklusif untuk ROM Evolution X pada POCO F5. Peningkatan visual dari lockscreen, status bar, hingga animasi sistem.',
+    descriptionEn:
+      'Exclusive UI customization module for Evolution X custom ROM on POCO F5 device.',
     image: '/images/portfolio/kernel_poco-f5.png',
     technologies: ['Android AOSP', 'Evolution X', 'Magisk Module', 'OMS'],
     liveUrl: 'https://rama.server.my.id/rising-ui-2.5',
@@ -222,7 +260,9 @@ const projects = [
     id: 7,
     title: 'Digital Image Compare Tools',
     description:
-      'Aplikasi web berbasis browser untuk membandingkan kualitas dan karakteristik teknis gambar digital secara side-by-side. Mendukung eksperimen Bit Depth (1-bit hingga 32-bit), kompresi JPEG, format TIFF, serta upscaling resolusi. Setiap gambar yang diunggah dianalisis dan ditampilkan dengan metadata lengkap: ukuran file, resolusi, color mode, dan estimasi bit depth. Cocok untuk belajar pengolahan citra digital dan membandingkan trade-off kualitas vs ukuran file.',
+      'Aplikasi web berbasis browser untuk membandingkan kualitas dan karakteristik teknis gambar digital secara side-by-side. Mendukung eksperimen Bit Depth (1-bit hingga 32-bit), kompresi JPEG, format TIFF, serta upscaling resolusi.',
+    descriptionEn:
+      'Browser-based web app to compare digital image quality and technical characteristics side-by-side. Supports bit depth testing, JPEG compression analysis, and resolution upscaling.',
     image: '/images/portfolio/banner_digital-image-compare.png',
     technologies: ['HTML', 'CSS', 'JavaScript', 'Canvas API', 'Vercel'],
     liveUrl: 'https://digital-image-compare-rama-x2.vercel.app',
@@ -235,6 +275,8 @@ const projects = [
     title: 'Thermal Breaker Miyabi Core',
     description:
       'Modul optimasi thermal Magisk tingkat lanjut yang dirancang khusus untuk mengurangi throttling agresif pada sistem Android dengan tetap menjaga perlindungan keamanan hardware.',
+    descriptionEn:
+      'Advanced Magisk thermal optimization module designed to reduce aggressive throttling while keeping hardware safe.',
     image: '/images/portfolio/thermal-breaker.png',
     technologies: ['Magisk', 'Shell Script', 'Android', 'Thermal Tuning'],
     liveUrl: 'https://github.com/Rama-X2/thermal-breaker-miyabi-core',
@@ -247,6 +289,8 @@ const projects = [
     title: 'GMS Breaker Miyabi Core',
     description:
       'Modul optimasi proses latar belakang GMS (Google Play Services) secara agresif untuk meningkatkan stabilitas CPU, mengurangi penggunaan RAM, dan meningkatkan efisiensi baterai tanpa mengganggu akun Google.',
+    descriptionEn:
+      'Background GMS process optimization module to save RAM and improve CPU power efficiency on Android without affecting Google accounts.',
     image: '/images/portfolio/gms-breaker.png',
     technologies: ['Magisk', 'Shell Script', 'Android', 'Process Management'],
     liveUrl: 'https://github.com/Rama-X2/gms-breaker-miyabi-core',
@@ -259,6 +303,8 @@ const projects = [
     title: 'Redmi 10A GPU Performance Unlock',
     description:
       'Modifikasi sistem untuk membuka performa GPU maksimal (Extreme GPU Max OPP Lock) dan Engine Anti-Override pada perangkat Redmi 10A (Helio G25) tanpa menimbulkan konflik thermal.',
+    descriptionEn:
+      'Low-level system modification to unlock maximum GPU performance on Redmi 10A (Helio G25) without thermal conflicts.',
     image: '/images/portfolio/gpu-unlock.png',
     technologies: ['Magisk', 'Shell Script', 'Android', 'Overclocking'],
     liveUrl: 'https://github.com/Rama-X2/Redmi-10A_GPU_Performance_Unlock',
@@ -271,6 +317,8 @@ const projects = [
     title: 'MTK WiFi MAC Randomization Fix',
     description:
       'Modul Magisk untuk mengatasi masalah atau menonaktifkan randomisasi MAC WiFi pada perangkat berprosesor MTK Helio G25 (seperti Redmi 9A/10A) yang menjalankan Android 13 SuperiorOS.',
+    descriptionEn:
+      'System fix module to stabilize or disable WiFi MAC randomization on MTK Helio G25 devices running Android 13.',
     image: '/images/portfolio/wifi-mac-fix.png',
     technologies: ['Magisk', 'Shell Script', 'Android', 'Networking'],
     liveUrl: 'https://github.com/Rama-X2/MTK-WiFi-MAC-Randomization-Fix',
@@ -283,6 +331,8 @@ const projects = [
     title: 'Kernel Overclocking by Rama',
     description:
       'Project kustomisasi kernel dengan fokus pada overclocking CPU/GPU, governor tuning, serta optimasi I/O scheduler dan thermal control.',
+    descriptionEn:
+      'Custom Linux kernel modification focusing on CPU/GPU governor tuning and I/O scheduling optimization.',
     image: '/images/portfolio/kernel-lappland.png',
     technologies: ['Android SDK', 'Shell Script', 'Linux Kernel', 'C', 'C++'],
     liveUrl: '#',
@@ -292,14 +342,143 @@ const projects = [
   },
 ]
 
-// ─── Navigation Sections ───────────────────────────────────────────────────────
-const sections = [
-  { id: 'home',         name: 'Home',         icon: Home      },
-  { id: 'about',        name: 'About',        icon: User      },
-  { id: 'projects',     name: 'Projects',     icon: Folder    },
-  { id: 'achievements', name: 'Achievements', icon: Award     },
-  { id: 'contact',      name: 'Contact',      icon: Mail      },
-]
+// ─── Translations Dictionary ──────────────────────────────────────────────────
+const translations = {
+  id: {
+    nav: { home: 'Home', about: 'About', projects: 'Projects', achievements: 'Achievements', contact: 'Contact' },
+    personal: {
+      greeting: '👋 Halo, saya',
+      bio: 'Seorang Full Stack Developer dan UI/UX Designer yang aktif mengembangkan berbagai solusi digital modern, mulai dari website, software, hingga sistem berbasis performa tinggi. Memiliki ketertarikan besar pada web development, server management, dan optimasi sistem, dengan fokus menciptakan aplikasi yang responsif, efisien, dan nyaman digunakan.',
+      location: 'Sukabumi, Jawa Barat',
+      available: 'Available for new opportunities',
+      viewResume: 'View Resume',
+      contactMe: 'Hubungi Saya',
+    },
+    quickCards: {
+      about: { label: 'About Me', sub: 'Siapa saya' },
+      projects: { label: 'Projects', sub: 'Karya & portfolio' },
+      achievements: { label: 'Achievements', sub: 'Sertifikat & penghargaan' },
+      contact: { label: 'Contact', sub: 'Hubungi saya' },
+    },
+    skillsTitle: 'Skills & Teknologi',
+    aboutSec: {
+      experienceTitle: 'Pengalaman',
+      educationTitle: 'Pendidikan',
+      ongoing: 'Ongoing',
+    },
+    achievementsSec: {
+      title: 'Achievements',
+      subtitle: 'Sertifikat & penghargaan yang telah saya raih',
+      clickToView: 'Klik untuk lihat sertifikat',
+    },
+    projectsSec: {
+      title: 'My Projects',
+      subtitle: 'Koleksi project yang pernah saya kerjakan',
+      featured: 'Featured',
+      technologies: 'Teknologi',
+      liveDemo: 'Live Demo',
+      sourceCode: 'Source Code',
+    },
+    contactSec: {
+      tag: 'Hubungi Saya',
+      heading: 'Mari Berdiskusi!',
+      description: 'Punya project menarik, ingin berkolaborasi, atau sekadar berdiskusi? Jangan ragu untuk menghubungi saya! Saya akan berusaha membalas secepat mungkin.',
+      emailLabel: 'Email',
+      emailAction: 'Kirim',
+      locationLabel: 'Lokasi & Jangkauan',
+      locationDesc: 'Berbasis di Sukabumi, Jawa Barat. Siap bekerja secara remote (jarak jauh) untuk klien dari seluruh dunia maupun on-site untuk project lokal.',
+      openMaps: 'Buka di Google Maps',
+      socialsHeading: 'Temukan Saya Di',
+      formHeading: 'Kirim Pesan Instan',
+      formDesc: 'Gunakan formulir di bawah ini untuk mengirimkan pesan secara instan. Semua masukan Anda sangat berarti bagi saya.',
+      nameLabel: 'Nama Lengkap',
+      namePlaceholder: 'Nama Anda',
+      emailInputLabel: 'Alamat Email',
+      emailPlaceholder: 'Email Anda',
+      subjectLabel: 'Subjek',
+      subjectPlaceholder: 'Apa subjek pesan Anda?',
+      messageLabel: 'Isi Pesan',
+      messagePlaceholder: 'Tuliskan pesan Anda di sini...',
+      submitBtn: 'Kirim Pesan Instan',
+      submitting: 'Mengirim Pesan...',
+      successTitle: 'Pesan Berhasil Dikirim!',
+      successDesc: 'Terima kasih telah menghubungi saya. Pesan Anda telah tersimpan dengan aman di antrean dan saya akan meresponsnya secepat mungkin.',
+      sendAnother: 'Kirim Pesan Lain',
+    },
+    resumeModal: {
+      title: 'Resume / CV',
+      download: 'Download Resume',
+      openNewTab: 'Buka di Tab Baru',
+    },
+  },
+  en: {
+    nav: { home: 'Home', about: 'About', projects: 'Projects', achievements: 'Achievements', contact: 'Contact' },
+    personal: {
+      greeting: "👋 Hi, I'm",
+      bio: 'A Full Stack Developer and UI/UX Designer actively creating modern digital solutions, from websites and software to high-performance systems. Passionate about web development, server management, and system optimization, focusing on building responsive, efficient, and user-friendly applications.',
+      location: 'Sukabumi, West Java, Indonesia',
+      available: 'Available for new opportunities',
+      viewResume: 'View Resume',
+      contactMe: 'Contact Me',
+    },
+    quickCards: {
+      about: { label: 'About Me', sub: 'Who I am' },
+      projects: { label: 'Projects', sub: 'My work & portfolio' },
+      achievements: { label: 'Achievements', sub: 'Certificates & awards' },
+      contact: { label: 'Contact', sub: 'Get in touch' },
+    },
+    skillsTitle: 'Skills & Technologies',
+    aboutSec: {
+      experienceTitle: 'Experience',
+      educationTitle: 'Education',
+      ongoing: 'Ongoing',
+    },
+    achievementsSec: {
+      title: 'Achievements',
+      subtitle: 'Certificates and honors I have earned',
+      clickToView: 'Click to view certificate',
+    },
+    projectsSec: {
+      title: 'My Projects',
+      subtitle: 'A showcase of projects I have built',
+      featured: 'Featured',
+      technologies: 'Technologies',
+      liveDemo: 'Live Demo',
+      sourceCode: 'Source Code',
+    },
+    contactSec: {
+      tag: 'Contact Me',
+      heading: "Let's Connect!",
+      description: 'Have an interesting project, want to collaborate, or just want to discuss ideas? Feel free to reach out! I will get back to you as soon as possible.',
+      emailLabel: 'Email',
+      emailAction: 'Send Email',
+      locationLabel: 'Location & Reach',
+      locationDesc: 'Based in Sukabumi, West Java. Open for worldwide remote work as well as local on-site projects.',
+      openMaps: 'Open in Google Maps',
+      socialsHeading: 'Find Me On',
+      formHeading: 'Send Instant Message',
+      formDesc: 'Use the form below to send an instant message directly. All feedback is greatly appreciated.',
+      nameLabel: 'Full Name',
+      namePlaceholder: 'Your Name',
+      emailInputLabel: 'Email Address',
+      emailPlaceholder: 'Your Email',
+      subjectLabel: 'Subject',
+      subjectPlaceholder: 'What is the subject of your message?',
+      messageLabel: 'Message',
+      messagePlaceholder: 'Write your message here...',
+      submitBtn: 'Send Instant Message',
+      submitting: 'Sending Message...',
+      successTitle: 'Message Sent Successfully!',
+      successDesc: 'Thank you for reaching out. Your message has been saved safely and I will respond as soon as possible.',
+      sendAnother: 'Send Another Message',
+    },
+    resumeModal: {
+      title: 'Resume / CV',
+      download: 'Download Resume',
+      openNewTab: 'Open in New Tab',
+    },
+  },
+}
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 const fadeUp = (delay = 0) => ({
@@ -310,6 +489,7 @@ const fadeUp = (delay = 0) => ({
 
 // ─── Main Component ────────────────────────────────────────────────────────────
 export default function Portfolio() {
+  const [lang, setLang] = useState<'id' | 'en'>('id')
   const [activeSection, setActiveSection] = useState('home')
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null)
   const [selectedCert, setSelectedCert] = useState<(typeof achievements)[0] | null>(null)
@@ -322,6 +502,28 @@ export default function Portfolio() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
 
+  useEffect(() => {
+    const saved = localStorage.getItem('portfolio_lang') as 'id' | 'en'
+    if (saved && (saved === 'id' || saved === 'en')) {
+      setLang(saved)
+    }
+  }, [])
+
+  const handleLangChange = (newLang: 'id' | 'en') => {
+    setLang(newLang)
+    localStorage.setItem('portfolio_lang', newLang)
+  }
+
+  const t = translations[lang]
+
+  const sections = [
+    { id: 'home',         name: t.nav.home,         icon: Home      },
+    { id: 'about',        name: t.nav.about,        icon: User      },
+    { id: 'projects',     name: t.nav.projects,     icon: Folder    },
+    { id: 'achievements', name: t.nav.achievements, icon: Award     },
+    { id: 'contact',      name: t.nav.contact,      icon: Mail      },
+  ]
+
   const handleInputChange = (field: keyof typeof formData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
     if (errors[field]) {
@@ -331,14 +533,14 @@ export default function Portfolio() {
 
   const validateForm = () => {
     const tempErrors: typeof errors = {}
-    if (!formData.name.trim()) tempErrors.name = 'Nama wajib diisi'
+    if (!formData.name.trim()) tempErrors.name = lang === 'en' ? 'Name is required' : 'Nama wajib diisi'
     if (!formData.email.trim()) {
-      tempErrors.email = 'Email wajib diisi'
+      tempErrors.email = lang === 'en' ? 'Email is required' : 'Email wajib diisi'
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      tempErrors.email = 'Format email tidak valid'
+      tempErrors.email = lang === 'en' ? 'Invalid email format' : 'Format email tidak valid'
     }
-    if (!formData.subject.trim()) tempErrors.subject = 'Subjek wajib diisi'
-    if (!formData.message.trim()) tempErrors.message = 'Pesan wajib diisi'
+    if (!formData.subject.trim()) tempErrors.subject = lang === 'en' ? 'Subject is required' : 'Subjek wajib diisi'
+    if (!formData.message.trim()) tempErrors.message = lang === 'en' ? 'Message is required' : 'Pesan wajib diisi'
     setErrors(tempErrors)
     return Object.keys(tempErrors).length === 0
   }
@@ -422,7 +624,6 @@ export default function Portfolio() {
         <div className="blob blob-3" />
       </div>
 
-
       {/* ── Header ─── */}
       <header className="fixed top-0 left-0 right-0 z-40 header-glass px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
         <motion.button
@@ -445,36 +646,66 @@ export default function Portfolio() {
           </div>
         </motion.button>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex space-x-1">
-          {sections.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => setActiveSection(s.id)}
-              className={`nav-btn ${activeSection === s.id ? 'nav-btn-active' : ''}`}
-            >
-              <s.icon className="w-4 h-4" />
-              <span>{s.name}</span>
-            </button>
-          ))}
-        </nav>
+        <div className="flex items-center gap-2 md:gap-3">
+          {/* Desktop nav */}
+          <nav className="hidden md:flex space-x-1">
+            {sections.map((s) => (
+              <button
+                key={s.id}
+                onClick={() => setActiveSection(s.id)}
+                className={`nav-btn ${activeSection === s.id ? 'nav-btn-active' : ''}`}
+              >
+                <s.icon className="w-4 h-4" />
+                <span>{s.name}</span>
+              </button>
+            ))}
+          </nav>
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? (
-            <X className="w-6 h-6" />
-          ) : (
-            <div className="space-y-1.5">
-              <div className="w-6 h-0.5 bg-current" />
-              <div className="w-6 h-0.5 bg-current" />
-              <div className="w-6 h-0.5 bg-current" />
-            </div>
-          )}
-        </button>
+          {/* Language Switcher Pill */}
+          <div className="flex items-center p-0.5 bg-white/5 border border-white/10 rounded-xl">
+            <button
+              onClick={() => handleLangChange('id')}
+              className={`px-2 py-1 rounded-lg text-[11px] font-semibold transition-all flex items-center gap-1 ${
+                lang === 'id'
+                  ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-sm'
+                  : 'text-gray-400 hover:text-white'
+              }`}
+              title="Bahasa Indonesia"
+            >
+              <span>🇮🇩</span>
+              <span>ID</span>
+            </button>
+            <button
+              onClick={() => handleLangChange('en')}
+              className={`px-2 py-1 rounded-lg text-[11px] font-semibold transition-all flex items-center gap-1 ${
+                lang === 'en'
+                  ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-sm'
+                  : 'text-gray-400 hover:text-white'
+              }`}
+              title="English"
+            >
+              <span>🇬🇧</span>
+              <span>EN</span>
+            </button>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <div className="space-y-1.5">
+                <div className="w-6 h-0.5 bg-current" />
+                <div className="w-6 h-0.5 bg-current" />
+                <div className="w-6 h-0.5 bg-current" />
+              </div>
+            )}
+          </button>
+        </div>
       </header>
 
       {/* Mobile dropdown nav */}
@@ -556,7 +787,7 @@ export default function Portfolio() {
 
           {/* Contact quick */}
           <div className="mt-4 p-4 rounded-xl glass-card">
-            <h3 className="text-[11px] font-bold text-gray-400 mb-3 uppercase tracking-wider">Kontak</h3>
+            <h3 className="text-[11px] font-bold text-gray-400 mb-3 uppercase tracking-wider">{t.nav.contact}</h3>
             <div className="space-y-2">
               <a href={`mailto:${personal.email}`}
                 className="flex items-center gap-2 text-[11px] text-gray-400 hover:text-white transition-colors">
@@ -599,7 +830,7 @@ export default function Portfolio() {
                     {/* Text */}
                     <div className="flex-1 text-center md:text-left">
                       <motion.p {...fadeUp(0.15)} className="text-sm text-primary font-semibold mb-1">
-                        👋 Halo, saya
+                        {t.personal.greeting}
                       </motion.p>
                       <motion.h1 {...fadeUp(0.2)} className="text-3xl md:text-4xl lg:text-5xl font-extrabold gradient-text leading-tight mb-2">
                         {personal.name}
@@ -608,13 +839,13 @@ export default function Portfolio() {
                         {personal.title}
                       </motion.p>
                       <motion.p {...fadeUp(0.3)} className="text-sm text-gray-400 leading-relaxed max-w-xl mx-auto md:mx-0">
-                        {personal.bio}
+                        {t.personal.bio}
                       </motion.p>
 
                       {/* Status badge */}
                       <motion.div {...fadeUp(0.35)} className="flex justify-center md:justify-start mt-3">
                         <span className="available-badge">
-                          <span className="dot" /> Available for new opportunities
+                          <span className="dot" /> {t.personal.available}
                         </span>
                       </motion.div>
 
@@ -628,7 +859,7 @@ export default function Portfolio() {
                           id="view-resume-btn"
                         >
                           <FileText className="w-4 h-4" />
-                          View Resume
+                          {t.personal.viewResume}
                         </motion.button>
                         <motion.button
                           onClick={() => navClick('contact')}
@@ -638,7 +869,7 @@ export default function Portfolio() {
                           id="contact-btn"
                         >
                           <MessageCircle className="w-4 h-4" />
-                          Hubungi Saya
+                          {t.personal.contactMe}
                         </motion.button>
                       </motion.div>
                     </div>
@@ -648,10 +879,10 @@ export default function Portfolio() {
                 {/* Quick nav cards */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                   {[
-                    { id: 'about',        icon: User,    label: 'About Me',     sub: 'Siapa saya',          color: '#6366f1' },
-                    { id: 'projects',     icon: Folder,  label: 'Projects',     sub: 'Karya & portfolio',   color: '#10b981' },
-                    { id: 'achievements', icon: Award,   label: 'Achievements', sub: 'Sertifikat & penghargaan', color: '#f59e0b' },
-                    { id: 'contact',      icon: Mail,    label: 'Contact',      sub: 'Hubungi saya',        color: '#ec4899' },
+                    { id: 'about',        icon: User,    label: t.quickCards.about.label,     sub: t.quickCards.about.sub,          color: '#6366f1' },
+                    { id: 'projects',     icon: Folder,  label: t.quickCards.projects.label,  sub: t.quickCards.projects.sub,   color: '#10b981' },
+                    { id: 'achievements', icon: Award,   label: t.quickCards.achievements.label, sub: t.quickCards.achievements.sub, color: '#f59e0b' },
+                    { id: 'contact',      icon: Mail,    label: t.quickCards.contact.label,   sub: t.quickCards.contact.sub,        color: '#ec4899' },
                   ].map((item, i) => (
                     <motion.button
                       key={item.id}
@@ -674,7 +905,7 @@ export default function Portfolio() {
                 {/* Mini Skills */}
                 <motion.div {...fadeUp(0.6)} className="glass-card rounded-2xl p-5 md:p-6">
                   <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                    <Zap className="w-5 h-5 text-yellow-400" /> Skills & Teknologi
+                    <Zap className="w-5 h-5 text-yellow-400" /> {t.skillsTitle}
                   </h2>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {skills.map((sk, i) => (
@@ -714,9 +945,9 @@ export default function Portfolio() {
                       <p className="text-gray-300 font-medium mb-2">{personal.title}</p>
                       <div className="flex items-center justify-center sm:justify-start gap-1.5 text-sm text-gray-400 mb-3">
                         <MapPin className="w-4 h-4 text-primary" />
-                        <span>{personal.location}</span>
+                        <span>{t.personal.location}</span>
                       </div>
-                      <p className="text-sm text-gray-300 leading-relaxed">{personal.bio}</p>
+                      <p className="text-sm text-gray-300 leading-relaxed">{t.personal.bio}</p>
                       {/* Social links */}
                       <div className="flex justify-center sm:justify-start gap-3 mt-4">
                         {[
@@ -741,26 +972,26 @@ export default function Portfolio() {
                 {/* Experience Timeline */}
                 <div>
                   <h2 className="text-xl md:text-2xl font-bold gradient-text mb-4 flex items-center gap-2">
-                    <Briefcase className="w-6 h-6 text-primary" /> Pengalaman
+                    <Briefcase className="w-6 h-6 text-primary" /> {t.aboutSec.experienceTitle}
                   </h2>
                   <div className="space-y-4">
                     {experiences.map((exp, i) => (
                       <motion.div key={i}
                         {...fadeUp(i * 0.12)}
-                        className="glass-card rounded-xl p-5 md:p-6 relative overflow-hidden"
+                        className="glass-card rounded-xl p-5 md:p-6 relative overflow-hidden render-optimized"
                         whileHover={{ y: -2 }}
                       >
                         <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl" style={{ backgroundColor: exp.color }} />
                         <div className="pl-3">
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
-                            <h3 className="font-bold text-white text-base md:text-lg">{exp.position}</h3>
+                            <h3 className="font-bold text-white text-base md:text-lg">{lang === 'en' ? exp.positionEn : exp.position}</h3>
                             <span className="text-xs font-semibold px-3 py-1 rounded-full w-fit"
                               style={{ backgroundColor: `${exp.color}20`, color: exp.color }}>
-                              {exp.period}
+                              {lang === 'en' ? exp.periodEn : exp.period}
                             </span>
                           </div>
                           <ul className="space-y-1.5">
-                            {exp.descriptions.map((desc, di) => (
+                            {(lang === 'en' ? exp.descriptionsEn : exp.descriptions).map((desc, di) => (
                               <li key={di} className="flex items-start gap-2 text-sm text-gray-300">
                                 <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: exp.color }} />
                                 <span>{desc}</span>
@@ -776,7 +1007,7 @@ export default function Portfolio() {
                 {/* Education */}
                 <div>
                   <h2 className="text-xl md:text-2xl font-bold gradient-text mb-4 flex items-center gap-2">
-                    <GraduationCap className="w-6 h-6 text-primary" /> Pendidikan
+                    <GraduationCap className="w-6 h-6 text-primary" /> {t.aboutSec.educationTitle}
                   </h2>
                   <div className="space-y-4">
                     {education.map((edu, i) => (
@@ -799,19 +1030,19 @@ export default function Portfolio() {
                             <h3 className="font-bold text-white text-sm md:text-base leading-tight">{edu.institution}</h3>
                             {edu.ongoing && (
                               <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-green-500/20 text-green-400 w-fit">
-                                Ongoing
+                                {t.aboutSec.ongoing}
                               </span>
                             )}
                           </div>
-                          <p className="text-sm text-primary font-medium mt-0.5">{edu.degree}</p>
+                          <p className="text-sm text-primary font-medium mt-0.5">{lang === 'en' ? edu.degreeEn : edu.degree}</p>
                           <div className="flex items-center gap-3 mt-1.5">
                             <div className="flex items-center gap-1 text-xs text-gray-400">
                               <Calendar className="w-3.5 h-3.5" />
-                              <span>{edu.period}</span>
+                              <span>{lang === 'en' ? edu.periodEn : edu.period}</span>
                             </div>
                             <div className="flex items-center gap-1 text-xs text-gray-400">
                               <MapPin className="w-3.5 h-3.5" />
-                              <span>{edu.location}</span>
+                              <span>{lang === 'en' ? edu.locationEn : edu.location}</span>
                             </div>
                           </div>
                         </div>
@@ -829,15 +1060,15 @@ export default function Portfolio() {
                 className="space-y-6">
 
                 <div>
-                  <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-1">Achievements</h2>
-                  <p className="text-gray-400 text-sm">Sertifikat & penghargaan yang telah saya raih</p>
+                  <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-1">{t.achievementsSec.title}</h2>
+                  <p className="text-gray-400 text-sm">{t.achievementsSec.subtitle}</p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
                   {achievements.map((item, i) => (
                     <motion.div key={item.id}
                       {...fadeUp(i * 0.1)}
-                      className="glass-card rounded-2xl overflow-hidden cursor-pointer group"
+                      className="glass-card rounded-2xl overflow-hidden cursor-pointer group render-optimized"
                       whileHover={{ y: -5, scale: 1.01 }}
                       onClick={() => setSelectedCert(item)}
                     >
@@ -861,11 +1092,11 @@ export default function Portfolio() {
                         <p className="text-xs text-primary font-medium mb-1">{item.issuer}</p>
                         <div className="flex items-center gap-1 text-xs text-gray-400">
                           <Calendar className="w-3.5 h-3.5" />
-                          <span>{item.date}</span>
+                          <span>{lang === 'en' && item.dateEn ? item.dateEn : item.date}</span>
                         </div>
                         <div className="mt-3 text-xs text-gray-400 flex items-center gap-1">
                           <ExternalLink className="w-3.5 h-3.5" />
-                          <span>Klik untuk lihat sertifikat</span>
+                          <span>{t.achievementsSec.clickToView}</span>
                         </div>
                       </div>
                     </motion.div>
@@ -881,8 +1112,8 @@ export default function Portfolio() {
                 className="space-y-6">
 
                 <div>
-                  <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-1">My Projects</h2>
-                  <p className="text-gray-400 text-sm">Koleksi project yang pernah saya kerjakan</p>
+                  <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-1">{t.projectsSec.title}</h2>
+                  <p className="text-gray-400 text-sm">{t.projectsSec.subtitle}</p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
@@ -891,7 +1122,7 @@ export default function Portfolio() {
                       initial={{ opacity: 0, y: 24 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.08 }}
-                      className="glass-card rounded-2xl overflow-hidden cursor-pointer group"
+                      className="glass-card rounded-2xl overflow-hidden cursor-pointer group render-optimized"
                       whileHover={{ y: -5, scale: 1.01 }}
                       onClick={() => setSelectedProject(project)}
                     >
@@ -902,7 +1133,7 @@ export default function Portfolio() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                         {project.featured && (
                           <div className="absolute top-3 right-3 px-2.5 py-1 bg-yellow-500/90 text-black rounded-full text-[10px] font-bold flex items-center gap-1">
-                            <Star className="w-3 h-3" /> Featured
+                            <Star className="w-3 h-3" /> {t.projectsSec.featured}
                           </div>
                         )}
                         <div className="absolute bottom-3 left-3">
@@ -915,7 +1146,9 @@ export default function Portfolio() {
                       {/* Info */}
                       <div className="p-4">
                         <h3 className="font-bold text-white mb-1 text-sm md:text-base line-clamp-1">{project.title}</h3>
-                        <p className="text-xs text-gray-400 mb-3 line-clamp-2 leading-relaxed">{project.description}</p>
+                        <p className="text-xs text-gray-400 mb-3 line-clamp-2 leading-relaxed">
+                          {lang === 'en' ? project.descriptionEn : project.description}
+                        </p>
                         <div className="flex flex-wrap gap-1.5">
                           {project.technologies.slice(0, 4).map((tech) => (
                             <span key={tech} className="px-2 py-0.5 bg-primary/15 text-primary rounded-full text-[10px] font-medium border border-primary/20">
@@ -951,13 +1184,13 @@ export default function Portfolio() {
                     <div className="glass-card rounded-2xl p-5 md:p-6 space-y-3 relative overflow-hidden group">
                       <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-primary to-secondary" />
                       <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-primary/10 text-primary border border-primary/20 inline-block">
-                        Hubungi Saya
+                        {t.contactSec.tag}
                       </span>
                       <h2 className="text-2xl md:text-3xl font-black gradient-text leading-tight tracking-tight">
-                        Mari Berdiskusi!
+                        {t.contactSec.heading}
                       </h2>
                       <p className="text-xs md:text-sm text-gray-300 leading-relaxed">
-                        Punya project menarik, ingin berkolaborasi, atau sekadar berdiskusi? Jangan ragu untuk menghubungi saya! Saya akan berusaha membalas secepat mungkin.
+                        {t.contactSec.description}
                       </p>
                     </div>
 
@@ -973,18 +1206,18 @@ export default function Portfolio() {
                             <Mail className="w-6 h-6" />
                           </div>
                           <div className="min-w-0">
-                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Email</p>
+                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">{t.contactSec.emailLabel}</p>
                             <p className="text-sm font-bold text-white truncate mt-0.5">{personal.email}</p>
                           </div>
                         </div>
                         <div className="hidden xs:flex items-center gap-1 text-xs font-semibold text-indigo-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0">
-                          <span>Kirim</span>
+                          <span>{t.contactSec.emailAction}</span>
                           <ExternalLink className="w-3.5 h-3.5" />
                         </div>
                       </motion.a>
                     </div>
 
-                    {/* Location Info Card (Distinct from WA/Email) */}
+                    {/* Location Info Card */}
                     <div className="glass-card rounded-2xl p-6 border border-white/10 hover:border-pink-500/30 hover:shadow-[0_0_20px_rgba(236,72,153,0.15)] transition-all relative overflow-hidden group">
                       <div className="absolute top-0 right-0 w-24 h-24 bg-pink-500/5 rounded-full blur-xl pointer-events-none" />
                       <div className="flex items-start gap-4">
@@ -993,11 +1226,11 @@ export default function Portfolio() {
                         </div>
                         <div className="space-y-3 flex-1">
                           <div>
-                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Lokasi & Jangkauan</p>
-                            <h4 className="font-extrabold text-white text-base mt-0.5">{personal.location}</h4>
+                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">{t.contactSec.locationLabel}</p>
+                            <h4 className="font-extrabold text-white text-base mt-0.5">{t.personal.location}</h4>
                           </div>
                           <p className="text-xs text-gray-300 leading-relaxed">
-                            Berbasis di Sukabumi, Jawa Barat. Siap bekerja secara remote (jarak jauh) untuk klien dari seluruh dunia maupun on-site untuk project lokal.
+                            {t.contactSec.locationDesc}
                           </p>
                           <motion.a
                             href="https://www.google.com/maps/place/Sukabumi,+Sukabumi+Regency,+West+Java/@-6.9897,106.9268"
@@ -1008,7 +1241,7 @@ export default function Portfolio() {
                             whileTap={{ scale: 0.98 }}
                           >
                             <Globe className="w-3.5 h-3.5" />
-                            <span>Buka di Google Maps</span>
+                            <span>{t.contactSec.openMaps}</span>
                           </motion.a>
                         </div>
                       </div>
@@ -1016,7 +1249,7 @@ export default function Portfolio() {
 
                     {/* Social Media Connections */}
                     <div className="glass-card rounded-2xl p-6 border border-white/10 space-y-4">
-                      <h4 className="font-bold text-white text-xs tracking-wider uppercase pl-1">Temukan Saya Di</h4>
+                      <h4 className="font-bold text-white text-xs tracking-wider uppercase pl-1">{t.contactSec.socialsHeading}</h4>
                       <div className="grid grid-cols-2 gap-2.5">
                         {[
                           { icon: Github,    href: personal.github,    label: 'GitHub',    color: '#ffffff', bg: 'rgba(255,255,255,0.06)', border: 'rgba(255,255,255,0.15)' },
@@ -1071,9 +1304,9 @@ export default function Portfolio() {
                           </motion.div>
                           
                           <div className="space-y-2.5 max-w-md">
-                            <h3 className="text-2xl font-extrabold text-white">Pesan Berhasil Dikirim!</h3>
+                            <h3 className="text-2xl font-extrabold text-white">{t.contactSec.successTitle}</h3>
                             <p className="text-sm text-gray-300 leading-relaxed">
-                              Terima kasih telah menghubungi saya. Pesan Anda telah tersimpan dengan aman di antrean dan saya akan meresponsnya secepat mungkin.
+                              {t.contactSec.successDesc}
                             </p>
                           </div>
 
@@ -1084,7 +1317,7 @@ export default function Portfolio() {
                             whileTap={{ scale: 0.97 }}
                           >
                             <Send className="w-3.5 h-3.5" />
-                            Kirim Pesan Lain
+                            {t.contactSec.sendAnother}
                           </motion.button>
                         </motion.div>
                       ) : (
@@ -1101,20 +1334,20 @@ export default function Portfolio() {
                               <div className="p-2 rounded-lg bg-primary/10 text-primary">
                                 <Send className="w-4 h-4" />
                               </div>
-                              <h3 className="text-base font-bold text-white">Kirim Pesan Instan</h3>
+                              <h3 className="text-base font-bold text-white">{t.contactSec.formHeading}</h3>
                             </div>
                             <p className="text-xs text-gray-400 leading-relaxed">
-                              Gunakan formulir di bawah ini untuk mengirimkan pesan secara instan. Semua masukan Anda sangat berarti bagi saya.
+                              {t.contactSec.formDesc}
                             </p>
                           </div>
 
                           <div className="space-y-3 mt-3">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               <div className="space-y-1">
-                                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">Nama Lengkap</label>
+                                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">{t.contactSec.nameLabel}</label>
                                 <input
                                   type="text"
-                                  placeholder="Nama Anda"
+                                  placeholder={t.contactSec.namePlaceholder}
                                   value={formData.name}
                                   onChange={(e) => handleInputChange('name', e.target.value)}
                                   disabled={isSubmitting}
@@ -1125,10 +1358,10 @@ export default function Portfolio() {
                                 )}
                               </div>
                               <div className="space-y-1">
-                                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">Alamat Email</label>
+                                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">{t.contactSec.emailInputLabel}</label>
                                 <input
                                   type="email"
-                                  placeholder="Email Anda"
+                                  placeholder={t.contactSec.emailPlaceholder}
                                   value={formData.email}
                                   onChange={(e) => handleInputChange('email', e.target.value)}
                                   disabled={isSubmitting}
@@ -1141,10 +1374,10 @@ export default function Portfolio() {
                             </div>
                             
                             <div className="space-y-1">
-                              <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">Subjek</label>
+                              <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">{t.contactSec.subjectLabel}</label>
                               <input
                                 type="text"
-                                placeholder="Apa subjek pesan Anda?"
+                                placeholder={t.contactSec.subjectPlaceholder}
                                 value={formData.subject}
                                 onChange={(e) => handleInputChange('subject', e.target.value)}
                                 disabled={isSubmitting}
@@ -1156,10 +1389,10 @@ export default function Portfolio() {
                             </div>
                             
                             <div className="space-y-1">
-                              <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">Isi Pesan</label>
+                              <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">{t.contactSec.messageLabel}</label>
                               <textarea
                                 rows={3}
-                                placeholder="Tuliskan pesan Anda di sini..."
+                                placeholder={t.contactSec.messagePlaceholder}
                                 value={formData.message}
                                 onChange={(e) => handleInputChange('message', e.target.value)}
                                 disabled={isSubmitting}
@@ -1182,12 +1415,12 @@ export default function Portfolio() {
                               {isSubmitting ? (
                                 <>
                                   <Loader2 className="w-4 h-4 animate-spin" />
-                                  <span>Mengirim Pesan...</span>
+                                  <span>{t.contactSec.submitting}</span>
                                 </>
                               ) : (
                                 <>
                                   <Send className="w-4 h-4" />
-                                  <span>Kirim Pesan Instan</span>
+                                  <span>{t.contactSec.submitBtn}</span>
                                 </>
                               )}
                             </motion.button>
@@ -1262,15 +1495,17 @@ export default function Portfolio() {
                 <Image src={selectedProject.image} alt={selectedProject.title} fill className="object-cover" />
                 {selectedProject.featured && (
                   <div className="absolute top-3 right-3 px-3 py-1 bg-yellow-500/90 text-black rounded-full text-xs font-bold">
-                    Featured
+                    {t.projectsSec.featured}
                   </div>
                 )}
               </div>
 
-              <p className="text-gray-300 text-sm leading-relaxed mb-4">{selectedProject.description}</p>
+              <p className="text-gray-300 text-sm leading-relaxed mb-4">
+                {lang === 'en' ? selectedProject.descriptionEn : selectedProject.description}
+              </p>
 
               <div className="mb-4">
-                <h3 className="font-bold text-white mb-2 text-sm">Teknologi</h3>
+                <h3 className="font-bold text-white mb-2 text-sm">{t.projectsSec.technologies}</h3>
                 <div className="flex flex-wrap gap-2">
                   {selectedProject.technologies.map((tech) => (
                     <span key={tech} className="px-3 py-1 bg-primary/20 text-primary rounded-full text-xs font-medium border border-primary/30">{tech}</span>
@@ -1282,12 +1517,12 @@ export default function Portfolio() {
                 <motion.a href={selectedProject.liveUrl} target="_blank" rel="noreferrer"
                   className="flex-1 btn-primary flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <ExternalLink className="w-4 h-4" /> Live Demo
+                  <ExternalLink className="w-4 h-4" /> {t.projectsSec.liveDemo}
                 </motion.a>
                 <motion.a href={selectedProject.githubUrl} target="_blank" rel="noreferrer"
                   className="flex-1 btn-outline flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Github className="w-4 h-4" /> Source Code
+                  <Github className="w-4 h-4" /> {t.projectsSec.sourceCode}
                 </motion.a>
               </div>
             </motion.div>
@@ -1324,7 +1559,7 @@ export default function Portfolio() {
 
               <div className="flex items-center gap-1.5 text-sm text-gray-400">
                 <Calendar className="w-4 h-4" />
-                <span>{selectedCert.date}</span>
+                <span>{lang === 'en' && selectedCert.dateEn ? selectedCert.dateEn : selectedCert.date}</span>
               </div>
             </motion.div>
           </motion.div>
@@ -1341,7 +1576,7 @@ export default function Portfolio() {
 
               {/* Header */}
               <div className="flex justify-between items-center mb-4 flex-shrink-0">
-                <h2 className="text-lg font-bold gradient-text">Resume / CV</h2>
+                <h2 className="text-lg font-bold gradient-text">{t.resumeModal.title}</h2>
                 <motion.button onClick={() => setShowResume(false)}
                   className="p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg transition-all"
                   whileHover={{ scale: 1.05, rotate: 90 }}
@@ -1370,7 +1605,7 @@ export default function Portfolio() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <FileText className="w-4 h-4" /> Download Resume
+                  <FileText className="w-4 h-4" /> {t.resumeModal.download}
                 </motion.a>
                 <motion.a
                   href="/gambar-resume/cv-resume-ade-rama.png"
@@ -1380,7 +1615,7 @@ export default function Portfolio() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <ExternalLink className="w-4 h-4" /> Buka di Tab Baru
+                  <ExternalLink className="w-4 h-4" /> {t.resumeModal.openNewTab}
                 </motion.a>
               </div>
             </motion.div>
