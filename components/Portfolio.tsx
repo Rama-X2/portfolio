@@ -648,7 +648,33 @@ export default function Portfolio() {
 
         <div className="flex items-center gap-2 md:gap-3">
           {/* Desktop nav */}
-          <nav className="hidden md:flex space-x-1">
+          <nav className="hidden md:flex items-center space-x-1">
+            {/* Language Switcher Pill (Desktop - Left of Home) */}
+            <div className="flex items-center p-0.5 bg-white/5 border border-white/10 rounded-xl mr-2">
+              <button
+                onClick={() => handleLangChange('id')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
+                  lang === 'id'
+                    ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-sm'
+                    : 'text-gray-400 hover:text-white'
+                }`}
+                title="Bahasa Indonesia"
+              >
+                ID
+              </button>
+              <button
+                onClick={() => handleLangChange('en')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
+                  lang === 'en'
+                    ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-sm'
+                    : 'text-gray-400 hover:text-white'
+                }`}
+                title="English"
+              >
+                EN
+              </button>
+            </div>
+
             {sections.map((s) => (
               <button
                 key={s.id}
@@ -661,31 +687,29 @@ export default function Portfolio() {
             ))}
           </nav>
 
-          {/* Language Switcher Pill */}
-          <div className="flex items-center p-0.5 bg-white/5 border border-white/10 rounded-xl">
+          {/* Language Switcher Pill (Mobile) */}
+          <div className="flex md:hidden items-center p-0.5 bg-white/5 border border-white/10 rounded-xl">
             <button
               onClick={() => handleLangChange('id')}
-              className={`px-2 py-1 rounded-lg text-[11px] font-semibold transition-all flex items-center gap-1 ${
+              className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all ${
                 lang === 'id'
                   ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-sm'
                   : 'text-gray-400 hover:text-white'
               }`}
               title="Bahasa Indonesia"
             >
-              <span>🇮🇩</span>
-              <span>ID</span>
+              ID
             </button>
             <button
               onClick={() => handleLangChange('en')}
-              className={`px-2 py-1 rounded-lg text-[11px] font-semibold transition-all flex items-center gap-1 ${
+              className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all ${
                 lang === 'en'
                   ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-sm'
                   : 'text-gray-400 hover:text-white'
               }`}
               title="English"
             >
-              <span>🇬🇧</span>
-              <span>EN</span>
+              EN
             </button>
           </div>
 
