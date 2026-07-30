@@ -422,21 +422,6 @@ export default function Portfolio() {
         <div className="blob blob-3" />
       </div>
 
-      {/* ── WhatsApp Floating Button ─── */}
-      <motion.a
-        href={personal.whatsapp}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="whatsapp-btn"
-        whileHover={{ scale: 1.12 }}
-        whileTap={{ scale: 0.92 }}
-        title="Chat via WhatsApp"
-      >
-        <svg viewBox="0 0 32 32" fill="currentColor" className="w-7 h-7">
-          <path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.64 4.73 1.77 6.72L2 30l7.45-1.76A13.92 13.92 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.5a11.44 11.44 0 01-5.84-1.6l-.42-.25-4.42 1.04 1.06-4.3-.27-.44A11.47 11.47 0 014.5 16C4.5 9.6 9.6 4.5 16 4.5S27.5 9.6 27.5 16 22.4 27.5 16 27.5zm6.3-8.55c-.34-.17-2.02-1-2.34-1.11-.32-.11-.55-.17-.78.17-.23.34-.89 1.11-1.09 1.34-.2.23-.4.26-.74.09-.34-.17-1.44-.53-2.74-1.69-1.01-.9-1.7-2.02-1.89-2.36-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.6.17-.2.23-.34.34-.57.11-.23.06-.43-.03-.6-.09-.17-.78-1.88-1.07-2.57-.28-.68-.57-.59-.78-.6h-.66c-.23 0-.6.09-.91.43-.32.34-1.2 1.17-1.2 2.86s1.23 3.32 1.4 3.55c.17.23 2.42 3.7 5.87 5.19.82.35 1.46.56 1.96.72.82.26 1.57.22 2.16.13.66-.1 2.02-.82 2.31-1.62.28-.8.28-1.48.2-1.62-.09-.14-.32-.23-.66-.4z"/>
-        </svg>
-        <span className="whatsapp-label">WhatsApp</span>
-      </motion.a>
 
       {/* ── Header ─── */}
       <header className="fixed top-0 left-0 right-0 z-40 header-glass px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
