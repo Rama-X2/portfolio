@@ -177,7 +177,8 @@ const achievements = [
     id: 4,
     title: 'DevCoach #200: Integrasi IT & AI powered by Asah!',
     issuer: 'DevCoach × Asah!',
-    date: '2025',
+    date: '26 Juni 2025',
+    dateEn: 'June 26, 2025',
     image: '/gambar-sertifikat/devcoach-200-integrasi-it-ai-powered-by-asah-certificate-1.png',
   },
   {
