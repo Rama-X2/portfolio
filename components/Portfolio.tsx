@@ -613,28 +613,12 @@ export default function Portfolio() {
     const isModalOpen = showResume || !!selectedProject || !!selectedCert
     if (isModalOpen) {
       document.body.classList.add('modal-open')
-      document.documentElement.classList.add('modal-open')
     } else {
       document.body.classList.remove('modal-open')
-      document.documentElement.classList.remove('modal-open')
-    }
-
-    const handleTouchMove = (e: TouchEvent) => {
-      const target = e.target as HTMLElement
-      const isScrollable = target.closest('.resume-img-scroll') || target.closest('.portfolio-modal-content')
-      if (!isScrollable && e.cancelable) {
-        e.preventDefault()
-      }
-    }
-
-    if (isModalOpen) {
-      document.addEventListener('touchmove', handleTouchMove, { passive: false })
     }
 
     return () => {
       document.body.classList.remove('modal-open')
-      document.documentElement.classList.remove('modal-open')
-      document.removeEventListener('touchmove', handleTouchMove)
     }
   }, [showResume, selectedProject, selectedCert])
 

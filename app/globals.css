@@ -410,12 +410,10 @@
   }
 }
 
-/* Lock scroll when modal is open */
-html.modal-open,
+/* Lock scroll when modal is open without resetting scroll position */
 body.modal-open {
   overflow: hidden !important;
-  height: 100vh !important;
-  overscroll-behavior: none !important;
+  touch-action: none;
 }
 
 /* Center certificate modal on mobile */
