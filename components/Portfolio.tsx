@@ -46,7 +46,7 @@ const personal = {
   website: 'https://rama-x2.my.id',
   github: 'https://github.com/Rama-X2',
   linkedin: 'https://linkedin.com/in/rama-xd',
-  instagram: 'https://instagram.com/rama_tcp',
+  instagram: 'https://instagram.com/rama_ext4',
 }
 
 const skills = [
