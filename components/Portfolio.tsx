@@ -146,7 +146,7 @@ const education = [
     institution: 'Universitas Linggabuana PGRI Sukabumi',
     degree: 'S1 Teknik Informatika',
     degreeEn: 'B.S. in Informatics Engineering',
-    period: 'Sedang Berjalan (Ongoing)',
+    period: 'Sedang Berjalan',
     periodEn: 'Ongoing',
     location: 'Sukabumi, Jawa Barat',
     locationEn: 'Sukabumi, West Java',
@@ -394,48 +394,48 @@ const projects = [
 // ─── Translations Dictionary ──────────────────────────────────────────────────
 const translations = {
   id: {
-    nav: { home: 'Home', about: 'About', projects: 'Projects', achievements: 'Achievements', contact: 'Contact' },
+    nav: { home: 'Beranda', about: 'Tentang', projects: 'Proyek', achievements: 'Prestasi', contact: 'Kontak' },
     personal: {
       greeting: 'Halo, saya',
       bio: 'Seorang Full Stack Developer dan UI/UX Designer yang aktif mengembangkan berbagai solusi digital modern, mulai dari website, software, hingga sistem berbasis performa tinggi. Memiliki ketertarikan besar pada web development, server management, dan optimasi sistem, dengan fokus menciptakan aplikasi yang responsif, efisien, dan nyaman digunakan.',
       location: 'Sukabumi, Jawa Barat',
-      available: 'Available for new opportunities',
-      viewResume: 'View Resume',
+      available: 'Tersedia untuk peluang baru',
+      viewResume: 'Lihat Resume',
       contactMe: 'Hubungi Saya',
     },
     quickCards: {
-      about: { label: 'About Me', sub: 'Siapa saya' },
-      projects: { label: 'Projects', sub: 'Karya & portfolio' },
-      achievements: { label: 'Achievements', sub: 'Sertifikat & penghargaan' },
-      contact: { label: 'Contact', sub: 'Hubungi saya' },
+      about: { label: 'Tentang Saya', sub: 'Siapa saya' },
+      projects: { label: 'Proyek Saya', sub: 'Karya & portofolio' },
+      achievements: { label: 'Prestasi & Sertifikat', sub: 'Sertifikat & penghargaan' },
+      contact: { label: 'Kontak', sub: 'Hubungi saya' },
     },
     skillsTitle: 'Tech Stack',
     aboutSec: {
       experienceTitle: 'Pengalaman',
       educationTitle: 'Pendidikan',
-      ongoing: 'Ongoing',
+      ongoing: 'Sedang Berjalan',
     },
     achievementsSec: {
-      title: 'Achievements',
+      title: 'Prestasi & Sertifikat',
       subtitle: 'Sertifikat & penghargaan yang telah saya raih',
       clickToView: 'Klik untuk lihat sertifikat',
     },
     projectsSec: {
-      title: 'My Projects',
-      subtitle: 'Koleksi project yang pernah saya kerjakan',
-      featured: 'Featured',
+      title: 'Proyek Saya',
+      subtitle: 'Koleksi proyek yang pernah saya kerjakan',
+      featured: 'Unggulan',
       technologies: 'Teknologi',
-      liveDemo: 'Live Demo',
-      sourceCode: 'Source Code',
+      liveDemo: 'Demo Langsung',
+      sourceCode: 'Kode Sumber',
     },
     contactSec: {
       tag: 'Hubungi Saya',
       heading: 'Mari Berdiskusi!',
-      description: 'Punya project menarik, ingin berkolaborasi, atau sekadar berdiskusi? Jangan ragu untuk menghubungi saya! Saya akan berusaha membalas secepat mungkin.',
+      description: 'Punya proyek menarik, ingin berkolaborasi, atau sekadar berdiskusi? Jangan ragu untuk menghubungi saya! Saya akan berusaha membalas secepat mungkin.',
       emailLabel: 'Email',
       emailAction: 'Kirim',
       locationLabel: 'Lokasi & Jangkauan',
-      locationDesc: 'Berbasis di Sukabumi, Jawa Barat. Siap bekerja secara remote (jarak jauh) untuk klien dari seluruh dunia maupun on-site untuk project lokal.',
+      locationDesc: 'Berbasis di Sukabumi, Jawa Barat. Siap bekerja secara remote (jarak jauh) untuk klien dari seluruh dunia maupun on-site untuk proyek lokal.',
       openMaps: 'Buka di Google Maps',
       socialsHeading: 'Temukan Saya Di',
       formHeading: 'Kirim Pesan Instan',
@@ -456,7 +456,7 @@ const translations = {
     },
     resumeModal: {
       title: 'Resume / CV',
-      download: 'Download Resume',
+      download: 'Unduh Resume',
       openNewTab: 'Buka di Tab Baru',
     },
   },
@@ -491,7 +491,7 @@ const translations = {
       title: 'My Projects',
       subtitle: 'A showcase of projects I have built',
       featured: 'Featured',
-      technologies: 'Technologies',
+      technologies: 'Tech Stack',
       liveDemo: 'Live Demo',
       sourceCode: 'Source Code',
     },
@@ -980,7 +980,7 @@ export default function Portfolio() {
                   </h2>
                   <p className="text-xs text-gray-400 mt-1">
                     {lang === 'en'
-                      ? 'Technologies, programming languages, frameworks & tools I work with'
+                      ? 'Programming languages, frameworks, tools & platforms I use'
                       : 'Bahasa pemrograman, framework, tools & platform yang saya gunakan'}
                   </p>
                 </div>
