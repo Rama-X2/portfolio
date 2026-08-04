@@ -678,11 +678,6 @@ export default function Portfolio() {
     }
   }, [showResume, selectedProject, selectedCert])
 
-  const navClick = (id: string) => {
-    setActiveSection(id)
-    setMenuOpen(false)
-  }
-
   return (
     <div className="min-h-screen portfolio-bg text-white flex flex-col">
       {/* ── Animated BG blobs ─── */}
@@ -1508,6 +1503,7 @@ export default function Portfolio() {
                       )}
                     </AnimatePresence>
                   </div>
+                </div>
 
               </motion.section>
 
