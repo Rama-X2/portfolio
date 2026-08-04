@@ -618,14 +618,36 @@ export default function Portfolio() {
     }
   }
 
+  const navClick = (id: string) => {
+    setActiveSection(id)
+    setMenuOpen(false)
+    const el = document.getElementById(id)
+    if (el) {
+      const yOffset = -85
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
+      window.scrollTo({ top: y, behavior: 'smooth' })
+    }
+  }
+
   const mainRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    if (mainRef.current) {
-      mainRef.current.scrollTop = 0
+    const sectionIds = ['home', 'about', 'projects', 'achievements', 'contact']
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 160
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const id = sectionIds[i]
+        const el = document.getElementById(id)
+        if (el && scrollPosition >= el.offsetTop) {
+          setActiveSection(id)
+          break
+        }
+      }
     }
-    window.scrollTo({ top: 0 })
-  }, [activeSection])
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -844,396 +866,416 @@ export default function Portfolio() {
         </aside>
 
         {/* ── Content ─── */}
-        <main ref={mainRef} className="flex-1 p-3 md:p-5 lg:p-6 overflow-y-auto custom-scrollbar min-w-0">
-          <AnimatePresence mode="wait">
+        <main ref={mainRef} className="flex-1 p-3 md:p-5 lg:p-6 min-w-0 space-y-12 md:space-y-16">
 
-            {/* ════════════════════════════════ HOME ═══ */}
-            {activeSection === 'home' && (
-              <motion.div key="home"
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-                className="space-y-5 md:space-y-6">
+          {/* ════════════════════════════════ HOME ═══ */}
+          <motion.section
+            id="home"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="scroll-mt-24 space-y-5 md:space-y-6"
+          >
 
-                {/* Hero card */}
-                <div className="glass-card rounded-2xl p-5 md:p-8">
-                  <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
-                    {/* Avatar */}
-                    <motion.div
-                      className="avatar-ring w-24 h-24 md:w-32 md:h-32 flex-shrink-0 mx-auto md:mx-0"
-                      {...fadeUp(0.1)}
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      <Image
-                        src={personal.avatar}
-                        alt={personal.name}
-                        width={128}
-                        height={128}
-                        className="w-full h-full object-cover rounded-full"
-                        priority
-                      />
-                    </motion.div>
-
-                    {/* Text */}
-                    <div className="flex-1 text-center md:text-left">
-                      <motion.p {...fadeUp(0.15)} className="text-sm text-primary font-semibold mb-1">
-                        {t.personal.greeting}
-                      </motion.p>
-                      <motion.h1 {...fadeUp(0.2)} className="text-3xl md:text-4xl lg:text-5xl font-extrabold gradient-text leading-tight mb-2">
-                        {personal.name}
-                      </motion.h1>
-                      <motion.p {...fadeUp(0.25)} className="text-base md:text-lg text-gray-300 mb-3 font-medium">
-                        {personal.title}
-                      </motion.p>
-                      <motion.p {...fadeUp(0.3)} className="text-sm text-gray-400 leading-relaxed max-w-xl mx-auto md:mx-0">
-                        {t.personal.bio}
-                      </motion.p>
-
-                      {/* Status badge */}
-                      <motion.div {...fadeUp(0.35)} className="flex justify-center md:justify-start mt-3">
-                        <span className="available-badge">
-                          <span className="dot" /> {t.personal.available}
-                        </span>
-                      </motion.div>
-
-                      {/* CTA buttons */}
-                      <motion.div {...fadeUp(0.4)} className="flex flex-col sm:flex-row gap-3 mt-5 justify-center md:justify-start">
-                        <motion.button
-                          onClick={() => setShowResume(true)}
-                          className="btn-primary flex items-center justify-center gap-2"
-                          whileHover={{ scale: 1.03, y: -2 }}
-                          whileTap={{ scale: 0.97 }}
-                          id="view-resume-btn"
-                        >
-                          <FileText className="w-4 h-4" />
-                          {t.personal.viewResume}
-                        </motion.button>
-                        <motion.button
-                          onClick={() => navClick('contact')}
-                          className="btn-outline flex items-center justify-center gap-2"
-                          whileHover={{ scale: 1.03, y: -2 }}
-                          whileTap={{ scale: 0.97 }}
-                          id="contact-btn"
-                        >
-                          <MessageCircle className="w-4 h-4" />
-                          {t.personal.contactMe}
-                        </motion.button>
-                      </motion.div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Quick nav cards */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-                  {[
-                    { id: 'about',        icon: User,    label: t.quickCards.about.label,     sub: t.quickCards.about.sub,          color: '#6366f1' },
-                    { id: 'projects',     icon: Folder,  label: t.quickCards.projects.label,  sub: t.quickCards.projects.sub,   color: '#10b981' },
-                    { id: 'achievements', icon: Award,   label: t.quickCards.achievements.label, sub: t.quickCards.achievements.sub, color: '#f59e0b' },
-                    { id: 'contact',      icon: Mail,    label: t.quickCards.contact.label,   sub: t.quickCards.contact.sub,        color: '#ec4899' },
-                  ].map((item, i) => (
-                    <motion.button
-                      key={item.id}
-                      onClick={() => navClick(item.id)}
-                      className="glass-card rounded-xl p-4 md:p-5 text-left hover:shadow-glow transition-all duration-300 group"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.5 + i * 0.08 }}
-                      whileHover={{ y: -4, scale: 1.02 }}
-                    >
-                      <div className="p-2 rounded-lg w-fit mb-3" style={{ backgroundColor: `${item.color}25` }}>
-                        <item.icon className="w-5 h-5" style={{ color: item.color }} />
-                      </div>
-                      <p className="font-semibold text-white text-sm md:text-base">{item.label}</p>
-                      <p className="text-xs text-gray-400 mt-0.5">{item.sub}</p>
-                    </motion.button>
-                  ))}
-                </div>
-
-                {/* Tech Stack & Tools */}
-                <motion.div {...fadeUp(0.6)} className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
-                    <div>
-                      <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                        <Zap className="w-5 h-5 text-yellow-400" /> {t.skillsTitle}
-                      </h2>
-                      <p className="text-xs text-gray-400 mt-1">
-                        {lang === 'en'
-                          ? 'Technologies, programming languages, frameworks & tools I work with'
-                          : 'Bahasa pemrograman, framework, tools & platform yang saya gunakan'}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2.5 sm:gap-3 justify-start items-center">
-                    {techStackList.map((item, i) => (
-                      <motion.div
-                        key={item.name}
-                        className="group relative flex items-center justify-center p-2 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 cursor-pointer"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.02 * i }}
-                        whileHover={{ scale: 1.15, y: -3 }}
-                      >
-                        <img
-                          src={`https://skillicons.dev/icons?i=${item.icon}`}
-                          alt={item.name}
-                          className="w-9 h-9 sm:w-10 sm:h-10 object-contain drop-shadow"
-                          loading="lazy"
-                        />
-                        <div className="absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-gray-900/95 text-white text-[11px] font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none border border-white/10 shadow-lg z-20">
-                          {item.name}
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
+            {/* Hero card */}
+            <div className="glass-card rounded-2xl p-5 md:p-8">
+              <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+                {/* Avatar */}
+                <motion.div
+                  className="avatar-ring w-24 h-24 md:w-32 md:h-32 flex-shrink-0 mx-auto md:mx-0"
+                  {...fadeUp(0.1)}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <Image
+                    src={personal.avatar}
+                    alt={personal.name}
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover rounded-full"
+                    priority
+                  />
                 </motion.div>
-              </motion.div>
-            )}
 
-            {/* ════════════════════════════════ ABOUT ═══ */}
-            {activeSection === 'about' && (
-              <motion.div key="about"
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-                className="space-y-6">
+                {/* Text */}
+                <div className="flex-1 text-center md:text-left">
+                  <motion.p {...fadeUp(0.15)} className="text-sm text-primary font-semibold mb-1">
+                    {t.personal.greeting}
+                  </motion.p>
+                  <motion.h1 {...fadeUp(0.2)} className="text-3xl md:text-4xl lg:text-5xl font-extrabold gradient-text leading-tight mb-2">
+                    {personal.name}
+                  </motion.h1>
+                  <motion.p {...fadeUp(0.25)} className="text-base md:text-lg text-gray-300 mb-3 font-medium">
+                    {personal.title}
+                  </motion.p>
+                  <motion.p {...fadeUp(0.3)} className="text-sm text-gray-400 leading-relaxed max-w-xl mx-auto md:mx-0">
+                    {t.personal.bio}
+                  </motion.p>
 
-                {/* Profile */}
-                <div className="glass-card rounded-2xl p-5 md:p-8">
-                  <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
-                    <div className="avatar-ring w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0">
-                      <Image src={personal.avatar} alt={personal.name} width={112} height={112}
-                        className="w-full h-full object-cover rounded-full" />
-                    </div>
-                    <div className="text-center sm:text-left">
-                      <h1 className="text-2xl md:text-3xl font-extrabold gradient-text mb-1">{personal.name}</h1>
-                      <p className="text-gray-300 font-medium mb-2">{personal.title}</p>
-                      <div className="flex items-center justify-center sm:justify-start gap-1.5 text-sm text-gray-400 mb-3">
-                        <MapPin className="w-4 h-4 text-primary" />
-                        <span>{t.personal.location}</span>
-                      </div>
-                      <p className="text-sm text-gray-300 leading-relaxed">{t.personal.bio}</p>
-                      {/* Social links */}
-                      <div className="flex justify-center sm:justify-start gap-3 mt-4">
-                        {[
-                          { icon: Github,    href: personal.github,    label: 'GitHub'    },
-                          { icon: Linkedin,  href: personal.linkedin,  label: 'LinkedIn'  },
-                          { icon: Instagram, href: personal.instagram, label: 'Instagram' },
-                          { icon: Globe,     href: personal.website,   label: 'Website'   },
-                        ].map((link) => (
-                          <motion.a key={link.label} href={link.href} target="_blank" rel="noreferrer"
-                            title={link.label}
-                            className="p-2.5 glass-card rounded-xl text-gray-400 hover:text-white transition-all"
-                            whileHover={{ scale: 1.12, y: -2 }}
-                          >
-                            <link.icon className="w-4 h-4" />
-                          </motion.a>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  {/* Status badge */}
+                  <motion.div {...fadeUp(0.35)} className="flex justify-center md:justify-start mt-3">
+                    <span className="available-badge">
+                      <span className="dot" /> {t.personal.available}
+                    </span>
+                  </motion.div>
 
-                {/* Experience Timeline */}
-                <div>
-                  <h2 className="text-xl md:text-2xl font-bold gradient-text mb-4 flex items-center gap-2">
-                    <Briefcase className="w-6 h-6 text-primary" /> {t.aboutSec.experienceTitle}
-                  </h2>
-                  <div className="space-y-4">
-                    {experiences.map((exp, i) => (
-                      <motion.div key={i}
-                        {...fadeUp(i * 0.12)}
-                        className="glass-card rounded-xl p-5 md:p-6 relative overflow-hidden render-optimized"
-                        whileHover={{ y: -2 }}
-                      >
-                        <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl" style={{ backgroundColor: exp.color }} />
-                        <div className="pl-3">
-                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
-                            <h3 className="font-bold text-white text-base md:text-lg">{lang === 'en' ? exp.positionEn : exp.position}</h3>
-                            <span className="text-xs font-semibold px-3 py-1 rounded-full w-fit"
-                              style={{ backgroundColor: `${exp.color}20`, color: exp.color }}>
-                              {lang === 'en' ? exp.periodEn : exp.period}
-                            </span>
-                          </div>
-                          <ul className="space-y-1.5">
-                            {(lang === 'en' ? exp.descriptionsEn : exp.descriptions).map((desc, di) => (
-                              <li key={di} className="flex items-start gap-2 text-sm text-gray-300">
-                                <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: exp.color }} />
-                                <span>{desc}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Education */}
-                <div>
-                  <h2 className="text-xl md:text-2xl font-bold gradient-text mb-4 flex items-center gap-2">
-                    <GraduationCap className="w-6 h-6 text-primary" /> {t.aboutSec.educationTitle}
-                  </h2>
-                  <div className="space-y-4">
-                    {education.map((edu, i) => (
-                      <motion.div key={i}
-                        {...fadeUp(i * 0.1)}
-                        className="glass-card rounded-xl p-5 flex items-start gap-4"
-                        whileHover={{ y: -2 }}
-                      >
-                        {/* Logo / placeholder */}
-                        <div className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden bg-white/10 flex items-center justify-center">
-                          {edu.logo ? (
-                            <Image src={edu.logo} alt={edu.institution} width={56} height={56}
-                              className="w-full h-full object-contain" />
-                          ) : (
-                            <GraduationCap className="w-7 h-7 text-gray-400" />
-                          )}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                            <h3 className="font-bold text-white text-sm md:text-base leading-tight">{edu.institution}</h3>
-                            {edu.ongoing && (
-                              <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-green-500/20 text-green-400 w-fit">
-                                {t.aboutSec.ongoing}
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-sm text-primary font-medium mt-0.5">{lang === 'en' ? edu.degreeEn : edu.degree}</p>
-                          <div className="flex items-center gap-3 mt-1.5">
-                            <div className="flex items-center gap-1 text-xs text-gray-400">
-                              <Calendar className="w-3.5 h-3.5" />
-                              <span>{lang === 'en' ? edu.periodEn : edu.period}</span>
-                            </div>
-                            <div className="flex items-center gap-1 text-xs text-gray-400">
-                              <MapPin className="w-3.5 h-3.5" />
-                              <span>{lang === 'en' ? edu.locationEn : edu.location}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {/* ════════════════════════════════ ACHIEVEMENTS ═══ */}
-            {activeSection === 'achievements' && (
-              <motion.div key="achievements"
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-                className="space-y-6">
-
-                <div>
-                  <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-1">{t.achievementsSec.title}</h2>
-                  <p className="text-gray-400 text-sm">{t.achievementsSec.subtitle}</p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-                  {achievements.map((item, i) => (
-                    <motion.div key={item.id}
-                      {...fadeUp(i * 0.1)}
-                      className="glass-card rounded-2xl overflow-hidden cursor-pointer group render-optimized"
-                      whileHover={{ y: -5, scale: 1.01 }}
-                      onClick={() => setSelectedCert(item)}
+                  {/* CTA buttons */}
+                  <motion.div {...fadeUp(0.4)} className="flex flex-col sm:flex-row gap-3 mt-5 justify-center md:justify-start">
+                    <motion.button
+                      onClick={() => setShowResume(true)}
+                      className="btn-primary flex items-center justify-center gap-2"
+                      whileHover={{ scale: 1.03, y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                      id="view-resume-btn"
                     >
-                      {/* Certificate image */}
-                      <div className="relative h-44 sm:h-48 overflow-hidden bg-gradient-to-br from-yellow-900/20 to-primary/20">
-                        <Image
-                          src={item.image}
-                          alt={item.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                        <div className="absolute top-3 right-3 p-1.5 bg-yellow-500/90 rounded-lg">
-                          <Award className="w-4 h-4 text-black" />
-                        </div>
-                      </div>
+                      <FileText className="w-4 h-4" />
+                      {t.personal.viewResume}
+                    </motion.button>
+                    <motion.button
+                      onClick={() => navClick('contact')}
+                      className="btn-outline flex items-center justify-center gap-2"
+                      whileHover={{ scale: 1.03, y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                      id="contact-btn"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      {t.personal.contactMe}
+                    </motion.button>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
 
-                      {/* Info */}
-                      <div className="p-4">
-                        <h3 className="font-bold text-white text-sm leading-snug mb-2 line-clamp-2">{item.title}</h3>
-                        <p className="text-xs text-primary font-medium mb-1">{item.issuer}</p>
+            {/* Quick nav cards */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+              {[
+                { id: 'about',        icon: User,    label: t.quickCards.about.label,     sub: t.quickCards.about.sub,          color: '#6366f1' },
+                { id: 'projects',     icon: Folder,  label: t.quickCards.projects.label,  sub: t.quickCards.projects.sub,   color: '#10b981' },
+                { id: 'achievements', icon: Award,   label: t.quickCards.achievements.label, sub: t.quickCards.achievements.sub, color: '#f59e0b' },
+                { id: 'contact',      icon: Mail,    label: t.quickCards.contact.label,   sub: t.quickCards.contact.sub,        color: '#ec4899' },
+              ].map((item, i) => (
+                <motion.button
+                  key={item.id}
+                  onClick={() => navClick(item.id)}
+                  className="glass-card rounded-xl p-4 md:p-5 text-left hover:shadow-glow transition-all duration-300 group"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + i * 0.08 }}
+                  whileHover={{ y: -4, scale: 1.02 }}
+                >
+                  <div className="p-2 rounded-lg w-fit mb-3" style={{ backgroundColor: `${item.color}25` }}>
+                    <item.icon className="w-5 h-5" style={{ color: item.color }} />
+                  </div>
+                  <p className="font-semibold text-white text-sm md:text-base">{item.label}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{item.sub}</p>
+                </motion.button>
+              ))}
+            </div>
+
+            {/* Tech Stack & Tools */}
+            <motion.div {...fadeUp(0.5)} className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
+                <div>
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                    <Zap className="w-5 h-5 text-yellow-400" /> {t.skillsTitle}
+                  </h2>
+                  <p className="text-xs text-gray-400 mt-1">
+                    {lang === 'en'
+                      ? 'Technologies, programming languages, frameworks & tools I work with'
+                      : 'Bahasa pemrograman, framework, tools & platform yang saya gunakan'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-2.5 sm:gap-3 justify-start items-center">
+                {techStackList.map((item, i) => (
+                  <motion.div
+                    key={item.name}
+                    className="group relative flex items-center justify-center p-2 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 cursor-pointer"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.01 * i }}
+                    whileHover={{ scale: 1.15, y: -3 }}
+                  >
+                    <img
+                      src={`https://skillicons.dev/icons?i=${item.icon}`}
+                      alt={item.name}
+                      className="w-9 h-9 sm:w-10 sm:h-10 object-contain drop-shadow"
+                      loading="lazy"
+                    />
+                    <div className="absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-gray-900/95 text-white text-[11px] font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none border border-white/10 shadow-lg z-20">
+                      {item.name}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.section>
+
+          {/* ════════════════════════════════ ABOUT ═══ */}
+          <motion.section
+            id="about"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="scroll-mt-24 space-y-6 pt-10 md:pt-14 border-t border-white/10"
+          >
+
+            {/* Profile */}
+            <div className="glass-card rounded-2xl p-5 md:p-8">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+                <div className="avatar-ring w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0">
+                  <Image src={personal.avatar} alt={personal.name} width={112} height={112}
+                    className="w-full h-full object-cover rounded-full" />
+                </div>
+                <div className="text-center sm:text-left">
+                  <h1 className="text-2xl md:text-3xl font-extrabold gradient-text mb-1">{personal.name}</h1>
+                  <p className="text-gray-300 font-medium mb-2">{personal.title}</p>
+                  <div className="flex items-center justify-center sm:justify-start gap-1.5 text-sm text-gray-400 mb-3">
+                    <MapPin className="w-4 h-4 text-primary" />
+                    <span>{t.personal.location}</span>
+                  </div>
+                  <p className="text-sm text-gray-300 leading-relaxed">{t.personal.bio}</p>
+                  {/* Social links */}
+                  <div className="flex justify-center sm:justify-start gap-3 mt-4">
+                    {[
+                      { icon: Github,    href: personal.github,    label: 'GitHub'    },
+                      { icon: Linkedin,  href: personal.linkedin,  label: 'LinkedIn'  },
+                      { icon: Instagram, href: personal.instagram, label: 'Instagram' },
+                      { icon: Globe,     href: personal.website,   label: 'Website'   },
+                    ].map((link) => (
+                      <motion.a key={link.label} href={link.href} target="_blank" rel="noreferrer"
+                        title={link.label}
+                        className="p-2.5 glass-card rounded-xl text-gray-400 hover:text-white transition-all"
+                        whileHover={{ scale: 1.12, y: -2 }}
+                      >
+                        <link.icon className="w-4 h-4" />
+                      </motion.a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Experience Timeline */}
+            <div>
+              <h2 className="text-xl md:text-2xl font-bold gradient-text mb-4 flex items-center gap-2">
+                <Briefcase className="w-6 h-6 text-primary" /> {t.aboutSec.experienceTitle}
+              </h2>
+              <div className="space-y-4">
+                {experiences.map((exp, i) => (
+                  <motion.div key={i}
+                    {...fadeUp(i * 0.12)}
+                    className="glass-card rounded-xl p-5 md:p-6 relative overflow-hidden render-optimized"
+                    whileHover={{ y: -2 }}
+                  >
+                    <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl" style={{ backgroundColor: exp.color }} />
+                    <div className="pl-3">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+                        <h3 className="font-bold text-white text-base md:text-lg">{lang === 'en' ? exp.positionEn : exp.position}</h3>
+                        <span className="text-xs font-semibold px-3 py-1 rounded-full w-fit"
+                          style={{ backgroundColor: `${exp.color}20`, color: exp.color }}>
+                          {lang === 'en' ? exp.periodEn : exp.period}
+                        </span>
+                      </div>
+                      <ul className="space-y-1.5">
+                        {(lang === 'en' ? exp.descriptionsEn : exp.descriptions).map((desc, di) => (
+                          <li key={di} className="flex items-start gap-2 text-sm text-gray-300">
+                            <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: exp.color }} />
+                            <span>{desc}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Education */}
+            <div>
+              <h2 className="text-xl md:text-2xl font-bold gradient-text mb-4 flex items-center gap-2">
+                <GraduationCap className="w-6 h-6 text-primary" /> {t.aboutSec.educationTitle}
+              </h2>
+              <div className="space-y-4">
+                {education.map((edu, i) => (
+                  <motion.div key={i}
+                    {...fadeUp(i * 0.1)}
+                    className="glass-card rounded-xl p-5 flex items-start gap-4"
+                    whileHover={{ y: -2 }}
+                  >
+                    {/* Logo / placeholder */}
+                    <div className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden bg-white/10 flex items-center justify-center">
+                      {edu.logo ? (
+                        <Image src={edu.logo} alt={edu.institution} width={56} height={56}
+                          className="w-full h-full object-contain" />
+                      ) : (
+                        <GraduationCap className="w-7 h-7 text-gray-400" />
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                        <h3 className="font-bold text-white text-sm md:text-base leading-tight">{edu.institution}</h3>
+                        {edu.ongoing && (
+                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-green-500/20 text-green-400 w-fit">
+                            {t.aboutSec.ongoing}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm text-primary font-medium mt-0.5">{lang === 'en' ? edu.degreeEn : edu.degree}</p>
+                      <div className="flex items-center gap-3 mt-1.5">
                         <div className="flex items-center gap-1 text-xs text-gray-400">
                           <Calendar className="w-3.5 h-3.5" />
-                          <span>{lang === 'en' && item.dateEn ? item.dateEn : item.date}</span>
+                          <span>{lang === 'en' ? edu.periodEn : edu.period}</span>
                         </div>
-                        <div className="mt-3 text-xs text-gray-400 flex items-center gap-1">
-                          <ExternalLink className="w-3.5 h-3.5" />
-                          <span>{t.achievementsSec.clickToView}</span>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-
-            {/* ════════════════════════════════ PROJECTS ═══ */}
-            {activeSection === 'projects' && (
-              <motion.div key="projects"
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-                className="space-y-6">
-
-                <div>
-                  <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-1">{t.projectsSec.title}</h2>
-                  <p className="text-gray-400 text-sm">{t.projectsSec.subtitle}</p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
-                  {projects.map((project, i) => (
-                    <motion.div key={project.id}
-                      initial={{ opacity: 0, y: 24 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.08 }}
-                      className="glass-card rounded-2xl overflow-hidden cursor-pointer group render-optimized"
-                      whileHover={{ y: -5, scale: 1.01 }}
-                      onClick={() => setSelectedProject(project)}
-                    >
-                      {/* Project image */}
-                      <div className="relative h-40 sm:h-44 overflow-hidden">
-                        <Image src={project.image} alt={project.title} fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                        {project.featured && (
-                          <div className="absolute top-3 right-3 px-2.5 py-1 bg-yellow-500/90 text-black rounded-full text-[10px] font-bold flex items-center gap-1">
-                            <Star className="w-3 h-3" /> {t.projectsSec.featured}
-                          </div>
-                        )}
-                        <div className="absolute bottom-3 left-3">
-                          <span className="text-[10px] font-semibold px-2 py-1 rounded-full bg-primary/80 text-white">
-                            {project.category}
-                          </span>
+                        <div className="flex items-center gap-1 text-xs text-gray-400">
+                          <MapPin className="w-3.5 h-3.5" />
+                          <span>{lang === 'en' ? edu.locationEn : edu.location}</span>
                         </div>
                       </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.section>
 
-                      {/* Info */}
-                      <div className="p-4">
-                        <h3 className="font-bold text-white mb-1 text-sm md:text-base line-clamp-1">{project.title}</h3>
-                        <p className="text-xs text-gray-400 mb-3 line-clamp-2 leading-relaxed">
-                          {lang === 'en' ? project.descriptionEn : project.description}
-                        </p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {project.technologies.slice(0, 4).map((tech) => (
-                            <span key={tech} className="px-2 py-0.5 bg-primary/15 text-primary rounded-full text-[10px] font-medium border border-primary/20">
-                              {tech}
-                            </span>
-                          ))}
-                          {project.technologies.length > 4 && (
-                            <span className="px-2 py-0.5 bg-white/10 text-gray-400 rounded-full text-[10px]">
-                              +{project.technologies.length - 4}
-                            </span>
-                          )}
-                        </div>
+          {/* ════════════════════════════════ PROJECTS ═══ */}
+          <motion.section
+            id="projects"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="scroll-mt-24 space-y-6 pt-10 md:pt-14 border-t border-white/10"
+          >
+
+            <div>
+              <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-1">{t.projectsSec.title}</h2>
+              <p className="text-gray-400 text-sm">{t.projectsSec.subtitle}</p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+              {projects.map((project, i) => (
+                <motion.div key={project.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  className="glass-card rounded-2xl overflow-hidden cursor-pointer group render-optimized"
+                  whileHover={{ y: -5, scale: 1.01 }}
+                  onClick={() => setSelectedProject(project)}
+                >
+                  {/* Project image */}
+                  <div className="relative h-40 sm:h-44 overflow-hidden">
+                    <Image src={project.image} alt={project.title} fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    {project.featured && (
+                      <div className="absolute top-3 right-3 px-2.5 py-1 bg-yellow-500/90 text-black rounded-full text-[10px] font-bold flex items-center gap-1">
+                        <Star className="w-3 h-3" /> {t.projectsSec.featured}
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
+                    )}
+                    <div className="absolute bottom-3 left-3">
+                      <span className="text-[10px] font-semibold px-2 py-1 rounded-full bg-primary/80 text-white">
+                        {project.category}
+                      </span>
+                    </div>
+                  </div>
 
-            {/* ════════════════════════════════ CONTACT ═══ */}
-            {activeSection === 'contact' && (
-              <motion.div key="contact"
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-                className="space-y-6 max-w-5xl mx-auto">
+                  {/* Info */}
+                  <div className="p-4">
+                    <h3 className="font-bold text-white mb-1 text-sm md:text-base line-clamp-1">{project.title}</h3>
+                    <p className="text-xs text-gray-400 mb-3 line-clamp-2 leading-relaxed">
+                      {lang === 'en' ? project.descriptionEn : project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.technologies.slice(0, 4).map((tech) => (
+                        <span key={tech} className="px-2 py-0.5 bg-primary/15 text-primary rounded-full text-[10px] font-medium border border-primary/20">
+                          {tech}
+                        </span>
+                      ))}
+                      {project.technologies.length > 4 && (
+                        <span className="px-2 py-0.5 bg-white/10 text-gray-400 rounded-full text-[10px]">
+                          +{project.technologies.length - 4}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* ════════════════════════════════ ACHIEVEMENTS ═══ */}
+          <motion.section
+            id="achievements"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="scroll-mt-24 space-y-6 pt-10 md:pt-14 border-t border-white/10"
+          >
+
+            <div>
+              <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-1">{t.achievementsSec.title}</h2>
+              <p className="text-gray-400 text-sm">{t.achievementsSec.subtitle}</p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+              {achievements.map((item, i) => (
+                <motion.div key={item.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  className="glass-card rounded-2xl overflow-hidden cursor-pointer group render-optimized"
+                  whileHover={{ y: -5, scale: 1.01 }}
+                  onClick={() => setSelectedCert(item)}
+                >
+                  {/* Certificate image */}
+                  <div className="relative h-44 sm:h-48 overflow-hidden bg-gradient-to-br from-yellow-900/20 to-primary/20">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute top-3 right-3 p-1.5 bg-yellow-500/90 rounded-lg">
+                      <Award className="w-4 h-4 text-black" />
+                    </div>
+                  </div>
+
+                  {/* Info */}
+                  <div className="p-4">
+                    <h3 className="font-bold text-white text-sm leading-snug mb-2 line-clamp-2">{item.title}</h3>
+                    <p className="text-xs text-primary font-medium mb-1">{item.issuer}</p>
+                    <div className="flex items-center gap-1 text-xs text-gray-400">
+                      <Calendar className="w-3.5 h-3.5" />
+                      <span>{lang === 'en' && item.dateEn ? item.dateEn : item.date}</span>
+                    </div>
+                    <div className="mt-3 text-xs text-gray-400 flex items-center gap-1">
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>{t.achievementsSec.clickToView}</span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* ════════════════════════════════ CONTACT ═══ */}
+          <motion.section
+            id="contact"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="scroll-mt-24 space-y-6 pt-10 md:pt-14 border-t border-white/10 max-w-5xl mx-auto"
+          >
 
                 {/* Grid Container */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
@@ -1467,26 +1509,12 @@ export default function Portfolio() {
                     </AnimatePresence>
                   </div>
 
-                </div>
-
-              </motion.div>
-            )}
-
-          </AnimatePresence>
+              </motion.section>
 
           {/* Footer */}
-          <footer className="mt-12 pt-6 pb-24 md:pb-8 border-t border-white/10 text-center text-xs text-gray-400 space-y-2">
-            <p className="flex items-center justify-center gap-1.5 font-medium text-gray-300">
-              <span>{lang === 'en' ? 'Designed & Developed with' : 'Dirancang & Dikembangkan dengan'}</span>
-              <span className="text-red-500 animate-pulse">❤️</span>
-              <span>{lang === 'en' ? 'by' : 'oleh'}</span>
-              <span className="font-bold text-white gradient-text">{personal.name}</span>
-            </p>
-            <p className="text-gray-400 text-[11px]">
-              © {new Date().getFullYear()} {personal.name} (Rama-X2). {lang === 'en' ? 'All rights reserved.' : 'Hak cipta dilindungi undang-undang.'}
-            </p>
-            <p className="text-[10px] text-gray-400">
-              {lang === 'en' ? 'Built with Next.js, Tailwind CSS & deployed on Vercel.' : 'Dibuat menggunakan Next.js, Tailwind CSS & Vercel.'}
+          <footer className="mt-12 pt-6 pb-24 md:pb-8 border-t border-white/10 text-center text-xs text-gray-400">
+            <p className="font-medium text-gray-300">
+              Copyright © {new Date().getFullYear()} <span className="font-bold text-white">{personal.name} (Rama-X2)</span>. {lang === 'en' ? 'All rights reserved.' : 'Hak cipta dilindungi undang-undang.'}
             </p>
           </footer>
         </main>
