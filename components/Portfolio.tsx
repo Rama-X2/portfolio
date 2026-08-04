@@ -621,9 +621,13 @@ export default function Portfolio() {
   const navClick = (id: string) => {
     setActiveSection(id)
     setMenuOpen(false)
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
     const el = document.getElementById(id)
     if (el) {
-      const yOffset = -85
+      const yOffset = -72
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
       window.scrollTo({ top: y, behavior: 'smooth' })
     }
@@ -741,7 +745,7 @@ export default function Portfolio() {
             {sections.map((s) => (
               <button
                 key={s.id}
-                onClick={() => setActiveSection(s.id)}
+                onClick={() => navClick(s.id)}
                 className={`nav-btn ${activeSection === s.id ? 'nav-btn-active' : ''}`}
               >
                 <s.icon className="w-4 h-4" />
@@ -831,7 +835,7 @@ export default function Portfolio() {
             {sections.map((s, i) => (
               <motion.button
                 key={s.id}
-                onClick={() => setActiveSection(s.id)}
+                onClick={() => navClick(s.id)}
                 className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 ${
                   activeSection === s.id
                     ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-glow'
@@ -1015,7 +1019,7 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="scroll-mt-24 space-y-6 pt-10 md:pt-14 border-t border-white/10"
+            className="scroll-mt-20 space-y-6 pt-6 md:pt-10 border-t border-white/10"
           >
 
             {/* Profile */}
@@ -1144,12 +1148,14 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="scroll-mt-24 space-y-6 pt-10 md:pt-14 border-t border-white/10"
+            className="scroll-mt-20 space-y-6 pt-6 md:pt-10 border-t border-white/10"
           >
 
-            <div>
-              <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-1">{t.projectsSec.title}</h2>
-              <p className="text-gray-400 text-sm">{t.projectsSec.subtitle}</p>
+            <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
+              <h2 className="text-2xl md:text-3xl font-extrabold gradient-text flex items-center gap-2.5 mb-1">
+                <Folder className="w-6 h-6 text-emerald-400" /> {t.projectsSec.title}
+              </h2>
+              <p className="text-xs md:text-sm text-gray-400">{t.projectsSec.subtitle}</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
@@ -1211,12 +1217,14 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="scroll-mt-24 space-y-6 pt-10 md:pt-14 border-t border-white/10"
+            className="scroll-mt-20 space-y-6 pt-6 md:pt-10 border-t border-white/10"
           >
 
-            <div>
-              <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-1">{t.achievementsSec.title}</h2>
-              <p className="text-gray-400 text-sm">{t.achievementsSec.subtitle}</p>
+            <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
+              <h2 className="text-2xl md:text-3xl font-extrabold gradient-text flex items-center gap-2.5 mb-1">
+                <Award className="w-6 h-6 text-yellow-400" /> {t.achievementsSec.title}
+              </h2>
+              <p className="text-xs md:text-sm text-gray-400">{t.achievementsSec.subtitle}</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
@@ -1269,7 +1277,7 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="scroll-mt-24 space-y-6 pt-10 md:pt-14 border-t border-white/10 max-w-5xl mx-auto"
+            className="scroll-mt-20 space-y-6 pt-6 md:pt-10 border-t border-white/10 max-w-5xl mx-auto"
           >
 
                 {/* Grid Container */}
@@ -1279,18 +1287,26 @@ export default function Portfolio() {
                   <div className="lg:col-span-5 space-y-5">
                     
                     {/* Header Card */}
-                    <div className="glass-card rounded-2xl p-5 md:p-6 space-y-3 relative overflow-hidden group">
-                      <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-primary to-secondary" />
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-primary/10 text-primary border border-primary/20 inline-block">
-                        {t.contactSec.tag}
-                      </span>
-                      <h2 className="text-2xl md:text-3xl font-black gradient-text leading-tight tracking-tight">
-                        {t.contactSec.heading}
-                      </h2>
-                      <p className="text-xs md:text-sm text-gray-300 leading-relaxed">
-                        {t.contactSec.description}
-                      </p>
+                    <div className="glass-card rounded-2xl p-6 md:p-7 border border-white/10 space-y-4 relative overflow-hidden group bg-gradient-to-br from-primary/10 via-transparent to-secondary/10">
+                      <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none" />
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-primary/20 text-primary border border-primary/30">
+                          {t.contactSec.tag}
+                        </span>
+                        <div className="p-2 rounded-xl bg-primary/10 text-primary border border-primary/20">
+                          <MessageCircle className="w-5 h-5" />
+                        </div>
+                      </div>
+                      <div>
+                        <h2 className="text-2xl md:text-3xl font-black gradient-text leading-tight tracking-tight mb-2">
+                          {t.contactSec.heading}
+                        </h2>
+                        <p className="text-xs md:text-sm text-gray-300 leading-relaxed">
+                          {t.contactSec.description}
+                        </p>
+                      </div>
                     </div>
+
                     {/* Location Info Card */}
                     <div className="glass-card rounded-2xl p-6 border border-white/10 hover:border-pink-500/30 hover:shadow-[0_0_20px_rgba(236,72,153,0.15)] transition-all relative overflow-hidden group">
                       <div className="absolute top-0 right-0 w-24 h-24 bg-pink-500/5 rounded-full blur-xl pointer-events-none" />
@@ -1322,30 +1338,33 @@ export default function Portfolio() {
                     </div>
 
                     {/* Social Media Connections */}
-                    <div className="glass-card rounded-2xl p-6 border border-white/10 space-y-4">
-                      <h4 className="font-bold text-white text-xs tracking-wider uppercase pl-1">{t.contactSec.socialsHeading}</h4>
-                      <div className="grid grid-cols-2 gap-2.5">
+                    <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10 space-y-4">
+                      <h4 className="font-bold text-white text-xs tracking-wider uppercase pl-1 flex items-center gap-2">
+                        <Globe className="w-4 h-4 text-primary" /> {t.contactSec.socialsHeading}
+                      </h4>
+                      <div className="grid grid-cols-2 gap-3">
                         {[
-                          { icon: Github,    href: personal.github,    label: 'GitHub',    color: '#ffffff', bg: 'rgba(255,255,255,0.06)', border: 'rgba(255,255,255,0.15)' },
-                          { icon: Linkedin,  href: personal.linkedin,  label: 'LinkedIn',  color: '#0A66C2', bg: 'rgba(10,102,194,0.06)', border: 'rgba(10,102,194,0.15)' },
-                          { icon: Instagram, href: personal.instagram, label: 'Instagram', color: '#E1306C', bg: 'rgba(225,48,108,0.06)', border: 'rgba(225,48,108,0.15)' },
-                          { icon: Globe,     href: personal.website,   label: 'Website',   color: '#6366f1', bg: 'rgba(99,102,241,0.06)', border: 'rgba(99,102,241,0.15)' },
+                          { icon: Github,    href: personal.github,    label: 'GitHub',    color: '#ffffff', bg: 'rgba(255,255,255,0.1)',  border: 'rgba(255,255,255,0.25)' },
+                          { icon: Linkedin,  href: personal.linkedin,  label: 'LinkedIn',  color: '#0A66C2', bg: 'rgba(10,102,194,0.15)', border: 'rgba(10,102,194,0.35)' },
+                          { icon: Instagram, href: personal.instagram, label: 'Instagram', color: '#E1306C', bg: 'rgba(225,48,108,0.15)', border: 'rgba(225,48,108,0.35)' },
+                          { icon: Globe,     href: personal.website,   label: 'Website',   color: '#6366f1', bg: 'rgba(99,102,241,0.15)', border: 'rgba(99,102,241,0.35)' },
                         ].map((s) => (
                           <motion.a
                             key={s.label}
                             href={s.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2.5 px-4 py-3 glass-card rounded-xl text-xs text-gray-300 hover:text-white transition-all justify-center border border-white/5"
+                            className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-bold text-white transition-all justify-center border shadow-sm"
+                            style={{ backgroundColor: s.bg, borderColor: s.border }}
                             whileHover={{ 
-                              scale: 1.03, 
-                              backgroundColor: s.bg, 
-                              borderColor: s.border,
-                              boxShadow: `0 0 15px ${s.border}` 
+                              scale: 1.04, 
+                              y: -2,
+                              boxShadow: `0 0 16px ${s.border}` 
                             }}
+                            whileTap={{ scale: 0.96 }}
                           >
-                            <s.icon className="w-4 h-4 flex-shrink-0" style={{ color: s.color }} />
-                            <span className="font-semibold">{s.label}</span>
+                            <s.icon className="w-5 h-5 flex-shrink-0" style={{ color: s.color }} />
+                            <span className="truncate">{s.label}</span>
                           </motion.a>
                         ))}
                       </div>
@@ -1510,7 +1529,7 @@ export default function Portfolio() {
           {/* Footer */}
           <footer className="mt-12 pt-6 pb-24 md:pb-8 border-t border-white/10 text-center text-xs text-gray-400">
             <p className="font-medium text-gray-300">
-              Copyright © {new Date().getFullYear()} <span className="font-bold text-white">{personal.name} (Rama-X2)</span>. {lang === 'en' ? 'All rights reserved.' : 'Hak cipta dilindungi undang-undang.'}
+              Copyright © 2025 – {new Date().getFullYear()} <span className="font-bold text-white">{personal.name} (Rama-X2)</span>. {lang === 'en' ? 'All rights reserved.' : 'Hak cipta dilindungi undang-undang.'}
             </p>
           </footer>
         </main>
