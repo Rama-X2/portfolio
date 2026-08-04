@@ -1287,19 +1287,17 @@ export default function Portfolio() {
                   <div className="lg:col-span-5 space-y-5">
                     
                     {/* Header Card */}
-                    <div className="glass-card rounded-2xl p-6 border border-white/10 space-y-2.5 relative overflow-hidden group">
-                      <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-primary to-secondary" />
-                      <div className="pl-1">
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-primary/10 text-primary border border-primary/20 inline-block mb-2">
-                          {t.contactSec.tag}
-                        </span>
-                        <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-2">
-                          {t.contactSec.heading}
-                        </h2>
-                        <p className="text-xs md:text-sm text-gray-300 leading-relaxed">
-                          {t.contactSec.description}
-                        </p>
-                      </div>
+                    <div className="glass-card rounded-2xl p-6 md:p-7 border border-white/10 space-y-3 relative overflow-hidden group text-center flex flex-col items-center justify-center">
+                      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-pink-500" />
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 inline-block">
+                        {t.contactSec.tag}
+                      </span>
+                      <h2 className="text-2xl md:text-3xl font-extrabold gradient-text">
+                        {t.contactSec.heading}
+                      </h2>
+                      <p className="text-xs md:text-sm text-gray-300 leading-relaxed max-w-md mx-auto">
+                        {t.contactSec.description}
+                      </p>
                     </div>
 
                     {/* Location Info Card */}
