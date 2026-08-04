@@ -1019,8 +1019,10 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="scroll-mt-20 space-y-6 pt-6 md:pt-10 border-t border-white/10"
+            className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
+            {/* Section Divider Bar */}
+            <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 shadow-[0_0_12px_rgba(99,102,241,0.5)] mb-2" />
 
             {/* Profile */}
             <div className="glass-card rounded-2xl p-5 md:p-8">
@@ -1148,8 +1150,10 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="scroll-mt-20 space-y-6 pt-6 md:pt-10 border-t border-white/10"
+            className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
+            {/* Section Divider Bar */}
+            <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 shadow-[0_0_12px_rgba(99,102,241,0.5)] mb-2" />
 
             <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
               <h2 className="text-2xl md:text-3xl font-extrabold gradient-text flex items-center gap-2.5 mb-1">
@@ -1217,8 +1221,10 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="scroll-mt-20 space-y-6 pt-6 md:pt-10 border-t border-white/10"
+            className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
+            {/* Section Divider Bar */}
+            <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 shadow-[0_0_12px_rgba(99,102,241,0.5)] mb-2" />
 
             <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
               <h2 className="text-2xl md:text-3xl font-extrabold gradient-text flex items-center gap-2.5 mb-1">
@@ -1277,8 +1283,10 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="scroll-mt-20 space-y-6 pt-6 md:pt-10 border-t border-white/10 max-w-5xl mx-auto"
+            className="scroll-mt-20 space-y-6 pt-6 md:pt-10 max-w-5xl mx-auto"
           >
+            {/* Section Divider Bar */}
+            <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 shadow-[0_0_12px_rgba(99,102,241,0.5)] mb-2" />
 
                 {/* Grid Container */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
