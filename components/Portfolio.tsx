@@ -573,15 +573,28 @@ export default function Portfolio() {
     return Object.keys(tempErrors).length === 0
   }
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!validateForm()) return
     setIsSubmitting(true)
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      const data = await res.json()
+      if (res.ok && data.success) {
+        setSubmitSuccess(true)
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        alert(data.error || (lang === 'en' ? 'Failed to send message' : 'Gagal mengirim pesan'))
+      }
+    } catch (err: any) {
+      alert(lang === 'en' ? 'An error occurred while sending message' : 'Terjadi kesalahan saat mengirim pesan')
+    } finally {
       setIsSubmitting(false)
-      setSubmitSuccess(true)
-      setFormData({ name: '', email: '', subject: '', message: '' })
-    }, 1500)
+    }
   }
 
   const mainRef = useRef<HTMLElement>(null)
@@ -825,11 +838,11 @@ export default function Portfolio() {
           <div className="mt-4 p-4 rounded-xl glass-card">
             <h3 className="text-[11px] font-bold text-gray-400 mb-3 uppercase tracking-wider">{t.nav.contact}</h3>
             <div className="space-y-2">
-              <a href={`mailto:${personal.email}`}
-                className="flex items-center gap-2 text-[11px] text-gray-400 hover:text-white transition-colors">
-                <Mail className="w-3.5 h-3.5" />
-                <span className="truncate">{personal.email}</span>
-              </a>
+              <button onClick={() => navClick('contact')}
+                className="flex items-center gap-2 text-[11px] text-gray-400 hover:text-white transition-colors w-full text-left">
+                <Mail className="w-3.5 h-3.5 text-primary" />
+                <span className="truncate font-medium">{lang === 'en' ? 'Send Instant Message' : 'Kirim Pesan Instan'}</span>
+              </button>
             </div>
           </div>
         </aside>
@@ -1229,30 +1242,6 @@ export default function Portfolio() {
                         {t.contactSec.description}
                       </p>
                     </div>
-
-                    {/* Direct Contact Card (Email) */}
-                    <div>
-                      <motion.a
-                        href={`mailto:${personal.email}`}
-                        className="glass-card rounded-2xl p-4 md:p-5 flex items-center justify-between gap-4 border border-white/10 hover:border-indigo-500/30 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] transition-all group"
-                        whileHover={{ y: -3, scale: 1.01 }}
-                      >
-                        <div className="flex items-center gap-4 min-w-0">
-                          <div className="p-3 rounded-xl bg-indigo-500/10 text-indigo-400 group-hover:scale-110 transition-transform flex-shrink-0">
-                            <Mail className="w-6 h-6" />
-                          </div>
-                          <div className="min-w-0">
-                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">{t.contactSec.emailLabel}</p>
-                            <p className="text-sm font-bold text-white truncate mt-0.5">{personal.email}</p>
-                          </div>
-                        </div>
-                        <div className="hidden xs:flex items-center gap-1 text-xs font-semibold text-indigo-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0">
-                          <span>{t.contactSec.emailAction}</span>
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </div>
-                      </motion.a>
-                    </div>
-
                     {/* Location Info Card */}
                     <div className="glass-card rounded-2xl p-6 border border-white/10 hover:border-pink-500/30 hover:shadow-[0_0_20px_rgba(236,72,153,0.15)] transition-all relative overflow-hidden group">
                       <div className="absolute top-0 right-0 w-24 h-24 bg-pink-500/5 rounded-full blur-xl pointer-events-none" />
