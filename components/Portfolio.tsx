@@ -75,7 +75,7 @@ const techStackList = [
   { name: 'GitHub', icon: 'github' },
   { name: 'Arch Linux', icon: 'arch' },
   { name: 'Linux', icon: 'linux' },
-  { name: 'Android', icon: 'android' },
+  { name: 'Android', icon: 'androidstudio' },
   { name: 'VS Code', icon: 'vscode' },
   { name: 'Postman', icon: 'postman' },
   { name: 'Figma', icon: 'figma' },
@@ -830,30 +830,6 @@ export default function Portfolio() {
               </motion.button>
             ))}
           </div>
-
-          {/* Tech Stack sidebar */}
-          <div className="mt-6 p-4 rounded-xl glass-card">
-            <h3 className="text-[11px] font-bold text-gray-400 mb-3 uppercase tracking-wider">Tech Stack</h3>
-            <div className="grid grid-cols-5 gap-2">
-              {techStackList.slice(0, 15).map((item) => (
-                <div
-                  key={item.name}
-                  className="group relative flex items-center justify-center p-1.5 rounded-lg bg-white/5 border border-white/5 hover:border-primary/40 hover:bg-primary/10 transition-all cursor-pointer"
-                >
-                  <img
-                    src={`https://skillicons.dev/icons?i=${item.icon}`}
-                    alt={item.name}
-                    className="w-6 h-6 object-contain"
-                    loading="lazy"
-                  />
-                  <div className="absolute -top-7 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded bg-gray-900 text-white text-[10px] font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-white/10 shadow z-30">
-                    {item.name}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
           {/* Contact quick */}
           <div className="mt-4 p-4 rounded-xl glass-card">
             <h3 className="text-[11px] font-bold text-gray-400 mb-3 uppercase tracking-wider">{t.nav.contact}</h3>
