@@ -49,15 +49,36 @@ const personal = {
   instagram: 'https://instagram.com/rama_ext4',
 }
 
-const skills = [
-  { name: 'HTML / CSS', icon: Monitor, color: '#e34c26', level: 92 },
-  { name: 'JavaScript', icon: Code, color: '#f0db4f', level: 88 },
-  { name: 'PHP & MySQL', icon: Database, color: '#777bb4', level: 85 },
-  { name: 'Next.js / React', icon: Layers, color: '#61DAFB', level: 82 },
-  { name: 'Linux & Server', icon: Server, color: '#4CAF50', level: 85 },
-  { name: 'Android Dev', icon: Smartphone, color: '#3DDC84', level: 87 },
-  { name: 'UI/UX Design', icon: Star, color: '#FF6B6B', level: 80 },
-  { name: 'Git & GitHub', icon: Github, color: '#f5f5f5', level: 88 },
+const techStackList = [
+  { name: 'HTML5', icon: 'html' },
+  { name: 'CSS3', icon: 'css' },
+  { name: 'JavaScript', icon: 'js' },
+  { name: 'TypeScript', icon: 'ts' },
+  { name: 'PHP', icon: 'php' },
+  { name: 'C', icon: 'c' },
+  { name: 'C++', icon: 'cpp' },
+  { name: 'Java', icon: 'java' },
+  { name: 'Python', icon: 'py' },
+  { name: 'NGINX', icon: 'nginx' },
+  { name: 'React', icon: 'react' },
+  { name: 'Vue.js', icon: 'vue' },
+  { name: 'Svelte', icon: 'svelte' },
+  { name: 'Node.js', icon: 'nodejs' },
+  { name: 'Express', icon: 'express' },
+  { name: 'Tailwind CSS', icon: 'tailwind' },
+  { name: 'MongoDB', icon: 'mongodb' },
+  { name: 'MySQL', icon: 'mysql' },
+  { name: 'Ubuntu', icon: 'ubuntu' },
+  { name: 'Docker', icon: 'docker' },
+  { name: 'Laravel', icon: 'laravel' },
+  { name: 'Git', icon: 'git' },
+  { name: 'GitHub', icon: 'github' },
+  { name: 'Arch Linux', icon: 'arch' },
+  { name: 'Linux', icon: 'linux' },
+  { name: 'Android', icon: 'android' },
+  { name: 'VS Code', icon: 'vscode' },
+  { name: 'Postman', icon: 'postman' },
+  { name: 'Figma', icon: 'figma' },
 ]
 
 const experiences = [
@@ -388,7 +409,7 @@ const translations = {
       achievements: { label: 'Achievements', sub: 'Sertifikat & penghargaan' },
       contact: { label: 'Contact', sub: 'Hubungi saya' },
     },
-    skillsTitle: 'Skills & Teknologi',
+    skillsTitle: 'Tech Stack',
     aboutSec: {
       experienceTitle: 'Pengalaman',
       educationTitle: 'Pendidikan',
@@ -455,7 +476,7 @@ const translations = {
       achievements: { label: 'Achievements', sub: 'Certificates & awards' },
       contact: { label: 'Contact', sub: 'Get in touch' },
     },
-    skillsTitle: 'Skills & Technologies',
+    skillsTitle: 'Tech Stack',
     aboutSec: {
       experienceTitle: 'Experience',
       educationTitle: 'Education',
@@ -810,24 +831,23 @@ export default function Portfolio() {
             ))}
           </div>
 
-          {/* Mini skills */}
+          {/* Tech Stack sidebar */}
           <div className="mt-6 p-4 rounded-xl glass-card">
-            <h3 className="text-[11px] font-bold text-gray-400 mb-3 uppercase tracking-wider">Skills</h3>
-            <div className="space-y-2">
-              {skills.slice(0, 5).map((sk) => (
-                <div key={sk.name}>
-                  <div className="flex justify-between text-[11px] mb-1">
-                    <span className="text-gray-300">{sk.name}</span>
-                    <span style={{ color: sk.color }}>{sk.level}%</span>
-                  </div>
-                  <div className="w-full bg-gray-700 rounded-full h-1">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: `${sk.level}%` }}
-                      transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
-                      className="h-1 rounded-full"
-                      style={{ backgroundColor: sk.color }}
-                    />
+            <h3 className="text-[11px] font-bold text-gray-400 mb-3 uppercase tracking-wider">Tech Stack</h3>
+            <div className="grid grid-cols-5 gap-2">
+              {techStackList.slice(0, 15).map((item) => (
+                <div
+                  key={item.name}
+                  className="group relative flex items-center justify-center p-1.5 rounded-lg bg-white/5 border border-white/5 hover:border-primary/40 hover:bg-primary/10 transition-all cursor-pointer"
+                >
+                  <img
+                    src={`https://skillicons.dev/icons?i=${item.icon}`}
+                    alt={item.name}
+                    className="w-6 h-6 object-contain"
+                    loading="lazy"
+                  />
+                  <div className="absolute -top-7 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded bg-gray-900 text-white text-[10px] font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-white/10 shadow z-30">
+                    {item.name}
                   </div>
                 </div>
               ))}
@@ -951,24 +971,40 @@ export default function Portfolio() {
                   ))}
                 </div>
 
-                {/* Mini Skills */}
-                <motion.div {...fadeUp(0.6)} className="glass-card rounded-2xl p-5 md:p-6">
-                  <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                    <Zap className="w-5 h-5 text-yellow-400" /> {t.skillsTitle}
-                  </h2>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {skills.map((sk, i) => (
+                {/* Tech Stack & Tools */}
+                <motion.div {...fadeUp(0.6)} className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
+                    <div>
+                      <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                        <Zap className="w-5 h-5 text-yellow-400" /> {t.skillsTitle}
+                      </h2>
+                      <p className="text-xs text-gray-400 mt-1">
+                        {lang === 'en'
+                          ? 'Technologies, programming languages, frameworks & tools I work with'
+                          : 'Bahasa pemrograman, framework, tools & platform yang saya gunakan'}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2.5 sm:gap-3 justify-start items-center">
+                    {techStackList.map((item, i) => (
                       <motion.div
-                        key={sk.name}
-                        className="flex items-center gap-2 p-2.5 rounded-xl"
-                        style={{ backgroundColor: `${sk.color}12`, border: `1px solid ${sk.color}30` }}
-                        initial={{ opacity: 0, scale: 0.85 }}
+                        key={item.name}
+                        className="group relative flex items-center justify-center p-2 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 cursor-pointer"
+                        initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.7 + i * 0.06 }}
-                        whileHover={{ scale: 1.04 }}
+                        transition={{ delay: 0.02 * i }}
+                        whileHover={{ scale: 1.15, y: -3 }}
                       >
-                        <sk.icon className="w-4 h-4 flex-shrink-0" style={{ color: sk.color }} />
-                        <span className="text-xs font-medium text-gray-200">{sk.name}</span>
+                        <img
+                          src={`https://skillicons.dev/icons?i=${item.icon}`}
+                          alt={item.name}
+                          className="w-9 h-9 sm:w-10 sm:h-10 object-contain drop-shadow"
+                          loading="lazy"
+                        />
+                        <div className="absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-gray-900/95 text-white text-[11px] font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none border border-white/10 shadow-lg z-20">
+                          {item.name}
+                        </div>
                       </motion.div>
                     ))}
                   </div>
