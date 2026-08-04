@@ -1021,11 +1021,9 @@ export default function Portfolio() {
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
-            {/* Section Divider Bar */}
-            <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 shadow-[0_0_12px_rgba(99,102,241,0.5)] mb-2" />
-
             {/* Profile */}
-            <div className="glass-card rounded-2xl p-5 md:p-8">
+            <div className="glass-card rounded-2xl p-5 md:p-8 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-pink-500" />
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
                 <div className="avatar-ring w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0">
                   <Image src={personal.avatar} alt={personal.name} width={112} height={112}
@@ -1152,10 +1150,8 @@ export default function Portfolio() {
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
-            {/* Section Divider Bar */}
-            <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 shadow-[0_0_12px_rgba(99,102,241,0.5)] mb-2" />
-
-            <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
+            <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-pink-500" />
               <h2 className="text-2xl md:text-3xl font-extrabold gradient-text flex items-center gap-2.5 mb-1">
                 <Folder className="w-6 h-6 text-emerald-400" /> {t.projectsSec.title}
               </h2>
@@ -1223,10 +1219,8 @@ export default function Portfolio() {
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
-            {/* Section Divider Bar */}
-            <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 shadow-[0_0_12px_rgba(99,102,241,0.5)] mb-2" />
-
-            <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
+            <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-pink-500" />
               <h2 className="text-2xl md:text-3xl font-extrabold gradient-text flex items-center gap-2.5 mb-1">
                 <Award className="w-6 h-6 text-yellow-400" /> {t.achievementsSec.title}
               </h2>
@@ -1285,8 +1279,6 @@ export default function Portfolio() {
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10 max-w-5xl mx-auto"
           >
-            {/* Section Divider Bar */}
-            <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 shadow-[0_0_12px_rgba(99,102,241,0.5)] mb-2" />
 
                 {/* Grid Container */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
