@@ -1287,18 +1287,13 @@ export default function Portfolio() {
                   <div className="lg:col-span-5 space-y-5">
                     
                     {/* Header Card */}
-                    <div className="glass-card rounded-2xl p-6 md:p-7 border border-white/10 space-y-4 relative overflow-hidden group bg-gradient-to-br from-primary/10 via-transparent to-secondary/10">
-                      <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none" />
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-primary/20 text-primary border border-primary/30">
+                    <div className="glass-card rounded-2xl p-6 border border-white/10 space-y-2.5 relative overflow-hidden group">
+                      <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-primary to-secondary" />
+                      <div className="pl-1">
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-primary/10 text-primary border border-primary/20 inline-block mb-2">
                           {t.contactSec.tag}
                         </span>
-                        <div className="p-2 rounded-xl bg-primary/10 text-primary border border-primary/20">
-                          <MessageCircle className="w-5 h-5" />
-                        </div>
-                      </div>
-                      <div>
-                        <h2 className="text-2xl md:text-3xl font-black gradient-text leading-tight tracking-tight mb-2">
+                        <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-2">
                           {t.contactSec.heading}
                         </h2>
                         <p className="text-xs md:text-sm text-gray-300 leading-relaxed">
@@ -1338,33 +1333,30 @@ export default function Portfolio() {
                     </div>
 
                     {/* Social Media Connections */}
-                    <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10 space-y-4">
-                      <h4 className="font-bold text-white text-xs tracking-wider uppercase pl-1 flex items-center gap-2">
-                        <Globe className="w-4 h-4 text-primary" /> {t.contactSec.socialsHeading}
-                      </h4>
-                      <div className="grid grid-cols-2 gap-3">
+                    <div className="glass-card rounded-2xl p-6 border border-white/10 space-y-4">
+                      <h4 className="font-bold text-white text-xs tracking-wider uppercase pl-1">{t.contactSec.socialsHeading}</h4>
+                      <div className="grid grid-cols-2 gap-2.5">
                         {[
-                          { icon: Github,    href: personal.github,    label: 'GitHub',    color: '#ffffff', bg: 'rgba(255,255,255,0.1)',  border: 'rgba(255,255,255,0.25)' },
-                          { icon: Linkedin,  href: personal.linkedin,  label: 'LinkedIn',  color: '#0A66C2', bg: 'rgba(10,102,194,0.15)', border: 'rgba(10,102,194,0.35)' },
-                          { icon: Instagram, href: personal.instagram, label: 'Instagram', color: '#E1306C', bg: 'rgba(225,48,108,0.15)', border: 'rgba(225,48,108,0.35)' },
-                          { icon: Globe,     href: personal.website,   label: 'Website',   color: '#6366f1', bg: 'rgba(99,102,241,0.15)', border: 'rgba(99,102,241,0.35)' },
+                          { icon: Github,    href: personal.github,    label: 'GitHub',    color: '#ffffff', bg: 'rgba(255,255,255,0.06)', border: 'rgba(255,255,255,0.15)' },
+                          { icon: Linkedin,  href: personal.linkedin,  label: 'LinkedIn',  color: '#0A66C2', bg: 'rgba(10,102,194,0.06)', border: 'rgba(10,102,194,0.15)' },
+                          { icon: Instagram, href: personal.instagram, label: 'Instagram', color: '#E1306C', bg: 'rgba(225,48,108,0.06)', border: 'rgba(225,48,108,0.15)' },
+                          { icon: Globe,     href: personal.website,   label: 'Website',   color: '#6366f1', bg: 'rgba(99,102,241,0.06)', border: 'rgba(99,102,241,0.15)' },
                         ].map((s) => (
                           <motion.a
                             key={s.label}
                             href={s.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-bold text-white transition-all justify-center border shadow-sm"
-                            style={{ backgroundColor: s.bg, borderColor: s.border }}
+                            className="flex items-center gap-2.5 px-4 py-3 glass-card rounded-xl text-xs text-gray-300 hover:text-white transition-all justify-center border border-white/5"
                             whileHover={{ 
-                              scale: 1.04, 
-                              y: -2,
-                              boxShadow: `0 0 16px ${s.border}` 
+                              scale: 1.03, 
+                              backgroundColor: s.bg, 
+                              borderColor: s.border,
+                              boxShadow: `0 0 15px ${s.border}` 
                             }}
-                            whileTap={{ scale: 0.96 }}
                           >
-                            <s.icon className="w-5 h-5 flex-shrink-0" style={{ color: s.color }} />
-                            <span className="truncate">{s.label}</span>
+                            <s.icon className="w-4 h-4 flex-shrink-0" style={{ color: s.color }} />
+                            <span className="font-semibold">{s.label}</span>
                           </motion.a>
                         ))}
                       </div>
