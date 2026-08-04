@@ -1475,8 +1475,19 @@ export default function Portfolio() {
           </AnimatePresence>
 
           {/* Footer */}
-          <footer className="mt-10 pb-24 md:pb-6 text-center text-xs text-gray-500">
-            <p>© 2025 {personal.name} · All rights reserved</p>
+          <footer className="mt-12 pt-6 pb-24 md:pb-8 border-t border-white/10 text-center text-xs text-gray-400 space-y-2">
+            <p className="flex items-center justify-center gap-1.5 font-medium text-gray-300">
+              <span>{lang === 'en' ? 'Designed & Developed with' : 'Dirancang & Dikembangkan dengan'}</span>
+              <span className="text-red-500 animate-pulse">❤️</span>
+              <span>{lang === 'en' ? 'by' : 'oleh'}</span>
+              <span className="font-bold text-white gradient-text">{personal.name}</span>
+            </p>
+            <p className="text-gray-400 text-[11px]">
+              © {new Date().getFullYear()} {personal.name} (Rama-X2). {lang === 'en' ? 'All rights reserved.' : 'Hak cipta dilindungi undang-undang.'}
+            </p>
+            <p className="text-[10px] text-gray-400">
+              {lang === 'en' ? 'Built with Next.js, Tailwind CSS & deployed on Vercel.' : 'Dibuat menggunakan Next.js, Tailwind CSS & Vercel.'}
+            </p>
           </footer>
         </main>
       </div>
