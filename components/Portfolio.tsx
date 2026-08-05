@@ -1151,10 +1151,10 @@ export default function Portfolio() {
                   onClick={() => setSelectedProject(project)}
                 >
                   {/* Project image */}
-                  <div className="relative h-40 sm:h-44 overflow-hidden bg-[#160d35] transform-gpu">
+                  <div className="relative h-40 sm:h-44 overflow-hidden -mb-px">
                     <Image src={project.image} alt={project.title} fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500 will-change-transform" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#160d35] via-black/30 to-transparent" />
+                      className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     {project.featured && (
                       <div className="absolute top-3 right-3 px-2.5 py-1 bg-yellow-500/90 text-black rounded-full text-[10px] font-bold flex items-center gap-1">
                         <Star className="w-3 h-3" /> {t.projectsSec.featured}
@@ -1220,14 +1220,14 @@ export default function Portfolio() {
                   onClick={() => setSelectedCert(item)}
                 >
                   {/* Certificate image */}
-                  <div className="relative h-44 sm:h-48 overflow-hidden bg-[#160d35] transform-gpu">
+                  <div className="relative h-44 sm:h-48 overflow-hidden -mb-px">
                     <Image
                       src={item.image}
                       alt={item.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500 will-change-transform"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#160d35] via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute top-3 right-3 p-1.5 bg-yellow-500/90 rounded-lg">
                       <Award className="w-4 h-4 text-black" />
                     </div>
