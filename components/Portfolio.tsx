@@ -13,6 +13,8 @@ import {
   MapPin,
   Award,
   Zap,
+  Code2,
+  Cpu,
   X,
   Linkedin,
   Instagram,
@@ -970,7 +972,7 @@ export default function Portfolio() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
                 <div>
                   <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                    <Zap className="w-5 h-5 text-yellow-400" /> {t.skillsTitle}
+                    <Code2 className="w-5 h-5 text-indigo-400" /> {t.skillsTitle}
                   </h2>
                   <p className="text-xs text-gray-400 mt-1">
                     {lang === 'en'
@@ -980,7 +982,7 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-2.5 sm:gap-3 justify-start items-center">
+              <div className="flex flex-wrap gap-2.5 sm:gap-3 justify-center items-center">
                 {techStackList.map((item, i) => (
                   <motion.div
                     key={item.name}
