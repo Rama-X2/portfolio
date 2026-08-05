@@ -37,6 +37,11 @@ import {
   Loader2,
 } from 'lucide-react'
 
+import DiscordWidget from './widgets/DiscordWidget'
+import WakaTimeWidget from './widgets/WakaTimeWidget'
+import GithubWidget from './widgets/GithubWidget'
+import AnimeClockWidget from './widgets/AnimeClockWidget'
+
 // ─── Data ──────────────────────────────────────────────────────────────────────
 const personal = {
   name: 'Ade Ramadhani Putra',
@@ -1047,152 +1052,12 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* Live Activity & Tech Widgets */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-              {/* Widget 1: Lanyard Discord RPC (REAL-TIME DISCORD PRESENCE) */}
-              <motion.a
-                href={`https://discord.com/users/${discordUserId}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass-card rounded-2xl p-4 md:p-5 text-left border border-white/10 hover:border-indigo-500/50 transition-all duration-300 relative overflow-hidden group cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                whileHover={{ y: -3 }}
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="p-2 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center gap-2">
-                    {discordData?.discord_user?.id && discordData?.discord_user?.avatar ? (
-                      <img
-                        src={`https://cdn.discordapp.com/avatars/${discordData.discord_user.id}/${discordData.discord_user.avatar}.png`}
-                        alt="Discord Avatar"
-                        className="w-5 h-5 rounded-full object-cover"
-                      />
-                    ) : (
-                      <MessageCircle className="w-5 h-5 text-indigo-400" />
-                    )}
-                  </div>
-                  <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border flex items-center gap-1.5 ${
-                    discordData?.discord_status === 'dnd'
-                      ? 'bg-red-500/15 border-red-500/35 text-red-400'
-                      : discordData?.discord_status === 'idle'
-                      ? 'bg-yellow-500/15 border-yellow-500/35 text-yellow-400'
-                      : discordData?.discord_status === 'online'
-                      ? 'bg-emerald-500/15 border-emerald-500/35 text-emerald-400'
-                      : 'bg-indigo-500/15 border-indigo-500/35 text-indigo-400'
-                  }`}>
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 bg-current"></span>
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-current"></span>
-                    </span>
-                    {discordData?.discord_status ? discordData.discord_status.toUpperCase() : 'ONLINE 🟢'}
-                  </span>
-                </div>
-                <h4 className="font-bold text-white text-sm md:text-base leading-snug flex items-center gap-1.5">
-                  <span>Discord Lanyard RPC</span>
-                  <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-indigo-400" />
-                </h4>
-                <p className="text-xs text-gray-300 mt-1 font-medium line-clamp-1">
-                  {discordData?.activities?.[0]?.name
-                    ? `${discordData.activities[0].name}`
-                    : discordData?.discord_user?.username
-                    ? `@${discordData.discord_user.username}`
-                    : 'Rama_ext4 • Active'}
-                </p>
-              </motion.a>
-
-              {/* Widget 2: WakaTime Coding Stats */}
-              <motion.a
-                href="https://wakatime.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass-card rounded-2xl p-4 md:p-5 text-left border border-white/10 hover:border-amber-500/50 transition-all duration-300 relative overflow-hidden group cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.28 }}
-                whileHover={{ y: -3 }}
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400">
-                    <Code className="w-5 h-5 text-amber-400" />
-                  </div>
-                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-amber-500/35 bg-amber-500/15 text-amber-400 flex items-center gap-1.5">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 bg-amber-400"></span>
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-400"></span>
-                    </span>
-                    {wakatimeData.timeText} ⚡
-                  </span>
-                </div>
-                <h4 className="font-bold text-white text-sm md:text-base leading-snug flex items-center gap-1.5">
-                  <span>WakaTime Coding</span>
-                  <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-amber-400" />
-                </h4>
-                <p className="text-xs text-gray-300 mt-1 font-medium line-clamp-1">
-                  {wakatimeData.languages} • Active Dev
-                </p>
-              </motion.a>
-
-              {/* Widget 3: GitHub Live Activity (REAL-TIME REPOS & FOLLOWERS) */}
-              <motion.a
-                href="https://github.com/Rama-X2"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass-card rounded-2xl p-4 md:p-5 text-left border border-white/10 hover:border-emerald-500/50 transition-all duration-300 relative overflow-hidden group cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.36 }}
-                whileHover={{ y: -3 }}
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="p-2.5 rounded-xl bg-emerald-500/20 text-emerald-400">
-                    <Github className="w-5 h-5 text-emerald-400" />
-                  </div>
-                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-500/35 bg-emerald-500/15 text-emerald-400 flex items-center gap-1.5">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 bg-emerald-400"></span>
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400"></span>
-                    </span>
-                    {githubData.repos}+ Repos 🟢
-                  </span>
-                </div>
-                <h4 className="font-bold text-white text-sm md:text-base leading-snug flex items-center gap-1.5">
-                  <span>{lang === 'en' ? 'GitHub Live Activity' : 'Aktivitas GitHub Live'}</span>
-                  <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-emerald-400" />
-                </h4>
-                <p className="text-xs text-gray-300 mt-1 font-medium line-clamp-1">
-                  {githubData.repos} Repositories • {githubData.followers} Followers
-                </p>
-              </motion.a>
-
-              {/* Widget 4: Live Anime Clock & Timezone Status */}
-              <motion.div
-                className="glass-card rounded-2xl p-4 md:p-5 text-left border border-white/10 hover:border-pink-500/50 transition-all duration-300 relative overflow-hidden group"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.44 }}
-                whileHover={{ y: -3 }}
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="p-2.5 rounded-xl bg-pink-500/20 text-pink-400 flex items-center gap-1.5">
-                    <Clock className="w-5 h-5 text-pink-400 animate-pulse" />
-                  </div>
-                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-pink-500/35 bg-pink-500/15 text-pink-400 flex items-center gap-1.5">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 bg-pink-400"></span>
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-pink-400"></span>
-                    </span>
-                    {liveTime || 'LIVE TIME'} ⌚
-                  </span>
-                </div>
-                <h4 className="font-bold text-white text-sm md:text-base leading-snug flex items-center gap-1.5">
-                  <span>Sukabumi, WIB (UTC+7)</span>
-                  <span className="text-xs px-1.5 py-0.5 rounded bg-pink-500/20 text-pink-300 font-mono font-bold">✨ Anime Vibe</span>
-                </h4>
-                <p className="text-xs text-gray-300 mt-1 font-medium line-clamp-1">
-                  Live Local Time • Indonesia
-                </p>
-              </motion.div>
+            {/* Live Activity & Tech Widgets (Modular Standalone Components) */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 md:gap-4">
+              <DiscordWidget discordUserId={discordUserId} avatarFallback={personal.avatar} />
+              <WakaTimeWidget avatarFallback={personal.avatar} timeText={wakatimeData.timeText} languages={wakatimeData.languages} />
+              <GithubWidget username="Rama-X2" />
+              <AnimeClockWidget avatarFallback={personal.avatar} />
             </div>
 
             {/* Tech Stack & Tools */}
