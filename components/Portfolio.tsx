@@ -911,13 +911,6 @@ export default function Portfolio() {
                     {t.personal.bio}
                   </motion.p>
 
-                  {/* Status badge */}
-                  <motion.div {...fadeUp(0.35)} className="flex justify-center md:justify-start mt-3">
-                    <span className="available-badge">
-                      <span className="dot" /> {t.personal.available}
-                    </span>
-                  </motion.div>
-
                   {/* CTA buttons */}
                   <motion.div {...fadeUp(0.4)} className="flex flex-col sm:flex-row gap-3 mt-5 justify-center md:justify-start">
                     <motion.button
