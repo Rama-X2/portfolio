@@ -1,44 +1,48 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  Home,
   User,
-  Folder,
-  Award,
-  Mail,
+  Code,
+  Globe,
   ExternalLink,
   Github,
+  Mail,
+  MapPin,
+  Award,
+  Zap,
+  X,
   Linkedin,
   Instagram,
-  Globe,
+  Send,
+  Home,
+  Briefcase,
+  Folder,
   FileText,
   MessageCircle,
-  MapPin,
-  Send,
-  X,
-  Zap,
-  Briefcase,
   GraduationCap,
   Calendar,
   CheckCircle,
-  CheckCircle2,
-  Download,
+  Monitor,
+  Smartphone,
+  Server,
+  Database,
+  Layers,
   Star,
   Loader2,
 } from 'lucide-react'
 
-// ─── Types & Data ──────────────────────────────────────────────────────────────
-type Language = 'id' | 'en'
-
+// ─── Data ──────────────────────────────────────────────────────────────────────
 const personal = {
   name: 'Ade Ramadhani Putra',
   title: 'Full Stack Developer & UI/UX Designer',
   avatar: '/images/portfolio/rama-x2.jpg',
   location: 'Sukabumi, Jawa Barat',
   email: 'aderamadhaniputra35@gmail.com',
+  phone: '+62 857-9518-5561',
+  whatsapp: 'https://wa.me/6285795185561',
   website: 'https://rama-x2.my.id',
   github: 'https://github.com/Rama-X2',
   linkedin: 'https://linkedin.com/in/rama-xd',
@@ -55,7 +59,7 @@ const techStackList = [
   { name: 'C++', icon: 'cpp' },
   { name: 'Java', icon: 'java' },
   { name: 'Python', icon: 'py' },
-  { name: 'Next.js', icon: 'nextjs' },
+  { name: 'NGINX', icon: 'nginx' },
   { name: 'React', icon: 'react' },
   { name: 'Vue.js', icon: 'vue' },
   { name: 'Svelte', icon: 'svelte' },
@@ -64,64 +68,76 @@ const techStackList = [
   { name: 'Tailwind CSS', icon: 'tailwind' },
   { name: 'MongoDB', icon: 'mongodb' },
   { name: 'MySQL', icon: 'mysql' },
-  { name: 'Linux Kernel', icon: 'linux' },
+  { name: 'Ubuntu', icon: 'ubuntu' },
   { name: 'Docker', icon: 'docker' },
-  { name: 'NestJS', icon: 'nestjs' },
+  { name: 'Laravel', icon: 'laravel' },
   { name: 'Git', icon: 'git' },
+  { name: 'GitHub', icon: 'github' },
   { name: 'Arch Linux', icon: 'arch' },
-  { name: 'Android SDK', icon: 'android' },
+  { name: 'Linux', icon: 'linux' },
+  { name: 'Android', icon: 'androidstudio' },
   { name: 'VS Code', icon: 'vscode' },
-  { name: 'Sublime Text', icon: 'sublime' },
+  { name: 'Postman', icon: 'postman' },
   { name: 'Figma', icon: 'figma' },
 ]
 
 const experiences = [
   {
-    position: 'Full Stack Developer & Systems Designer',
-    positionEn: 'Full Stack Developer & Systems Designer',
+    position: 'IT Support & System Developer',
+    positionEn: 'IT Support & System Developer',
     period: '2023 – Sekarang',
     periodEn: '2023 – Present',
+    descriptions: [
+      'Melakukan troubleshooting, maintenance, dan optimasi perangkat komputer serta smartphone.',
+      'Menangani instalasi sistem operasi, driver, dan konfigurasi software.',
+      'Mengembangkan dan memodifikasi sistem Android seperti custom ROM, tweaking, dan optimasi performa.',
+      'Membantu pengguna dalam perbaikan software serta peningkatan stabilitas perangkat.',
+    ],
+    descriptionsEn: [
+      'Troubleshooting, maintaining, and optimizing computer hardware and smartphones.',
+      'Managing OS installations, driver setups, and software configurations.',
+      'Developing and tweaking Android systems, custom ROMs, and performance tuning.',
+      'Assisting users with software repairs and enhancing device stability.',
+    ],
     color: '#6366f1',
-    descriptions: [
-      'Merancang dan membangun aplikasi web berkinerja tinggi menggunakan Next.js, React, dan TypeScript.',
-      'Mengembangkan RESTful API scalable dan manajemen database terintegrasi.',
-      'Mengimplementasikan desain UI/UX responsif, modern, dan bernuansa premium.',
-    ],
-    descriptionsEn: [
-      'Designed and built high-performance web applications using Next.js, React, and TypeScript.',
-      'Developed scalable RESTful APIs and integrated database management systems.',
-      'Implemented responsive, modern, and premium UI/UX designs.',
-    ],
   },
   {
-    position: 'Linux Kernel & Android Customization',
-    positionEn: 'Linux Kernel & Android Customization Specialist',
-    period: '2022 – Sekarang',
-    periodEn: '2022 – Present',
-    color: '#10b981',
+    position: 'Full Stack Web Developer',
+    positionEn: 'Full Stack Web Developer',
+    period: '2024 – Sekarang',
+    periodEn: '2024 – Present',
     descriptions: [
-      'Kustomisasi kernel Linux, optimasi governor CPU/GPU, dan tuning performa I/O.',
-      'Pengembangan custom ROM berbasis AOSP dan integrasi modul Android.',
+      'Mengembangkan website dan aplikasi berbasis web modern dengan fokus pada performa dan pengalaman pengguna.',
+      'Membuat sistem CRUD, dashboard admin, dan landing page responsif menggunakan PHP, JavaScript, dan MySQL.',
+      'Mengelola deployment website dan konfigurasi hosting berbasis Linux serta cloud platform.',
+      'Mendesain antarmuka modern yang responsif dan mudah digunakan.',
     ],
     descriptionsEn: [
-      'Linux kernel customization, CPU/GPU governor optimization, and I/O performance tuning.',
-      'AOSP-based custom ROM development and Android module integration.',
+      'Developing modern web applications and websites focused on speed, security, and user experience.',
+      'Building CRUD systems, admin dashboards, and responsive landing pages using PHP, JavaScript, and MySQL.',
+      'Managing website deployments and cloud/Linux-based server hosting configurations.',
+      'Designing clean, modern, and user-friendly interfaces.',
     ],
+    color: '#8b5cf6',
   },
   {
-    position: 'UI/UX Designer',
-    positionEn: 'UI/UX Designer',
-    period: '2023 – Sekarang',
-    periodEn: '2023 – Present',
+    position: 'Personal Software & Experimental Projects',
+    positionEn: 'Personal Software & Experimental Projects',
+    period: '2021 – Sekarang',
+    periodEn: '2021 – Present',
+    descriptions: [
+      'Mengembangkan berbagai project software dan eksperimen teknologi secara mandiri.',
+      'Melakukan optimasi sistem, debugging, dan tuning performa pada berbagai environment.',
+      'Mengeksplorasi pengembangan berbasis Linux, Android, dan web technology.',
+      'Mendesain tools dan solusi digital untuk kebutuhan personal maupun pembelajaran.',
+    ],
+    descriptionsEn: [
+      'Independently building software projects and experimenting with cutting-edge tech.',
+      'Performing system optimization, debugging, and performance tuning across various environments.',
+      'Exploring Linux system administration, Android internals, and modern web frameworks.',
+      'Designing custom tools and digital solutions for personal and educational needs.',
+    ],
     color: '#06b6d4',
-    descriptions: [
-      'Membuat wireframe, kaji antarmuka pengguna, dan prototipe interaktif menggunakan Figma.',
-      'Memastikan konsistensi sistem desain, aksesibilitas, dan kenyamanan pengguna.',
-    ],
-    descriptionsEn: [
-      'Created wireframes, user interface studies, and interactive prototypes using Figma.',
-      'Ensured design system consistency, accessibility, and user comfort.',
-    ],
   },
 ]
 
@@ -166,8 +182,8 @@ const achievements = [
     issuer: 'Cisco Networking Academy',
     date: '20 Juli 2026',
     dateEn: 'July 20, 2026',
-    image: '/gambar-sertifikat/cisco-intro-cybersecurity-certificate.png',
-    verifyUrl: 'https://www.credly.com/badges/6ee1a4bb-bd90-482a-aef2-2a5433d710db/public_url',
+    image: '/gambar-sertifikat/cisco-introduction-to-cybersecurity.png',
+    verifyUrl: 'https://www.credly.com/badges/dc1ad136-5dfd-41ac-a802-ad0f89fcddd8/public_url',
   },
   {
     id: 3,
@@ -175,17 +191,16 @@ const achievements = [
     issuer: 'Cisco Networking Academy',
     date: '20 Juli 2026',
     dateEn: 'July 20, 2026',
-    image: '/gambar-sertifikat/cisco-networking-basics-certificate.png',
-    verifyUrl: 'https://www.credly.com/badges/8c8ab9c0-6202-4bb3-a3d8-21d3f9f3ef4d/public_url',
+    image: '/gambar-sertifikat/cisco-networking-basics.png',
+    verifyUrl: 'https://www.credly.com/badges/a504b2a0-83c5-4901-802c-2b3c2ed5bdb8/public_url',
   },
   {
     id: 4,
     title: 'DevCoach #200: Integrasi IT & AI powered by Asah!',
-    issuer: 'DevCoach x Asah!',
+    issuer: 'DevCoach × Asah!',
     date: '26 Juni 2025',
     dateEn: 'June 26, 2025',
-    image: '/gambar-sertifikat/devcoach-200.png',
-    verifyUrl: 'https://www.dicoding.com/certificates/N9ZO5WO10PG5',
+    image: '/gambar-sertifikat/devcoach-200-integrasi-it-ai-powered-by-asah-certificate-1.png',
   },
   {
     id: 5,
@@ -193,8 +208,7 @@ const achievements = [
     issuer: 'Indosat Ooredoo Hutchison Digital Camp',
     date: '10 Juli 2025',
     dateEn: 'July 10, 2025',
-    image: '/gambar-sertifikat/idcamp-live-10.png',
-    verifyUrl: 'https://www.dicoding.com/certificates/KZX72V6NWX68',
+    image: '/gambar-sertifikat/idcamp-x-dicoding-live-10-uipath-agentic-automation-introduction-and-use-case-certificate-1.png',
   },
   {
     id: 6,
@@ -202,8 +216,7 @@ const achievements = [
     issuer: 'Indosat Ooredoo Hutchison Digital Camp',
     date: '22 Juli 2025',
     dateEn: 'July 22, 2025',
-    image: '/gambar-sertifikat/idcamp-dialogue-5.png',
-    verifyUrl: 'https://www.dicoding.com/certificates/N9ZO51N20PG5',
+    image: '/gambar-sertifikat/idcamp-alumni-dialogue-5-debunking-the-myth-of-intelligent-automation-prepare-for-the-future-workfor-1.png',
   },
 ]
 
@@ -211,71 +224,177 @@ const projects = [
   {
     id: 1,
     title: 'BumiTani – Premium Agricultural E-Commerce',
-    description: 'Website e-commerce pertanian modern premium dengan database 72 produk (bibit, nutrisi, pakan, peralatan, pestisida, dan pupuk) dalam 6 kategori. Dilengkapi filter dan pencarian real-time, detail modal produk, sistem keranjang LocalStorage, serta checkout via WhatsApp.',
-    descriptionEn: 'Modern premium agricultural e-commerce website featuring a 72-product database across 6 categories. Equipped with real-time search & filters, product detail modals, LocalStorage cart system, and WhatsApp checkout.',
+    description:
+      'Website e-commerce pertanian modern premium dengan database 72 produk (bibit, nutrisi, pakan, peralatan, pestisida, dan pupuk) dalam 6 kategori. Dilengkapi filter dan pencarian real-time, detail modal produk, sistem keranjang LocalStorage, serta checkout via WhatsApp.',
+    descriptionEn:
+      'Premium modern agricultural e-commerce website with a database of 72 products across 6 categories. Features real-time search & filters, product modal details, LocalStorage shopping cart, and direct checkout.',
+    image: '/images/portfolio/banner_bumi-tani.png',
+    technologies: ['HTML', 'Tailwind CSS', 'JavaScript', 'LocalStorage', 'Vercel'],
+    liveUrl: 'https://bumi-tani-v2.vercel.app',
+    githubUrl: 'https://github.com/Rama-X2/Bumi-Tani-v2',
     category: 'Web Development',
-    technologies: ['HTML', 'Tailwind CSS', 'JavaScript', 'LocalStorage'],
-    image: '/gambar-project/bumitani.png',
-    liveDemoUrl: 'https://bumitani.server.my.id/',
-    sourceCodeUrl: 'https://github.com/Rama-X2/bumitani-ecommerce',
     featured: true,
   },
   {
     id: 2,
     title: 'HomeLab – Premium Powder Drink E-Commerce',
-    description: 'Platform e-commerce dan editorial web premium yang dirancang khusus untuk mempresentasikan lini produk bubuk minuman premium. Fokus pada estetika high-end, performa ringan tanpa overhead framework berat, serta pengalaman belanja (UI/UX) yang seamless.',
-    descriptionEn: 'Premium powder drink e-commerce platform featuring high-end aesthetics, lightweight performance, and a seamless shopping experience.',
+    description:
+      'Platform e-commerce dan editorial web premium yang dirancang khusus untuk mempresentasikan lini produk bubuk minuman premium. Fokus pada estetika high-end, performa ringan tanpa overhead framework berat, serta pengalaman belanja (UI/UX) yang sangat halus, lengkap dengan catalog filter, search real-time, shopping cart localStorage, dan fast checkout.',
+    descriptionEn:
+      'Premium powder drink e-commerce platform & web editorial. Features high-end minimalist aesthetics, real-time search, catalog filter, shopping cart, and fast checkout.',
+    image: '/images/portfolio/banner_homelab.webp',
+    technologies: ['HTML', 'Tailwind CSS', 'JavaScript', 'LocalStorage', 'Vercel'],
+    liveUrl: 'https://homelab-sample.vercel.app',
+    githubUrl: 'https://github.com/Rama-X2/homelab-sample',
     category: 'Web Development',
-    technologies: ['HTML', 'Tailwind CSS', 'JavaScript', 'LocalStorage'],
-    image: '/gambar-project/homelab.jpg',
-    liveDemoUrl: 'https://homelab.server.my.id/',
-    sourceCodeUrl: 'https://github.com/Rama-X2/homelab-ecommerce',
     featured: true,
   },
   {
     id: 3,
     title: 'Rama Store – Gaming Topup Platform',
-    description: 'Modern gaming top-up platform dengan real-time transaction processing, multi-game support, dan animasi yang menarik. Dibangun menggunakan Next.js, TypeScript, dan Framer Motion.',
-    descriptionEn: 'Modern gaming top-up platform with real-time transaction processing, multi-game support, and engaging animations built using Next.js, TypeScript, and Framer Motion.',
+    description:
+      'Modern gaming top-up platform dengan real-time transaction processing, multi-game support, dan animasi yang menarik. Dibangun menggunakan Next.js, TypeScript, dan Framer Motion.',
+    descriptionEn:
+      'Modern gaming top-up platform with real-time transaction processing, multi-game support, and fluid animations. Built with Next.js, TypeScript, and Framer Motion.',
+    image: '/images/portfolio/banner_rama-store.png',
+    technologies: ['Next.js', 'TypeScript', 'Framer Motion', 'Tailwind CSS', 'Node.js'],
+    liveUrl: 'https://rama-store.vercel.app',
+    githubUrl: 'https://github.com/Rama-X2/rama-store',
     category: 'Web Development',
-    technologies: ['Next.js', 'TypeScript', 'Framer Motion', 'Tailwind CSS'],
-    image: '/gambar-project/rama-store.png',
-    liveDemoUrl: 'https://store.rama-x2.my.id/',
-    sourceCodeUrl: 'https://github.com/Rama-X2/rama-store',
     featured: true,
   },
   {
     id: 4,
     title: 'Custom ROM by Rama – Basic AOSP',
-    description: 'ROM custom ringan berbasis Android 15 (Vanilla Ice Cream) yang disempurnakan dengan asisten AI cerdas menggunakan TensorFlow dan NLP. Menawarkan pengalaman Android murni yang responsif, hemat baterai, dan efisien.',
-    descriptionEn: 'Lightweight Android 15 (Vanilla Ice Cream) custom ROM enhanced with AI assistant using TensorFlow & NLP for pure performance.',
+    description:
+      'ROM custom ringan berbasis Android 15 (Vanilla Ice Cream) yang disempurnakan dengan asisten AI cerdas menggunakan TensorFlow dan NLP.',
+    descriptionEn:
+      'Lightweight custom ROM based on Android 15 (Vanilla Ice Cream) enhanced with a smart AI assistant using TensorFlow and NLP.',
+    image: '/images/portfolio/banner_rom-pixel.png',
+    technologies: ['AOSP', 'Android 15', 'Shell Script', 'Python', 'TensorFlow'],
+    liveUrl: 'https://rama.server.my.id/custom-rom-by_rama',
+    githubUrl: 'https://github.com/Rama-X2/Rom-Pixel',
     category: 'Operating System',
-    technologies: ['AOSP', 'Android 15', 'Shell Script', 'Python'],
-    image: '/gambar-project/custom-rom-aosp.png',
-    sourceCodeUrl: 'https://github.com/Rama-X2',
     featured: true,
   },
   {
     id: 5,
+    title: 'Rama Server Dashboard',
+    description:
+      'Dashboard manajemen server lengkap untuk operasi bisnis, menggabungkan analitik, kontrol jaringan, dan wawasan pengguna.',
+    descriptionEn:
+      'Comprehensive server management dashboard integrating analytics, network control, and user insights.',
+    image: '/images/portfolio/banner_rama_server.png',
+    technologies: ['React', 'Chart.js', 'Material-UI', 'Express.js', 'MongoDB'],
+    liveUrl: 'https://rama.server.my.id/dashboard/rama-server',
+    githubUrl: 'https://github.com/Rama-X2/andora-ex-wami-ram',
+    category: 'Dashboard',
+    featured: true,
+  },
+  {
+    id: 6,
+    title: 'RISING UI 2.5 – Evolution X for POCO F5',
+    description:
+      'Modul kustomisasi UI eksklusif untuk ROM Evolution X pada POCO F5. Peningkatan visual dari lockscreen, status bar, hingga animasi sistem.',
+    descriptionEn:
+      'Exclusive UI customization module for Evolution X custom ROM on POCO F5 device.',
+    image: '/images/portfolio/kernel_poco-f5.png',
+    technologies: ['Android AOSP', 'Evolution X', 'Magisk Module', 'OMS'],
+    liveUrl: 'https://rama.server.my.id/rising-ui-2.5',
+    githubUrl: 'https://github.com/Rama-X2/RISING-UI-2.5',
+    category: 'UI/UX Enhancement',
+    featured: false,
+  },
+  {
+    id: 7,
+    title: 'Digital Image Compare Tools',
+    description:
+      'Aplikasi web berbasis browser untuk membandingkan kualitas dan karakteristik teknis gambar digital secara side-by-side. Mendukung eksperimen Bit Depth (1-bit hingga 32-bit), kompresi JPEG, format TIFF, serta upscaling resolusi.',
+    descriptionEn:
+      'Browser-based web app to compare digital image quality and technical characteristics side-by-side. Supports bit depth testing, JPEG compression analysis, and resolution upscaling.',
+    image: '/images/portfolio/banner_digital-image-compare.png',
+    technologies: ['HTML', 'CSS', 'JavaScript', 'Canvas API', 'Vercel'],
+    liveUrl: 'https://digital-image-compare-rama-x2.vercel.app',
+    githubUrl: 'https://github.com/Rama-X2/Digital-Image-Compare-Tools',
+    category: 'Web Tool – Image Processing',
+    featured: false,
+  },
+  {
+    id: 8,
+    title: 'Thermal Breaker Miyabi Core',
+    description:
+      'Modul optimasi thermal Magisk tingkat lanjut yang dirancang khusus untuk mengurangi throttling agresif pada sistem Android dengan tetap menjaga perlindungan keamanan hardware.',
+    descriptionEn:
+      'Advanced Magisk thermal optimization module designed to reduce aggressive throttling while keeping hardware safe.',
+    image: '/images/portfolio/thermal-breaker.png',
+    technologies: ['Magisk', 'Shell Script', 'Android', 'Thermal Tuning'],
+    liveUrl: 'https://github.com/Rama-X2/thermal-breaker-miyabi-core',
+    githubUrl: 'https://github.com/Rama-X2/thermal-breaker-miyabi-core',
+    category: 'System Tuning',
+    featured: false,
+  },
+  {
+    id: 9,
+    title: 'GMS Breaker Miyabi Core',
+    description:
+      'Modul optimasi proses latar belakang GMS (Google Play Services) secara agresif untuk meningkatkan stabilitas CPU, mengurangi penggunaan RAM, dan meningkatkan efisiensi baterai tanpa mengganggu akun Google.',
+    descriptionEn:
+      'Background GMS process optimization module to save RAM and improve CPU power efficiency on Android without affecting Google accounts.',
+    image: '/images/portfolio/gms-breaker.png',
+    technologies: ['Magisk', 'Shell Script', 'Android', 'Process Management'],
+    liveUrl: 'https://github.com/Rama-X2/gms-breaker-miyabi-core',
+    githubUrl: 'https://github.com/Rama-X2/gms-breaker-miyabi-core',
+    category: 'System Tuning',
+    featured: false,
+  },
+  {
+    id: 10,
+    title: 'Redmi 10A GPU Performance Unlock',
+    description:
+      'Modifikasi sistem untuk membuka performa GPU maksimal (Extreme GPU Max OPP Lock) dan Engine Anti-Override pada perangkat Redmi 10A (Helio G25) tanpa menimbulkan konflik thermal.',
+    descriptionEn:
+      'Low-level system modification to unlock maximum GPU performance on Redmi 10A (Helio G25) without thermal conflicts.',
+    image: '/images/portfolio/gpu-unlock.png',
+    technologies: ['Magisk', 'Shell Script', 'Android', 'Overclocking'],
+    liveUrl: 'https://github.com/Rama-X2/Redmi-10A_GPU_Performance_Unlock',
+    githubUrl: 'https://github.com/Rama-X2/Redmi-10A_GPU_Performance_Unlock',
+    category: 'Kernel & GPU Tuning',
+    featured: false,
+  },
+  {
+    id: 11,
+    title: 'MTK WiFi MAC Randomization Fix',
+    description:
+      'Modul Magisk untuk mengatasi masalah atau menonaktifkan randomisasi MAC WiFi pada perangkat berprosesor MTK Helio G25 (seperti Redmi 9A/10A) yang menjalankan Android 13 SuperiorOS.',
+    descriptionEn:
+      'System fix module to stabilize or disable WiFi MAC randomization on MTK Helio G25 devices running Android 13.',
+    image: '/images/portfolio/wifi-mac-fix.png',
+    technologies: ['Magisk', 'Shell Script', 'Android', 'Networking'],
+    liveUrl: 'https://github.com/Rama-X2/MTK-WiFi-MAC-Randomization-Fix',
+    githubUrl: 'https://github.com/Rama-X2/MTK-WiFi-MAC-Randomization-Fix',
+    category: 'System Fix',
+    featured: false,
+  },
+  {
+    id: 12,
     title: 'Kernel Overclocking by Rama',
-    description: 'Project kustomisasi kernel dengan fokus pada overclocking CPU/GPU, governor tuning, serta optimasi I/O scheduler. Menghasilkan peningkatan performa perangkat hingga 25% tanpa mengorbankan stabilitas sistem.',
-    descriptionEn: 'Kernel customization focused on CPU/GPU overclocking, governor tuning, and I/O scheduler optimization boosting performance by 25%.',
-    category: 'Operating System',
-    technologies: ['Android SDK', 'Shell Script', 'Linux Kernel', 'C'],
-    image: '/gambar-project/kernel-overclocking.png',
-    sourceCodeUrl: 'https://github.com/Rama-X2',
+    description:
+      'Project kustomisasi kernel dengan fokus pada overclocking CPU/GPU, governor tuning, serta optimasi I/O scheduler dan thermal control.',
+    descriptionEn:
+      'Custom Linux kernel modification focusing on CPU/GPU governor tuning and I/O scheduling optimization.',
+    image: '/images/portfolio/kernel-lappland.png',
+    technologies: ['Android SDK', 'Shell Script', 'Linux Kernel', 'C', 'C++'],
+    liveUrl: '#',
+    githubUrl: 'https://github.com/Rama-X2',
+    category: 'Kernel Development',
+    featured: false,
   },
 ]
 
+// ─── Translations Dictionary ──────────────────────────────────────────────────
 const translations = {
   id: {
-    nav: {
-      home: 'Beranda',
-      about: 'Tentang',
-      projects: 'Proyek',
-      achievements: 'Prestasi',
-      contact: 'Kontak',
-    },
+    nav: { home: 'Beranda', about: 'Tentang', projects: 'Proyek', achievements: 'Prestasi', contact: 'Kontak' },
     personal: {
       greeting: 'Halo, saya',
       bio: 'Seorang Full Stack Developer dan UI/UX Designer yang aktif mengembangkan berbagai solusi digital modern, mulai dari website, software, hingga sistem berbasis performa tinggi. Memiliki ketertarikan besar pada web development, server management, dan optimasi sistem, dengan fokus menciptakan aplikasi yang responsif, efisien, dan nyaman digunakan.',
@@ -292,7 +411,6 @@ const translations = {
     },
     skillsTitle: 'Tech Stack',
     aboutSec: {
-      title: 'Tentang Saya',
       experienceTitle: 'Pengalaman',
       educationTitle: 'Pendidikan',
       ongoing: 'Sedang Berjalan',
@@ -306,72 +424,67 @@ const translations = {
       title: 'Proyek Saya',
       subtitle: 'Koleksi proyek yang pernah saya kerjakan',
       featured: 'Unggulan',
-      technologies: 'Tech Stack',
-      liveDemo: 'Live Demo',
-      sourceCode: 'Source Code',
+      technologies: 'Teknologi',
+      liveDemo: 'Demo Langsung',
+      sourceCode: 'Kode Sumber',
     },
     contactSec: {
-      tag: 'HUBUNGI SAYA',
+      tag: 'Hubungi Saya',
       heading: 'Mari Berdiskusi!',
       description: 'Punya proyek menarik, ingin berkolaborasi, atau sekadar berdiskusi? Jangan ragu untuk menghubungi saya! Saya akan berusaha membalas secepat mungkin.',
-      locationTag: 'LOKASI & JANGKAUAN',
-      locationHeading: 'Sukabumi, Jawa Barat',
+      emailLabel: 'Email',
+      emailAction: 'Kirim',
+      locationLabel: 'Lokasi & Jangkauan',
       locationDesc: 'Berbasis di Sukabumi, Jawa Barat. Siap bekerja secara remote (jarak jauh) untuk klien dari seluruh dunia maupun on-site untuk proyek lokal.',
       openMaps: 'Buka di Google Maps',
-      socialsTag: 'MEDIA SOSIAL',
       socialsHeading: 'Temukan Saya Di',
-      formTag: 'PESAN INSTAN',
       formHeading: 'Kirim Pesan Instan',
       formDesc: 'Gunakan formulir di bawah ini untuk mengirimkan pesan secara instan. Semua masukan Anda sangat berarti bagi saya.',
-      fullName: 'Nama Lengkap',
-      fullNamePlaceholder: 'Nama Anda',
-      emailAddress: 'Alamat Email',
+      nameLabel: 'Nama Lengkap',
+      namePlaceholder: 'Nama Anda',
+      emailInputLabel: 'Alamat Email',
       emailPlaceholder: 'Email Anda',
-      subject: 'Subjek',
+      subjectLabel: 'Subjek',
       subjectPlaceholder: 'Apa subjek pesan Anda?',
-      message: 'Isi Pesan',
+      messageLabel: 'Isi Pesan',
       messagePlaceholder: 'Tuliskan pesan Anda di sini...',
-      sendMessage: 'Kirim Pesan Instan',
-      sending: 'Mengirim...',
-      successMsg: 'Pesan Anda berhasil terkirim! Terima kasih telah menghubungi saya.',
+      submitBtn: 'Kirim Pesan Instan',
+      submitting: 'Mengirim Pesan...',
+      successTitle: 'Pesan Berhasil Dikirim!',
+      successDesc: 'Terima kasih telah menghubungi saya. Pesan Anda telah tersimpan dengan aman di antrean dan saya akan meresponsnya secepat mungkin.',
+      sendAnother: 'Kirim Pesan Lain',
     },
     resumeModal: {
-      downloadPdf: 'Unduh CV (PDF)',
-      close: 'Tutup',
+      title: 'Resume / CV',
+      download: 'Unduh Resume',
+      openNewTab: 'Buka di Tab Baru',
     },
   },
   en: {
-    nav: {
-      home: 'Home',
-      about: 'About',
-      projects: 'Projects',
-      achievements: 'Achievements',
-      contact: 'Contact',
-    },
+    nav: { home: 'Home', about: 'About', projects: 'Projects', achievements: 'Achievements', contact: 'Contact' },
     personal: {
-      greeting: "Hello, I'm",
-      bio: 'A Full Stack Developer and UI/UX Designer who actively develops modern digital solutions, ranging from websites, software, to high-performance systems. Passionate about web development, server management, and system optimization, focusing on creating responsive, efficient, and user-friendly applications.',
-      location: 'Sukabumi, West Java',
-      available: 'Available for opportunities',
+      greeting: "Hi, I'm",
+      bio: 'A Full Stack Developer and UI/UX Designer actively creating modern digital solutions, from websites and software to high-performance systems. Passionate about web development, server management, and system optimization, focusing on building responsive, efficient, and user-friendly applications.',
+      location: 'Sukabumi, West Java, Indonesia',
+      available: 'Available for new opportunities',
       viewResume: 'View Resume',
       contactMe: 'Contact Me',
     },
     quickCards: {
       about: { label: 'About Me', sub: 'Who I am' },
-      projects: { label: 'My Projects', sub: 'Works & portfolio' },
+      projects: { label: 'Projects', sub: 'My work & portfolio' },
       achievements: { label: 'Achievements', sub: 'Certificates & awards' },
       contact: { label: 'Contact', sub: 'Get in touch' },
     },
     skillsTitle: 'Tech Stack',
     aboutSec: {
-      title: 'About Me',
       experienceTitle: 'Experience',
       educationTitle: 'Education',
       ongoing: 'Ongoing',
     },
     achievementsSec: {
-      title: 'Achievements & Certificates',
-      subtitle: 'Certificates and awards I have earned',
+      title: 'Achievements',
+      subtitle: 'Certificates and honors I have earned',
       clickToView: 'Click to view certificate',
     },
     projectsSec: {
@@ -383,70 +496,107 @@ const translations = {
       sourceCode: 'Source Code',
     },
     contactSec: {
-      tag: 'CONTACT ME',
+      tag: 'Contact Me',
       heading: "Let's Connect!",
-      description: 'Have an interesting project, want to collaborate, or just say hi? Feel free to reach out to me! I will do my best to respond as soon as possible.',
-      locationTag: 'LOCATION & REACH',
-      locationHeading: 'Sukabumi, West Java',
-      locationDesc: 'Based in Sukabumi, West Java. Open for remote work worldwide as well as on-site for local projects.',
+      description: 'Have an interesting project, want to collaborate, or just want to discuss ideas? Feel free to reach out! I will get back to you as soon as possible.',
+      emailLabel: 'Email',
+      emailAction: 'Send Email',
+      locationLabel: 'Location & Reach',
+      locationDesc: 'Based in Sukabumi, West Java. Open for worldwide remote work as well as local on-site projects.',
       openMaps: 'Open in Google Maps',
-      socialsTag: 'SOCIAL MEDIA',
       socialsHeading: 'Find Me On',
-      formTag: 'INSTANT MESSAGE',
       formHeading: 'Send Instant Message',
-      formDesc: 'Use the form below to send me a message directly. All input is greatly appreciated.',
-      fullName: 'Full Name',
-      fullNamePlaceholder: 'Your Name',
-      emailAddress: 'Email Address',
+      formDesc: 'Use the form below to send an instant message directly. All feedback is greatly appreciated.',
+      nameLabel: 'Full Name',
+      namePlaceholder: 'Your Name',
+      emailInputLabel: 'Email Address',
       emailPlaceholder: 'Your Email',
-      subject: 'Subject',
+      subjectLabel: 'Subject',
       subjectPlaceholder: 'What is the subject of your message?',
-      message: 'Message',
+      messageLabel: 'Message',
       messagePlaceholder: 'Write your message here...',
-      sendMessage: 'Send Instant Message',
-      sending: 'Sending...',
-      successMsg: 'Your message has been sent successfully! Thank you for reaching out.',
+      submitBtn: 'Send Instant Message',
+      submitting: 'Sending Message...',
+      successTitle: 'Message Sent Successfully!',
+      successDesc: 'Thank you for reaching out. Your message has been saved safely and I will respond as soon as possible.',
+      sendAnother: 'Send Another Message',
     },
     resumeModal: {
-      downloadPdf: 'Download CV (PDF)',
-      close: 'Close',
+      title: 'Resume / CV',
+      download: 'Download Resume',
+      openNewTab: 'Open in New Tab',
     },
   },
 }
 
+// ─── Helpers ───────────────────────────────────────────────────────────────────
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  animate: { opacity: 1, y: 0 },
+  transition: { delay, duration: 0.5, ease: 'easeOut' },
+})
+
+// ─── Main Component ────────────────────────────────────────────────────────────
 export default function Portfolio() {
-  const [lang, setLang] = useState<Language>('id')
+  const [lang, setLang] = useState<'id' | 'en'>('id')
   const [activeSection, setActiveSection] = useState('home')
+  const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null)
+  const [selectedCert, setSelectedCert] = useState<(typeof achievements)[0] | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [selectedProject, setSelectedProject] = useState<any>(null)
-  const [selectedCert, setSelectedCert] = useState<any>(null)
   const [showResume, setShowResume] = useState(false)
 
   // Form State
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
+  const [errors, setErrors] = useState<{ name?: string; email?: string; subject?: string; message?: string }>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+
+  useEffect(() => {
+    const saved = localStorage.getItem('portfolio_lang') as 'id' | 'en'
+    if (saved && (saved === 'id' || saved === 'en')) {
+      setLang(saved)
+    }
+  }, [])
+
+  const handleLangChange = (newLang: 'id' | 'en') => {
+    setLang(newLang)
+    localStorage.setItem('portfolio_lang', newLang)
+  }
 
   const t = translations[lang]
 
   const sections = [
-    { id: 'home', name: t.nav.home, icon: Home },
-    { id: 'about', name: t.nav.about, icon: User },
-    { id: 'projects', name: t.nav.projects, icon: Folder },
-    { id: 'achievements', name: t.nav.achievements, icon: Award },
-    { id: 'contact', name: t.nav.contact, icon: Mail },
+    { id: 'home',         name: t.nav.home,         icon: Home      },
+    { id: 'about',        name: t.nav.about,        icon: User      },
+    { id: 'projects',     name: t.nav.projects,     icon: Folder    },
+    { id: 'achievements', name: t.nav.achievements, icon: Award     },
+    { id: 'contact',      name: t.nav.contact,      icon: Mail      },
   ]
 
-  const handleLangChange = (newLang: Language) => {
-    setLang(newLang)
+  const handleInputChange = (field: keyof typeof formData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: undefined }))
+    }
   }
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+  const validateForm = () => {
+    const tempErrors: typeof errors = {}
+    if (!formData.name.trim()) tempErrors.name = lang === 'en' ? 'Name is required' : 'Nama wajib diisi'
+    if (!formData.email.trim()) {
+      tempErrors.email = lang === 'en' ? 'Email is required' : 'Email wajib diisi'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      tempErrors.email = lang === 'en' ? 'Invalid email format' : 'Format email tidak valid'
+    }
+    if (!formData.subject.trim()) tempErrors.subject = lang === 'en' ? 'Subject is required' : 'Subjek wajib diisi'
+    if (!formData.message.trim()) tempErrors.message = lang === 'en' ? 'Message is required' : 'Pesan wajib diisi'
+    setErrors(tempErrors)
+    return Object.keys(tempErrors).length === 0
   }
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!validateForm()) return
     setIsSubmitting(true)
     try {
       const res = await fetch('/api/contact', {
@@ -483,6 +633,8 @@ export default function Portfolio() {
     }
   }
 
+  const mainRef = useRef<HTMLElement>(null)
+
   useEffect(() => {
     const sectionIds = ['home', 'about', 'projects', 'achievements', 'contact']
     const handleScroll = () => {
@@ -501,13 +653,16 @@ export default function Portfolio() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      setSelectedProject(null)
-      setSelectedCert(null)
-      setShowResume(false)
-    }
-  }, [])
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedProject(null)
+        setSelectedCert(null)
+        setShowResume(false)
+      }
+    },
+    [],
+  )
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown)
@@ -526,12 +681,6 @@ export default function Portfolio() {
       document.body.classList.remove('modal-open')
     }
   }, [showResume, selectedProject, selectedCert])
-
-  const fadeUp = (delay = 0) => ({
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.4, delay },
-  })
 
   return (
     <div className="min-h-screen portfolio-bg text-white flex flex-col">
@@ -567,7 +716,7 @@ export default function Portfolio() {
         <div className="flex items-center gap-2 md:gap-3">
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center space-x-1">
-            {/* Language Switcher Pill (Desktop) */}
+            {/* Language Switcher Pill (Desktop - Left of Home) */}
             <div className="flex items-center p-0.5 bg-white/5 border border-white/10 rounded-xl mr-2">
               <button
                 onClick={() => handleLangChange('id')}
@@ -706,19 +855,18 @@ export default function Portfolio() {
           <div className="mt-4 p-4 rounded-xl glass-card">
             <h3 className="text-[11px] font-bold text-gray-400 mb-3 uppercase tracking-wider">{t.nav.contact}</h3>
             <div className="space-y-2">
-              <button
-                onClick={() => navClick('contact')}
-                className="flex items-center gap-2 text-[11px] text-gray-400 hover:text-white transition-colors w-full text-left"
-              >
+              <button onClick={() => navClick('contact')}
+                className="flex items-center gap-2 text-[11px] text-gray-400 hover:text-white transition-colors w-full text-left">
                 <Mail className="w-3.5 h-3.5 text-primary" />
-                <span className="truncate">{t.contactSec.formHeading}</span>
+                <span className="truncate font-medium">{lang === 'en' ? 'Send Instant Message' : 'Kirim Pesan Instan'}</span>
               </button>
             </div>
           </div>
         </aside>
 
-        {/* Main Content */}
-        <main className="flex-1 p-4 md:p-6 lg:p-8 max-w-6xl mx-auto w-full min-w-0 pb-20 md:pb-8">
+        {/* ── Content ─── */}
+        <main ref={mainRef} className="flex-1 p-3 md:p-5 lg:p-6 min-w-0 space-y-12 md:space-y-16">
+
           {/* ════════════════════════════════ HOME ═══ */}
           <motion.section
             id="home"
@@ -728,6 +876,7 @@ export default function Portfolio() {
             transition={{ duration: 0.5 }}
             className="scroll-mt-24 space-y-5 md:space-y-6"
           >
+
             {/* Hero card */}
             <div className="glass-card rounded-2xl p-5 md:p-8">
               <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
@@ -752,10 +901,7 @@ export default function Portfolio() {
                   <motion.p {...fadeUp(0.15)} className="text-sm text-primary font-semibold mb-1">
                     {t.personal.greeting}
                   </motion.p>
-                  <motion.h1
-                    {...fadeUp(0.2)}
-                    className="text-3xl md:text-4xl lg:text-5xl font-extrabold gradient-text leading-tight mb-2"
-                  >
+                  <motion.h1 {...fadeUp(0.2)} className="text-3xl md:text-4xl lg:text-5xl font-extrabold gradient-text leading-tight mb-2">
                     {personal.name}
                   </motion.h1>
                   <motion.p {...fadeUp(0.25)} className="text-base md:text-lg text-gray-300 mb-3 font-medium">
@@ -795,10 +941,10 @@ export default function Portfolio() {
             {/* Quick nav cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
               {[
-                { id: 'about', icon: User, label: t.quickCards.about.label, sub: t.quickCards.about.sub, color: '#6366f1' },
-                { id: 'projects', icon: Folder, label: t.quickCards.projects.label, sub: t.quickCards.projects.sub, color: '#10b981' },
-                { id: 'achievements', icon: Award, label: t.quickCards.achievements.label, sub: t.quickCards.achievements.sub, color: '#f59e0b' },
-                { id: 'contact', icon: Mail, label: t.quickCards.contact.label, sub: t.quickCards.contact.sub, color: '#ec4899' },
+                { id: 'about',        icon: User,    label: t.quickCards.about.label,     sub: t.quickCards.about.sub,          color: '#6366f1' },
+                { id: 'projects',     icon: Folder,  label: t.quickCards.projects.label,  sub: t.quickCards.projects.sub,   color: '#10b981' },
+                { id: 'achievements', icon: Award,   label: t.quickCards.achievements.label, sub: t.quickCards.achievements.sub, color: '#f59e0b' },
+                { id: 'contact',      icon: Mail,    label: t.quickCards.contact.label,   sub: t.quickCards.contact.sub,        color: '#ec4899' },
               ].map((item, i) => (
                 <motion.button
                   key={item.id}
@@ -873,13 +1019,8 @@ export default function Portfolio() {
               <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-5 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
                 <div className="avatar-ring w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0">
-                  <Image
-                    src={personal.avatar}
-                    alt={personal.name}
-                    width={112}
-                    height={112}
-                    className="w-full h-full object-cover rounded-full"
-                  />
+                  <Image src={personal.avatar} alt={personal.name} width={112} height={112}
+                    className="w-full h-full object-cover rounded-full" />
                 </div>
                 <div className="text-center sm:text-left">
                   <h1 className="text-2xl md:text-3xl font-extrabold gradient-text mb-1">{personal.name}</h1>
@@ -892,16 +1033,12 @@ export default function Portfolio() {
                   {/* Social links */}
                   <div className="flex justify-center sm:justify-start gap-3 mt-4">
                     {[
-                      { icon: Github, href: personal.github, label: 'GitHub' },
-                      { icon: Linkedin, href: personal.linkedin, label: 'LinkedIn' },
+                      { icon: Github,    href: personal.github,    label: 'GitHub'    },
+                      { icon: Linkedin,  href: personal.linkedin,  label: 'LinkedIn'  },
                       { icon: Instagram, href: personal.instagram, label: 'Instagram' },
-                      { icon: Globe, href: personal.website, label: 'Website' },
+                      { icon: Globe,     href: personal.website,   label: 'Website'   },
                     ].map((link) => (
-                      <motion.a
-                        key={link.label}
-                        href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
+                      <motion.a key={link.label} href={link.href} target="_blank" rel="noreferrer"
                         title={link.label}
                         className="p-2.5 glass-card rounded-xl text-gray-400 hover:text-white transition-all"
                         whileHover={{ scale: 1.12, y: -2 }}
@@ -921,8 +1058,7 @@ export default function Portfolio() {
               </h2>
               <div className="space-y-4">
                 {experiences.map((exp, i) => (
-                  <motion.div
-                    key={i}
+                  <motion.div key={i}
                     {...fadeUp(i * 0.12)}
                     className="glass-card rounded-xl p-5 md:p-6 relative overflow-hidden render-optimized"
                     whileHover={{ y: -2 }}
@@ -931,10 +1067,8 @@ export default function Portfolio() {
                     <div className="pl-3">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
                         <h3 className="font-bold text-white text-base md:text-lg">{lang === 'en' ? exp.positionEn : exp.position}</h3>
-                        <span
-                          className="text-xs font-semibold px-3 py-1 rounded-full w-fit"
-                          style={{ backgroundColor: `${exp.color}20`, color: exp.color }}
-                        >
+                        <span className="text-xs font-semibold px-3 py-1 rounded-full w-fit"
+                          style={{ backgroundColor: `${exp.color}20`, color: exp.color }}>
                           {lang === 'en' ? exp.periodEn : exp.period}
                         </span>
                       </div>
@@ -959,8 +1093,7 @@ export default function Portfolio() {
               </h2>
               <div className="space-y-4">
                 {education.map((edu, i) => (
-                  <motion.div
-                    key={i}
+                  <motion.div key={i}
                     {...fadeUp(i * 0.1)}
                     className="glass-card rounded-xl p-5 flex items-start gap-4"
                     whileHover={{ y: -2 }}
@@ -968,13 +1101,8 @@ export default function Portfolio() {
                     {/* Logo / placeholder */}
                     <div className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden bg-white/10 flex items-center justify-center">
                       {edu.logo ? (
-                        <Image
-                          src={edu.logo}
-                          alt={edu.institution}
-                          width={56}
-                          height={56}
-                          className="w-full h-full object-contain"
-                        />
+                        <Image src={edu.logo} alt={edu.institution} width={56} height={56}
+                          className="w-full h-full object-contain" />
                       ) : (
                         <GraduationCap className="w-7 h-7 text-gray-400" />
                       )}
@@ -1025,8 +1153,7 @@ export default function Portfolio() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
               {projects.map((project, i) => (
-                <motion.div
-                  key={project.id}
+                <motion.div key={project.id}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -1037,12 +1164,8 @@ export default function Portfolio() {
                 >
                   {/* Project image */}
                   <div className="relative h-40 sm:h-44 overflow-hidden">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                    <Image src={project.image} alt={project.title} fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                     {project.featured && (
                       <div className="absolute top-3 right-3 px-2.5 py-1 bg-yellow-500/90 text-black rounded-full text-[10px] font-bold flex items-center gap-1">
@@ -1064,10 +1187,7 @@ export default function Portfolio() {
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {project.technologies.slice(0, 4).map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-0.5 bg-primary/15 text-primary rounded-full text-[10px] font-medium border border-primary/20"
-                        >
+                        <span key={tech} className="px-2 py-0.5 bg-primary/15 text-primary rounded-full text-[10px] font-medium border border-primary/20">
                           {tech}
                         </span>
                       ))}
@@ -1102,8 +1222,7 @@ export default function Portfolio() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
               {achievements.map((item, i) => (
-                <motion.div
-                  key={item.id}
+                <motion.div key={item.id}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -1153,428 +1272,446 @@ export default function Portfolio() {
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10 max-w-5xl mx-auto"
           >
-            {/* Grid Container */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-              {/* Left Column: Direct Info & Socials (Span 5 on Desktop) */}
-              <div className="lg:col-span-5 space-y-5">
-                {/* Header Card */}
-                <div className="glass-card rounded-2xl p-6 md:p-7 border border-white/10 space-y-3 group text-center flex flex-col items-center justify-center">
-                  <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-1 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 inline-block">
-                    {t.contactSec.tag}
-                  </span>
-                  <h2 className="text-2xl md:text-3xl font-extrabold gradient-text">
-                    {t.contactSec.heading}
-                  </h2>
-                  <p className="text-xs md:text-sm text-gray-300 leading-relaxed max-w-md mx-auto">
-                    {t.contactSec.description}
-                  </p>
-                </div>
 
-                {/* Location Info Card */}
-                <div className="glass-card rounded-2xl p-6 border border-white/10 hover:border-pink-500/30 hover:shadow-[0_0_20px_rgba(236,72,153,0.15)] transition-all relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-pink-500/5 rounded-full blur-xl pointer-events-none" />
-                  <div className="flex items-start gap-4">
-                    <div className="p-3.5 rounded-xl bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/30 text-pink-400 flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <MapPin className="w-6 h-6" />
-                    </div>
-                    <div className="space-y-1.5 flex-1">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-pink-400">
-                        {t.contactSec.locationTag}
+                {/* Grid Container */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+                  
+                  {/* Left Column: Direct Info & Socials (Span 5 on Desktop) */}
+                  <div className="lg:col-span-5 space-y-5">
+                    
+                    {/* Header Card */}
+                    <div className="glass-card rounded-2xl p-6 md:p-7 border border-white/10 space-y-3 group text-center flex flex-col items-center justify-center">
+                      <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-1 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 inline-block">
+                        {t.contactSec.tag}
                       </span>
-                      <h3 className="font-bold text-white text-base md:text-lg">
-                        {t.contactSec.locationHeading}
-                      </h3>
-                      <p className="text-xs text-gray-400 leading-relaxed">
-                        {t.contactSec.locationDesc}
-                      </p>
-                      <a
-                        href="https://maps.google.com/?q=Sukabumi,Jawa+Barat"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-pink-400 hover:text-pink-300 transition-colors pt-2"
-                      >
-                        <span>{t.contactSec.openMaps}</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Social Media Links */}
-                <div className="glass-card rounded-2xl p-6 border border-white/10 space-y-4">
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                    {t.contactSec.socialsHeading}
-                  </h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    {[
-                      { icon: Github, href: personal.github, label: 'GitHub' },
-                      { icon: Linkedin, href: personal.linkedin, label: 'LinkedIn' },
-                      { icon: Instagram, href: personal.instagram, label: 'Instagram' },
-                      { icon: Globe, href: personal.website, label: 'Website' },
-                    ].map((s) => (
-                      <motion.a
-                        key={s.label}
-                        href={s.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center justify-center gap-2.5 p-3 rounded-xl glass-card border border-white/5 text-gray-300 hover:text-white transition-all text-xs font-semibold"
-                        whileHover={{ scale: 1.03, y: -2 }}
-                        whileTap={{ scale: 0.97 }}
-                      >
-                        <s.icon className="w-4 h-4 text-primary" />
-                        <span>{s.label}</span>
-                      </motion.a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column: Contact Form */}
-              <div className="lg:col-span-7">
-                <div className="glass-card rounded-2xl p-6 md:p-8 border border-white/10 relative overflow-hidden group">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 border border-primary/30 text-primary">
-                      <Send className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-white text-base md:text-lg">
-                        {t.contactSec.formHeading}
-                      </h3>
-                      <p className="text-xs text-gray-400">
-                        {t.contactSec.formDesc}
+                      <h2 className="text-2xl md:text-3xl font-extrabold gradient-text">
+                        {t.contactSec.heading}
+                      </h2>
+                      <p className="text-xs md:text-sm text-gray-300 leading-relaxed max-w-md mx-auto">
+                        {t.contactSec.description}
                       </p>
                     </div>
-                  </div>
 
-                  {submitSuccess ? (
-                    <div className="p-6 rounded-xl bg-green-500/10 border border-green-500/30 text-center space-y-3">
-                      <CheckCircle2 className="w-12 h-12 text-green-400 mx-auto" />
-                      <h4 className="font-bold text-white text-base">Terima Kasih!</h4>
-                      <p className="text-xs text-green-300 leading-relaxed">
-                        {t.contactSec.successMsg}
-                      </p>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleFormSubmit} className="space-y-4">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1.5">
-                          <label className="text-xs font-semibold text-gray-300">
-                            {t.contactSec.fullName}
-                          </label>
-                          <input
-                            type="text"
-                            name="name"
-                            required
-                            value={formData.name}
-                            onChange={handleFormChange}
-                            placeholder={t.contactSec.fullNamePlaceholder}
-                            className="form-input"
-                          />
+                    {/* Location Info Card */}
+                    <div className="glass-card rounded-2xl p-6 border border-white/10 hover:border-pink-500/30 hover:shadow-[0_0_20px_rgba(236,72,153,0.15)] transition-all relative overflow-hidden group">
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-pink-500/5 rounded-full blur-xl pointer-events-none" />
+                      <div className="flex items-start gap-4">
+                        <div className="p-3 rounded-xl bg-pink-500/10 text-pink-400 flex-shrink-0 group-hover:scale-110 transition-transform">
+                          <MapPin className="w-6 h-6" />
                         </div>
-                        <div className="space-y-1.5">
-                          <label className="text-xs font-semibold text-gray-300">
-                            {t.contactSec.emailAddress}
-                          </label>
-                          <input
-                            type="email"
-                            name="email"
-                            required
-                            value={formData.email}
-                            onChange={handleFormChange}
-                            placeholder={t.contactSec.emailPlaceholder}
-                            className="form-input"
-                          />
+                        <div className="space-y-3 flex-1">
+                          <div>
+                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">{t.contactSec.locationLabel}</p>
+                            <h4 className="font-extrabold text-white text-base mt-0.5">{t.personal.location}</h4>
+                          </div>
+                          <p className="text-xs text-gray-300 leading-relaxed">
+                            {t.contactSec.locationDesc}
+                          </p>
+                          <motion.a
+                            href="https://www.google.com/maps/place/Sukabumi,+Sukabumi+Regency,+West+Java/@-6.9897,106.9268"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-pink-500/10 text-pink-400 text-xs font-semibold border border-pink-500/20 hover:bg-pink-500/20 transition-all"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            <Globe className="w-3.5 h-3.5" />
+                            <span>{t.contactSec.openMaps}</span>
+                          </motion.a>
                         </div>
                       </div>
+                    </div>
 
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-semibold text-gray-300">
-                          {t.contactSec.subject}
-                        </label>
-                        <input
-                          type="text"
-                          name="subject"
-                          required
-                          value={formData.subject}
-                          onChange={handleFormChange}
-                          placeholder={t.contactSec.subjectPlaceholder}
-                          className="form-input"
-                        />
+                    {/* Social Media Connections */}
+                    <div className="glass-card rounded-2xl p-6 border border-white/10 space-y-4">
+                      <h4 className="font-bold text-white text-xs tracking-wider uppercase pl-1">{t.contactSec.socialsHeading}</h4>
+                      <div className="grid grid-cols-2 gap-2.5">
+                        {[
+                          { icon: Github,    href: personal.github,    label: 'GitHub',    color: '#ffffff', bg: 'rgba(255,255,255,0.06)', border: 'rgba(255,255,255,0.15)' },
+                          { icon: Linkedin,  href: personal.linkedin,  label: 'LinkedIn',  color: '#0A66C2', bg: 'rgba(10,102,194,0.06)', border: 'rgba(10,102,194,0.15)' },
+                          { icon: Instagram, href: personal.instagram, label: 'Instagram', color: '#E1306C', bg: 'rgba(225,48,108,0.06)', border: 'rgba(225,48,108,0.15)' },
+                          { icon: Globe,     href: personal.website,   label: 'Website',   color: '#6366f1', bg: 'rgba(99,102,241,0.06)', border: 'rgba(99,102,241,0.15)' },
+                        ].map((s) => (
+                          <motion.a
+                            key={s.label}
+                            href={s.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2.5 px-4 py-3 glass-card rounded-xl text-xs text-gray-300 hover:text-white transition-all justify-center border border-white/5"
+                            whileHover={{ 
+                              scale: 1.03, 
+                              backgroundColor: s.bg, 
+                              borderColor: s.border,
+                              boxShadow: `0 0 15px ${s.border}` 
+                            }}
+                          >
+                            <s.icon className="w-4 h-4 flex-shrink-0" style={{ color: s.color }} />
+                            <span className="font-semibold">{s.label}</span>
+                          </motion.a>
+                        ))}
                       </div>
+                    </div>
 
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-semibold text-gray-300">
-                          {t.contactSec.message}
-                        </label>
-                        <textarea
-                          name="message"
-                          required
-                          rows={4}
-                          value={formData.message}
-                          onChange={handleFormChange}
-                          placeholder={t.contactSec.messagePlaceholder}
-                          className="form-input resize-none"
-                        />
-                      </div>
+                  </div>
 
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full btn-primary flex items-center justify-center gap-2 py-3.5 mt-2 text-sm font-semibold disabled:opacity-50"
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <Loader2 className="w-4 h-4 animate-spin" />
-                            <span>{t.contactSec.sending}</span>
-                          </>
-                        ) : (
-                          <>
-                            <Send className="w-4 h-4" />
-                            <span>{t.contactSec.sendMessage}</span>
-                          </>
-                        )}
-                      </button>
-                    </form>
-                  )}
+                  {/* Right Column: Contact Form / Success Screen (Span 7 on Desktop) */}
+                  <div className="lg:col-span-7">
+                    <AnimatePresence mode="wait">
+                      {submitSuccess ? (
+                        <motion.div
+                          key="success-card"
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.95 }}
+                          transition={{ duration: 0.3 }}
+                          className="glass-card rounded-2xl p-6 md:p-8 space-y-6 h-full flex flex-col justify-center items-center text-center border border-green-500/20 relative overflow-hidden"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-b from-green-500/5 to-transparent pointer-events-none" />
+                          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-emerald-500" />
+                          
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: 0.2, type: 'spring', stiffness: 200, damping: 15 }}
+                            className="w-16 h-16 rounded-full bg-green-500/10 text-green-400 flex items-center justify-center border border-green-500/20 shadow-[0_0_30px_rgba(34,197,94,0.3)]"
+                          >
+                            <CheckCircle className="w-10 h-10" />
+                          </motion.div>
+                          
+                          <div className="space-y-2.5 max-w-md">
+                            <h3 className="text-2xl font-extrabold text-white">{t.contactSec.successTitle}</h3>
+                            <p className="text-sm text-gray-300 leading-relaxed">
+                              {t.contactSec.successDesc}
+                            </p>
+                          </div>
+
+                          <motion.button
+                            onClick={() => setSubmitSuccess(false)}
+                            className="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-semibold border border-white/10 transition-all flex items-center gap-2 mt-4"
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                          >
+                            <Send className="w-3.5 h-3.5" />
+                            {t.contactSec.sendAnother}
+                          </motion.button>
+                        </motion.div>
+                      ) : (
+                        <motion.form
+                          key="contact-form"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          onSubmit={handleFormSubmit}
+                          className="glass-card rounded-2xl p-5 md:p-6 space-y-4 border border-white/10 relative"
+                        >
+                          <div className="space-y-1.5">
+                            <div className="flex items-center gap-2.5">
+                              <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                                <Send className="w-4 h-4" />
+                              </div>
+                              <h3 className="text-base font-bold text-white">{t.contactSec.formHeading}</h3>
+                            </div>
+                            <p className="text-xs text-gray-400 leading-relaxed">
+                              {t.contactSec.formDesc}
+                            </p>
+                          </div>
+
+                          <div className="space-y-3 mt-3">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                              <div className="space-y-1">
+                                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">{t.contactSec.nameLabel}</label>
+                                <input
+                                  type="text"
+                                  placeholder={t.contactSec.namePlaceholder}
+                                  value={formData.name}
+                                  onChange={(e) => handleInputChange('name', e.target.value)}
+                                  disabled={isSubmitting}
+                                  className={`form-input py-2.5 ${errors.name ? 'border-red-500/40 bg-red-500/5 focus:border-red-500' : ''}`}
+                                />
+                                {errors.name && (
+                                  <p className="text-[10px] text-red-400 pl-1 font-semibold">{errors.name}</p>
+                                )}
+                              </div>
+                              <div className="space-y-1">
+                                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">{t.contactSec.emailInputLabel}</label>
+                                <input
+                                  type="email"
+                                  placeholder={t.contactSec.emailPlaceholder}
+                                  value={formData.email}
+                                  onChange={(e) => handleInputChange('email', e.target.value)}
+                                  disabled={isSubmitting}
+                                  className={`form-input py-2.5 ${errors.email ? 'border-red-500/40 bg-red-500/5 focus:border-red-500' : ''}`}
+                                />
+                                {errors.email && (
+                                  <p className="text-[10px] text-red-400 pl-1 font-semibold">{errors.email}</p>
+                                )}
+                              </div>
+                            </div>
+                            
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">{t.contactSec.subjectLabel}</label>
+                              <input
+                                type="text"
+                                placeholder={t.contactSec.subjectPlaceholder}
+                                value={formData.subject}
+                                onChange={(e) => handleInputChange('subject', e.target.value)}
+                                disabled={isSubmitting}
+                                className={`form-input py-2.5 w-full ${errors.subject ? 'border-red-500/40 bg-red-500/5 focus:border-red-500' : ''}`}
+                              />
+                              {errors.subject && (
+                                <p className="text-[10px] text-red-400 pl-1 font-semibold">{errors.subject}</p>
+                              )}
+                            </div>
+                            
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">{t.contactSec.messageLabel}</label>
+                              <textarea
+                                rows={3}
+                                placeholder={t.contactSec.messagePlaceholder}
+                                value={formData.message}
+                                onChange={(e) => handleInputChange('message', e.target.value)}
+                                disabled={isSubmitting}
+                                className={`form-input py-2.5 w-full resize-none ${errors.message ? 'border-red-500/40 bg-red-500/5 focus:border-red-500' : ''}`}
+                              />
+                              {errors.message && (
+                                <p className="text-[10px] text-red-400 pl-1 font-semibold">{errors.message}</p>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="mt-4 pt-1">
+                            <motion.button
+                              type="submit"
+                              disabled={isSubmitting}
+                              className="btn-primary w-full flex items-center justify-center gap-2 py-2.5 rounded-xl font-bold text-sm shadow-glow-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                              whileHover={isSubmitting ? {} : { scale: 1.02, y: -2 }}
+                              whileTap={isSubmitting ? {} : { scale: 0.98 }}
+                            >
+                              {isSubmitting ? (
+                                <>
+                                  <Loader2 className="w-4 h-4 animate-spin" />
+                                  <span>{t.contactSec.submitting}</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Send className="w-4 h-4" />
+                                  <span>{t.contactSec.submitBtn}</span>
+                                </>
+                              )}
+                            </motion.button>
+                          </div>
+                        </motion.form>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </motion.section>
+
+              </motion.section>
 
           {/* Footer */}
-          <footer className="mt-12 py-6 text-center text-xs text-gray-500 border-t border-white/5">
-            <p>
-              Copyright © 2025 – {new Date().getFullYear()}{' '}
-              <span className="text-gray-300 font-semibold">{personal.name} (Rama-X2)</span>.{' '}
-              {lang === 'en' ? 'All rights reserved.' : 'Hak cipta dilindungi undang-undang.'}
+          <footer className="mt-12 pt-6 pb-24 md:pb-8 border-t border-white/10 text-center text-xs text-gray-400">
+            <p className="font-medium text-gray-300">
+              Copyright © 2025 – {new Date().getFullYear()} <span className="font-bold text-white">{personal.name} (Rama-X2)</span>. {lang === 'en' ? 'All rights reserved.' : 'Hak cipta dilindungi undang-undang.'}
             </p>
           </footer>
         </main>
       </div>
 
-      {/* Mobile bottom nav */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 mobile-bottom-nav md:hidden flex justify-around items-center px-2 py-2">
-        {sections.map((s) => {
-          const isActive = activeSection === s.id
-          return (
+      {/* ── Bottom nav (mobile) ─── */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 mobile-bottom-nav">
+        <div className="flex">
+          {sections.map((s) => (
             <button
               key={s.id}
               onClick={() => navClick(s.id)}
-              className={`flex flex-col items-center py-1 px-3 rounded-xl transition-all relative ${
-                isActive ? 'text-primary font-bold' : 'text-gray-400 hover:text-gray-200 font-normal'
+              className={`flex-1 flex flex-col items-center py-2.5 gap-1 transition-all ${
+                activeSection === s.id ? 'text-primary' : 'text-gray-500'
               }`}
             >
-              <s.icon className={`w-5 h-5 mb-0.5 ${isActive ? 'scale-110' : ''}`} />
-              <span className="text-[10px]">{s.name}</span>
-              {isActive && (
+              <s.icon className="w-5 h-5" />
+              <span className="text-[9px] font-medium">{s.name}</span>
+              {activeSection === s.id && (
                 <motion.div
-                  layoutId="activeTab"
-                  className="w-1.5 h-1.5 rounded-full bg-primary absolute -bottom-0.5"
+                  layoutId="active-dot"
+                  className="w-1 h-1 rounded-full bg-primary"
                 />
               )}
             </button>
-          )
-        })}
-      </div>
+          ))}
+        </div>
+      </nav>
 
-      {/* ── Modals ─── */}
-      {/* Project Detail Modal */}
+      {/* ── Project Detail Modal ─── */}
       <AnimatePresence>
         {selectedProject && (
-          <div className="portfolio-modal" onClick={() => setSelectedProject(null)}>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="portfolio-modal-content custom-scrollbar"
-              onClick={(e) => e.stopPropagation()}
-            >
+          <motion.div className="portfolio-modal" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            onClick={() => setSelectedProject(null)}>
+            <motion.div className="portfolio-modal-content" onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.88, y: 40 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 40 }}>
+
               <div className="flex justify-between items-start mb-4">
-                <div>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/20 text-primary border border-primary/30">
-                    {selectedProject.category}
-                  </span>
-                  <h2 className="text-2xl font-bold text-white mt-2">{selectedProject.title}</h2>
+                <div className="flex-1 pr-4">
+                  <h2 className="text-xl md:text-2xl font-bold gradient-text mb-0.5">{selectedProject.title}</h2>
+                  <p className="text-xs text-primary">{selectedProject.category}</p>
                 </div>
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+                <motion.button onClick={() => setSelectedProject(null)}
+                  className="p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg transition-all"
+                  whileHover={{ scale: 1.05, rotate: 90 }}
+                  whileTap={{ scale: 0.95 }}
+                  title="Close"
                 >
                   <X className="w-5 h-5" />
-                </button>
+                </motion.button>
               </div>
 
-              <div className="relative h-64 sm:h-80 rounded-xl overflow-hidden mb-5 border border-white/10">
-                <Image
-                  src={selectedProject.image}
-                  alt={selectedProject.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="space-y-4 text-sm text-gray-300">
-                <p className="leading-relaxed">
-                  {lang === 'en'
-                    ? selectedProject.longDescriptionEn || selectedProject.descriptionEn
-                    : selectedProject.longDescription || selectedProject.description}
-                </p>
-
-                <div>
-                  <h4 className="font-semibold text-white mb-2">{t.projectsSec.technologies}</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.technologies.map((tech: string) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-white/5 border border-white/10 text-primary rounded-lg text-xs font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+              <div className="relative h-44 md:h-56 rounded-xl mb-5 overflow-hidden">
+                <Image src={selectedProject.image} alt={selectedProject.title} fill className="object-cover" />
+                {selectedProject.featured && (
+                  <div className="absolute top-3 right-3 px-3 py-1 bg-yellow-500/90 text-black rounded-full text-xs font-bold">
+                    {t.projectsSec.featured}
                   </div>
-                </div>
+                )}
+              </div>
 
-                <div className="flex flex-wrap gap-3 pt-3">
-                  {selectedProject.liveDemoUrl && (
-                    <a
-                      href={selectedProject.liveDemoUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="btn-primary inline-flex items-center gap-2 text-xs"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      {t.projectsSec.liveDemo}
-                    </a>
-                  )}
-                  {selectedProject.sourceCodeUrl && (
-                    <a
-                      href={selectedProject.sourceCodeUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="btn-outline inline-flex items-center gap-2 text-xs"
-                    >
-                      <Github className="w-4 h-4" />
-                      {t.projectsSec.sourceCode}
-                    </a>
-                  )}
+              <p className="text-gray-300 text-sm leading-relaxed mb-4">
+                {lang === 'en' ? selectedProject.descriptionEn : selectedProject.description}
+              </p>
+
+              <div className="mb-4">
+                <h3 className="font-bold text-white mb-2 text-sm">{t.projectsSec.technologies}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProject.technologies.map((tech) => (
+                    <span key={tech} className="px-3 py-1 bg-primary/20 text-primary rounded-full text-xs font-medium border border-primary/30">{tech}</span>
+                  ))}
                 </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3">
+                <motion.a href={selectedProject.liveUrl} target="_blank" rel="noreferrer"
+                  className="flex-1 btn-primary flex items-center justify-center gap-2"
+                  whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <ExternalLink className="w-4 h-4" /> {t.projectsSec.liveDemo}
+                </motion.a>
+                <motion.a href={selectedProject.githubUrl} target="_blank" rel="noreferrer"
+                  className="flex-1 btn-outline flex items-center justify-center gap-2"
+                  whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Github className="w-4 h-4" /> {t.projectsSec.sourceCode}
+                </motion.a>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Certificate Modal */}
+      {/* ── Certificate Modal ─── */}
       <AnimatePresence>
         {selectedCert && (
-          <div className="portfolio-modal cert-modal-wrap" onClick={() => setSelectedCert(null)}>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="portfolio-modal-content max-w-3xl custom-scrollbar"
-              onClick={(e) => e.stopPropagation()}
-            >
+          <motion.div className="portfolio-modal cert-modal-wrap" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            onClick={() => setSelectedCert(null)}>
+            <motion.div className="portfolio-modal-content" onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.88, y: 40 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 40 }}>
+
               <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h2 className="text-xl font-bold text-white">{selectedCert.title}</h2>
-                  <p className="text-xs text-primary font-medium mt-0.5">{selectedCert.issuer}</p>
+                <div className="flex-1 pr-4">
+                  <h2 className="text-base md:text-lg font-bold gradient-text leading-snug">{selectedCert.title}</h2>
+                  <p className="text-xs text-primary mt-0.5">{selectedCert.issuer}</p>
                 </div>
-                <button
-                  onClick={() => setSelectedCert(null)}
-                  className="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+                <motion.button onClick={() => setSelectedCert(null)}
+                  className="p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg transition-all"
+                  whileHover={{ scale: 1.05, rotate: 90 }}
+                  whileTap={{ scale: 0.95 }}
+                  title="Close"
                 >
                   <X className="w-5 h-5" />
-                </button>
+                </motion.button>
               </div>
 
-              <div className="relative w-full h-[50vh] sm:h-[65vh] rounded-xl overflow-hidden mb-4 border border-white/10 bg-black/40">
-                <Image
-                  src={selectedCert.image}
-                  alt={selectedCert.title}
-                  fill
-                  className="object-contain"
-                />
+              <div className="relative rounded-xl overflow-hidden mb-4" style={{ aspectRatio: '1.414/1' }}>
+                <Image src={selectedCert.image} alt={selectedCert.title} fill className="object-contain bg-white/5" />
               </div>
 
-              {selectedCert.verifyUrl && (
-                <div className="flex justify-end pt-2">
-                  <a
-                    href={selectedCert.verifyUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn-primary inline-flex items-center gap-2 text-xs"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    Verifikasi Kredensial
-                  </a>
+              <div className="flex items-center justify-between gap-3 text-sm text-gray-400">
+                <div className="flex items-center gap-1.5">
+                  <Calendar className="w-4 h-4" />
+                  <span>{lang === 'en' && selectedCert.dateEn ? selectedCert.dateEn : selectedCert.date}</span>
                 </div>
-              )}
+                {(selectedCert as any).verifyUrl && (
+                  <motion.a
+                    href={(selectedCert as any).verifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30 text-xs font-semibold transition-all"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span>{lang === 'en' ? 'Verify on Credly' : 'Verifikasi di Credly'}</span>
+                  </motion.a>
+                )}
+              </div>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Resume CV Preview Modal */}
+      {/* ── Resume Modal ─── */}
       <AnimatePresence>
         {showResume && (
-          <div className="portfolio-modal" onClick={() => setShowResume(false)}>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="resume-modal-content"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex justify-between items-center mb-3 pb-3 border-b border-white/10 flex-shrink-0">
-                <div>
-                  <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                    CV / Curriculum Vitae
-                  </h2>
-                  <p className="text-xs text-gray-400">Ade Ramadhani Putra</p>
-                </div>
-                <button
-                  onClick={() => setShowResume(false)}
-                  className="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+          <motion.div className="portfolio-modal" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            onClick={() => setShowResume(false)}>
+            <motion.div className="resume-modal-content" onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.88, y: 40 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 40 }}>
+
+              {/* Header */}
+              <div className="flex justify-between items-center mb-4 flex-shrink-0">
+                <h2 className="text-lg font-bold gradient-text">{t.resumeModal.title}</h2>
+                <motion.button onClick={() => setShowResume(false)}
+                  className="p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg transition-all"
+                  whileHover={{ scale: 1.05, rotate: 90 }}
+                  whileTap={{ scale: 0.95 }}
+                  title="Close"
                 >
                   <X className="w-5 h-5" />
-                </button>
+                </motion.button>
               </div>
 
-              {/* Scrollable image */}
-              <div className="resume-img-scroll border border-white/10 my-2">
+              {/* Scrollable image area */}
+              <div className="resume-img-scroll">
                 <img
-                  src="/gambar-cv/cv_rama.png"
-                  alt="CV Ade Ramadhani Putra"
+                  src="/gambar-resume/cv-resume-ade-rama.png"
+                  alt="Resume Ade Ramadhani Putra"
                   className="resume-img"
                 />
               </div>
 
-              {/* Fixed Bottom Action Bar */}
-              <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-3 flex-shrink-0">
-                <button
-                  onClick={() => setShowResume(false)}
-                  className="btn-outline text-xs px-4 py-2.5"
+              {/* Action buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 mt-4 flex-shrink-0">
+                <motion.a
+                  href="/gambar-resume/cv-resume-ade-rama.png"
+                  download="CV-Resume-Ade-Ramadhani-Putra.png"
+                  className="btn-primary flex-1 flex items-center justify-center gap-2"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  {t.resumeModal.close}
-                </button>
-                <a
-                  href="/gambar-cv/cv_rama.png"
-                  download="CV_Ade_Ramadhani_Putra.png"
-                  className="btn-primary text-xs px-4 py-2.5 inline-flex items-center gap-2"
+                  <FileText className="w-4 h-4" /> {t.resumeModal.download}
+                </motion.a>
+                <motion.a
+                  href="/gambar-resume/cv-resume-ade-rama.png"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline flex-1 flex items-center justify-center gap-2"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <Download className="w-4 h-4" />
-                  {t.resumeModal.downloadPdf}
-                </a>
+                  <ExternalLink className="w-4 h-4" /> {t.resumeModal.openNewTab}
+                </motion.a>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
+
     </div>
   )
 }
