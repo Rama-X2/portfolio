@@ -1014,7 +1014,7 @@ export default function Portfolio() {
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
-            {/* About Me Details (No duplicate avatar, rich background text) */}
+            {/* About Me Details (100% Unique, Authentic Background Text) */}
             <div className="glass-card rounded-2xl p-6 md:p-8 border border-white/10">
               <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-5 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
               <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-4">
@@ -1023,18 +1023,18 @@ export default function Portfolio() {
               <div className="space-y-4 text-sm md:text-base text-gray-300 leading-relaxed font-normal">
                 <p>
                   {lang === 'en'
-                    ? 'I am a Full Stack Web Developer, UI/UX Designer, and System Specialist based in Sukabumi, West Java. I have a deep passion for modern web software engineering, Linux server management, as well as low-level Android customization and Linux Kernel tuning.'
-                    : 'Saya adalah seorang Full Stack Web Developer, UI/UX Designer, dan System Specialist yang berdomisili di Sukabumi, Jawa Barat. Memiliki passion yang mendalam di dunia pengembangan perangkat lunak web, manajemen server berbasis Linux, serta kustomisasi tingkat rendah (low-level) pada ekosistem Android dan Linux Kernel.'}
+                    ? 'I am a Full Stack Web Developer, UI/UX Designer, and System Specialist based in Sukabumi, West Java. My core expertise focuses on engineering modern web applications, managing Linux server infrastructures, and developing low-level systems including AOSP Android customization and Linux Kernel tuning.'
+                    : 'Saya adalah seorang Full Stack Web Developer, UI/UX Designer, dan System Specialist asal Sukabumi, Jawa Barat. Fokus utama saya berpusat pada rekayasa aplikasi web modern, pengelolaan infrastruktur server berbasis Linux, serta pengembangan sistem tingkat rendah (low-level) seperti kustomisasi Android AOSP dan optimasi Linux Kernel.'}
                 </p>
                 <p>
                   {lang === 'en'
-                    ? 'My tech journey is fueled by continuous curiosity to build fast, responsive, and premium digital solutions. From engineering complex e-commerce platforms like BumiTani and HomeLab, crafting gaming top-up platforms like Rama Store with fluid animations, to developing AOSP-based custom ROMs and kernel optimizations for peak hardware performance.'
-                    : 'Perjalanan teknologi saya didorong oleh rasa ingin tahu yang tinggi untuk membangun solusi digital yang cepat, responsif, dan bernuansa premium. Mulai dari merancang platform e-commerce kompleks seperti BumiTani dan HomeLab, membangun platform gaming top-up Rama Store dengan animasi modern, hingga melakukan optimasi kernel dan custom ROM berbasis AOSP untuk meningkatkan performa perangkat secara maksimal.'}
+                    ? 'My technical exploration stems from a deep passion for high-performance computing and intuitive user interface design. I bring this expertise to life through full-featured e-commerce platforms like BumiTani and HomeLab, the Rama Store gaming top-up platform, as well as hardware optimization modules like Miyabi Core and custom ROMs tailored for maximum device efficiency.'
+                    : 'Eksplorasi teknis saya berawal dari ketertarikan mendalam terhadap performa komputasi dan estetika antarmuka. Keahlian ini saya wujudkan melalui pembangunan platform e-commerce berfitur lengkap seperti BumiTani dan HomeLab, web platform top-up Rama Store, hingga perancangan modul optimasi hardware seperti Miyabi Core dan custom ROM untuk menghasilkan efisiensi sistem yang maksimal.'}
                 </p>
                 <p>
                   {lang === 'en'
-                    ? 'I am committed to combining elegant design aesthetics with robust system engineering. Whether developing full-stack web applications, managing cloud server infrastructures, or sharing open-source experimental projects on GitHub, my goal is to deliver intuitive, highly efficient digital products that solve real-world problems.'
-                    : 'Saya selalu berkomitmen untuk memadukan estetika desain yang elegan dengan performa sistem yang tangguh. Baik dalam menangani pengembangan web full-stack, administrasi server, maupun proyek eksperimental open-source di GitHub, fokus utama saya adalah menciptakan produk digital yang intuitif, efisien, dan memberikan nilai nyata bagi pengguna.'}
+                    ? 'I firmly believe in merging clean code, system speed, and visual elegance in every project I build. Whether engineering modern web apps, administering cloud servers, or contributing open-source projects on GitHub, my mission is to deliver fast, secure, and user-centric digital solutions.'
+                    : 'Saya memegang prinsip untuk selalu mengintegrasikan kerapihan kode, kecepatan sistem, dan keindahan visual dalam setiap karya. Baik dalam membangun aplikasi web modern, mengelola server cloud, maupun membagikan proyek open-source di GitHub, dedikasi saya adalah menghadirkan solusi teknologi yang cepat, aman, dan nyaman digunakan.'}
                 </p>
               </div>
             </div>
