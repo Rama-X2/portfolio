@@ -1014,7 +1014,7 @@ export default function Portfolio() {
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
-            {/* About Me Details (Refined Professional Text) */}
+            {/* About Me Details (Balanced Professional Practitioner Text) */}
             <div className="glass-card rounded-2xl p-6 md:p-8 border border-white/10">
               <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-5 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
               <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-4">
@@ -1023,18 +1023,18 @@ export default function Portfolio() {
               <div className="space-y-4 text-sm md:text-base text-gray-300 leading-relaxed font-normal">
                 <p>
                   {lang === 'en'
-                    ? 'I am a Full Stack Web Developer, UI/UX Designer, and System Specialist based in Sukabumi, West Java. My core expertise focuses on engineering modern web applications, managing Linux server infrastructures, and developing low-level systems including AOSP Android customization and Linux Kernel tuning.'
-                    : 'Saya adalah seorang Full Stack Web Developer, UI/UX Designer, dan System Specialist asal Sukabumi, Jawa Barat. Fokus utama saya berpusat pada rekayasa aplikasi web modern, pengelolaan infrastruktur server berbasis Linux, serta pengembangan sistem tingkat rendah (low-level) seperti kustomisasi Android AOSP dan optimasi Linux Kernel.'}
+                    ? 'I am a Full Stack Web Developer, UI/UX Designer, and System Specialist based in Sukabumi, West Java. My core focus centers on designing modern web applications, managing Linux server infrastructures, and exploring low-level systems including AOSP Android customization and Linux Kernel tuning.'
+                    : 'Saya adalah seorang Full Stack Web Developer, UI/UX Designer, dan System Specialist asal Sukabumi, Jawa Barat. Fokus utama saya berpusat pada perancangan aplikasi web modern, pengelolaan infrastruktur server berbasis Linux, serta eksplorasi sistem tingkat rendah (low-level) seperti kustomisasi Android AOSP dan optimasi Linux Kernel.'}
                 </p>
                 <p>
                   {lang === 'en'
-                    ? 'My technical exploration stems from a deep passion for high-performance computing and interface design. I apply this expertise through building modern e-commerce platforms, interactive web applications, as well as designing hardware optimization modules like Miyabi Core and custom ROMs tailored for maximum system efficiency.'
-                    : 'Eksplorasi teknis saya berawal dari ketertarikan mendalam terhadap performa komputasi dan desain antarmuka. Keahlian ini saya terapkan secara nyata melalui pembangunan berbagai aplikasi e-commerce modern, platform web interaktif, hingga perancangan modul optimasi hardware seperti Miyabi Core dan custom ROM untuk menghasilkan efisiensi sistem yang maksimal.'}
+                    ? 'My technical journey stems from a deep passion for computing performance, hardware/electronics modification, and interface design. I bring this expertise to life through building modern e-commerce applications, interactive web platforms, server & network management, as well as designing optimization modules like Miyabi Core, CPU/GPU overclocking experiments, and custom ROMs focused on performance improvement and device efficiency.'
+                    : 'Eksplorasi teknis saya berawal dari ketertarikan mendalam terhadap performa komputasi, modifikasi hardware/elektronika, dan desain antarmuka. Pengalaman ini saya wujudkan secara langsung melalui pembuatan aplikasi e-commerce modern, platform web interaktif, pengelolaan server & jaringan, hingga perancangan modul optimasi seperti Miyabi Core, eksperimen overclocking CPU/GPU, dan custom ROM yang difokuskan untuk peningkatan performa serta efisiensi perangkat.'}
                 </p>
                 <p>
                   {lang === 'en'
-                    ? 'I always prioritize clean code architecture, responsive system performance, and intuitive interfaces across all my work. Whether developing full-stack web applications, administering cloud server infrastructures, or sharing open-source projects on GitHub, my goal is to deliver stable, secure, and user-centric digital solutions.'
-                    : 'Saya selalu mengutamakan struktur kode yang bersih, performa sistem yang responsif, serta antarmuka yang intuitif di setiap proyek. Baik dalam mengembangkan aplikasi web full-stack, mengelola server cloud, maupun membagikan proyek open-source di GitHub, fokus utama saya adalah menghadirkan solusi teknologi yang stabil, aman, dan berdampak nyata bagi pengguna.'}
+                    ? 'In every project I develop, I prioritize clean code architecture, responsive system performance, and intuitive user interfaces. Whether building web applications, managing cloud servers, or sharing open-source projects on GitHub, my goal is to deliver stable, secure, and helpful digital solutions.'
+                    : 'Dalam setiap proyek yang saya kembangkan, saya mengutamakan penerapan struktur kode yang rapi, performa yang responsif, serta antarmuka yang mudah digunakan. Baik saat membangun aplikasi web, mengelola server cloud, maupun membagikan proyek open-source di GitHub, dedikasi saya adalah menghadirkan solusi teknologi yang stabil, aman, dan bermanfaat.'}
                 </p>
               </div>
             </div>
