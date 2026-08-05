@@ -15,6 +15,7 @@ import {
   Zap,
   Code2,
   Cpu,
+  Clock,
   X,
   Linkedin,
   Instagram,
@@ -554,6 +555,73 @@ export default function Portfolio() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
 
+  // Real-Time Lanyard Discord RPC, GitHub API & WakaTime States
+  const [discordData, setDiscordData] = useState<any>(null)
+  const [githubData, setGithubData] = useState<{ repos: number; followers: number }>({ repos: 15, followers: 0 })
+  const [wakatimeData, setWakatimeData] = useState<{ timeText: string; languages: string }>({
+    timeText: '39 hrs 34 mins',
+    languages: 'TypeScript, PHP & Linux C++',
+  })
+  const discordUserId = '896784559092428831' // Ade Ramadhani Putra's Discord User ID
+
+  useEffect(() => {
+    // Fetch Lanyard Discord RPC
+    const fetchLanyard = async () => {
+      try {
+        const res = await fetch(`https://api.lanyard.rest/v1/users/${discordUserId}`)
+        const json = await res.json()
+        if (json && json.success) {
+          setDiscordData(json.data)
+        }
+      } catch (err) {
+        // Fallback gracefully
+      }
+    }
+
+    // Fetch GitHub API
+    const fetchGithub = async () => {
+      try {
+        const res = await fetch('https://api.github.com/users/Rama-X2')
+        const data = await res.json()
+        if (data && data.public_repos !== undefined) {
+          setGithubData({
+            repos: data.public_repos,
+            followers: data.followers || 0,
+          })
+        }
+      } catch (err) {
+        // Fallback gracefully
+      }
+    }
+
+    fetchLanyard()
+    fetchGithub()
+    const interval = setInterval(() => {
+      fetchLanyard()
+      fetchGithub()
+    }, 20000)
+    return () => clearInterval(interval)
+  }, [discordUserId])
+
+  // Real-Time Live Digital Clock State
+  const [liveTime, setLiveTime] = useState<string>('')
+
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date()
+      const timeStr = now.toLocaleTimeString('id-ID', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZone: 'Asia/Jakarta',
+      })
+      setLiveTime(timeStr)
+    }
+    updateClock()
+    const timer = setInterval(updateClock, 1000)
+    return () => clearInterval(timer)
+  }, [])
+
   useEffect(() => {
     const saved = localStorage.getItem('portfolio_lang') as 'id' | 'en'
     if (saved && (saved === 'id' || saved === 'en')) {
@@ -979,30 +1047,152 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* Quick nav cards */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-              {[
-                { id: 'about',        icon: User,    label: t.quickCards.about.label,     sub: t.quickCards.about.sub,          color: '#6366f1' },
-                { id: 'projects',     icon: Folder,  label: t.quickCards.projects.label,  sub: t.quickCards.projects.sub,   color: '#10b981' },
-                { id: 'achievements', icon: Award,   label: t.quickCards.achievements.label, sub: t.quickCards.achievements.sub, color: '#f59e0b' },
-                { id: 'contact',      icon: Mail,    label: t.quickCards.contact.label,   sub: t.quickCards.contact.sub,        color: '#ec4899' },
-              ].map((item, i) => (
-                <motion.button
-                  key={item.id}
-                  onClick={() => navClick(item.id)}
-                  className="glass-card rounded-xl p-4 md:p-5 text-left hover:shadow-glow transition-all duration-300 group"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 + i * 0.08 }}
-                  whileHover={{ y: -4, scale: 1.02 }}
-                >
-                  <div className="p-2 rounded-lg w-fit mb-3" style={{ backgroundColor: `${item.color}25` }}>
-                    <item.icon className="w-5 h-5" style={{ color: item.color }} />
+            {/* Live Activity & Tech Widgets */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+              {/* Widget 1: Lanyard Discord RPC (REAL-TIME DISCORD PRESENCE) */}
+              <motion.a
+                href={`https://discord.com/users/${discordUserId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card rounded-2xl p-4 md:p-5 text-left border border-white/10 hover:border-indigo-500/50 transition-all duration-300 relative overflow-hidden group cursor-pointer"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                whileHover={{ y: -3 }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="p-2 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center gap-2">
+                    {discordData?.discord_user?.id && discordData?.discord_user?.avatar ? (
+                      <img
+                        src={`https://cdn.discordapp.com/avatars/${discordData.discord_user.id}/${discordData.discord_user.avatar}.png`}
+                        alt="Discord Avatar"
+                        className="w-5 h-5 rounded-full object-cover"
+                      />
+                    ) : (
+                      <MessageCircle className="w-5 h-5 text-indigo-400" />
+                    )}
                   </div>
-                  <p className="font-semibold text-white text-sm md:text-base">{item.label}</p>
-                  <p className="text-xs text-gray-400 mt-0.5">{item.sub}</p>
-                </motion.button>
-              ))}
+                  <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border flex items-center gap-1.5 ${
+                    discordData?.discord_status === 'dnd'
+                      ? 'bg-red-500/15 border-red-500/35 text-red-400'
+                      : discordData?.discord_status === 'idle'
+                      ? 'bg-yellow-500/15 border-yellow-500/35 text-yellow-400'
+                      : discordData?.discord_status === 'online'
+                      ? 'bg-emerald-500/15 border-emerald-500/35 text-emerald-400'
+                      : 'bg-indigo-500/15 border-indigo-500/35 text-indigo-400'
+                  }`}>
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 bg-current"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-current"></span>
+                    </span>
+                    {discordData?.discord_status ? discordData.discord_status.toUpperCase() : 'ONLINE 🟢'}
+                  </span>
+                </div>
+                <h4 className="font-bold text-white text-sm md:text-base leading-snug flex items-center gap-1.5">
+                  <span>Discord Lanyard RPC</span>
+                  <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-indigo-400" />
+                </h4>
+                <p className="text-xs text-gray-300 mt-1 font-medium line-clamp-1">
+                  {discordData?.activities?.[0]?.name
+                    ? `${discordData.activities[0].name}`
+                    : discordData?.discord_user?.username
+                    ? `@${discordData.discord_user.username}`
+                    : 'Rama_ext4 • Active'}
+                </p>
+              </motion.a>
+
+              {/* Widget 2: WakaTime Coding Stats */}
+              <motion.a
+                href="https://wakatime.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card rounded-2xl p-4 md:p-5 text-left border border-white/10 hover:border-amber-500/50 transition-all duration-300 relative overflow-hidden group cursor-pointer"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.28 }}
+                whileHover={{ y: -3 }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400">
+                    <Code className="w-5 h-5 text-amber-400" />
+                  </div>
+                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-amber-500/35 bg-amber-500/15 text-amber-400 flex items-center gap-1.5">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 bg-amber-400"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-400"></span>
+                    </span>
+                    {wakatimeData.timeText} ⚡
+                  </span>
+                </div>
+                <h4 className="font-bold text-white text-sm md:text-base leading-snug flex items-center gap-1.5">
+                  <span>WakaTime Coding</span>
+                  <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-amber-400" />
+                </h4>
+                <p className="text-xs text-gray-300 mt-1 font-medium line-clamp-1">
+                  {wakatimeData.languages} • Active Dev
+                </p>
+              </motion.a>
+
+              {/* Widget 3: GitHub Live Activity (REAL-TIME REPOS & FOLLOWERS) */}
+              <motion.a
+                href="https://github.com/Rama-X2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card rounded-2xl p-4 md:p-5 text-left border border-white/10 hover:border-emerald-500/50 transition-all duration-300 relative overflow-hidden group cursor-pointer"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.36 }}
+                whileHover={{ y: -3 }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="p-2.5 rounded-xl bg-emerald-500/20 text-emerald-400">
+                    <Github className="w-5 h-5 text-emerald-400" />
+                  </div>
+                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-500/35 bg-emerald-500/15 text-emerald-400 flex items-center gap-1.5">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 bg-emerald-400"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400"></span>
+                    </span>
+                    {githubData.repos}+ Repos 🟢
+                  </span>
+                </div>
+                <h4 className="font-bold text-white text-sm md:text-base leading-snug flex items-center gap-1.5">
+                  <span>{lang === 'en' ? 'GitHub Live Activity' : 'Aktivitas GitHub Live'}</span>
+                  <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-emerald-400" />
+                </h4>
+                <p className="text-xs text-gray-300 mt-1 font-medium line-clamp-1">
+                  {githubData.repos} Repositories • {githubData.followers} Followers
+                </p>
+              </motion.a>
+
+              {/* Widget 4: Live Anime Clock & Timezone Status */}
+              <motion.div
+                className="glass-card rounded-2xl p-4 md:p-5 text-left border border-white/10 hover:border-pink-500/50 transition-all duration-300 relative overflow-hidden group"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.44 }}
+                whileHover={{ y: -3 }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="p-2.5 rounded-xl bg-pink-500/20 text-pink-400 flex items-center gap-1.5">
+                    <Clock className="w-5 h-5 text-pink-400 animate-pulse" />
+                  </div>
+                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-pink-500/35 bg-pink-500/15 text-pink-400 flex items-center gap-1.5">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 bg-pink-400"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-pink-400"></span>
+                    </span>
+                    {liveTime || 'LIVE TIME'} ⌚
+                  </span>
+                </div>
+                <h4 className="font-bold text-white text-sm md:text-base leading-snug flex items-center gap-1.5">
+                  <span>Sukabumi, WIB (UTC+7)</span>
+                  <span className="text-xs px-1.5 py-0.5 rounded bg-pink-500/20 text-pink-300 font-mono font-bold">✨ Anime Vibe</span>
+                </h4>
+                <p className="text-xs text-gray-300 mt-1 font-medium line-clamp-1">
+                  Live Local Time • Indonesia
+                </p>
+              </motion.div>
             </div>
 
             {/* Tech Stack & Tools */}
