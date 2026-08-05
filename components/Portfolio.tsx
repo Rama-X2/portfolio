@@ -1154,7 +1154,7 @@ export default function Portfolio() {
                   <div className="relative h-40 sm:h-44 overflow-hidden -mb-px">
                     <Image src={project.image} alt={project.title} fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#160d35] via-[#160d35]/50 to-transparent pointer-events-none" />
                     {project.featured && (
                       <div className="absolute top-3 right-3 px-2.5 py-1 bg-yellow-500/90 text-black rounded-full text-[10px] font-bold flex items-center gap-1">
                         <Star className="w-3 h-3" /> {t.projectsSec.featured}
@@ -1227,7 +1227,7 @@ export default function Portfolio() {
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#160d35] via-[#160d35]/50 to-transparent pointer-events-none" />
                     <div className="absolute top-3 right-3 p-1.5 bg-yellow-500/90 rounded-lg">
                       <Award className="w-4 h-4 text-black" />
                     </div>
