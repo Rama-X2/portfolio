@@ -1151,16 +1151,17 @@ export default function Portfolio() {
                   onClick={() => setSelectedProject(project)}
                 >
                   {/* Project image */}
-                  <div className="relative h-40 sm:h-44 overflow-hidden -mb-px">
+                  <div className="relative h-40 sm:h-44 overflow-hidden -mb-px bg-[#160d35]">
                     <Image src={project.image} alt={project.title} fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#160d35] via-[#160d35]/50 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#160d35] via-[#160d35]/50 to-transparent pointer-events-none z-10" />
+                    <div className="absolute -bottom-1 left-0 right-0 h-3 bg-[#160d35] pointer-events-none z-20" />
                     {project.featured && (
-                      <div className="absolute top-3 right-3 px-2.5 py-1 bg-yellow-500/90 text-black rounded-full text-[10px] font-bold flex items-center gap-1">
+                      <div className="absolute top-3 right-3 px-2.5 py-1 bg-yellow-500/90 text-black rounded-full text-[10px] font-bold flex items-center gap-1 z-30">
                         <Star className="w-3 h-3" /> {t.projectsSec.featured}
                       </div>
                     )}
-                    <div className="absolute bottom-3 left-3">
+                    <div className="absolute bottom-3 left-3 z-30">
                       <span className="text-[10px] font-semibold px-2 py-1 rounded-full bg-primary/80 text-white">
                         {project.category}
                       </span>
@@ -1220,15 +1221,16 @@ export default function Portfolio() {
                   onClick={() => setSelectedCert(item)}
                 >
                   {/* Certificate image */}
-                  <div className="relative h-44 sm:h-48 overflow-hidden -mb-px">
+                  <div className="relative h-44 sm:h-48 overflow-hidden -mb-px bg-[#160d35]">
                     <Image
                       src={item.image}
                       alt={item.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#160d35] via-[#160d35]/50 to-transparent pointer-events-none" />
-                    <div className="absolute top-3 right-3 p-1.5 bg-yellow-500/90 rounded-lg">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#160d35] via-[#160d35]/50 to-transparent pointer-events-none z-10" />
+                    <div className="absolute -bottom-1 left-0 right-0 h-3 bg-[#160d35] pointer-events-none z-20" />
+                    <div className="absolute top-3 right-3 p-1.5 bg-yellow-500/90 rounded-lg z-30">
                       <Award className="w-4 h-4 text-black" />
                     </div>
                   </div>
