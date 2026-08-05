@@ -1014,7 +1014,7 @@ export default function Portfolio() {
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
-            {/* About Me Details (100% Unique, Authentic Background Text) */}
+            {/* About Me Details (Refined Professional Text) */}
             <div className="glass-card rounded-2xl p-6 md:p-8 border border-white/10">
               <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-5 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
               <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-4">
@@ -1028,13 +1028,13 @@ export default function Portfolio() {
                 </p>
                 <p>
                   {lang === 'en'
-                    ? 'My technical exploration stems from a deep passion for high-performance computing and intuitive user interface design. I bring this expertise to life through full-featured e-commerce platforms like BumiTani and HomeLab, the Rama Store gaming top-up platform, as well as hardware optimization modules like Miyabi Core and custom ROMs tailored for maximum device efficiency.'
-                    : 'Eksplorasi teknis saya berawal dari ketertarikan mendalam terhadap performa komputasi dan estetika antarmuka. Keahlian ini saya wujudkan melalui pembangunan platform e-commerce berfitur lengkap seperti BumiTani dan HomeLab, web platform top-up Rama Store, hingga perancangan modul optimasi hardware seperti Miyabi Core dan custom ROM untuk menghasilkan efisiensi sistem yang maksimal.'}
+                    ? 'My technical exploration stems from a deep passion for high-performance computing and interface design. I apply this expertise through building modern e-commerce platforms, interactive web applications, as well as designing hardware optimization modules like Miyabi Core and custom ROMs tailored for maximum system efficiency.'
+                    : 'Eksplorasi teknis saya berawal dari ketertarikan mendalam terhadap performa komputasi dan desain antarmuka. Keahlian ini saya terapkan secara nyata melalui pembangunan berbagai aplikasi e-commerce modern, platform web interaktif, hingga perancangan modul optimasi hardware seperti Miyabi Core dan custom ROM untuk menghasilkan efisiensi sistem yang maksimal.'}
                 </p>
                 <p>
                   {lang === 'en'
-                    ? 'I firmly believe in merging clean code, system speed, and visual elegance in every project I build. Whether engineering modern web apps, administering cloud servers, or contributing open-source projects on GitHub, my mission is to deliver fast, secure, and user-centric digital solutions.'
-                    : 'Saya memegang prinsip untuk selalu mengintegrasikan kerapihan kode, kecepatan sistem, dan keindahan visual dalam setiap karya. Baik dalam membangun aplikasi web modern, mengelola server cloud, maupun membagikan proyek open-source di GitHub, dedikasi saya adalah menghadirkan solusi teknologi yang cepat, aman, dan nyaman digunakan.'}
+                    ? 'I always prioritize clean code architecture, responsive system performance, and intuitive interfaces across all my work. Whether developing full-stack web applications, administering cloud server infrastructures, or sharing open-source projects on GitHub, my goal is to deliver stable, secure, and user-centric digital solutions.'
+                    : 'Saya selalu mengutamakan struktur kode yang bersih, performa sistem yang responsif, serta antarmuka yang intuitif di setiap proyek. Baik dalam mengembangkan aplikasi web full-stack, mengelola server cloud, maupun membagikan proyek open-source di GitHub, fokus utama saya adalah menghadirkan solusi teknologi yang stabil, aman, dan berdampak nyata bagi pengguna.'}
                 </p>
               </div>
             </div>
