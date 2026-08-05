@@ -531,10 +531,10 @@ const translations = {
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 24 },
+  initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: false, amount: 0.15 },
-  transition: { delay, duration: 0.45, ease: 'easeOut' },
+  viewport: { once: true },
+  transition: { delay, duration: 0.4, ease: 'easeOut' },
 })
 
 // ─── Main Component ────────────────────────────────────────────────────────────
@@ -987,7 +987,7 @@ export default function Portfolio() {
                     className="group relative flex items-center justify-center p-2 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 cursor-pointer"
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: false, amount: 0.1 }}
+                    viewport={{ once: true }}
                     transition={{ delay: 0.01 * i }}
                     whileHover={{ scale: 1.15, y: -3 }}
                   >
@@ -1011,7 +1011,7 @@ export default function Portfolio() {
             id="about"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.15 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
@@ -1128,7 +1128,7 @@ export default function Portfolio() {
             id="projects"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.15 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
@@ -1145,7 +1145,7 @@ export default function Portfolio() {
                 <motion.div key={project.id}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.15 }}
+                  viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
                   className="glass-card rounded-2xl overflow-hidden cursor-pointer group"
                   whileHover={{ y: -5 }}
@@ -1198,7 +1198,7 @@ export default function Portfolio() {
             id="achievements"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.15 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
@@ -1215,7 +1215,7 @@ export default function Portfolio() {
                 <motion.div key={item.id}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.15 }}
+                  viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
                   className="glass-card rounded-2xl overflow-hidden cursor-pointer group"
                   whileHover={{ y: -5 }}
@@ -1259,7 +1259,7 @@ export default function Portfolio() {
             id="contact"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.15 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10 max-w-5xl mx-auto"
           >
