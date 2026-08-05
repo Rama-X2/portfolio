@@ -1141,14 +1141,10 @@ export default function Portfolio() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
-              {projects.map((project, i) => (
+              {projects.map((project) => (
                 <motion.div key={project.id}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
                   className="glass-card rounded-2xl overflow-hidden cursor-pointer group"
-                  whileHover={{ y: -5 }}
+                  whileHover={{ y: -4 }}
                   onClick={() => setSelectedProject(project)}
                 >
                   {/* Project image */}
@@ -1211,14 +1207,10 @@ export default function Portfolio() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-              {achievements.map((item, i) => (
+              {achievements.map((item) => (
                 <motion.div key={item.id}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
                   className="glass-card rounded-2xl overflow-hidden cursor-pointer group"
-                  whileHover={{ y: -5 }}
+                  whileHover={{ y: -4 }}
                   onClick={() => setSelectedCert(item)}
                 >
                   {/* Certificate image */}

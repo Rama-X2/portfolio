@@ -20,7 +20,6 @@
   html {
     background-color: #0c0a1e;
     color: #ffffff;
-    scroll-behavior: smooth;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
@@ -29,7 +28,6 @@
     color: #ffffff;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
-    overscroll-behavior: none;
   }
 }
 
@@ -38,43 +36,37 @@
   .portfolio-bg {
     background: linear-gradient(135deg, #0c0a1e 0%, #160d35 40%, #1a1040 100%);
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
   }
 
-  /* ── Animated blobs ─── */
+  /* ── Ambient Background Blobs (Vibrant & Rich) ─── */
   .blob {
     position: fixed;
     border-radius: 50%;
     pointer-events: none;
-    z-index: -1;
-    animation: blobFloat 8s ease-in-out infinite;
-    will-change: transform;
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
+    z-index: 0;
   }
   .blob-1 {
     top: -10%;
     right: -10%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.45) 0%, rgba(139, 92, 246, 0.20) 50%, rgba(12, 10, 30, 0) 100%);
-    animation-delay: 0s;
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.40) 0%, rgba(139, 92, 246, 0.15) 50%, rgba(12, 10, 30, 0) 100%);
   }
   .blob-2 {
     bottom: -15%;
     left: -10%;
-    width: 450px;
-    height: 450px;
-    background: radial-gradient(circle, rgba(6, 182, 212, 0.45) 0%, rgba(59, 130, 246, 0.20) 50%, rgba(12, 10, 30, 0) 100%);
-    animation-delay: -3s;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.40) 0%, rgba(59, 130, 246, 0.15) 50%, rgba(12, 10, 30, 0) 100%);
   }
   .blob-3 {
     top: 40%;
-    right: 20%;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(236, 72, 153, 0.30) 0%, rgba(139, 92, 246, 0.15) 50%, rgba(12, 10, 30, 0) 100%);
-    animation-delay: -6s;
-    opacity: 0.10;
+    right: 15%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.25) 0%, rgba(139, 92, 246, 0.10) 50%, rgba(12, 10, 30, 0) 100%);
   }
 
   /* ── Gradient text ─── */
@@ -82,32 +74,33 @@
     @apply bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent;
   }
 
-  /* ── Glass card ─── */
+  /* ── Glass card (Stunning Glassmorphism Aesthetics) ─── */
   .glass-card {
-    background: rgba(22, 13, 53, 0.75);
+    background: rgba(22, 13, 53, 0.65);
     border: 1px solid rgba(255, 255, 255, 0.10);
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
   }
   .glass-card:hover {
-    background: rgba(22, 13, 53, 0.95);
+    background: rgba(255, 255, 255, 0.08);
     border-color: rgba(99, 102, 241, 0.35);
+    box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.30);
   }
 
   @media (min-width: 1024px) {
     .glass-card {
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      background: rgba(22, 13, 53, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(22, 13, 53, 0.60);
     }
     .glass-card:hover {
-      background: rgba(22, 13, 53, 0.95);
+      background: rgba(255, 255, 255, 0.08);
     }
   }
 
   /* ── Header glass ─── */
   .header-glass {
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     background: rgba(12, 10, 30, 0.85);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
