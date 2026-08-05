@@ -797,24 +797,24 @@ export default function Portfolio() {
 
           {/* Mobile hamburger */}
           <motion.button
-            className="md:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:text-white transition-colors"
+            className="md:hidden p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
             onClick={() => setMenuOpen(!menuOpen)}
-            whileTap={{ scale: 0.92 }}
+            whileTap={{ scale: 0.9 }}
             aria-label="Toggle menu"
           >
             <motion.div
               key={menuOpen ? 'open' : 'closed'}
-              initial={{ opacity: 0, rotate: menuOpen ? -90 : 90, scale: 0.8 }}
-              animate={{ opacity: 1, rotate: 0, scale: 1 }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.15 }}
             >
               {menuOpen ? (
-                <X className="w-5 h-5 text-pink-400" />
+                <X className="w-6 h-6 text-white" />
               ) : (
-                <div className="space-y-1">
-                  <div className="w-4.5 h-0.5 bg-current rounded-full" />
-                  <div className="w-4.5 h-0.5 bg-current rounded-full" />
-                  <div className="w-4.5 h-0.5 bg-current rounded-full" />
+                <div className="space-y-1.5">
+                  <div className="w-6 h-0.5 bg-current rounded-full" />
+                  <div className="w-6 h-0.5 bg-current rounded-full" />
+                  <div className="w-6 h-0.5 bg-current rounded-full" />
                 </div>
               )}
             </motion.div>
@@ -831,34 +831,34 @@ export default function Portfolio() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-30 md:hidden bg-black/40 backdrop-blur-[2px] pointer-events-auto"
+              transition={{ duration: 0.15 }}
+              className="fixed inset-0 z-30 md:hidden bg-black/30 pointer-events-auto"
               onClick={() => setMenuOpen(false)}
             />
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.88, y: -10, transformOrigin: 'top right' }}
+              initial={{ opacity: 0, scale: 0.9, y: -8, transformOrigin: 'top right' }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.88, y: -10 }}
+              exit={{ opacity: 0, scale: 0.9, y: -8 }}
               transition={{ type: 'spring', stiffness: 450, damping: 25 }}
-              className="fixed top-[64px] right-4 w-48 md:hidden z-40 p-2 rounded-2xl glass-card shadow-[0_10px_40px_-10px_rgba(99,102,241,0.4)] bg-[#0c0a1e]/95 border border-white/15 origin-top-right overflow-hidden"
+              className="fixed top-[62px] right-4 w-44 md:hidden z-40 p-1.5 rounded-xl glass-card shadow-glow bg-[#0c0a1e]/95 border border-white/10 origin-top-right overflow-hidden"
             >
-              <div className="space-y-1">
+              <div className="space-y-0.5">
                 {sections.map((s, i) => (
                   <motion.button
                     key={s.id}
                     onClick={() => navClick(s.id)}
-                    initial={{ opacity: 0, x: 10 }}
+                    initial={{ opacity: 0, x: 8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.02 * i, duration: 0.15 }}
                     whileTap={{ scale: 0.96 }}
-                    className={`w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all text-xs font-semibold ${
+                    className={`w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg transition-all text-xs font-semibold ${
                       activeSection === s.id
-                        ? 'bg-gradient-to-r from-primary via-secondary to-pink-500 text-white shadow-md'
-                        : 'text-gray-300 hover:text-white hover:bg-white/10'
+                        ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-sm'
+                        : 'text-gray-400 hover:text-white hover:bg-white/10'
                     }`}
                   >
-                    <s.icon className={`w-4 h-4 ${activeSection === s.id ? 'text-white' : 'text-primary'}`} />
+                    <s.icon className={`w-4 h-4 ${activeSection === s.id ? 'text-white' : 'text-gray-400'}`} />
                     <span>{s.name}</span>
                   </motion.button>
                 ))}
@@ -1058,8 +1058,8 @@ export default function Portfolio() {
             {/* About Me Details (Balanced Professional Practitioner Text) */}
             <div className="glass-card rounded-2xl p-6 md:p-8 border border-white/10">
               <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-5 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
-              <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-4">
-                {lang === 'en' ? 'About Me' : 'Tentang Saya'}
+              <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-4 flex items-center gap-2.5">
+                <User className="w-6 h-6 text-indigo-400" /> {lang === 'en' ? 'About Me' : 'Tentang Saya'}
               </h2>
               <div className="space-y-4 text-sm md:text-base text-gray-300 leading-relaxed font-normal">
                 <p>
@@ -1704,7 +1704,7 @@ export default function Portfolio() {
                 <img
                   src="/gambar-resume/cv-resume-ade-rama.png"
                   alt="Resume Ade Ramadhani Putra"
-                  className="resume-img"
+                  className="resume-img allow-download"
                 />
               </div>
 
@@ -1713,7 +1713,7 @@ export default function Portfolio() {
                 <motion.a
                   href="/gambar-resume/cv-resume-ade-rama.png"
                   download="CV-Resume-Ade-Ramadhani-Putra.png"
-                  className="btn-primary flex-1 flex items-center justify-center gap-2"
+                  className="btn-primary flex-1 flex items-center justify-center gap-2 allow-download"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -1723,7 +1723,7 @@ export default function Portfolio() {
                   href="/gambar-resume/cv-resume-ade-rama.png"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-outline flex-1 flex items-center justify-center gap-2"
+                  className="btn-outline flex-1 flex items-center justify-center gap-2 allow-download"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
