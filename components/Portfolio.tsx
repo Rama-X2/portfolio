@@ -1022,8 +1022,8 @@ export default function Portfolio() {
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
             {/* Profile */}
-            <div className="glass-card rounded-2xl p-5 md:p-8 relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-pink-500" />
+            <div className="glass-card rounded-2xl p-5 md:p-8 border border-white/10">
+              <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-5 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
                 <div className="avatar-ring w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0">
                   <Image src={personal.avatar} alt={personal.name} width={112} height={112}
@@ -1150,8 +1150,8 @@ export default function Portfolio() {
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
-            <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10 relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-pink-500" />
+            <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
+              <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-4 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
               <h2 className="text-2xl md:text-3xl font-extrabold gradient-text flex items-center gap-2.5 mb-1">
                 <Folder className="w-6 h-6 text-emerald-400" /> {t.projectsSec.title}
               </h2>
@@ -1219,8 +1219,8 @@ export default function Portfolio() {
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
-            <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10 relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-pink-500" />
+            <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
+              <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-4 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
               <h2 className="text-2xl md:text-3xl font-extrabold gradient-text flex items-center gap-2.5 mb-1">
                 <Award className="w-6 h-6 text-yellow-400" /> {t.achievementsSec.title}
               </h2>
@@ -1287,8 +1287,8 @@ export default function Portfolio() {
                   <div className="lg:col-span-5 space-y-5">
                     
                     {/* Header Card */}
-                    <div className="glass-card rounded-2xl p-6 md:p-7 border border-white/10 space-y-3 relative overflow-hidden group text-center flex flex-col items-center justify-center">
-                      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-pink-500" />
+                    <div className="glass-card rounded-2xl p-6 md:p-7 border border-white/10 space-y-3 group text-center flex flex-col items-center justify-center">
+                      <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-1 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
                       <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 inline-block">
                         {t.contactSec.tag}
                       </span>
