@@ -662,6 +662,7 @@ export default function Portfolio() {
         setSelectedProject(null)
         setSelectedCert(null)
         setShowResume(false)
+        setMenuOpen(false)
       }
     },
     [],
@@ -671,6 +672,17 @@ export default function Portfolio() {
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [handleKeyDown])
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const handleScrollOrTouch = () => setMenuOpen(false)
+    window.addEventListener('scroll', handleScrollOrTouch, { passive: true })
+    window.addEventListener('touchmove', handleScrollOrTouch, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScrollOrTouch)
+      window.removeEventListener('touchmove', handleScrollOrTouch)
+    }
+  }, [menuOpen])
 
   useEffect(() => {
     const isModalOpen = showResume || !!selectedProject || !!selectedCert
@@ -784,49 +796,75 @@ export default function Portfolio() {
           </div>
 
           {/* Mobile hamburger */}
-          <button
-            className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
+          <motion.button
+            className="md:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:text-white transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
+            whileTap={{ scale: 0.92 }}
             aria-label="Toggle menu"
           >
-            {menuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <div className="space-y-1.5">
-                <div className="w-6 h-0.5 bg-current" />
-                <div className="w-6 h-0.5 bg-current" />
-                <div className="w-6 h-0.5 bg-current" />
-              </div>
-            )}
-          </button>
+            <motion.div
+              key={menuOpen ? 'open' : 'closed'}
+              initial={{ opacity: 0, rotate: menuOpen ? -90 : 90, scale: 0.8 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+            >
+              {menuOpen ? (
+                <X className="w-5 h-5 text-pink-400" />
+              ) : (
+                <div className="space-y-1">
+                  <div className="w-4.5 h-0.5 bg-current rounded-full" />
+                  <div className="w-4.5 h-0.5 bg-current rounded-full" />
+                  <div className="w-4.5 h-0.5 bg-current rounded-full" />
+                </div>
+              )}
+            </motion.div>
+          </motion.button>
         </div>
       </header>
 
       {/* Mobile dropdown nav */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: -8 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: -8 }}
-            transition={{ duration: 0.1, ease: 'easeOut' }}
-            className="fixed top-[62px] right-4 w-44 md:hidden z-30 p-1.5 rounded-xl glass-card shadow-glow bg-[#0c0a1e]/95 origin-top-right"
-          >
-            {sections.map((s) => (
-              <button
-                key={s.id}
-                onClick={() => navClick(s.id)}
-                className={`w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg mb-0.5 transition-all text-xs ${
-                  activeSection === s.id
-                    ? 'bg-gradient-to-r from-primary to-secondary text-white'
-                    : 'text-gray-400 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                <s.icon className="w-4 h-4" />
-                <span className="font-medium">{s.name}</span>
-              </button>
-            ))}
-          </motion.div>
+          <>
+            {/* Click-outside backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-30 md:hidden bg-black/40 backdrop-blur-[2px] pointer-events-auto"
+              onClick={() => setMenuOpen(false)}
+            />
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.88, y: -10, transformOrigin: 'top right' }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.88, y: -10 }}
+              transition={{ type: 'spring', stiffness: 450, damping: 25 }}
+              className="fixed top-[64px] right-4 w-48 md:hidden z-40 p-2 rounded-2xl glass-card shadow-[0_10px_40px_-10px_rgba(99,102,241,0.4)] bg-[#0c0a1e]/95 border border-white/15 origin-top-right overflow-hidden"
+            >
+              <div className="space-y-1">
+                {sections.map((s, i) => (
+                  <motion.button
+                    key={s.id}
+                    onClick={() => navClick(s.id)}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.02 * i, duration: 0.15 }}
+                    whileTap={{ scale: 0.96 }}
+                    className={`w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all text-xs font-semibold ${
+                      activeSection === s.id
+                        ? 'bg-gradient-to-r from-primary via-secondary to-pink-500 text-white shadow-md'
+                        : 'text-gray-300 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    <s.icon className={`w-4 h-4 ${activeSection === s.id ? 'text-white' : 'text-primary'}`} />
+                    <span>{s.name}</span>
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
 
