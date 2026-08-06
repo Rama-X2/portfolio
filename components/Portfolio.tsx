@@ -1805,7 +1805,7 @@ export default function Portfolio() {
           </motion.div>
         )}
       </AnimatePresence>
-      {/* Interactive Widget Modal Overlay (Smooth Backdrop Blur & Zero Squishing) */}
+      {/* Interactive Widget Modal Overlay (Mobile Safe Top/Bottom Padding) */}
       <AnimatePresence>
         {activeModalWidget && (
           <motion.div
@@ -1813,7 +1813,7 @@ export default function Portfolio() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActiveModalWidget(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto"
+            className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-3 sm:p-4 pt-16 pb-12 bg-black/85 backdrop-blur-md overflow-y-auto"
           >
             {activeModalWidget === 'discord' && (
               <DiscordModalContent

@@ -37,7 +37,7 @@ export default function AnimeClockWidget({
       className="glass-card rounded-2xl p-3.5 sm:p-4 text-left border border-white/10 hover:border-pink-500/50 transition-all duration-300 relative overflow-hidden group cursor-pointer flex flex-col justify-between"
       whileHover={{ y: -4, scale: 1.01 }}
     >
-      {/* Top Anime Banner / Cover (Lappland Arknights Cyber Cover) */}
+      {/* Top Banner / Cover */}
       <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-r from-pink-900/80 via-purple-900/80 to-indigo-900/80 border-b border-white/10" />
 
       <div className="relative z-10 pt-1">
@@ -48,7 +48,7 @@ export default function AnimeClockWidget({
               onError={(e) => {
                 (e.target as HTMLElement).setAttribute('src', avatarFallback)
               }}
-              alt="Lappland Arknights Avatar"
+              alt="Local Time Avatar"
               className="w-11 h-11 rounded-full object-cover border-2 border-pink-400/80 shadow-lg ring-2 ring-pink-500/30"
             />
             <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-pink-400 rounded-full animate-ping" />
@@ -61,7 +61,7 @@ export default function AnimeClockWidget({
         <h4 className="font-bold text-white text-xs sm:text-sm md:text-base leading-snug line-clamp-1">
           Sukabumi Local Time
         </h4>
-        <p className="text-[10px] text-pink-300 font-medium font-mono">Arknights Lappland Cyber Vibe</p>
+        <p className="text-[10px] text-pink-300 font-medium font-mono">Indonesia Western Standard Time (WIB)</p>
       </div>
 
       {/* Compact Activity Card */}
@@ -75,14 +75,14 @@ export default function AnimeClockWidget({
           </span>
         </div>
         <p className="text-xs sm:text-sm font-extrabold text-white font-mono tracking-wider">
-          {liveTime || '16:30:00 WIB'}
+          {liveTime || '16:45:00 WIB'}
         </p>
       </div>
     </motion.div>
   )
 }
 
-/* Full Anime Clock Modal Component */
+/* Full Anime Clock Modal Component (Clean & Mobile Safe) */
 export function AnimeClockModalContent({
   onClose,
 }: {
@@ -121,74 +121,75 @@ export function AnimeClockModalContent({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       onClick={(e) => e.stopPropagation()}
-      className="glass-card rounded-3xl p-5 sm:p-6 md:p-8 max-w-3xl w-full text-left border border-pink-500/40 bg-gray-950/90 shadow-2xl relative overflow-hidden space-y-5"
+      className="glass-card rounded-3xl p-4 sm:p-6 md:p-8 max-w-3xl w-full text-left border border-pink-500/40 bg-gray-950/95 shadow-2xl relative overflow-hidden space-y-4 sm:space-y-5 max-h-[82vh] overflow-y-auto"
     >
       {/* Top Banner */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-r from-pink-900 via-purple-900 to-indigo-900 border-b border-white/10" />
 
-      {/* Close Button */}
+      {/* Sticky Close Button (Safe for Mobile Address Bars) */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 z-40 p-2 rounded-full bg-black/40 text-gray-300 hover:text-white hover:bg-black/60 transition-all"
+        className="sticky top-2 float-right z-50 p-2.5 rounded-full bg-black/80 border border-white/20 text-gray-200 hover:text-white hover:bg-black transition-all shadow-lg"
+        title="Tutup"
       >
         <X className="w-5 h-5" />
       </button>
 
       {/* Header Section */}
-      <div className="relative z-10 pt-6 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+      <div className="relative z-10 pt-4 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 clear-right">
         <div className="flex items-center gap-4">
           <div className="relative">
             <img
               src="https://github.com/Rama-X2.png"
-              alt="Lappland Avatar"
+              alt="Local Time Avatar"
               className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-4 border-gray-950 shadow-2xl relative z-10"
             />
             <span className="absolute top-0 right-0 w-4 h-4 bg-pink-400 rounded-full animate-ping z-20" />
           </div>
           <div>
-            <h3 className="font-extrabold text-white text-lg sm:text-xl md:text-2xl">
+            <h3 className="font-extrabold text-white text-base sm:text-xl md:text-2xl">
               Sukabumi Local Time
             </h3>
-            <p className="text-sm text-pink-300 font-medium font-mono">Arknights Lappland Cyber Vibe</p>
+            <p className="text-xs sm:text-sm text-pink-300 font-medium font-mono">Indonesia Western Standard Time (WIB)</p>
           </div>
         </div>
       </div>
 
       {/* Big Digital Clock Display */}
-      <div className="bg-black/50 p-6 rounded-3xl border border-pink-500/40 text-center space-y-2">
-        <div className="text-xs font-bold text-pink-300 uppercase tracking-widest">Waktu Indonesia Barat (WIB)</div>
-        <div className="text-4xl sm:text-5xl font-black text-white font-mono tracking-widest drop-shadow-[0_0_20px_rgba(244,114,182,0.6)]">
-          {liveTime || '16:30:00 WIB'}
+      <div className="bg-black/50 p-5 sm:p-6 rounded-3xl border border-pink-500/40 text-center space-y-2">
+        <div className="text-[10px] sm:text-xs font-bold text-pink-300 uppercase tracking-widest">Waktu Indonesia Barat (WIB)</div>
+        <div className="text-3xl sm:text-5xl font-black text-white font-mono tracking-widest drop-shadow-[0_0_20px_rgba(244,114,182,0.6)]">
+          {liveTime || '16:45:00 WIB'}
         </div>
-        <div className="text-sm text-pink-200 font-medium flex items-center justify-center gap-2 pt-1">
+        <div className="text-xs sm:text-sm text-pink-200 font-medium flex items-center justify-center gap-2 pt-1">
           <Calendar className="w-4 h-4 text-pink-400" />
           <span>{liveDate || 'Kamis, 6 Agustus 2026'}</span>
         </div>
       </div>
 
       {/* Location & Timezone Details */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white/5 p-4 rounded-2xl border border-white/10 flex items-center gap-3">
-          <MapPin className="w-6 h-6 text-pink-400 flex-shrink-0" />
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+        <div className="bg-white/5 p-3.5 sm:p-4 rounded-2xl border border-white/10 flex items-center gap-3">
+          <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-pink-400 flex-shrink-0" />
           <div>
             <div className="text-[10px] font-bold text-gray-400 uppercase">Lokasi Developer</div>
-            <div className="text-sm font-bold text-white">Sukabumi, Jawa Barat</div>
+            <div className="text-xs sm:text-sm font-bold text-white">Sukabumi, Jawa Barat</div>
           </div>
         </div>
 
-        <div className="bg-white/5 p-4 rounded-2xl border border-white/10 flex items-center gap-3">
-          <Sun className="w-6 h-6 text-amber-400 flex-shrink-0" />
+        <div className="bg-white/5 p-3.5 sm:p-4 rounded-2xl border border-white/10 flex items-center gap-3">
+          <Sun className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400 flex-shrink-0" />
           <div>
             <div className="text-[10px] font-bold text-gray-400 uppercase">Zona Waktu Offset</div>
-            <div className="text-sm font-bold text-white">UTC+07:00 (WIB)</div>
+            <div className="text-xs sm:text-sm font-bold text-white">UTC+07:00 (WIB)</div>
           </div>
         </div>
 
-        <div className="bg-white/5 p-4 rounded-2xl border border-white/10 flex items-center gap-3">
-          <Clock className="w-6 h-6 text-purple-400 flex-shrink-0" />
+        <div className="bg-white/5 p-3.5 sm:p-4 rounded-2xl border border-white/10 flex items-center gap-3">
+          <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400 flex-shrink-0" />
           <div>
             <div className="text-[10px] font-bold text-gray-400 uppercase">Status Operasional</div>
-            <div className="text-sm font-bold text-emerald-400">Aktif & Online</div>
+            <div className="text-xs sm:text-sm font-bold text-emerald-400">Aktif & Online</div>
           </div>
         </div>
       </div>

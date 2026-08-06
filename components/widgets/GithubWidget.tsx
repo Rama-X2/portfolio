@@ -80,7 +80,7 @@ export default function GithubWidget({
   )
 }
 
-/* Full GitHub Modal Component */
+/* Full GitHub Modal Component (Clean & Mobile Safe) */
 export function GithubModalContent({
   username,
   onClose,
@@ -121,21 +121,22 @@ export function GithubModalContent({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       onClick={(e) => e.stopPropagation()}
-      className="glass-card rounded-3xl p-5 sm:p-6 md:p-8 max-w-3xl w-full text-left border border-emerald-500/40 bg-gray-950/90 shadow-2xl relative overflow-hidden space-y-5"
+      className="glass-card rounded-3xl p-4 sm:p-6 md:p-8 max-w-3xl w-full text-left border border-emerald-500/40 bg-gray-950/95 shadow-2xl relative overflow-hidden space-y-4 sm:space-y-5 max-h-[82vh] overflow-y-auto"
     >
       {/* Top Banner */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-r from-emerald-900 via-teal-900 to-cyan-900 border-b border-white/10" />
 
-      {/* Close Button */}
+      {/* Sticky Close Button (Safe for Mobile Address Bars) */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 z-40 p-2 rounded-full bg-black/40 text-gray-300 hover:text-white hover:bg-black/60 transition-all"
+        className="sticky top-2 float-right z-50 p-2.5 rounded-full bg-black/80 border border-white/20 text-gray-200 hover:text-white hover:bg-black transition-all shadow-lg"
+        title="Tutup"
       >
         <X className="w-5 h-5" />
       </button>
 
       {/* Header Section */}
-      <div className="relative z-10 pt-6 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+      <div className="relative z-10 pt-4 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 clear-right">
         <div className="flex items-center gap-4">
           <img
             src={githubData.avatar}
@@ -143,10 +144,10 @@ export function GithubModalContent({
             className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-4 border-gray-950 shadow-2xl relative z-10"
           />
           <div>
-            <h3 className="font-extrabold text-white text-lg sm:text-xl md:text-2xl">
+            <h3 className="font-extrabold text-white text-base sm:text-xl md:text-2xl">
               @{username} • GitHub Developer Profile
             </h3>
-            <p className="text-sm text-emerald-300 font-medium font-mono">Open Source & Active Repositories</p>
+            <p className="text-xs sm:text-sm text-emerald-300 font-medium font-mono">Open Source & Active Repositories</p>
           </div>
         </div>
 
@@ -154,7 +155,7 @@ export function GithubModalContent({
           href={`https://github.com/${username}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-all shadow-lg shadow-emerald-600/30"
+          className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-all shadow-lg shadow-emerald-600/30"
         >
           <span>Buka Profil GitHub Asli</span>
           <ExternalLink className="w-4 h-4" />
@@ -162,32 +163,32 @@ export function GithubModalContent({
       </div>
 
       {/* Stats Header Bar */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
-          <div className="text-xs font-bold text-emerald-300 uppercase">Public Repositories</div>
-          <div className="text-xl font-extrabold text-white mt-1">{githubData.repos} Repos</div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+        <div className="bg-white/5 p-3.5 sm:p-4 rounded-2xl border border-white/10">
+          <div className="text-[10px] sm:text-xs font-bold text-emerald-300 uppercase">Public Repositories</div>
+          <div className="text-lg sm:text-xl font-extrabold text-white mt-0.5 sm:mt-1">{githubData.repos} Repos</div>
           <div className="text-[10px] text-gray-400 mt-0.5">Open Source Codebases</div>
         </div>
-        <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
-          <div className="text-xs font-bold text-emerald-300 uppercase">GitHub Followers</div>
-          <div className="text-xl font-extrabold text-white mt-1">{githubData.followers} Followers</div>
+        <div className="bg-white/5 p-3.5 sm:p-4 rounded-2xl border border-white/10">
+          <div className="text-[10px] sm:text-xs font-bold text-emerald-300 uppercase">GitHub Followers</div>
+          <div className="text-lg sm:text-xl font-extrabold text-white mt-0.5 sm:mt-1">{githubData.followers} Followers</div>
           <div className="text-[10px] text-gray-400 mt-0.5">Developer Network</div>
         </div>
-        <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
-          <div className="text-xs font-bold text-emerald-300 uppercase">Contributions</div>
-          <div className="text-xl font-extrabold text-white mt-1">Active Commits</div>
+        <div className="bg-white/5 p-3.5 sm:p-4 rounded-2xl border border-white/10">
+          <div className="text-[10px] sm:text-xs font-bold text-emerald-300 uppercase">Contributions</div>
+          <div className="text-lg sm:text-xl font-extrabold text-white mt-0.5 sm:mt-1">Active Commits</div>
           <div className="text-[10px] text-gray-400 mt-0.5">Consistent GitHub Activity</div>
         </div>
       </div>
 
       {/* Featured Repositories List */}
-      <div className="bg-white/5 p-5 rounded-2xl border border-white/10 space-y-3">
+      <div className="bg-white/5 p-4 sm:p-5 rounded-2xl border border-white/10 space-y-3">
         <div className="text-xs font-bold text-emerald-300 uppercase tracking-wider flex items-center gap-1.5">
           <GitBranch className="w-4 h-4 text-emerald-400" /> Featured Repositories
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {featuredRepos.map((repo, idx) => (
-            <div key={idx} className="bg-black/40 p-4 rounded-2xl border border-white/5 flex flex-col justify-between">
+            <div key={idx} className="bg-black/40 p-3.5 sm:p-4 rounded-2xl border border-white/5 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between text-xs font-bold text-white mb-1.5">
                   <span className="text-emerald-300 line-clamp-1">{repo.name}</span>

@@ -60,7 +60,7 @@ export default function WakaTimeWidget({
   )
 }
 
-/* Full WakaTime Modal Component */
+/* Full WakaTime Modal Component (Clean & Mobile Safe) */
 export function WakaTimeModalContent({
   timeText = '39 hrs 34 mins',
   languages = 'TypeScript, PHP & Linux C++',
@@ -83,21 +83,22 @@ export function WakaTimeModalContent({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       onClick={(e) => e.stopPropagation()}
-      className="glass-card rounded-3xl p-5 sm:p-6 md:p-8 max-w-3xl w-full text-left border border-amber-500/40 bg-gray-950/90 shadow-2xl relative overflow-hidden space-y-5"
+      className="glass-card rounded-3xl p-4 sm:p-6 md:p-8 max-w-3xl w-full text-left border border-amber-500/40 bg-gray-950/95 shadow-2xl relative overflow-hidden space-y-4 sm:space-y-5 max-h-[82vh] overflow-y-auto"
     >
       {/* Top Banner */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-r from-amber-900 via-orange-900 to-yellow-900 border-b border-white/10" />
 
-      {/* Close Button */}
+      {/* Sticky Close Button (Safe for Mobile Address Bars) */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 z-40 p-2 rounded-full bg-black/40 text-gray-300 hover:text-white hover:bg-black/60 transition-all"
+        className="sticky top-2 float-right z-50 p-2.5 rounded-full bg-black/80 border border-white/20 text-gray-200 hover:text-white hover:bg-black transition-all shadow-lg"
+        title="Tutup"
       >
         <X className="w-5 h-5" />
       </button>
 
       {/* Header Section */}
-      <div className="relative z-10 pt-6 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+      <div className="relative z-10 pt-4 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 clear-right">
         <div className="flex items-center gap-4">
           <img
             src="https://github.com/Rama-X2.png"
@@ -105,10 +106,10 @@ export function WakaTimeModalContent({
             className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-4 border-gray-950 shadow-2xl relative z-10"
           />
           <div>
-            <h3 className="font-extrabold text-white text-lg sm:text-xl md:text-2xl">
+            <h3 className="font-extrabold text-white text-base sm:text-xl md:text-2xl">
               @Rama-X2 • WakaTime Developer Profile
             </h3>
-            <p className="text-sm text-amber-300 font-medium font-mono">VS Code Active Time Log</p>
+            <p className="text-xs sm:text-sm text-amber-300 font-medium font-mono">VS Code Active Time Log</p>
           </div>
         </div>
 
@@ -116,7 +117,7 @@ export function WakaTimeModalContent({
           href="https://wakatime.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs transition-all shadow-lg shadow-amber-600/30"
+          className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs transition-all shadow-lg shadow-amber-600/30"
         >
           <span>Lihat WakaTime Asli</span>
           <ExternalLink className="w-4 h-4" />
@@ -124,26 +125,26 @@ export function WakaTimeModalContent({
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
-          <div className="text-xs font-bold text-amber-300 uppercase">Total Coding Log</div>
-          <div className="text-xl font-extrabold text-white mt-1">{timeText}</div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+        <div className="bg-white/5 p-3.5 sm:p-4 rounded-2xl border border-white/10">
+          <div className="text-[10px] sm:text-xs font-bold text-amber-300 uppercase">Total Coding Log</div>
+          <div className="text-lg sm:text-xl font-extrabold text-white mt-0.5 sm:mt-1">{timeText}</div>
           <div className="text-[10px] text-gray-400 mt-0.5">All-Time Active Time Log</div>
         </div>
-        <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
-          <div className="text-xs font-bold text-amber-300 uppercase">Daily Average</div>
-          <div className="text-xl font-extrabold text-white mt-1">4 hrs 12 mins / day</div>
+        <div className="bg-white/5 p-3.5 sm:p-4 rounded-2xl border border-white/10">
+          <div className="text-[10px] sm:text-xs font-bold text-amber-300 uppercase">Daily Average</div>
+          <div className="text-lg sm:text-xl font-extrabold text-white mt-0.5 sm:mt-1">4 hrs 12 mins / day</div>
           <div className="text-[10px] text-gray-400 mt-0.5">Consistent Developer Activity</div>
         </div>
-        <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
-          <div className="text-xs font-bold text-amber-300 uppercase">Primary IDE Editor</div>
-          <div className="text-xl font-extrabold text-white mt-1">Visual Studio Code</div>
+        <div className="bg-white/5 p-3.5 sm:p-4 rounded-2xl border border-white/10">
+          <div className="text-[10px] sm:text-xs font-bold text-amber-300 uppercase">Primary IDE Editor</div>
+          <div className="text-lg sm:text-xl font-extrabold text-white mt-0.5 sm:mt-1">Visual Studio Code</div>
           <div className="text-[10px] text-gray-400 mt-0.5">Linux & Windows Environments</div>
         </div>
       </div>
 
       {/* Language Distribution Breakdown */}
-      <div className="bg-white/5 p-5 rounded-2xl border border-white/10 space-y-3">
+      <div className="bg-white/5 p-4 sm:p-5 rounded-2xl border border-white/10 space-y-3">
         <div className="text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
           <Code2 className="w-4 h-4 text-amber-400" /> Language Distribution Breakdown
         </div>
@@ -159,7 +160,7 @@ export function WakaTimeModalContent({
           ))}
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
           {languageBreakdown.map((lang, idx) => (
             <div key={idx} className="flex items-center gap-2 text-xs">
               <span className={`w-3 h-3 rounded-full ${lang.color}`} />
