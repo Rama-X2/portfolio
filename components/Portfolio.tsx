@@ -37,10 +37,10 @@ import {
   Loader2,
 } from 'lucide-react'
 
-import DiscordWidget from './widgets/DiscordWidget'
-import WakaTimeWidget from './widgets/WakaTimeWidget'
-import GithubWidget from './widgets/GithubWidget'
-import AnimeClockWidget from './widgets/AnimeClockWidget'
+import DiscordWidget, { DiscordModalContent } from './widgets/DiscordWidget'
+import WakaTimeWidget, { WakaTimeModalContent } from './widgets/WakaTimeWidget'
+import GithubWidget, { GithubModalContent } from './widgets/GithubWidget'
+import AnimeClockWidget, { AnimeClockModalContent } from './widgets/AnimeClockWidget'
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
 const personal = {
@@ -553,7 +553,7 @@ export default function Portfolio() {
   const [selectedCert, setSelectedCert] = useState<(typeof achievements)[0] | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [showResume, setShowResume] = useState(false)
-  const [activeWidget, setActiveWidget] = useState<'discord' | 'wakatime' | 'github' | 'clock' | null>(null)
+  const [activeModalWidget, setActiveModalWidget] = useState<'discord' | 'wakatime' | 'github' | 'clock' | null>(null)
 
   // Form State
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
@@ -1053,30 +1053,26 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* Live Activity & Tech Widgets (Interactive Expanding Grid) */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 md:gap-4 transition-all duration-500">
+            {/* Live Activity & Tech Widgets (Clean Compact 4-Card Overview) */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 md:gap-4">
               <DiscordWidget
                 discordUserId={discordUserId}
                 avatarFallback={personal.avatar}
-                isExpanded={activeWidget === 'discord'}
-                onToggle={() => setActiveWidget(activeWidget === 'discord' ? null : 'discord')}
+                onOpenModal={() => setActiveModalWidget('discord')}
               />
               <WakaTimeWidget
                 avatarFallback={personal.avatar}
                 timeText={wakatimeData.timeText}
                 languages={wakatimeData.languages}
-                isExpanded={activeWidget === 'wakatime'}
-                onToggle={() => setActiveWidget(activeWidget === 'wakatime' ? null : 'wakatime')}
+                onOpenModal={() => setActiveModalWidget('wakatime')}
               />
               <GithubWidget
                 username="Rama-X2"
-                isExpanded={activeWidget === 'github'}
-                onToggle={() => setActiveWidget(activeWidget === 'github' ? null : 'github')}
+                onOpenModal={() => setActiveModalWidget('github')}
               />
               <AnimeClockWidget
                 avatarFallback={personal.avatar}
-                isExpanded={activeWidget === 'clock'}
-                onToggle={() => setActiveWidget(activeWidget === 'clock' ? null : 'clock')}
+                onOpenModal={() => setActiveModalWidget('clock')}
               />
             </div>
 
@@ -1806,6 +1802,42 @@ export default function Portfolio() {
                 </motion.a>
               </div>
             </motion.div>
+          </motion.div>
+      {/* Interactive Widget Modal Overlay (Smooth Backdrop Blur & Zero Squishing) */}
+      <AnimatePresence>
+        {activeModalWidget && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveModalWidget(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto"
+          >
+            {activeModalWidget === 'discord' && (
+              <DiscordModalContent
+                discordUserId={discordUserId}
+                avatarFallback={personal.avatar}
+                onClose={() => setActiveModalWidget(null)}
+              />
+            )}
+            {activeModalWidget === 'wakatime' && (
+              <WakaTimeModalContent
+                timeText={wakatimeData.timeText}
+                languages={wakatimeData.languages}
+                onClose={() => setActiveModalWidget(null)}
+              />
+            )}
+            {activeModalWidget === 'github' && (
+              <GithubModalContent
+                username="Rama-X2"
+                onClose={() => setActiveModalWidget(null)}
+              />
+            )}
+            {activeModalWidget === 'clock' && (
+              <AnimeClockModalContent
+                onClose={() => setActiveModalWidget(null)}
+              />
+            )}
           </motion.div>
         )}
       </AnimatePresence>
