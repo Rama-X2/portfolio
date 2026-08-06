@@ -34,11 +34,11 @@ export default function AnimeClockWidget({
   return (
     <motion.div
       onClick={onOpenModal}
-      className="glass-card rounded-2xl p-3.5 sm:p-4 text-left border border-white/10 hover:border-pink-500/50 transition-all duration-300 relative overflow-hidden group cursor-pointer flex flex-col justify-between"
+      className="bg-[#131527] rounded-2xl p-3.5 sm:p-4 text-left border border-white/10 hover:border-pink-500/40 transition-all duration-300 relative overflow-hidden group cursor-pointer flex flex-col justify-between shadow-lg"
       whileHover={{ y: -4, scale: 1.01 }}
     >
       {/* Top Banner / Cover */}
-      <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-r from-pink-900/80 via-purple-900/80 to-indigo-900/80 border-b border-white/10" />
+      <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-r from-pink-900/60 via-purple-900/60 to-indigo-900/60 border-b border-white/10" />
 
       <div className="relative z-10 pt-1">
         <div className="flex items-center justify-between mb-2">
@@ -49,7 +49,7 @@ export default function AnimeClockWidget({
                 (e.target as HTMLElement).setAttribute('src', avatarFallback)
               }}
               alt="Local Time Avatar"
-              className="w-11 h-11 rounded-full object-cover border-2 border-pink-400/80 shadow-lg ring-2 ring-pink-500/30"
+              className="w-11 h-11 rounded-full object-cover border-2 border-pink-400/80 shadow-md ring-2 ring-pink-500/30"
             />
             <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-pink-400 rounded-full animate-ping" />
           </div>
@@ -67,7 +67,7 @@ export default function AnimeClockWidget({
       {/* Compact Activity Card */}
       <div className="relative z-10 mt-3 pt-2 border-t border-white/10 bg-white/5 p-2.5 rounded-xl border border-white/5 space-y-1">
         <div className="flex items-center justify-between">
-          <span className="text-[9px] font-bold text-pink-300 uppercase tracking-wider flex items-center gap-1">
+          <span className="text-[9px] font-bold text-pink-300 uppercase tracking-wider flex items-center gap-1.5">
             <Clock className="w-3 h-3 text-pink-400" /> Real-Time Ticker
           </span>
           <span className="text-[9px] text-pink-400 font-mono font-semibold flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
@@ -75,14 +75,14 @@ export default function AnimeClockWidget({
           </span>
         </div>
         <p className="text-xs sm:text-sm font-extrabold text-white font-mono tracking-wider">
-          {liveTime || '16:45:00 WIB'}
+          {liveTime || '18:45:00 WIB'}
         </p>
       </div>
     </motion.div>
   )
 }
 
-/* Full Anime Clock Modal Component (Clean & Mobile Safe) */
+/* Full Local Time Modal Component */
 export function AnimeClockModalContent({
   onClose,
 }: {
@@ -126,7 +126,7 @@ export function AnimeClockModalContent({
       {/* Top Banner */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-r from-pink-900 via-purple-900 to-indigo-900 border-b border-white/10" />
 
-      {/* Sticky Close Button (Safe for Mobile Address Bars) */}
+      {/* Sticky Close Button */}
       <button
         onClick={onClose}
         className="sticky top-2 float-right z-50 p-2.5 rounded-full bg-black/80 border border-white/20 text-gray-200 hover:text-white hover:bg-black transition-all shadow-lg"
@@ -159,7 +159,7 @@ export function AnimeClockModalContent({
       <div className="bg-black/50 p-5 sm:p-6 rounded-3xl border border-pink-500/40 text-center space-y-2">
         <div className="text-[10px] sm:text-xs font-bold text-pink-300 uppercase tracking-widest">Waktu Indonesia Barat (WIB)</div>
         <div className="text-3xl sm:text-5xl font-black text-white font-mono tracking-widest drop-shadow-[0_0_20px_rgba(244,114,182,0.6)]">
-          {liveTime || '16:45:00 WIB'}
+          {liveTime || '18:45:00 WIB'}
         </div>
         <div className="text-xs sm:text-sm text-pink-200 font-medium flex items-center justify-center gap-2 pt-1">
           <Calendar className="w-4 h-4 text-pink-400" />

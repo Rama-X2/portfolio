@@ -10,6 +10,13 @@ interface WakaTimeWidgetProps {
   onOpenModal?: () => void
 }
 
+// Official WakaTime SVG Logo
+const WakaTimeLogo = () => (
+  <svg className="w-4 h-4 fill-amber-400 flex-shrink-0" viewBox="0 0 24 24">
+    <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm0 4a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm-1 3v6l5.25 3.15.75-1.23-4.5-2.67V7H11z"/>
+  </svg>
+)
+
 export default function WakaTimeWidget({
   timeText = '39 hrs 34 mins',
   languages = 'TypeScript, PHP & Linux C++',
@@ -18,18 +25,18 @@ export default function WakaTimeWidget({
   return (
     <motion.div
       onClick={onOpenModal}
-      className="glass-card rounded-2xl p-3.5 sm:p-4 text-left border border-white/10 hover:border-amber-500/50 transition-all duration-300 relative overflow-hidden group cursor-pointer flex flex-col justify-between"
+      className="bg-[#131527] rounded-2xl p-3.5 sm:p-4 text-left border border-white/10 hover:border-amber-500/40 transition-all duration-300 relative overflow-hidden group cursor-pointer flex flex-col justify-between shadow-lg"
       whileHover={{ y: -4, scale: 1.01 }}
     >
       {/* Top Banner / Cover */}
-      <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-r from-amber-900/80 via-orange-900/80 to-yellow-900/80 border-b border-white/10" />
+      <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-r from-amber-900/60 via-orange-900/60 to-yellow-900/60 border-b border-white/10" />
 
       <div className="relative z-10 pt-1">
         <div className="flex items-center justify-between mb-2">
           <img
             src="https://github.com/Rama-X2.png"
             alt="GitHub Avatar for WakaTime Profile"
-            className="w-11 h-11 rounded-full object-cover border-2 border-amber-400/80 shadow-lg"
+            className="w-11 h-11 rounded-full object-cover border-2 border-amber-400/80 shadow-md"
           />
           <span className="text-[9px] font-bold px-2.5 py-0.5 rounded-full border border-amber-500/35 bg-amber-500/15 text-amber-300">
             {timeText}
@@ -45,8 +52,8 @@ export default function WakaTimeWidget({
       {/* Compact Activity Card */}
       <div className="relative z-10 mt-3 pt-2 border-t border-white/10 bg-white/5 p-2.5 rounded-xl border border-white/5 space-y-1">
         <div className="flex items-center justify-between">
-          <span className="text-[9px] font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1">
-            <Clock className="w-3 h-3 text-amber-400" /> Coding Tracker
+          <span className="text-[9px] font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
+            <WakaTimeLogo /> Coding Tracker
           </span>
           <span className="text-[9px] text-amber-400 font-mono font-semibold flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
             Detail <ChevronRight className="w-3 h-3" />
@@ -60,7 +67,7 @@ export default function WakaTimeWidget({
   )
 }
 
-/* Full WakaTime Modal Component (Clean & Mobile Safe) */
+/* Full WakaTime Modal Component */
 export function WakaTimeModalContent({
   timeText = '39 hrs 34 mins',
   languages = 'TypeScript, PHP & Linux C++',
@@ -88,7 +95,7 @@ export function WakaTimeModalContent({
       {/* Top Banner */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-r from-amber-900 via-orange-900 to-yellow-900 border-b border-white/10" />
 
-      {/* Sticky Close Button (Safe for Mobile Address Bars) */}
+      {/* Sticky Close Button */}
       <button
         onClick={onClose}
         className="sticky top-2 float-right z-50 p-2.5 rounded-full bg-black/80 border border-white/20 text-gray-200 hover:text-white hover:bg-black transition-all shadow-lg"

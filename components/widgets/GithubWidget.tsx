@@ -2,12 +2,19 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ExternalLink, GitBranch, Star, ChevronRight, X, FolderGit2 } from 'lucide-react'
+import { ExternalLink, GitBranch, Star, ChevronRight, X } from 'lucide-react'
 
 interface GithubWidgetProps {
   username: string
   onOpenModal?: () => void
 }
+
+// Official GitHub SVG Logo
+const GitHubLogo = () => (
+  <svg className="w-4 h-4 fill-emerald-400 flex-shrink-0" viewBox="0 0 24 24">
+    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+  </svg>
+)
 
 export default function GithubWidget({
   username,
@@ -38,18 +45,18 @@ export default function GithubWidget({
   return (
     <motion.div
       onClick={onOpenModal}
-      className="glass-card rounded-2xl p-3.5 sm:p-4 text-left border border-white/10 hover:border-emerald-500/50 transition-all duration-300 relative overflow-hidden group cursor-pointer flex flex-col justify-between"
+      className="bg-[#131527] rounded-2xl p-3.5 sm:p-4 text-left border border-white/10 hover:border-emerald-500/40 transition-all duration-300 relative overflow-hidden group cursor-pointer flex flex-col justify-between shadow-lg"
       whileHover={{ y: -4, scale: 1.01 }}
     >
       {/* Top Banner / Cover */}
-      <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-r from-emerald-900/80 via-teal-900/80 to-cyan-900/80 border-b border-white/10" />
+      <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-r from-emerald-900/60 via-teal-900/60 to-cyan-900/60 border-b border-white/10" />
 
       <div className="relative z-10 pt-1">
         <div className="flex items-center justify-between mb-2">
           <img
             src={githubData.avatar}
             alt="GitHub Profile Avatar"
-            className="w-11 h-11 rounded-full object-cover border-2 border-emerald-400/80 shadow-lg"
+            className="w-11 h-11 rounded-full object-cover border-2 border-emerald-400/80 shadow-md"
           />
           <span className="text-[9px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-500/35 bg-emerald-500/15 text-emerald-300">
             {githubData.repos}+ Public Repos
@@ -65,8 +72,8 @@ export default function GithubWidget({
       {/* Compact Activity Card */}
       <div className="relative z-10 mt-3 pt-2 border-t border-white/10 bg-white/5 p-2.5 rounded-xl border border-white/5 space-y-1">
         <div className="flex items-center justify-between">
-          <span className="text-[9px] font-bold text-emerald-300 uppercase tracking-wider flex items-center gap-1">
-            <FolderGit2 className="w-3 h-3 text-emerald-400" /> Live Activity
+          <span className="text-[9px] font-bold text-emerald-300 uppercase tracking-wider flex items-center gap-1.5">
+            <GitHubLogo /> Live Activity
           </span>
           <span className="text-[9px] text-emerald-400 font-mono font-semibold flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
             Detail <ChevronRight className="w-3 h-3" />
@@ -80,7 +87,7 @@ export default function GithubWidget({
   )
 }
 
-/* Full GitHub Modal Component (Clean & Mobile Safe) */
+/* Full GitHub Modal Component */
 export function GithubModalContent({
   username,
   onClose,
@@ -126,7 +133,7 @@ export function GithubModalContent({
       {/* Top Banner */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-r from-emerald-900 via-teal-900 to-cyan-900 border-b border-white/10" />
 
-      {/* Sticky Close Button (Safe for Mobile Address Bars) */}
+      {/* Sticky Close Button */}
       <button
         onClick={onClose}
         className="sticky top-2 float-right z-50 p-2.5 rounded-full bg-black/80 border border-white/20 text-gray-200 hover:text-white hover:bg-black transition-all shadow-lg"
