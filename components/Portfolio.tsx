@@ -1803,6 +1803,8 @@ export default function Portfolio() {
               </div>
             </motion.div>
           </motion.div>
+        )}
+      </AnimatePresence>
       {/* Interactive Widget Modal Overlay (Smooth Backdrop Blur & Zero Squishing) */}
       <AnimatePresence>
         {activeModalWidget && (
