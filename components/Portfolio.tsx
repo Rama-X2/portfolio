@@ -1046,8 +1046,8 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* Live Activity & Tech Widgets (Clean Compact 4-Card Overview) */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 md:gap-4">
+            {/* ── 4 Interactive Realtime GFX Widgets (Responsive 1-col on Mobile, 4-col on Desktop) ─── */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-3.5 md:gap-4">
               <DiscordWidget
                 discordUserId={discordUserId}
                 avatarFallback={personal.avatar}

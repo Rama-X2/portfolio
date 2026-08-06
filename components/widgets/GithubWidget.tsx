@@ -45,49 +45,47 @@ export default function GithubWidget({
   return (
     <motion.div
       onClick={onOpenModal}
-      className="bg-gradient-to-br from-[#1b1e38] via-[#15172d] to-[#111324] rounded-2xl text-left border border-emerald-500/30 hover:border-emerald-500/70 hover:shadow-[0_8px_30px_rgba(16,185,129,0.3)] transition-all duration-300 relative overflow-hidden group cursor-pointer flex flex-col justify-between"
+      className="bg-gradient-to-br from-[#1c1e3a] via-[#15172d] to-[#111324] rounded-2xl text-left border-0 hover:shadow-[0_8px_30px_rgba(16,185,129,0.3)] transition-all duration-300 relative overflow-hidden group cursor-pointer flex flex-col justify-between"
       whileHover={{ y: -3 }}
     >
       {/* Vermilion GFX Wavy Emerald Header Cover */}
-      <div className="relative h-16 w-full bg-gradient-to-r from-emerald-900 via-teal-900 to-cyan-950 overflow-hidden border-b border-emerald-500/30">
-        <svg className="absolute bottom-0 left-0 right-0 w-full h-8 text-[#15172d] fill-current" viewBox="0 0 1440 320">
+      <div className="relative h-14 w-full bg-gradient-to-r from-emerald-900 via-teal-900 to-cyan-950 overflow-hidden">
+        <svg className="absolute bottom-0 left-0 right-0 w-full h-7 text-[#15172d] fill-current" viewBox="0 0 1440 320">
           <path d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,144C672,139,768,181,864,186.7C960,192,1056,160,1152,149.3C1248,139,1344,149,1392,154.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
         </svg>
-        <div className="absolute top-2 right-3">
-          <span className="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md border border-emerald-500/50 bg-emerald-950/80 text-emerald-300 backdrop-blur-md">
+        <div className="absolute top-2 right-2.5">
+          <span className="text-[8px] sm:text-[9px] font-mono font-bold px-2 py-0.5 rounded-md border border-emerald-500/50 bg-emerald-950/80 text-emerald-300 backdrop-blur-md">
             {githubData.repos}+ REPOS ✦
           </span>
         </div>
       </div>
 
-      <div className="relative z-10 px-4 pb-4 -mt-7">
-        <div className="flex items-end justify-between mb-3">
-          <div className="flex items-end gap-3">
-            <img
-              src={githubData.avatar}
-              alt="GitHub Profile Avatar"
-              className="w-12 h-12 rounded-full object-cover border-2 border-emerald-400/80 shadow-lg relative z-10"
-            />
-            <div>
-              <h4 className="font-bold text-white text-xs sm:text-sm leading-snug flex items-center gap-1.5 line-clamp-1">
-                <span>@{username}</span>
-              </h4>
-              <p className="text-[10px] text-emerald-300 font-mono">GitHub Developer</p>
-            </div>
+      <div className="relative z-10 px-3.5 pb-3.5 -mt-6">
+        <div className="flex items-end gap-2.5 mb-2.5">
+          <img
+            src={githubData.avatar}
+            alt="GitHub Profile Avatar"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border-2 border-emerald-400/80 shadow-md relative z-10 flex-shrink-0"
+          />
+          <div className="min-w-0 flex-1">
+            <h4 className="font-bold text-white text-xs sm:text-sm leading-tight truncate">
+              @{username}
+            </h4>
+            <p className="text-[10px] text-emerald-300 font-mono truncate">GitHub Developer</p>
           </div>
         </div>
 
         {/* Activity Info Box */}
-        <div className="bg-[#121427]/95 p-3 rounded-xl border border-emerald-500/25 space-y-1.5 shadow-inner">
+        <div className="bg-[#121427]/95 p-2.5 rounded-xl space-y-1 shadow-inner">
           <div className="flex items-center justify-between">
-            <span className="text-[9px] font-mono font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+            <span className="text-[9px] font-mono font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1 truncate">
               <GitHubLogo /> LIVE REPOSITORIES
             </span>
-            <span className="text-[9px] text-emerald-300 font-mono font-semibold flex items-center gap-0.5 group-hover:text-emerald-200 transition-colors">
+            <span className="text-[9px] text-emerald-300 font-mono font-semibold flex items-center gap-0.5 group-hover:text-emerald-200 transition-colors flex-shrink-0 ml-1">
               Detail ✦
             </span>
           </div>
-          <p className="text-[11px] font-bold text-white line-clamp-1">
+          <p className="text-[11px] font-bold text-white truncate">
             {githubData.repos} Public Repositories • {githubData.followers} Followers
           </p>
         </div>
@@ -137,35 +135,36 @@ export function GithubModalContent({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       onClick={(e) => e.stopPropagation()}
-      className="bg-gradient-to-b from-[#1c1d3b] via-[#14162e] to-[#0f1124] rounded-3xl text-left border border-emerald-500/50 shadow-[0_25px_70px_rgba(16,185,129,0.3)] relative overflow-hidden max-h-[82vh] overflow-y-auto"
+      className="bg-gradient-to-b from-[#1c1d3b] via-[#14162e] to-[#0f1124] rounded-3xl text-left border-0 shadow-[0_25px_70px_rgba(16,185,129,0.3)] relative overflow-hidden max-h-[82vh] overflow-y-auto"
     >
       {/* Top Vermilion GFX Header Cover */}
-      <div className="relative h-28 w-full bg-gradient-to-r from-emerald-900 via-teal-900 to-cyan-950 overflow-hidden border-b border-emerald-500/40">
-        <svg className="absolute bottom-0 left-0 right-0 w-full h-12 text-[#1c1d3b] fill-current" viewBox="0 0 1440 320">
+      <div className="relative h-24 sm:h-28 w-full bg-gradient-to-r from-emerald-900 via-teal-900 to-cyan-950 overflow-hidden">
+        <svg className="absolute bottom-0 left-0 right-0 w-full h-10 sm:h-12 text-[#1c1d3b] fill-current" viewBox="0 0 1440 320">
           <path d="M0,192L60,197.3C120,203,240,213,360,202.7C480,192,600,160,720,165.3C840,171,960,213,1080,218.7C1200,224,1320,192,1380,176L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
         </svg>
 
+        {/* Kotak Edge Close Button (Orange Circle Fix) */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 z-50 p-2.5 rounded-full bg-black/80 border border-white/20 text-gray-200 hover:text-white hover:bg-black transition-all shadow-lg"
+          className="absolute top-3 right-3 z-50 p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/20 rounded-xl transition-all shadow-md"
           title="Tutup"
         >
           <X className="w-5 h-5" />
         </button>
       </div>
 
-      <div className="px-5 pb-6 sm:px-8 sm:pb-8 -mt-14 space-y-5 relative z-10">
-        {/* Header Section */}
+      <div className="px-4 pb-5 sm:px-8 sm:pb-8 -mt-12 sm:-mt-14 space-y-4 sm:space-y-5 relative z-10">
+        {/* Header Section (Borderless & Seamless - Green Circle Fix) */}
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
-          <div className="flex items-end gap-4">
+          <div className="flex items-end gap-3.5">
             <img
               src={githubData.avatar}
               alt="GitHub Avatar"
-              className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-[#1c1d3b] shadow-2xl relative z-10"
+              className="w-18 h-18 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-[#1c1d3b] shadow-2xl relative z-10 flex-shrink-0"
             />
             <div>
               <div className="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-widest">// OPEN SOURCE CODE SUITE</div>
-              <h3 className="font-extrabold text-white text-lg sm:text-2xl">
+              <h3 className="font-extrabold text-white text-base sm:text-xl md:text-2xl">
                 @{username} • GitHub Developer Profile
               </h3>
               <p className="text-xs sm:text-sm text-emerald-300 font-medium font-mono">Open Source & Active Repositories</p>
@@ -176,40 +175,51 @@ export function GithubModalContent({
             href={`https://github.com/${username}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs transition-all shadow-lg shadow-emerald-600/30"
+            className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs transition-all shadow-lg shadow-emerald-600/30"
           >
             <span>Buka Profil GitHub Asli</span>
             <ExternalLink className="w-4 h-4" />
           </a>
         </div>
 
-        {/* Stats Header Bar */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-[#121429]/90 p-4 rounded-2xl border border-emerald-500/30">
-            <div className="text-[10px] font-mono font-bold text-emerald-400 uppercase">// PUBLIC REPOSITORIES</div>
+        {/* Dynamic Animated Stats Cards (Blue Circle Fix) */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+          <div className="bg-gradient-to-br from-emerald-950/60 to-teal-950/60 p-4 rounded-2xl border border-emerald-500/40 relative overflow-hidden group">
+            <div className="text-[10px] font-mono font-bold text-emerald-400 uppercase flex items-center justify-between">
+              <span>// PUBLIC REPOSITORIES</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            </div>
             <div className="text-lg sm:text-xl font-extrabold text-white mt-1">{githubData.repos} Repos</div>
-            <div className="text-[10px] text-gray-400 mt-0.5">Open Source Codebases</div>
+            <div className="text-[10px] text-gray-300 mt-0.5">Open Source Codebases</div>
           </div>
-          <div className="bg-[#121429]/90 p-4 rounded-2xl border border-emerald-500/30">
-            <div className="text-[10px] font-mono font-bold text-emerald-400 uppercase">// GITHUB FOLLOWERS</div>
+
+          <div className="bg-gradient-to-br from-emerald-950/60 to-teal-950/60 p-4 rounded-2xl border border-emerald-500/40 relative overflow-hidden group">
+            <div className="text-[10px] font-mono font-bold text-emerald-400 uppercase flex items-center justify-between">
+              <span>// GITHUB FOLLOWERS</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            </div>
             <div className="text-lg sm:text-xl font-extrabold text-white mt-1">{githubData.followers} Followers</div>
-            <div className="text-[10px] text-gray-400 mt-0.5">Developer Network</div>
+            <div className="text-[10px] text-gray-300 mt-0.5">Developer Network</div>
           </div>
-          <div className="bg-[#121429]/90 p-4 rounded-2xl border border-emerald-500/30">
-            <div className="text-[10px] font-mono font-bold text-emerald-400 uppercase">// CONTRIBUTIONS</div>
+
+          <div className="bg-gradient-to-br from-emerald-950/60 to-teal-950/60 p-4 rounded-2xl border border-emerald-500/40 relative overflow-hidden group">
+            <div className="text-[10px] font-mono font-bold text-emerald-400 uppercase flex items-center justify-between">
+              <span>// CONTRIBUTIONS</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            </div>
             <div className="text-lg sm:text-xl font-extrabold text-white mt-1">Active Commits</div>
-            <div className="text-[10px] text-gray-400 mt-0.5">Consistent GitHub Activity</div>
+            <div className="text-[10px] text-gray-300 mt-0.5">Consistent GitHub Activity</div>
           </div>
         </div>
 
         {/* Featured Repositories List */}
-        <div className="bg-[#121429]/90 p-4 sm:p-5 rounded-2xl border border-emerald-500/30 space-y-3">
+        <div className="bg-[#121429]/90 p-4 sm:p-5 rounded-2xl space-y-3">
           <div className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
             <GitBranch className="w-4 h-4 text-emerald-400" /> // FEATURED REPOSITORIES
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {featuredRepos.map((repo, idx) => (
-              <div key={idx} className="bg-[#0b0d1e] p-3.5 rounded-xl border border-white/10 flex flex-col justify-between">
+              <div key={idx} className="bg-[#0b0d1e] p-3.5 rounded-xl text-left flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between text-xs font-bold text-white mb-1.5">
                     <span className="text-emerald-300 line-clamp-1">{repo.name}</span>
