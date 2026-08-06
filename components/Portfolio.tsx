@@ -780,8 +780,13 @@ export default function Portfolio() {
         <div className="blob blob-3" />
       </div>
 
-      {/* ── Header ─── */}
-      <header className="fixed top-0 left-0 right-0 z-40 header-glass px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
+      {/* ── Header Navigasi Atas (Navbar Header - Animasi Masuk 1x saat Web Dibuka) ─── */}
+      <motion.header
+        initial={{ y: -40, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        className="fixed top-0 left-0 right-0 z-40 header-glass px-4 md:px-6 py-3 md:py-4 flex justify-between items-center"
+      >
         <motion.button
           className="flex items-center gap-2 md:gap-3"
           onClick={() => navClick('home')}
@@ -870,33 +875,25 @@ export default function Portfolio() {
           </div>
 
           {/* Mobile hamburger */}
-          <motion.button
+          <button
             className="md:hidden p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
             onClick={() => setMenuOpen(!menuOpen)}
-            whileTap={{ scale: 0.9 }}
             aria-label="Toggle menu"
           >
-            <motion.div
-              key={menuOpen ? 'open' : 'closed'}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.15 }}
-            >
-              {menuOpen ? (
-                <X className="w-6 h-6 text-white" />
-              ) : (
-                <div className="space-y-1.5">
-                  <div className="w-6 h-0.5 bg-current rounded-full" />
-                  <div className="w-6 h-0.5 bg-current rounded-full" />
-                  <div className="w-6 h-0.5 bg-current rounded-full" />
-                </div>
-              )}
-            </motion.div>
-          </motion.button>
+            {menuOpen ? (
+              <X className="w-6 h-6 text-white" />
+            ) : (
+              <div className="space-y-1.5">
+                <div className="w-6 h-0.5 bg-current rounded-full" />
+                <div className="w-6 h-0.5 bg-current rounded-full" />
+                <div className="w-6 h-0.5 bg-current rounded-full" />
+              </div>
+            )}
+          </button>
         </div>
-      </header>
+      </motion.header>
 
-      {/* Mobile dropdown nav */}
+      {/* Mobile dropdown nav (Animasi 100% Konsisten Slide-Fade Tanpa Scaling Morphing) */}
       <AnimatePresence>
         {menuOpen && (
           <>
@@ -911,21 +908,17 @@ export default function Portfolio() {
             />
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: -8, transformOrigin: 'top right' }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: -8 }}
-              transition={{ type: 'spring', stiffness: 450, damping: 25 }}
-              className="fixed top-[62px] right-4 w-44 md:hidden z-40 p-1.5 rounded-xl glass-card shadow-glow bg-[#0c0a1e]/95 border border-white/10 origin-top-right overflow-hidden"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.15, ease: 'easeOut' }}
+              className="fixed top-[62px] right-4 w-44 md:hidden z-40 p-1.5 rounded-xl glass-card shadow-glow bg-[#0c0a1e]/95 border border-white/10 overflow-hidden"
             >
               <div className="space-y-0.5">
-                {sections.map((s, i) => (
-                  <motion.button
+                {sections.map((s) => (
+                  <button
                     key={s.id}
                     onClick={() => navClick(s.id)}
-                    initial={{ opacity: 0, x: 8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.02 * i, duration: 0.15 }}
-                    whileTap={{ scale: 0.96 }}
                     className={`w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg transition-all text-xs font-semibold ${
                       activeSection === s.id
                         ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-sm'
@@ -934,7 +927,7 @@ export default function Portfolio() {
                   >
                     <s.icon className={`w-4 h-4 ${activeSection === s.id ? 'text-white' : 'text-gray-400'}`} />
                     <span>{s.name}</span>
-                  </motion.button>
+                  </button>
                 ))}
               </div>
             </motion.div>
