@@ -35,9 +35,10 @@ export default function DiscordWidget({ discordUserId, avatarFallback }: Discord
     let heartbeatInterval: NodeJS.Timeout | null = null
 
     try {
-      ws = new WebSocket('wss://api.lanyard.rest/socket')
+      const socket = new WebSocket('wss://api.lanyard.rest/socket')
+      ws = socket
 
-      ws.onmessage = (event) => {
+      socket.onmessage = (event) => {
         try {
           const message = JSON.parse(event.data)
           const { op, d, t } = message
@@ -46,20 +47,22 @@ export default function DiscordWidget({ discordUserId, avatarFallback }: Discord
           if (op === 1) {
             const interval = d.heartbeat_interval
             heartbeatInterval = setInterval(() => {
-              if (ws && ws.readyState === WebSocket.OPEN) {
-                ws.send(JSON.stringify({ op: 3 }))
+              if (socket && socket.readyState === WebSocket.OPEN) {
+                socket.send(JSON.stringify({ op: 3 }))
               }
             }, interval)
 
             // Send Initialize (op 2) with subscribe_to_id
-            ws.send(
-              JSON.stringify({
-                op: 2,
-                d: {
-                  subscribe_to_id: discordUserId,
-                },
-              })
-            )
+            if (socket && socket.readyState === WebSocket.OPEN) {
+              socket.send(
+                JSON.stringify({
+                  op: 2,
+                  d: {
+                    subscribe_to_id: discordUserId,
+                  },
+                })
+              )
+            }
           }
 
           // Opcode 0: Event (INIT_STATE or PRESENCE_UPDATE)
