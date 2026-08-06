@@ -553,6 +553,7 @@ export default function Portfolio() {
   const [selectedCert, setSelectedCert] = useState<(typeof achievements)[0] | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [showResume, setShowResume] = useState(false)
+  const [activeWidget, setActiveWidget] = useState<'discord' | 'wakatime' | 'github' | 'clock' | null>(null)
 
   // Form State
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
@@ -1052,12 +1053,31 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* Live Activity & Tech Widgets (Modular Standalone Components) */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 md:gap-4">
-              <DiscordWidget discordUserId={discordUserId} avatarFallback={personal.avatar} />
-              <WakaTimeWidget avatarFallback={personal.avatar} timeText={wakatimeData.timeText} languages={wakatimeData.languages} />
-              <GithubWidget username="Rama-X2" />
-              <AnimeClockWidget avatarFallback={personal.avatar} />
+            {/* Live Activity & Tech Widgets (Interactive Expanding Grid) */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 md:gap-4 transition-all duration-500">
+              <DiscordWidget
+                discordUserId={discordUserId}
+                avatarFallback={personal.avatar}
+                isExpanded={activeWidget === 'discord'}
+                onToggle={() => setActiveWidget(activeWidget === 'discord' ? null : 'discord')}
+              />
+              <WakaTimeWidget
+                avatarFallback={personal.avatar}
+                timeText={wakatimeData.timeText}
+                languages={wakatimeData.languages}
+                isExpanded={activeWidget === 'wakatime'}
+                onToggle={() => setActiveWidget(activeWidget === 'wakatime' ? null : 'wakatime')}
+              />
+              <GithubWidget
+                username="Rama-X2"
+                isExpanded={activeWidget === 'github'}
+                onToggle={() => setActiveWidget(activeWidget === 'github' ? null : 'github')}
+              />
+              <AnimeClockWidget
+                avatarFallback={personal.avatar}
+                isExpanded={activeWidget === 'clock'}
+                onToggle={() => setActiveWidget(activeWidget === 'clock' ? null : 'clock')}
+              />
             </div>
 
             {/* Tech Stack & Tools */}
