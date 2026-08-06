@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ExternalLink, ChevronRight, X, Car, Box, Gamepad2 } from 'lucide-react'
+import { ExternalLink, ChevronRight, X, Car, Box, Gamepad2, Clock } from 'lucide-react'
 
 interface DiscordWidgetProps {
   discordUserId: string
@@ -18,13 +18,13 @@ const SpotifyLogo = () => (
 )
 
 const VSCodeLogo = () => (
-  <svg className="w-4 h-4 fill-blue-400 flex-shrink-0" viewBox="0 0 24 24">
+  <svg className="w-5 h-5 fill-blue-400 flex-shrink-0" viewBox="0 0 24 24">
     <path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.12a.999.999 0 0 0-1.276.064L.327 7.297a.998.998 0 0 0 .043 1.456l3.87 3.247-3.87 3.247a.998.998 0 0 0-.043 1.456l1.322 1.223c.365.338.932.364 1.276.064l4.12-3.12 9.46 8.63c.47.43 1.156.54 1.705.29l4.94-2.377A1.5 1.5 0 0 0 24 20.146V3.854a1.5 1.5 0 0 0-.85-1.267zM18 16.5L11.5 12 18 7.5v9z"/>
   </svg>
 )
 
 const YouTubeLogo = () => (
-  <svg className="w-4 h-4 fill-red-500 flex-shrink-0" viewBox="0 0 24 24">
+  <svg className="w-5 h-5 fill-red-500 flex-shrink-0" viewBox="0 0 24 24">
     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
   </svg>
 )
@@ -123,33 +123,45 @@ export default function DiscordWidget({
   const youtubeActivity = nonCustomActivities.find((act: any) => act.name.toLowerCase().includes('youtube'))
 
   const statusColor = status === 'dnd'
-    ? 'bg-red-950/70 border-red-500/50 text-red-400'
+    ? 'bg-red-500/25 border-red-500/50 text-red-300'
     : status === 'idle'
-    ? 'bg-amber-950/70 border-amber-500/50 text-amber-400'
+    ? 'bg-amber-500/25 border-amber-500/50 text-amber-300'
     : status === 'online'
-    ? 'bg-emerald-950/70 border-emerald-500/50 text-emerald-400'
-    : 'bg-purple-950/70 border-purple-500/50 text-purple-300'
+    ? 'bg-emerald-500/25 border-emerald-500/50 text-emerald-300'
+    : 'bg-purple-500/25 border-purple-500/50 text-purple-300'
 
   return (
     <motion.div
       onClick={onOpenModal}
-      className="bg-[#0c0d1a] rounded-2xl p-4 text-left border border-purple-500/20 hover:border-rose-500/60 hover:shadow-[0_0_25px_rgba(225,29,72,0.2)] transition-all duration-300 relative overflow-hidden group cursor-pointer flex flex-col justify-between"
+      className="bg-gradient-to-br from-[#1b1e38] via-[#15172d] to-[#111324] rounded-2xl text-left border border-rose-500/30 hover:border-rose-500/70 hover:shadow-[0_8px_30px_rgba(225,29,72,0.3)] transition-all duration-300 relative overflow-hidden group cursor-pointer flex flex-col justify-between"
       whileHover={{ y: -3 }}
     >
-      <div className="relative z-10">
-        {/* Lappland Decadenza HUD Top Header */}
-        <div className="flex items-center justify-between mb-3 border-b border-white/10 pb-2.5">
-          <div className="flex items-center gap-3">
+      {/* Vermilion GFX Wavy Red/Purple Header Cover */}
+      <div className="relative h-16 w-full bg-gradient-to-r from-rose-900 via-purple-900 to-indigo-950 overflow-hidden border-b border-rose-500/30">
+        {/* Wavy SVG shape overlay */}
+        <svg className="absolute bottom-0 left-0 right-0 w-full h-8 text-[#15172d] fill-current" viewBox="0 0 1440 320">
+          <path d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,144C672,139,768,181,864,186.7C960,192,1056,160,1152,149.3C1248,139,1344,149,1392,154.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+        <div className="absolute top-2 right-3">
+          <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded-md border uppercase tracking-wider backdrop-blur-md ${statusColor}`}>
+            {status.toUpperCase()} ✦
+          </span>
+        </div>
+      </div>
+
+      <div className="relative z-10 px-4 pb-4 -mt-7">
+        <div className="flex items-end justify-between mb-3">
+          <div className="flex items-end gap-3">
             <div className="relative">
               <img
                 src={avatarUrl}
                 alt="Discord Avatar"
-                className="w-10 h-10 rounded-full object-cover border-2 border-rose-500/70 shadow-md relative z-10"
+                className="w-12 h-12 rounded-full object-cover border-2 border-rose-500/80 shadow-lg relative z-10"
                 onError={(e) => {
                   (e.target as HTMLElement).setAttribute('src', avatarFallback)
                 }}
               />
-              <span className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-gray-950 z-20 ${
+              <span className={`absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-gray-950 z-20 ${
                 status === 'dnd' ? 'bg-red-500' : status === 'idle' ? 'bg-amber-400' : 'bg-emerald-400'
               }`} />
             </div>
@@ -160,14 +172,10 @@ export default function DiscordWidget({
               <p className="text-[10px] text-purple-300 font-mono">{username}</p>
             </div>
           </div>
-
-          <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded border uppercase tracking-wider ${statusColor}`}>
-            {status.toUpperCase()} ✦
-          </span>
         </div>
 
-        {/* Compact Activity Info Box */}
-        <div className="bg-black/50 p-2.5 rounded-xl border border-white/10 space-y-1">
+        {/* Activity Card Box (Vermilion Vermilion Style) */}
+        <div className="bg-[#121427]/95 p-3 rounded-xl border border-rose-500/25 space-y-1.5 shadow-inner">
           <div className="flex items-center justify-between">
             <span className="text-[9px] font-mono font-bold text-rose-400 uppercase tracking-wider flex items-center gap-1.5">
               {isListeningSpotify ? (
@@ -184,7 +192,7 @@ export default function DiscordWidget({
                 </>
               )}
             </span>
-            <span className="text-[9px] text-gray-400 font-mono font-semibold flex items-center gap-0.5 group-hover:text-rose-400 transition-colors">
+            <span className="text-[9px] text-rose-300 font-mono font-semibold flex items-center gap-0.5 group-hover:text-rose-200 transition-colors">
               Detail ✦
             </span>
           </div>
@@ -194,9 +202,14 @@ export default function DiscordWidget({
               {spotify.song} • <span className="text-emerald-300 font-normal">{spotify.artist}</span>
             </p>
           ) : vsCodeActivity ? (
-            <p className="text-[11px] font-bold text-white line-clamp-1">
-              {vsCodeActivity.details || vsCodeActivity.name}
-            </p>
+            <div className="flex items-center justify-between text-[11px]">
+              <p className="font-bold text-white line-clamp-1">
+                {vsCodeActivity.details || vsCodeActivity.name}
+              </p>
+              <span className="text-[10px] text-rose-300 font-mono ml-2 flex-shrink-0">
+                Editing team.md
+              </span>
+            </div>
           ) : (
             <p className="text-[11px] font-bold text-white line-clamp-1">
               Visual Studio Code Active Work
@@ -208,7 +221,7 @@ export default function DiscordWidget({
   )
 }
 
-/* Full Discord Rich Profile Modal Component (Lappland Decadenza Cyber HUD Style) */
+/* Full Discord Rich Profile Modal Component (Arknights GFX Vermilion Style) */
 export function DiscordModalContent({
   discordUserId,
   avatarFallback,
@@ -246,7 +259,7 @@ export function DiscordModalContent({
 
   const recentGames = [
     { name: 'Forza Horizon 4', time: '2d ago', icon: Car, color: 'text-red-400' },
-    { name: 'Arknights:Endfield', time: '3d ago', icon: Gamepad2, color: 'text-rose-400' },
+    { name: 'Arknights:Endfield', time: '3d ago', icon: Gamepad2, color: 'text-purple-400' },
     { name: 'Minecraft', time: '9d ago • Trending', icon: Box, color: 'text-emerald-400' },
   ]
 
@@ -256,134 +269,142 @@ export function DiscordModalContent({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       onClick={(e) => e.stopPropagation()}
-      className="bg-[#0b0c18] rounded-3xl p-5 sm:p-6 md:p-8 max-w-3xl w-full text-left border border-rose-500/40 shadow-[0_0_50px_rgba(225,29,72,0.25)] relative overflow-hidden space-y-5 max-h-[82vh] overflow-y-auto"
+      className="bg-gradient-to-b from-[#1c1d3b] via-[#14162e] to-[#0f1124] rounded-3xl text-left border border-rose-500/50 shadow-[0_25px_70px_rgba(225,29,72,0.3)] relative overflow-hidden max-h-[82vh] overflow-y-auto"
     >
-      {/* Sticky Close Button */}
-      <button
-        onClick={onClose}
-        className="sticky top-2 float-right z-50 p-2.5 rounded-full bg-black/80 border border-white/20 text-gray-200 hover:text-white hover:bg-black transition-all shadow-lg"
-        title="Tutup"
-      >
-        <X className="w-5 h-5" />
-      </button>
+      {/* Top Vermilion GFX Header Cover */}
+      <div className="relative h-28 w-full bg-gradient-to-r from-rose-900 via-purple-900 to-indigo-950 overflow-hidden border-b border-rose-500/40">
+        <svg className="absolute bottom-0 left-0 right-0 w-full h-12 text-[#1c1d3b] fill-current" viewBox="0 0 1440 320">
+          <path d="M0,192L60,197.3C120,203,240,213,360,202.7C480,192,600,160,720,165.3C840,171,960,213,1080,218.7C1200,224,1320,192,1380,176L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+        </svg>
 
-      {/* Lappland Decadenza HUD Header */}
-      <div className="relative z-10 pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-4 clear-right">
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <img
-              src={avatarUrl}
-              alt="Discord Avatar"
-              className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-rose-500/80 shadow-2xl relative z-10"
-              onError={(e) => {
-                (e.target as HTMLElement).setAttribute('src', avatarFallback)
-              }}
-            />
-            <span className={`absolute bottom-0 right-0 w-5 h-5 rounded-full border-4 border-gray-950 z-30 ${
-              status === 'dnd' ? 'bg-red-500' : status === 'idle' ? 'bg-amber-400' : 'bg-emerald-400'
-            }`} />
-          </div>
-
-          <div>
-            <div className="text-[10px] font-mono font-bold text-rose-400 uppercase tracking-widest">// OPERATOR DISCORD PRESENCE</div>
-            <h3 className="font-extrabold text-white text-base sm:text-xl md:text-2xl flex items-center gap-2">
-              <span>{displayName}</span>
-              <span className="text-xs bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded border border-purple-500/30 font-mono">
-                MORA
-              </span>
-            </h3>
-            <p className="text-xs sm:text-sm text-indigo-300 font-medium font-mono">{username}</p>
-          </div>
-        </div>
-
-        <a
-          href={`https://discord.com/users/${discordUserId}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-purple-600 hover:from-rose-500 hover:to-purple-500 text-white font-bold text-xs transition-all shadow-lg shadow-rose-600/30"
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 z-50 p-2.5 rounded-full bg-black/80 border border-white/20 text-gray-200 hover:text-white hover:bg-black transition-all shadow-lg"
+          title="Tutup"
         >
-          <span>Buka Profil Discord Asli</span>
-          <ExternalLink className="w-4 h-4" />
-        </a>
+          <X className="w-5 h-5" />
+        </button>
       </div>
 
-      {/* Bio & Details Quote */}
-      <div className="bg-black/50 p-4 rounded-2xl border border-rose-500/20 text-xs sm:text-sm text-purple-200 font-mono space-y-1.5">
-        <p className="text-amber-300 font-bold text-sm sm:text-base">" kyaaa.....(≧▽≦) "</p>
-        <p className="text-gray-300 text-xs sm:text-sm">Greetings, I'm from Indonesia...!!! #OC_Expert #Animator_MV</p>
-        <div className="text-[11px] sm:text-xs text-rose-400 pt-1 flex flex-wrap items-center gap-3">
-          <span>Member Since: Oct 10, 2021</span>
-          <span>•</span>
-          <span>Roles: Admin</span>
-        </div>
-      </div>
+      <div className="px-5 pb-6 sm:px-8 sm:pb-8 -mt-14 space-y-5 relative z-10">
+        {/* Header Profile Section */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+          <div className="flex items-end gap-4">
+            <div className="relative">
+              <img
+                src={avatarUrl}
+                alt="Discord Avatar"
+                className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-[#1c1d3b] shadow-2xl relative z-10"
+                onError={(e) => {
+                  (e.target as HTMLElement).setAttribute('src', avatarFallback)
+                }}
+              />
+              <span className={`absolute bottom-1 right-1 w-5 h-5 rounded-full border-4 border-gray-950 z-30 ${
+                status === 'dnd' ? 'bg-red-500' : status === 'idle' ? 'bg-amber-400' : 'bg-emerald-400'
+              }`} />
+            </div>
 
-      {/* ACTIVITIES SECTION */}
-      <div className={`grid grid-cols-1 ${isListeningSpotify ? 'md:grid-cols-2' : 'grid-cols-1'} gap-3.5`}>
-        {/* VS Code Activity */}
-        <div className="bg-black/40 p-4 rounded-2xl border border-white/10 flex items-start gap-3.5">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 flex-shrink-0">
-            <VSCodeLogo />
+            <div>
+              <div className="text-[10px] font-mono font-bold text-rose-400 uppercase tracking-widest">// ARKNIGHTS OPERATOR PRESENCE</div>
+              <h3 className="font-extrabold text-white text-lg sm:text-2xl flex items-center gap-2">
+                <span>{displayName}</span>
+                <span className="text-xs bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded border border-purple-500/30 font-mono">
+                  MORA
+                </span>
+              </h3>
+              <p className="text-xs sm:text-sm text-indigo-300 font-medium font-mono">{username}</p>
+            </div>
           </div>
-          <div className="flex-1 min-w-0">
-            <div className="text-[10px] font-mono font-bold text-blue-300 uppercase tracking-wider mb-0.5">// CURRENT ACTIVITY</div>
-            <h5 className="font-bold text-white text-xs sm:text-base line-clamp-1">
-              {vsCodeActivity?.name || 'Visual Studio Code'}
-            </h5>
-            <p className="text-xs text-gray-300 line-clamp-1">
-              {vsCodeActivity?.details || 'Editing AdvancedParams.svelte'}
-            </p>
-            <p className="text-[11px] text-gray-400 line-clamp-1 font-mono mt-0.5">
-              {vsCodeActivity?.state || 'Workspace: andora-wami-ex-main'}
-            </p>
+
+          <a
+            href={`https://discord.com/users/${discordUserId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-purple-600 hover:from-rose-500 hover:to-purple-500 text-white font-bold text-xs transition-all shadow-lg shadow-rose-600/30"
+          >
+            <span>Buka Profil Discord Asli</span>
+            <ExternalLink className="w-4 h-4" />
+          </a>
+        </div>
+
+        {/* Bio & Details Quote */}
+        <div className="bg-[#121429]/90 p-4 rounded-2xl border border-rose-500/30 text-xs sm:text-sm text-purple-200 font-mono space-y-1.5">
+          <p className="text-amber-300 font-bold text-sm sm:text-base">" kyaaa.....(≧▽≦) "</p>
+          <p className="text-gray-300 text-xs sm:text-sm">Greetings, I'm from Indonesia...!!! #OC_Expert #Animator_MV</p>
+          <div className="text-[11px] sm:text-xs text-rose-300 pt-1 flex flex-wrap items-center gap-3">
+            <span>Member Since: Oct 10, 2021</span>
+            <span>•</span>
+            <span>Roles: Admin</span>
           </div>
         </div>
 
-        {/* Spotify Live Music ONLY IF LISTENING */}
-        {isListeningSpotify && (
-          <div className="bg-black/40 p-4 rounded-2xl border border-emerald-500/30 flex items-start gap-3.5">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 flex-shrink-0">
-              <SpotifyLogo />
+        {/* ACTIVITIES SECTION */}
+        <div className={`grid grid-cols-1 ${isListeningSpotify ? 'md:grid-cols-2' : 'grid-cols-1'} gap-4`}>
+          {/* VS Code Activity */}
+          <div className="bg-[#121429]/90 p-4 rounded-2xl border border-rose-500/30 flex items-start gap-3.5">
+            <div className="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 flex-shrink-0">
+              <VSCodeLogo />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono font-bold text-emerald-300 uppercase tracking-wider">// SPOTIFY MUSIC</span>
-                <span className="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded font-mono">LIVE</span>
-              </div>
-              <h5 className="font-bold text-white text-xs sm:text-base line-clamp-1">
-                {spotify?.song || 'BLUE MOON'}
+              <div className="text-[10px] font-mono font-bold text-blue-300 uppercase tracking-wider mb-0.5">// CURRENT ACTIVITY</div>
+              <h5 className="font-bold text-white text-sm sm:text-base line-clamp-1">
+                {vsCodeActivity?.name || 'Visual Studio Code'}
               </h5>
-              <p className="text-xs text-emerald-300 line-clamp-1 font-medium">
-                by {spotify?.artist || 'Slana'}
+              <p className="text-xs text-gray-300 line-clamp-1">
+                {vsCodeActivity?.details || 'Editing AdvancedParams.svelte'}
               </p>
-              <div className="w-full bg-white/10 h-1.5 rounded-full mt-2 overflow-hidden">
-                <div className="bg-emerald-400 h-full w-2/3 rounded-full animate-pulse" />
-              </div>
+              <p className="text-[11px] text-rose-300 line-clamp-1 font-mono mt-0.5">
+                {vsCodeActivity?.state || 'Workspace: andora-wami-ex-main'}
+              </p>
             </div>
           </div>
-        )}
-      </div>
 
-      {/* Recent Activity Log */}
-      <div className="bg-black/40 p-4 rounded-2xl border border-white/10 space-y-2">
-        <div className="text-xs font-mono font-bold text-rose-400 uppercase tracking-wider flex items-center gap-1.5">
-          // RECENT GAMING & APPLICATION LOGS
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-          {recentGames.map((game, idx) => {
-            const IconComponent = game.icon
-            return (
-              <div key={idx} className="bg-black/60 p-3 rounded-xl border border-white/5 text-left flex items-start gap-2.5">
-                <div className={`p-2 bg-white/5 rounded-lg ${game.color}`}>
-                  <IconComponent className="w-4 h-4" />
+          {/* Spotify Live Music ONLY IF LISTENING */}
+          {isListeningSpotify && (
+            <div className="bg-[#121429]/90 p-4 rounded-2xl border border-emerald-500/30 flex items-start gap-3.5">
+              <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 flex-shrink-0">
+                <SpotifyLogo />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono font-bold text-emerald-300 uppercase tracking-wider">// SPOTIFY MUSIC</span>
+                  <span className="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded font-mono">LIVE</span>
                 </div>
-                <div className="min-w-0 flex-1">
-                  <div className="text-xs font-bold text-white line-clamp-1">{game.name}</div>
-                  <div className="text-[10px] text-gray-400 mt-0.5">{game.time}</div>
+                <h5 className="font-bold text-white text-sm sm:text-base line-clamp-1">
+                  {spotify?.song || 'BLUE MOON'}
+                </h5>
+                <p className="text-xs text-emerald-300 line-clamp-1 font-medium">
+                  by {spotify?.artist || 'Slana'}
+                </p>
+                <div className="w-full bg-white/10 h-1.5 rounded-full mt-2 overflow-hidden">
+                  <div className="bg-emerald-400 h-full w-2/3 rounded-full animate-pulse" />
                 </div>
               </div>
-            )
-          })}
+            </div>
+          )}
+        </div>
+
+        {/* Recent Activity Log */}
+        <div className="bg-[#121429]/90 p-4 rounded-2xl border border-rose-500/30 space-y-2">
+          <div className="text-xs font-mono font-bold text-rose-400 uppercase tracking-wider flex items-center gap-1.5">
+            // RECENT GAMING & APPLICATION LOGS
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {recentGames.map((game, idx) => {
+              const IconComponent = game.icon
+              return (
+                <div key={idx} className="bg-[#0b0d1e] p-3.5 rounded-xl border border-white/10 text-left flex items-start gap-3">
+                  <div className={`p-2 bg-white/5 rounded-lg ${game.color}`}>
+                    <IconComponent className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-xs font-bold text-white line-clamp-1">{game.name}</div>
+                    <div className="text-[10px] text-gray-400 mt-0.5">{game.time}</div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
     </motion.div>
