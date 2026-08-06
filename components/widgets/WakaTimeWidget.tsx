@@ -83,7 +83,7 @@ export function WakaTimeModalContent({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       onClick={(e) => e.stopPropagation()}
-      className="glass-card rounded-3xl p-4 sm:p-6 md:p-8 max-w-3xl w-full text-left border border-amber-500/40 bg-gray-950/95 shadow-2xl relative overflow-hidden space-y-4 sm:space-y-5 max-h-[82vh] overflow-y-auto"
+      className="bg-[#0f101d] rounded-3xl p-4 sm:p-6 md:p-8 max-w-3xl w-full text-left border border-amber-500/40 shadow-[0_20px_60px_rgba(0,0,0,0.9)] relative overflow-hidden space-y-4 sm:space-y-5 max-h-[82vh] overflow-y-auto"
     >
       {/* Top Banner */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-r from-amber-900 via-orange-900 to-yellow-900 border-b border-white/10" />
