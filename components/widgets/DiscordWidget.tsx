@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, Music, Code } from 'lucide-react'
 
 interface DiscordWidgetProps {
   discordUserId: string
@@ -10,36 +10,105 @@ interface DiscordWidgetProps {
 }
 
 export default function DiscordWidget({ discordUserId, avatarFallback }: DiscordWidgetProps) {
-  const [discordData, setDiscordData] = useState<any>(null)
+  const [lanyardData, setLanyardData] = useState<any>(null)
 
   useEffect(() => {
     if (!discordUserId) return
-    const fetchLanyard = async () => {
+
+    // 1. Initial REST API Fetch
+    const fetchLanyardRest = async () => {
       try {
         const res = await fetch(`https://api.lanyard.rest/v1/users/${discordUserId}`)
         const json = await res.json()
-        if (json && json.success) {
-          setDiscordData(json.data)
+        if (json && json.success && json.data) {
+          setLanyardData(json.data)
         }
       } catch (err) {
         // Fallback
       }
     }
-    fetchLanyard()
-    const interval = setInterval(fetchLanyard, 10000)
-    return () => clearInterval(interval)
+
+    fetchLanyardRest()
+
+    // 2. WebSocket Real-Time Connection
+    let ws: WebSocket | null = null
+    let heartbeatInterval: NodeJS.Timeout | null = null
+
+    try {
+      ws = new WebSocket('wss://api.lanyard.rest/socket')
+
+      ws.onmessage = (event) => {
+        try {
+          const message = JSON.parse(event.data)
+          const { op, d, t } = message
+
+          // Opcode 1: Hello from Lanyard server (send initialize & setup heartbeat)
+          if (op === 1) {
+            const interval = d.heartbeat_interval
+            heartbeatInterval = setInterval(() => {
+              if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ op: 3 }))
+              }
+            }, interval)
+
+            // Send Initialize (op 2) with subscribe_to_id
+            ws.send(
+              JSON.stringify({
+                op: 2,
+                d: {
+                  subscribe_to_id: discordUserId,
+                },
+              })
+            )
+          }
+
+          // Opcode 0: Event (INIT_STATE or PRESENCE_UPDATE)
+          if (op === 0 && (t === 'INIT_STATE' || t === 'PRESENCE_UPDATE')) {
+            if (t === 'INIT_STATE' && d && d[discordUserId]) {
+              setLanyardData(d[discordUserId])
+            } else if (t === 'PRESENCE_UPDATE' && d && (d.user_id === discordUserId || d.discord_user?.id === discordUserId)) {
+              setLanyardData((prev: any) => ({ ...prev, ...d }))
+            }
+          }
+        } catch (err) {
+          // JSON parse error
+        }
+      }
+    } catch (err) {
+      // WS Connection error
+    }
+
+    return () => {
+      if (heartbeatInterval) clearInterval(heartbeatInterval)
+      if (ws) ws.close()
+    }
   }, [discordUserId])
 
-  const rawStatus = discordData?.discord_status
-  const status = (rawStatus && rawStatus !== 'offline') ? rawStatus : 'online'
+  // Extract Discord User details
+  const status = lanyardData?.discord_status || 'online'
+  const discordUser = lanyardData?.discord_user
+  const username = discordUser?.username ? `@${discordUser.username}` : '@rama_ext'
+  const displayName = discordUser?.global_name || 'Rama-X2 『 Sukabumi 』'
   
-  const avatarUrl = discordData?.discord_user?.id && discordData?.discord_user?.avatar
-    ? `https://cdn.discordapp.com/avatars/${discordData.discord_user.id}/${discordData.discord_user.avatar}.png`
+  const avatarUrl = discordUser?.id && discordUser?.avatar
+    ? `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png?size=256`
     : 'https://github.com/Rama-X2.png'
 
-  const activityName = discordData?.activities?.[0]?.name || 'Visual Studio Code'
-  const activityDetails = discordData?.activities?.[0]?.details || 'Editing Portfolio.tsx'
-  const activityState = discordData?.activities?.[0]?.state || 'Workspace: portfolio-main'
+  // Extract Spotify Activity if playing
+  const spotify = lanyardData?.spotify
+  const isListeningSpotify = lanyardData?.listening_to_spotify && spotify
+
+  // Extract Non-Custom Activity (e.g. VS Code or Game)
+  const nonCustomActivities = lanyardData?.activities?.filter((act: any) => act.type !== 4) || []
+  const primaryActivity = nonCustomActivities[0]
+
+  const statusColor = status === 'dnd'
+    ? 'bg-red-500 border-red-500/35 bg-red-500/15 text-red-400'
+    : status === 'idle'
+    ? 'bg-amber-400 border-amber-500/35 bg-amber-500/15 text-amber-400'
+    : status === 'online'
+    ? 'bg-emerald-400 border-emerald-500/35 bg-emerald-500/15 text-emerald-400'
+    : 'bg-gray-400 border-gray-500/35 bg-gray-500/15 text-gray-400'
 
   return (
     <motion.a
@@ -53,9 +122,9 @@ export default function DiscordWidget({ discordUserId, avatarFallback }: Discord
       whileHover={{ y: -3 }}
     >
       {/* Top Banner / Cover */}
-      <div className="absolute top-0 left-0 right-0 h-10 bg-gradient-to-r from-purple-900/60 via-indigo-900/60 to-pink-900/60 border-b border-white/10" />
+      <div className="absolute top-0 left-0 right-0 h-11 bg-gradient-to-r from-purple-900/70 via-indigo-900/70 to-pink-900/70 border-b border-white/10" />
 
-      <div className="relative z-10 pt-2">
+      <div className="relative z-10 pt-1">
         <div className="flex items-center justify-between mb-2">
           <div className="relative">
             <img
@@ -71,35 +140,68 @@ export default function DiscordWidget({ discordUserId, avatarFallback }: Discord
                 ? 'bg-red-500'
                 : status === 'idle'
                 ? 'bg-amber-400'
-                : 'bg-emerald-400'
+                : status === 'online'
+                ? 'bg-emerald-400'
+                : 'bg-gray-400'
             }`} />
           </div>
-          <span className="text-[9px] font-bold px-2 py-0.5 rounded-full border uppercase tracking-wider bg-emerald-500/15 border-emerald-500/35 text-emerald-400">
+          <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full border uppercase tracking-wider ${statusColor}`}>
             {status.toUpperCase()}
           </span>
         </div>
 
         <h4 className="font-bold text-white text-xs sm:text-sm leading-snug flex items-center gap-1 line-clamp-1">
-          <span>Rama-X2 『 Sukabumi 』</span>
+          <span>{displayName}</span>
           <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-indigo-400 flex-shrink-0" />
         </h4>
-        <p className="text-[10px] text-indigo-300 font-medium font-mono">@rama_ext</p>
+        <p className="text-[10px] text-indigo-300 font-medium font-mono">{username}</p>
       </div>
 
       <div className="relative z-10 mt-3 pt-2 border-t border-white/10 bg-white/5 p-2 rounded-xl border border-white/5">
-        <div className="flex items-center justify-between mb-1">
-          <span className="text-[9px] font-bold text-indigo-300 uppercase tracking-wider">Discord Presence</span>
-          <span className="text-[9px] text-emerald-400 font-mono font-semibold">Active</span>
-        </div>
-        <p className="text-[11px] font-bold text-white line-clamp-1">
-          {activityName}
-        </p>
-        <p className="text-[10px] text-gray-300 line-clamp-1 font-medium">
-          {activityDetails}
-        </p>
-        <p className="text-[9px] text-gray-400 line-clamp-1 font-mono mt-0.5">
-          {activityState}
-        </p>
+        {isListeningSpotify ? (
+          <div className="space-y-0.5">
+            <div className="flex items-center justify-between">
+              <span className="text-[9px] font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1">
+                <Music className="w-3 h-3 text-emerald-400 animate-spin" /> Spotify
+              </span>
+              <span className="text-[9px] text-emerald-400 font-mono font-semibold">Live</span>
+            </div>
+            <p className="text-[11px] font-bold text-white line-clamp-1">
+              {spotify.song}
+            </p>
+            <p className="text-[10px] text-emerald-300 line-clamp-1 font-medium">
+              by {spotify.artist}
+            </p>
+          </div>
+        ) : primaryActivity ? (
+          <div className="space-y-0.5">
+            <div className="flex items-center justify-between">
+              <span className="text-[9px] font-bold text-indigo-300 uppercase tracking-wider flex items-center gap-1">
+                <Code className="w-3 h-3 text-indigo-400" /> {primaryActivity.name}
+              </span>
+              <span className="text-[9px] text-indigo-400 font-mono font-semibold">Active</span>
+            </div>
+            <p className="text-[11px] font-bold text-white line-clamp-1">
+              {primaryActivity.details || primaryActivity.name}
+            </p>
+            <p className="text-[10px] text-gray-300 line-clamp-1 font-medium">
+              {primaryActivity.state || 'Discord Rich Presence'}
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-0.5">
+            <div className="flex items-center justify-between">
+              <span className="text-[9px] font-bold text-indigo-300 uppercase tracking-wider">Discord Presence</span>
+              <span className="text-[9px] text-emerald-400 font-mono font-semibold">Live</span>
+            </div>
+            <p className="text-[11px] font-bold text-white line-clamp-1">
+              Visual Studio Code & Gaming
+            </p>
+            <p className="text-[10px] text-gray-300 line-clamp-1 font-medium">
+              Active in Lanyard Community
+            </p>
+          </div>
+        )}
       </div>
     </motion.a>
   )
