@@ -678,6 +678,35 @@ export default function Portfolio() {
 
   const displayedProjects = showAllProjects ? projects : projects.slice(0, initialItems)
   const displayedAchievements = showAllCertificates ? achievements : achievements.slice(0, initialItems)
+
+  const handleToggleProjects = () => {
+    if (showAllProjects) {
+      setShowAllProjects(false)
+      const el = document.getElementById('projects')
+      if (el) {
+        const yOffset = -90
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' })
+      }
+    } else {
+      setShowAllProjects(true)
+    }
+  }
+
+  const handleToggleCertificates = () => {
+    if (showAllCertificates) {
+      setShowAllCertificates(false)
+      const el = document.getElementById('achievements')
+      if (el) {
+        const yOffset = -90
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' })
+      }
+    } else {
+      setShowAllCertificates(true)
+    }
+  }
+
   // Form State
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
   const [errors, setErrors] = useState<{ name?: string; email?: string; subject?: string; message?: string }>({})
@@ -1314,7 +1343,7 @@ export default function Portfolio() {
             {projects.length > initialItems && (
               <div className="mt-8 flex justify-center">
                 <ToggleButton
-                  onClick={() => setShowAllProjects((prev) => !prev)}
+                  onClick={handleToggleProjects}
                   isShowingMore={showAllProjects}
                   totalCount={projects.length}
                   currentCount={displayedProjects.length}
@@ -1402,7 +1431,7 @@ export default function Portfolio() {
             {achievements.length > initialItems && (
               <div className="mt-8 flex justify-center">
                 <ToggleButton
-                  onClick={() => setShowAllCertificates((prev) => !prev)}
+                  onClick={handleToggleCertificates}
                   isShowingMore={showAllCertificates}
                   totalCount={achievements.length}
                   currentCount={displayedAchievements.length}
@@ -1429,7 +1458,13 @@ export default function Portfolio() {
                   <div className="lg:col-span-5 space-y-5">
                     
                     {/* Header Card */}
-                    <div className="glass-card rounded-2xl p-6 md:p-7 border border-white/10 space-y-3 group text-center flex flex-col items-center justify-center">
+                    <motion.div
+                      initial={{ opacity: 0, x: -30, y: 20 }}
+                      whileInView={{ opacity: 1, x: 0, y: 0 }}
+                      viewport={{ once: false, margin: '-20px' }}
+                      transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+                      className="glass-card rounded-2xl p-6 md:p-7 border border-white/10 space-y-3 group text-center flex flex-col items-center justify-center"
+                    >
                       <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-1 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
                       <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 inline-block">
                         {t.contactSec.tag}
@@ -1440,10 +1475,16 @@ export default function Portfolio() {
                       <p className="text-xs md:text-sm text-gray-300 leading-relaxed max-w-md mx-auto">
                         {t.contactSec.description}
                       </p>
-                    </div>
+                    </motion.div>
 
                     {/* Location Info Card */}
-                    <div className="glass-card rounded-2xl p-6 border border-white/10 hover:border-pink-500/30 hover:shadow-[0_0_20px_rgba(236,72,153,0.15)] transition-all relative overflow-hidden group">
+                    <motion.div
+                      initial={{ opacity: 0, x: -30, y: 20 }}
+                      whileInView={{ opacity: 1, x: 0, y: 0 }}
+                      viewport={{ once: false, margin: '-20px' }}
+                      transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+                      className="glass-card rounded-2xl p-6 border border-white/10 hover:border-pink-500/30 hover:shadow-[0_0_20px_rgba(236,72,153,0.15)] transition-all relative overflow-hidden group"
+                    >
                       <div className="absolute top-0 right-0 w-24 h-24 bg-pink-500/5 rounded-full blur-xl pointer-events-none" />
                       <div className="flex items-start gap-4">
                         <div className="p-3 rounded-xl bg-pink-500/10 text-pink-400 flex-shrink-0 group-hover:scale-110 transition-transform">
@@ -1470,10 +1511,16 @@ export default function Portfolio() {
                           </motion.a>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
 
                     {/* Social Media Connections */}
-                    <div className="glass-card rounded-2xl p-6 border border-white/10 space-y-4">
+                    <motion.div
+                      initial={{ opacity: 0, x: -30, y: 20 }}
+                      whileInView={{ opacity: 1, x: 0, y: 0 }}
+                      viewport={{ once: false, margin: '-20px' }}
+                      transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
+                      className="glass-card rounded-2xl p-6 border border-white/10 space-y-4"
+                    >
                       <h4 className="font-bold text-white text-xs tracking-wider uppercase pl-1">{t.contactSec.socialsHeading}</h4>
                       <div className="grid grid-cols-2 gap-2.5">
                         {[
@@ -1500,12 +1547,18 @@ export default function Portfolio() {
                           </motion.a>
                         ))}
                       </div>
-                    </div>
+                    </motion.div>
 
                   </div>
 
                   {/* Right Column: Contact Form / Success Screen (Span 7 on Desktop) */}
-                  <div className="lg:col-span-7">
+                  <motion.div
+                    className="lg:col-span-7"
+                    initial={{ opacity: 0, x: 30, y: 20 }}
+                    whileInView={{ opacity: 1, x: 0, y: 0 }}
+                    viewport={{ once: false, margin: '-20px' }}
+                    transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+                  >
                     <AnimatePresence mode="wait">
                       {submitSuccess ? (
                         <motion.div
@@ -1653,7 +1706,7 @@ export default function Portfolio() {
                         </motion.form>
                       )}
                     </AnimatePresence>
-                  </div>
+                  </motion.div>
                 </div>
 
               </motion.section>
