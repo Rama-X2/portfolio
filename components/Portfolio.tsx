@@ -37,10 +37,6 @@ import {
   Loader2,
 } from 'lucide-react'
 
-import DiscordWidget, { DiscordModalContent } from './widgets/DiscordWidget'
-import WakaTimeWidget, { WakaTimeModalContent } from './widgets/WakaTimeWidget'
-import GithubWidget, { GithubModalContent } from './widgets/GithubWidget'
-import AnimeClockWidget, { AnimeClockModalContent } from './widgets/AnimeClockWidget'
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
 const personal = {
@@ -181,7 +177,7 @@ const achievements = [
     issuer: 'Cisco Networking Academy',
     date: '22 Juli 2026',
     dateEn: 'July 22, 2026',
-    image: '/gambar-sertifikat/cisco-ethical-hacker-certificate.png',
+    image: '/gambar-sertifikat/cisco-ethical-hacker-certificate.webp',
     verifyUrl: 'https://www.credly.com/badges/d6d1ef95-849b-4e56-8501-a7b67c7574e9/public_url',
   },
   {
@@ -190,7 +186,7 @@ const achievements = [
     issuer: 'Cisco Networking Academy',
     date: '20 Juli 2026',
     dateEn: 'July 20, 2026',
-    image: '/gambar-sertifikat/cisco-introduction-to-cybersecurity.png',
+    image: '/gambar-sertifikat/cisco-introduction-to-cybersecurity.webp',
     verifyUrl: 'https://www.credly.com/badges/dc1ad136-5dfd-41ac-a802-ad0f89fcddd8/public_url',
   },
   {
@@ -199,7 +195,7 @@ const achievements = [
     issuer: 'Cisco Networking Academy',
     date: '20 Juli 2026',
     dateEn: 'July 20, 2026',
-    image: '/gambar-sertifikat/cisco-networking-basics.png',
+    image: '/gambar-sertifikat/cisco-networking-basics.webp',
     verifyUrl: 'https://www.credly.com/badges/a504b2a0-83c5-4901-802c-2b3c2ed5bdb8/public_url',
   },
   {
@@ -208,7 +204,7 @@ const achievements = [
     issuer: 'DevCoach × Asah!',
     date: '26 Juni 2025',
     dateEn: 'June 26, 2025',
-    image: '/gambar-sertifikat/devcoach-200-integrasi-it-ai-powered-by-asah-certificate-1.png',
+    image: '/gambar-sertifikat/devcoach-200-integrasi-it-ai-powered-by-asah-certificate.webp',
   },
   {
     id: 5,
@@ -216,7 +212,7 @@ const achievements = [
     issuer: 'Indosat Ooredoo Hutchison Digital Camp',
     date: '10 Juli 2025',
     dateEn: 'July 10, 2025',
-    image: '/gambar-sertifikat/idcamp-x-dicoding-live-10-uipath-agentic-automation-introduction-and-use-case-certificate-1.png',
+    image: '/gambar-sertifikat/idcamp-x-dicoding-live-10-uipath-agentic-automation-introduction-and-use-case-certificate.webp',
   },
   {
     id: 6,
@@ -224,7 +220,7 @@ const achievements = [
     issuer: 'Indosat Ooredoo Hutchison Digital Camp',
     date: '22 Juli 2025',
     dateEn: 'July 22, 2025',
-    image: '/gambar-sertifikat/idcamp-alumni-dialogue-5-debunking-the-myth-of-intelligent-automation-prepare-for-the-future-workfor-1.png',
+    image: '/gambar-sertifikat/idcamp-alumni-dialogue-5-debunking-the-myth-of-intelligent-automation-prepare-for-the-future-workfor.webp',
   },
 ]
 
@@ -236,7 +232,7 @@ const projects = [
       'Website e-commerce pertanian modern premium dengan database 72 produk (bibit, nutrisi, pakan, peralatan, pestisida, dan pupuk) dalam 6 kategori. Dilengkapi filter dan pencarian real-time, detail modal produk, sistem keranjang LocalStorage, serta checkout via WhatsApp.',
     descriptionEn:
       'Premium modern agricultural e-commerce website with a database of 72 products across 6 categories. Features real-time search & filters, product modal details, LocalStorage shopping cart, and direct checkout.',
-    image: '/images/portfolio/banner_bumi-tani.png',
+    image: '/images/portfolio/banner_bumi-tani.webp',
     technologies: ['HTML', 'Tailwind CSS', 'JavaScript', 'LocalStorage', 'Vercel'],
     liveUrl: 'https://bumi-tani-v2.vercel.app',
     githubUrl: 'https://github.com/Rama-X2/Bumi-Tani-v2',
@@ -264,7 +260,7 @@ const projects = [
       'Modern gaming top-up platform dengan real-time transaction processing, multi-game support, dan animasi yang menarik. Dibangun menggunakan Next.js, TypeScript, dan Framer Motion.',
     descriptionEn:
       'Modern gaming top-up platform with real-time transaction processing, multi-game support, and fluid animations. Built with Next.js, TypeScript, and Framer Motion.',
-    image: '/images/portfolio/banner_rama-store.png',
+    image: '/images/portfolio/banner_rama-store.webp',
     technologies: ['Next.js', 'TypeScript', 'Framer Motion', 'Tailwind CSS', 'Node.js'],
     liveUrl: 'https://rama-store.vercel.app',
     githubUrl: 'https://github.com/Rama-X2/rama-store',
@@ -278,7 +274,7 @@ const projects = [
       'ROM custom ringan berbasis Android 15 (Vanilla Ice Cream) yang disempurnakan dengan asisten AI cerdas menggunakan TensorFlow dan NLP.',
     descriptionEn:
       'Lightweight custom ROM based on Android 15 (Vanilla Ice Cream) enhanced with a smart AI assistant using TensorFlow and NLP.',
-    image: '/images/portfolio/banner_rom-pixel.png',
+    image: '/images/portfolio/banner_rom-pixel.webp',
     technologies: ['AOSP', 'Android 15', 'Shell Script', 'Python', 'TensorFlow'],
     liveUrl: 'https://rama.server.my.id/custom-rom-by_rama',
     githubUrl: 'https://github.com/Rama-X2/Rom-Pixel',
@@ -292,7 +288,7 @@ const projects = [
       'Dashboard manajemen server lengkap untuk operasi bisnis, menggabungkan analitik, kontrol jaringan, dan wawasan pengguna.',
     descriptionEn:
       'Comprehensive server management dashboard integrating analytics, network control, and user insights.',
-    image: '/images/portfolio/banner_rama_server.png',
+    image: '/images/portfolio/banner_rama_server.webp',
     technologies: ['React', 'Chart.js', 'Material-UI', 'Express.js', 'MongoDB'],
     liveUrl: 'https://rama.server.my.id/dashboard/rama-server',
     githubUrl: 'https://github.com/Rama-X2/andora-ex-wami-ram',
@@ -306,7 +302,7 @@ const projects = [
       'Modul kustomisasi UI eksklusif untuk ROM Evolution X pada POCO F5. Peningkatan visual dari lockscreen, status bar, hingga animasi sistem.',
     descriptionEn:
       'Exclusive UI customization module for Evolution X custom ROM on POCO F5 device.',
-    image: '/images/portfolio/kernel_poco-f5.png',
+    image: '/images/portfolio/kernel_poco-f5.webp',
     technologies: ['Android AOSP', 'Evolution X', 'Magisk Module', 'OMS'],
     liveUrl: 'https://rama.server.my.id/rising-ui-2.5',
     githubUrl: 'https://github.com/Rama-X2/RISING-UI-2.5',
@@ -320,7 +316,7 @@ const projects = [
       'Aplikasi web berbasis browser untuk membandingkan kualitas dan karakteristik teknis gambar digital secara side-by-side. Mendukung eksperimen Bit Depth (1-bit hingga 32-bit), kompresi JPEG, format TIFF, serta upscaling resolusi.',
     descriptionEn:
       'Browser-based web app to compare digital image quality and technical characteristics side-by-side. Supports bit depth testing, JPEG compression analysis, and resolution upscaling.',
-    image: '/images/portfolio/banner_digital-image-compare.png',
+    image: '/images/portfolio/banner_digital-image-compare.webp',
     technologies: ['HTML', 'CSS', 'JavaScript', 'Canvas API', 'Vercel'],
     liveUrl: 'https://digital-image-compare-rama-x2.vercel.app',
     githubUrl: 'https://github.com/Rama-X2/Digital-Image-Compare-Tools',
@@ -334,7 +330,7 @@ const projects = [
       'Modul optimasi thermal Magisk tingkat lanjut yang dirancang khusus untuk mengurangi throttling agresif pada sistem Android dengan tetap menjaga perlindungan keamanan hardware.',
     descriptionEn:
       'Advanced Magisk thermal optimization module designed to reduce aggressive throttling while keeping hardware safe.',
-    image: '/images/portfolio/thermal-breaker.png',
+    image: '/images/portfolio/thermal-breaker.webp',
     technologies: ['Magisk', 'Shell Script', 'Android', 'Thermal Tuning'],
     liveUrl: 'https://github.com/Rama-X2/thermal-breaker-miyabi-core',
     githubUrl: 'https://github.com/Rama-X2/thermal-breaker-miyabi-core',
@@ -348,7 +344,7 @@ const projects = [
       'Modul optimasi proses latar belakang GMS (Google Play Services) secara agresif untuk meningkatkan stabilitas CPU, mengurangi penggunaan RAM, dan meningkatkan efisiensi baterai tanpa mengganggu akun Google.',
     descriptionEn:
       'Background GMS process optimization module to save RAM and improve CPU power efficiency on Android without affecting Google accounts.',
-    image: '/images/portfolio/gms-breaker.png',
+    image: '/images/portfolio/gms-breaker.webp',
     technologies: ['Magisk', 'Shell Script', 'Android', 'Process Management'],
     liveUrl: 'https://github.com/Rama-X2/gms-breaker-miyabi-core',
     githubUrl: 'https://github.com/Rama-X2/gms-breaker-miyabi-core',
@@ -362,7 +358,7 @@ const projects = [
       'Modifikasi sistem untuk membuka performa GPU maksimal (Extreme GPU Max OPP Lock) dan Engine Anti-Override pada perangkat Redmi 10A (Helio G25) tanpa menimbulkan konflik thermal.',
     descriptionEn:
       'Low-level system modification to unlock maximum GPU performance on Redmi 10A (Helio G25) without thermal conflicts.',
-    image: '/images/portfolio/gpu-unlock.png',
+    image: '/images/portfolio/gpu-unlock.webp',
     technologies: ['Magisk', 'Shell Script', 'Android', 'Overclocking'],
     liveUrl: 'https://github.com/Rama-X2/Redmi-10A_GPU_Performance_Unlock',
     githubUrl: 'https://github.com/Rama-X2/Redmi-10A_GPU_Performance_Unlock',
@@ -376,7 +372,7 @@ const projects = [
       'Modul Magisk untuk mengatasi masalah atau menonaktifkan randomisasi MAC WiFi pada perangkat berprosesor MTK Helio G25 (seperti Redmi 9A/10A) yang menjalankan Android 13 SuperiorOS.',
     descriptionEn:
       'System fix module to stabilize or disable WiFi MAC randomization on MTK Helio G25 devices running Android 13.',
-    image: '/images/portfolio/wifi-mac-fix.png',
+    image: '/images/portfolio/wifi-mac-fix.webp',
     technologies: ['Magisk', 'Shell Script', 'Android', 'Networking'],
     liveUrl: 'https://github.com/Rama-X2/MTK-WiFi-MAC-Randomization-Fix',
     githubUrl: 'https://github.com/Rama-X2/MTK-WiFi-MAC-Randomization-Fix',
@@ -390,7 +386,7 @@ const projects = [
       'Project kustomisasi kernel dengan fokus pada overclocking CPU/GPU, governor tuning, serta optimasi I/O scheduler dan thermal control.',
     descriptionEn:
       'Custom Linux kernel modification focusing on CPU/GPU governor tuning and I/O scheduling optimization.',
-    image: '/images/portfolio/kernel-lappland.png',
+    image: '/images/portfolio/kernel-lappland.webp',
     technologies: ['Android SDK', 'Shell Script', 'Linux Kernel', 'C', 'C++'],
     liveUrl: '#',
     githubUrl: 'https://github.com/Rama-X2',
@@ -553,80 +549,11 @@ export default function Portfolio() {
   const [selectedCert, setSelectedCert] = useState<(typeof achievements)[0] | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [showResume, setShowResume] = useState(false)
-  const [activeModalWidget, setActiveModalWidget] = useState<'discord' | 'wakatime' | 'github' | 'clock' | null>(null)
-
   // Form State
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
   const [errors, setErrors] = useState<{ name?: string; email?: string; subject?: string; message?: string }>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
-
-  // Real-Time Lanyard Discord RPC, GitHub API & WakaTime States
-  const [discordData, setDiscordData] = useState<any>(null)
-  const [githubData, setGithubData] = useState<{ repos: number; followers: number }>({ repos: 15, followers: 0 })
-  const [wakatimeData, setWakatimeData] = useState<{ timeText: string; languages: string }>({
-    timeText: '39 hrs 34 mins',
-    languages: 'TypeScript, PHP & Linux C++',
-  })
-  const discordUserId = '896784559092428831' // Ade Ramadhani Putra's Discord User ID
-
-  useEffect(() => {
-    // Fetch Lanyard Discord RPC
-    const fetchLanyard = async () => {
-      try {
-        const res = await fetch(`https://api.lanyard.rest/v1/users/${discordUserId}`)
-        const json = await res.json()
-        if (json && json.success) {
-          setDiscordData(json.data)
-        }
-      } catch (err) {
-        // Fallback gracefully
-      }
-    }
-
-    // Fetch GitHub API
-    const fetchGithub = async () => {
-      try {
-        const res = await fetch('https://api.github.com/users/Rama-X2')
-        const data = await res.json()
-        if (data && data.public_repos !== undefined) {
-          setGithubData({
-            repos: data.public_repos,
-            followers: data.followers || 0,
-          })
-        }
-      } catch (err) {
-        // Fallback gracefully
-      }
-    }
-
-    fetchLanyard()
-    fetchGithub()
-    const interval = setInterval(() => {
-      fetchLanyard()
-      fetchGithub()
-    }, 20000)
-    return () => clearInterval(interval)
-  }, [discordUserId])
-
-  // Real-Time Live Digital Clock State
-  const [liveTime, setLiveTime] = useState<string>('')
-
-  useEffect(() => {
-    const updateClock = () => {
-      const now = new Date()
-      const timeStr = now.toLocaleTimeString('id-ID', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        timeZone: 'Asia/Jakarta',
-      })
-      setLiveTime(timeStr)
-    }
-    updateClock()
-    const timer = setInterval(updateClock, 1000)
-    return () => clearInterval(timer)
-  }, [])
 
   useEffect(() => {
     const saved = localStorage.getItem('portfolio_lang') as 'id' | 'en'
@@ -1044,29 +971,6 @@ export default function Portfolio() {
                   </motion.div>
                 </div>
               </div>
-            </div>
-
-            {/* ── 4 Interactive Realtime GFX Widgets (Responsive 1-col on Mobile, 4-col on Desktop) ─── */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-3.5 md:gap-4">
-              <DiscordWidget
-                discordUserId={discordUserId}
-                avatarFallback={personal.avatar}
-                onOpenModal={() => setActiveModalWidget('discord')}
-              />
-              <WakaTimeWidget
-                avatarFallback={personal.avatar}
-                timeText={wakatimeData.timeText}
-                languages={wakatimeData.languages}
-                onOpenModal={() => setActiveModalWidget('wakatime')}
-              />
-              <GithubWidget
-                username="Rama-X2"
-                onOpenModal={() => setActiveModalWidget('github')}
-              />
-              <AnimeClockWidget
-                avatarFallback={personal.avatar}
-                onOpenModal={() => setActiveModalWidget('clock')}
-              />
             </div>
 
             {/* Tech Stack & Tools */}
@@ -1766,7 +1670,7 @@ export default function Portfolio() {
               {/* Scrollable image area */}
               <div className="resume-img-scroll">
                 <img
-                  src="/gambar-resume/cv-resume-ade-rama.png"
+                  src="/gambar-resume/cv-resume-ade-rama.webp"
                   alt="Resume Ade Ramadhani Putra"
                   className="resume-img allow-download"
                 />
@@ -1775,8 +1679,8 @@ export default function Portfolio() {
               {/* Action buttons */}
               <div className="flex flex-col sm:flex-row gap-3 mt-4 flex-shrink-0">
                 <motion.a
-                  href="/gambar-resume/cv-resume-ade-rama.png"
-                  download="CV-Resume-Ade-Ramadhani-Putra.png"
+                  href="/gambar-resume/cv-resume-ade-rama.webp"
+                  download="CV-Resume-Ade-Ramadhani-Putra.webp"
                   className="btn-primary flex-1 flex items-center justify-center gap-2 allow-download"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -1784,7 +1688,7 @@ export default function Portfolio() {
                   <FileText className="w-4 h-4" /> {t.resumeModal.download}
                 </motion.a>
                 <motion.a
-                  href="/gambar-resume/cv-resume-ade-rama.png"
+                  href="/gambar-resume/cv-resume-ade-rama.webp"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-outline flex-1 flex items-center justify-center gap-2 allow-download"
@@ -1798,45 +1702,6 @@ export default function Portfolio() {
           </motion.div>
         )}
       </AnimatePresence>
-      {/* Interactive Widget Modal Overlay (Mobile Safe Top/Bottom Padding) */}
-      <AnimatePresence>
-        {activeModalWidget && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setActiveModalWidget(null)}
-            className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-3 sm:p-4 pt-16 pb-12 bg-black/85 backdrop-blur-md overflow-y-auto"
-          >
-            {activeModalWidget === 'discord' && (
-              <DiscordModalContent
-                discordUserId={discordUserId}
-                avatarFallback={personal.avatar}
-                onClose={() => setActiveModalWidget(null)}
-              />
-            )}
-            {activeModalWidget === 'wakatime' && (
-              <WakaTimeModalContent
-                timeText={wakatimeData.timeText}
-                languages={wakatimeData.languages}
-                onClose={() => setActiveModalWidget(null)}
-              />
-            )}
-            {activeModalWidget === 'github' && (
-              <GithubModalContent
-                username="Rama-X2"
-                onClose={() => setActiveModalWidget(null)}
-              />
-            )}
-            {activeModalWidget === 'clock' && (
-              <AnimeClockModalContent
-                onClose={() => setActiveModalWidget(null)}
-              />
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
     </div>
   )
 }
