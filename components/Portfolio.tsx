@@ -994,7 +994,7 @@ export default function Portfolio() {
       {/* ── Layout (Full-Width Clean Desktop View, Mobile 100% Preserved) ─── */}
       <div className="flex flex-1 pt-[60px] md:pt-[72px] justify-center">
         {/* ── Content ─── */}
-        <main ref={mainRef} className="flex-1 max-w-[1380px] mx-auto w-full p-3 md:p-6 lg:p-8 min-w-0 space-y-12 md:space-y-16">
+        <main ref={mainRef} className="flex-1 w-full max-w-[1720px] mx-auto p-3 sm:p-5 md:p-8 lg:p-10 min-w-0 space-y-12 md:space-y-16">
 
           {/* ════════════════════════════════ HOME ═══ */}
           <motion.section
@@ -1253,7 +1253,7 @@ export default function Portfolio() {
                 >
                   <div>
                     {/* Project image */}
-                    <div className="relative h-44 sm:h-48 overflow-hidden bg-[#160d35]">
+                    <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#160d35]">
                       <Image
                         src={project.image}
                         alt={project.title}
@@ -1351,15 +1351,15 @@ export default function Portfolio() {
                   onClick={() => setSelectedCert(item)}
                 >
                   <div>
-                    {/* Certificate image */}
-                    <div className="relative h-48 sm:h-52 overflow-hidden bg-[#160d35]">
+                    {/* Certificate image with natural A4 ratio (16/11.5) */}
+                    <div className="relative w-full aspect-[16/11.5] overflow-hidden bg-[#160d35]">
                       <Image
                         src={item.image}
                         alt={item.title}
                         fill
                         className="object-cover transform group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#160d35] via-[#160d35]/30 to-transparent pointer-events-none z-10" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#160d35] via-[#160d35]/20 to-transparent pointer-events-none z-10" />
                       <div className="absolute -bottom-1 left-0 right-0 h-3 bg-[#160d35] pointer-events-none z-20" />
                       <div className="absolute top-3 right-3 p-1.5 bg-yellow-500/90 rounded-lg z-30 shadow-md">
                         <Award className="w-4 h-4 text-black" />
@@ -1367,37 +1367,33 @@ export default function Portfolio() {
 
                       {/* Hover Overlay like Ekizr */}
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-25 pointer-events-none">
-                        <div className="px-3 py-1.5 rounded-lg bg-black/60 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold flex items-center gap-1.5 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                          <ExternalLink className="w-3.5 h-3.5 text-primary" />
+                        <div className="px-3.5 py-2 rounded-xl bg-black/70 backdrop-blur-md border border-white/20 text-white text-xs font-semibold flex items-center gap-2 shadow-xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                          <ExternalLink className="w-4 h-4 text-primary" />
                           <span>{lang === 'en' ? 'View Certificate' : 'Lihat Sertifikat'}</span>
                         </div>
                       </div>
                     </div>
 
-                    {/* Info */}
-                    <div className="p-4 md:p-5">
-                      <h3 className="font-bold text-white text-sm md:text-base leading-snug mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                        {item.title}
-                      </h3>
-                      <p className="text-xs text-primary font-medium mb-2">{item.issuer}</p>
-                      <div className="flex items-center gap-1.5 text-xs text-gray-400">
-                        <Calendar className="w-3.5 h-3.5 text-gray-500" />
-                        <span>{lang === 'en' && item.dateEn ? item.dateEn : item.date}</span>
+                    {/* Streamlined Info Footer */}
+                    <div className="p-3.5 sm:p-4 bg-[#120a2e]/90 border-t border-white/5">
+                      <div className="flex items-center justify-between gap-2 mb-1.5">
+                        <h3 className="font-bold text-white text-xs sm:text-sm line-clamp-1 group-hover:text-primary transition-colors flex-1">
+                          {item.title}
+                        </h3>
+                        {(item as any).verifyUrl && (
+                          <span className="flex-shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-primary/15 text-primary border border-primary/20">
+                            {item.issuer.includes('Microsoft') ? 'MS Learn' : 'Credly'}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex items-center justify-between text-[11px] text-gray-400">
+                        <span className="text-primary font-medium truncate max-w-[60%]">{item.issuer}</span>
+                        <div className="flex items-center gap-1 text-gray-400 flex-shrink-0">
+                          <Calendar className="w-3 h-3 text-gray-500" />
+                          <span>{lang === 'en' && item.dateEn ? item.dateEn : item.date}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-
-                  {/* Action footer */}
-                  <div className="px-4 pb-4 md:px-5 md:pb-5 pt-0 flex items-center justify-between border-t border-white/5 mt-auto text-xs text-gray-400">
-                    <span className="text-gray-300 flex items-center gap-1">
-                      <ExternalLink className="w-3.5 h-3.5 text-primary" />
-                      <span>{t.achievementsSec.clickToView}</span>
-                    </span>
-                    {(item as any).verifyUrl && (
-                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
-                        {item.issuer.includes('Microsoft') ? 'MS Learn' : 'Credly'}
-                      </span>
-                    )}
                   </div>
                 </motion.div>
               ))}
