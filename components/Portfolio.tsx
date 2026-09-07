@@ -222,6 +222,60 @@ const achievements = [
     dateEn: 'July 22, 2025',
     image: '/gambar-sertifikat/idcamp-alumni-dialogue-5-debunking-the-myth-of-intelligent-automation-prepare-for-the-future-workfor.webp',
   },
+  {
+    id: 7,
+    title: 'Deploying and Configuring Microsoft Entra Global Secure Access',
+    issuer: 'Microsoft',
+    date: '7 Agustus 2026',
+    dateEn: 'August 7, 2026',
+    image: '/gambar-sertifikat/Deploying and Configuring Microsoft Entra Global Secure Access.webp',
+    verifyUrl: 'https://learn.microsoft.com/api/achievements/share/id-id/Rama-X2/H2K7LAM8?sharingId=2AC6E178E4535795',
+  },
+  {
+    id: 8,
+    title: 'Managing Microsoft Entra Identity Protection',
+    issuer: 'Microsoft',
+    date: '7 Agustus 2026',
+    dateEn: 'August 7, 2026',
+    image: '/gambar-sertifikat/Managing Microsoft Entra Identity Protection.webp',
+    verifyUrl: 'https://learn.microsoft.com/api/achievements/share/id-id/Rama-X2/7D6K6GDZ?sharingId=2AC6E178E4535795',
+  },
+  {
+    id: 9,
+    title: 'Implementing Access Management for Azure Resources',
+    issuer: 'Microsoft',
+    date: '7 Agustus 2026',
+    dateEn: 'August 7, 2026',
+    image: '/gambar-sertifikat/Implementing Access Management for Azure Resources.webp',
+    verifyUrl: 'https://learn.microsoft.com/api/achievements/share/id-id/Rama-X2/NQJVS8RF?sharingId=2AC6E178E4535795',
+  },
+  {
+    id: 10,
+    title: 'Designing Semantic Models in Power BI',
+    issuer: 'Microsoft',
+    date: '7 Agustus 2026',
+    dateEn: 'August 7, 2026',
+    image: '/gambar-sertifikat/Designing Semantic Models in Power BI.webp',
+    verifyUrl: 'https://learn.microsoft.com/api/achievements/share/id-id/Rama-X2/VSUJ2G3M?sharingId=2AC6E178E4535795',
+  },
+  {
+    id: 11,
+    title: 'Optimizing Models for Performance in Power BI',
+    issuer: 'Microsoft',
+    date: '7 Agustus 2026',
+    dateEn: 'August 7, 2026',
+    image: '/gambar-sertifikat/Optimizing Models for Performance in Power BI.webp',
+    verifyUrl: 'https://learn.microsoft.com/api/achievements/share/id-id/Rama-X2/WMDVXMBN?sharingId=2AC6E178E4535795',
+  },
+  {
+    id: 12,
+    title: 'Build Programs Using Python Coding in Minecraft',
+    issuer: 'Microsoft',
+    date: '7 Agustus 2026',
+    dateEn: 'August 7, 2026',
+    image: '/gambar-sertifikat/Build Programs Using Python Coding in minecraft.webp',
+    verifyUrl: 'https://learn.microsoft.com/api/achievements/share/id-id/Rama-X2/D3Y94CXJ?sharingId=2AC6E178E4535795',
+  },
 ]
 
 const projects = [
@@ -1602,7 +1656,11 @@ export default function Portfolio() {
                     whileTap={{ scale: 0.97 }}
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
-                    <span>{lang === 'en' ? 'Verify on Credly' : 'Verifikasi di Credly'}</span>
+                    <span>
+                      {(selectedCert as any).verifyUrl.includes('learn.microsoft.com') || selectedCert.issuer.includes('Microsoft')
+                        ? (lang === 'en' ? 'Verify on Microsoft Learn' : 'Verifikasi di Microsoft Learn')
+                        : (lang === 'en' ? 'Verify on Credly' : 'Verifikasi di Credly')}
+                    </span>
                   </motion.a>
                 )}
               </div>
