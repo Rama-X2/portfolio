@@ -592,7 +592,7 @@ const translations = {
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
+  viewport: { once: false },
   transition: { delay, duration: 0.4, ease: 'easeOut' },
 })
 
@@ -607,7 +607,7 @@ const cardScrollVariant = (index: number) => ({
     y: 0,
     x: 0,
   },
-  viewport: { once: true, margin: '-40px' },
+  viewport: { once: false, margin: '-40px' },
   transition: {
     duration: 0.45,
     delay: (index % 3) * 0.1,
@@ -1001,7 +1001,7 @@ export default function Portfolio() {
             id="home"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.5 }}
             className="scroll-mt-24 space-y-5 md:space-y-6"
           >
@@ -1089,7 +1089,7 @@ export default function Portfolio() {
                     className="group relative flex items-center justify-center p-2 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 cursor-pointer"
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ delay: 0.01 * i }}
                     whileHover={{ scale: 1.15, y: -3 }}
                   >
@@ -1113,7 +1113,7 @@ export default function Portfolio() {
             id="about"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
@@ -1230,7 +1230,7 @@ export default function Portfolio() {
             id="projects"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
@@ -1329,7 +1329,7 @@ export default function Portfolio() {
             id="achievements"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
@@ -1421,7 +1421,7 @@ export default function Portfolio() {
             id="contact"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10 max-w-5xl mx-auto"
           >
