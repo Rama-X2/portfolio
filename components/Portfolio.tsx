@@ -1170,7 +1170,7 @@ export default function Portfolio() {
               <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
                 {/* Avatar */}
                 <motion.div
-                  className="avatar-ring w-24 h-24 md:w-32 md:h-32 flex-shrink-0 mx-auto md:mx-0 relative"
+                  className="avatar-ring w-24 h-24 md:w-32 md:h-32 flex-shrink-0 mx-auto md:mx-0"
                   {...fadeUp(0.1)}
                   whileHover={{ scale: 1.05 }}
                 >
@@ -1182,44 +1182,10 @@ export default function Portfolio() {
                     className="w-full h-full object-cover rounded-full"
                     priority
                   />
-                  {/* Glowing Live Status Beacon on Avatar (Modern Profile Badge) */}
-                  <span className="absolute bottom-1 right-1 md:bottom-2 md:right-2 flex h-4 w-4 md:h-5 md:w-5 pointer-events-none">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-4 w-4 md:h-5 md:w-5 bg-emerald-500 border-2 border-[#0c0a1e] shadow-[0_0_10px_#10b981]" />
-                  </span>
                 </motion.div>
 
                 {/* Text */}
                 <div className="flex-1 text-center md:text-left">
-                  {/* Floating Neon Glow Status Badge (Gaya Ekizr, 100% Ramping & Proporsional di Mobile) */}
-                  <motion.div
-                    {...fadeUp(0.08)}
-                    className="inline-flex items-center mb-2.5 justify-center md:justify-start"
-                  >
-                    <motion.div
-                      onClick={() => navClick('contact')}
-                      className="relative group cursor-pointer inline-flex items-center"
-                      whileHover={{ scale: 1.05, y: -1 }}
-                      whileTap={{ scale: 0.97 }}
-                      title={lang === 'en' ? 'Click to contact me directly' : 'Klik untuk hubungi saya langsung'}
-                    >
-                      {/* Animated Glowing Outer Aura (Indigo-Purple-Pink Neon) */}
-                      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary via-secondary to-pink-500 rounded-full blur-sm opacity-40 group-hover:opacity-75 transition duration-500 animate-pulse pointer-events-none" />
-                      
-                      {/* Frosted Glass Pill (Ramping, Mewah, Anti-Terlipat di HP) */}
-                      <div className="relative flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0c0a1e]/90 backdrop-blur-xl border border-white/15 group-hover:border-primary/50 transition-all shadow-glow">
-                        <Sparkles className="w-3.5 h-3.5 text-indigo-400 group-hover:rotate-12 transition-transform duration-300 flex-shrink-0" />
-                        <span className="text-xs sm:text-sm font-semibold gradient-text tracking-wide whitespace-nowrap">
-                          {lang === 'en' ? 'Available for Projects' : 'Tersedia untuk Proyek'}
-                        </span>
-                        <span className="relative flex h-2 w-2 flex-shrink-0">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-                        </span>
-                      </div>
-                    </motion.div>
-                  </motion.div>
-
                   <motion.p {...fadeUp(0.15)} className="text-sm text-primary font-semibold mb-1">
                     {t.personal.greeting}
                   </motion.p>
