@@ -1170,7 +1170,7 @@ export default function Portfolio() {
               <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
                 {/* Avatar */}
                 <motion.div
-                  className="avatar-ring w-24 h-24 md:w-32 md:h-32 flex-shrink-0 mx-auto md:mx-0"
+                  className="avatar-ring w-24 h-24 md:w-32 md:h-32 flex-shrink-0 mx-auto md:mx-0 relative"
                   {...fadeUp(0.1)}
                   whileHover={{ scale: 1.05 }}
                 >
@@ -1182,43 +1182,42 @@ export default function Portfolio() {
                     className="w-full h-full object-cover rounded-full"
                     priority
                   />
+                  {/* Glowing Live Status Beacon on Avatar (Modern Profile Badge) */}
+                  <span className="absolute bottom-1 right-1 md:bottom-2 md:right-2 flex h-4 w-4 md:h-5 md:w-5 pointer-events-none">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-4 w-4 md:h-5 md:w-5 bg-emerald-500 border-2 border-[#0c0a1e] shadow-[0_0_10px_#10b981]" />
+                  </span>
                 </motion.div>
 
                 {/* Text */}
                 <div className="flex-1 text-center md:text-left">
-                  {/* High-Tech Shimmer Status Capsule (Ultra-Tech / Vercel-Grade Polish) */}
+                  {/* Floating Neon Glow Status Badge (Gaya Ekizr, 100% Ramping & Proporsional di Mobile) */}
                   <motion.div
                     {...fadeUp(0.08)}
-                    onClick={() => navClick('contact')}
-                    className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1.5 rounded-full glass-card border border-emerald-500/30 hover:border-emerald-400/70 bg-[#0c0e24]/90 hover:bg-[#13173a] text-xs mb-3.5 shadow-[0_0_20px_rgba(16,185,129,0.18)] hover:shadow-[0_0_25px_rgba(16,185,129,0.35)] cursor-pointer group transition-all duration-300 relative overflow-hidden select-none"
-                    whileHover={{ scale: 1.03, y: -1 }}
-                    whileTap={{ scale: 0.98 }}
-                    title={lang === 'en' ? 'Click to contact me directly' : 'Klik untuk hubungi saya langsung'}
+                    className="inline-flex items-center mb-2.5 justify-center md:justify-start"
                   >
-                    {/* Animated Light Sweep Shimmer Effect */}
-                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
-
-                    {/* Concentric Dual-Ring Radar Beacon */}
-                    <span className="relative flex h-2.5 w-2.5 items-center justify-center flex-shrink-0">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                      <span className="absolute inline-flex h-4 w-4 rounded-full bg-emerald-500/20" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]" />
-                    </span>
-
-                    {/* Monospace Micro Badge */}
-                    <span className="text-[10px] font-mono tracking-wider font-extrabold uppercase text-emerald-300 bg-emerald-500/15 px-1.5 py-0.5 rounded border border-emerald-500/30">
-                      {lang === 'en' ? 'STATUS: ACTIVE' : 'STATUS: AKTIF'}
-                    </span>
-
-                    <span className="text-white/20 text-xs font-light">|</span>
-
-                    {/* Main Status Text */}
-                    <span className="font-semibold text-gray-200 group-hover:text-white transition-colors text-xs tracking-tight">
-                      {lang === 'en' ? 'Available for Freelance & Projects' : 'Tersedia untuk Freelance & Kolaborasi Proyek'}
-                    </span>
-
-                    {/* Micro Interactive Chevron */}
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400/70 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+                    <motion.div
+                      onClick={() => navClick('contact')}
+                      className="relative group cursor-pointer inline-flex items-center"
+                      whileHover={{ scale: 1.05, y: -1 }}
+                      whileTap={{ scale: 0.97 }}
+                      title={lang === 'en' ? 'Click to contact me directly' : 'Klik untuk hubungi saya langsung'}
+                    >
+                      {/* Animated Glowing Outer Aura (Indigo-Purple-Pink Neon) */}
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary via-secondary to-pink-500 rounded-full blur-sm opacity-40 group-hover:opacity-75 transition duration-500 animate-pulse pointer-events-none" />
+                      
+                      {/* Frosted Glass Pill (Ramping, Mewah, Anti-Terlipat di HP) */}
+                      <div className="relative flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0c0a1e]/90 backdrop-blur-xl border border-white/15 group-hover:border-primary/50 transition-all shadow-glow">
+                        <Sparkles className="w-3.5 h-3.5 text-indigo-400 group-hover:rotate-12 transition-transform duration-300 flex-shrink-0" />
+                        <span className="text-xs sm:text-sm font-semibold gradient-text tracking-wide whitespace-nowrap">
+                          {lang === 'en' ? 'Available for Projects' : 'Tersedia untuk Proyek'}
+                        </span>
+                        <span className="relative flex h-2 w-2 flex-shrink-0">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+                        </span>
+                      </div>
+                    </motion.div>
                   </motion.div>
 
                   <motion.p {...fadeUp(0.15)} className="text-sm text-primary font-semibold mb-1">
