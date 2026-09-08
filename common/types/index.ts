@@ -9,6 +9,10 @@ export interface PersonalInfo {
   linkedin: string
   instagram: string
   discord?: string
+  website?: string
+  email?: string
+  phone?: string
+  whatsapp?: string
 }
 
 export interface TechStackItem {
@@ -55,10 +59,14 @@ export interface ProjectItem {
   title: string
   description: string
   descriptionEn: string
+  longDescription?: string
+  longDescriptionEn?: string
   image: string
   technologies: string[]
   liveUrl?: string
   githubUrl?: string
+  liveDemoUrl?: string
+  sourceCodeUrl?: string
   category: string
   featured?: boolean
 }

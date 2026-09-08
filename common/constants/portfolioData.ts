@@ -30,6 +30,7 @@ export const personal: PersonalInfo = {
   linkedin: 'https://linkedin.com/in/rama-xd',
   instagram: 'https://instagram.com/rama_ext4',
   discord: 'https://discord.com/users/rama_ext',
+  website: 'https://rama-x2.my.id',
 }
 
 export const techStackList: TechStackItem[] = [
