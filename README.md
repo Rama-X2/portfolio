@@ -4,15 +4,18 @@
 
 **Modern, responsive, and performance-driven personal web portfolio.**
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-rama--x2.my.id-4f46e5?style=flat-square&logo=google-chrome&logoColor=white)](https://rama-x2.my.id)
-[![Next.js](https://img.shields.io/badge/Next.js%2014-black?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React%2018-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript%205-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS%203-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Framer Motion](https://img.shields.io/badge/Framer%20Motion-0055FF?style=flat-square&logo=framer&logoColor=white)](https://www.framer.com/motion/)
-[![Resend](https://img.shields.io/badge/Resend%20API-000000?style=flat-square&logo=resend&logoColor=white)](https://resend.com/)
+<br />
 
-[Explore Live Showcase](https://rama-x2.my.id) • [View Projects](https://rama-x2.my.id#projects) • [Contact](https://rama-x2.my.id#contact)
+[![Visit Portfolio Website](https://img.shields.io/badge/VISIT_PORTFOLIO_WEBSITE-rama--x2.my.id-6366f1?style=for-the-badge&logo=google-chrome&logoColor=white)](https://rama-x2.my.id)
+
+<br /><br />
+
+[![Next.js](https://img.shields.io/badge/Next.js_14-000000?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React_18-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript_5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_3-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=flat-square&logo=framer&logoColor=white)](https://www.framer.com/motion/)
+[![Resend](https://img.shields.io/badge/Resend_API-000000?style=flat-square&logo=resend&logoColor=white)](https://resend.com/)
 
 </div>
 
@@ -81,14 +84,28 @@ portfolio-web/
 
 ## Author & Contact
 
-**Ade Ramadhani Putra**  
-Full Stack Developer & UI/UX Designer — Sukabumi, Indonesia
-
-- **Website**: [rama-x2.my.id](https://rama-x2.my.id)
-- **GitHub**: [@Rama-X2](https://github.com/Rama-X2)
-- **LinkedIn**: [Ade Ramadhani Putra](https://www.linkedin.com/in/ade-ramadhani-putra-66270b22a)
-- **Instagram**: [@rama_ext4](https://instagram.com/rama_ext4)
-- **Discord**: `@rama_ext`
+<table>
+  <tr>
+    <td align="center" width="150" valign="middle">
+      <img src="https://github.com/Rama-X2.png" width="95" style="border-radius: 50%;" alt="Ade Ramadhani Putra" />
+      <br /><br />
+      <b>Ade Ramadhani Putra</b>
+      <br />
+      <sub>Sukabumi, Indonesia</sub>
+    </td>
+    <td valign="middle">
+      <b>Full Stack Developer & UI/UX Designer</b>
+      <br />
+      <sub>Specializing in modern web applications, server infrastructure, and interactive UI systems.</sub>
+      <br /><br />
+      <a href="https://rama-x2.my.id"><img src="https://img.shields.io/badge/Website-rama--x2.my.id-4f46e5?style=flat-square&logo=google-chrome&logoColor=white" alt="Website" /></a>
+      <a href="https://github.com/Rama-X2"><img src="https://img.shields.io/badge/GitHub-@Rama--X2-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub" /></a>
+      <a href="https://www.linkedin.com/in/ade-ramadhani-putra-66270b22a"><img src="https://img.shields.io/badge/LinkedIn-Ade_Ramadhani_Putra-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+      <a href="https://instagram.com/rama_ext4"><img src="https://img.shields.io/badge/Instagram-@rama__ext4-E4405F?style=flat-square&logo=instagram&logoColor=white" alt="Instagram" /></a>
+      <a href="https://discord.com"><img src="https://img.shields.io/badge/Discord-@rama__ext-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord" /></a>
+    </td>
+  </tr>
+</table>
 
 ---
 
