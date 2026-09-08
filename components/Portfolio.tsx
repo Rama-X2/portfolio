@@ -36,6 +36,7 @@ import {
   Star,
   Loader2,
   ChevronDown,
+  ChevronRight,
   ArrowUp,
   Sparkles,
 } from 'lucide-react'
@@ -54,6 +55,7 @@ const personal = {
   github: 'https://github.com/Rama-X2',
   linkedin: 'https://linkedin.com/in/rama-xd',
   instagram: 'https://instagram.com/rama_ext4',
+  discord: 'https://discord.com/users/rama_ext',
 }
 
 const techStackList = [
@@ -760,6 +762,12 @@ const ToggleButton = ({
   </motion.button>
 )
 
+const DiscordIcon = ({ className = 'w-4 h-4' }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+  </svg>
+)
+
 // ─── Main Component ────────────────────────────────────────────────────────────
 export default function Portfolio() {
   const [lang, setLang] = useState<'id' | 'en'>('id')
@@ -1178,20 +1186,39 @@ export default function Portfolio() {
 
                 {/* Text */}
                 <div className="flex-1 text-center md:text-left">
-                  {/* Status Pill: Available for Freelance & Projects */}
+                  {/* High-Tech Shimmer Status Capsule (Ultra-Tech / Vercel-Grade Polish) */}
                   <motion.div
                     {...fadeUp(0.08)}
-                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold mb-2 shadow-[0_0_15px_rgba(16,185,129,0.15)]"
+                    onClick={() => navClick('contact')}
+                    className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1.5 rounded-full glass-card border border-emerald-500/30 hover:border-emerald-400/70 bg-[#0c0e24]/90 hover:bg-[#13173a] text-xs mb-3.5 shadow-[0_0_20px_rgba(16,185,129,0.18)] hover:shadow-[0_0_25px_rgba(16,185,129,0.35)] cursor-pointer group transition-all duration-300 relative overflow-hidden select-none"
+                    whileHover={{ scale: 1.03, y: -1 }}
+                    whileTap={{ scale: 0.98 }}
+                    title={lang === 'en' ? 'Click to contact me directly' : 'Klik untuk hubungi saya langsung'}
                   >
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    {/* Animated Light Sweep Shimmer Effect */}
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
+
+                    {/* Concentric Dual-Ring Radar Beacon */}
+                    <span className="relative flex h-2.5 w-2.5 items-center justify-center flex-shrink-0">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="absolute inline-flex h-4 w-4 rounded-full bg-emerald-500/20" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]" />
                     </span>
-                    <span>
-                      {lang === 'en'
-                        ? 'Available for Freelance & Projects'
-                        : 'Tersedia untuk Freelance & Kolaborasi Proyek'}
+
+                    {/* Monospace Micro Badge */}
+                    <span className="text-[10px] font-mono tracking-wider font-extrabold uppercase text-emerald-300 bg-emerald-500/15 px-1.5 py-0.5 rounded border border-emerald-500/30">
+                      {lang === 'en' ? 'STATUS: ACTIVE' : 'STATUS: AKTIF'}
                     </span>
+
+                    <span className="text-white/20 text-xs font-light">|</span>
+
+                    {/* Main Status Text */}
+                    <span className="font-semibold text-gray-200 group-hover:text-white transition-colors text-xs tracking-tight">
+                      {lang === 'en' ? 'Available for Freelance & Projects' : 'Tersedia untuk Freelance & Kolaborasi Proyek'}
+                    </span>
+
+                    {/* Micro Interactive Chevron */}
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400/70 group-hover:text-emerald-300 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
                   </motion.div>
 
                   <motion.p {...fadeUp(0.15)} className="text-sm text-primary font-semibold mb-1">
@@ -1709,16 +1736,17 @@ export default function Portfolio() {
                       <h4 className="font-bold text-white text-xs tracking-wider uppercase pl-1">{t.contactSec.socialsHeading}</h4>
                       <div className="grid grid-cols-2 gap-2.5">
                         {[
-                          { icon: Github,    href: personal.github,    label: 'GitHub',    color: '#ffffff', bg: 'rgba(255,255,255,0.06)', border: 'rgba(255,255,255,0.15)' },
-                          { icon: Linkedin,  href: personal.linkedin,  label: 'LinkedIn',  color: '#0A66C2', bg: 'rgba(10,102,194,0.06)', border: 'rgba(10,102,194,0.15)' },
-                          { icon: Instagram, href: personal.instagram, label: 'Instagram', color: '#E1306C', bg: 'rgba(225,48,108,0.06)', border: 'rgba(225,48,108,0.15)' },
-                          { icon: Globe,     href: personal.website,   label: 'Website',   color: '#6366f1', bg: 'rgba(99,102,241,0.06)', border: 'rgba(99,102,241,0.15)' },
+                          { icon: Github,      href: personal.github,    label: 'GitHub',    color: '#ffffff', bg: 'rgba(255,255,255,0.06)', border: 'rgba(255,255,255,0.15)', title: 'GitHub: @Rama-X2' },
+                          { icon: Linkedin,    href: personal.linkedin,  label: 'LinkedIn',  color: '#0A66C2', bg: 'rgba(10,102,194,0.06)', border: 'rgba(10,102,194,0.15)', title: 'LinkedIn: Ade Ramadhani Putra' },
+                          { icon: Instagram,   href: personal.instagram, label: 'Instagram', color: '#E1306C', bg: 'rgba(225,48,108,0.06)', border: 'rgba(225,48,108,0.15)', title: 'Instagram: @rama_ext4' },
+                          { icon: DiscordIcon, href: personal.discord,   label: 'Discord',   color: '#5865F2', bg: 'rgba(88,101,242,0.08)', border: 'rgba(88,101,242,0.25)', title: 'Discord: @rama_ext' },
                         ].map((s, idx) => (
                           <motion.a
                             key={s.label}
                             href={s.href}
                             target="_blank"
                             rel="noopener noreferrer"
+                            title={s.title}
                             className="flex items-center gap-2.5 px-4 py-3 glass-card rounded-xl text-xs text-gray-300 hover:text-white transition-all justify-center border border-white/5"
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}

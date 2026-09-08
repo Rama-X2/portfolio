@@ -10,6 +10,7 @@ export interface PersonalInfo {
   github: string
   linkedin: string
   instagram: string
+  discord?: string
 }
 
 export interface TechStackItem {
