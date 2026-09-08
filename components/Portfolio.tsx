@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
-import AOS from 'aos'
 import {
   User,
   Globe,
@@ -319,35 +318,61 @@ export default function Portfolio() {
     }
   }, [])
 
-  // Optimized AOS initialization matching ekizr's portfolio behavior
+  // Bidirectional Scroll Animations (Replays smoothly on both Scroll Up & Scroll Down)
   useEffect(() => {
-    const initAOS = () => {
-      AOS.init({
-        once: false, // Animasi aktif berulang kali saat scroll ke atas & bawah
-        offset: 20,
-        duration: 800,
-        easing: 'ease-out-cubic',
+    const updateAosAnimations = () => {
+      const elements = document.querySelectorAll<HTMLElement>('[data-aos]')
+      const windowHeight = window.innerHeight
+
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect()
+        // Check if element enters the visible viewport (natural trigger)
+        const isVisible = rect.top < windowHeight - 20 && rect.bottom > 20
+
+        if (isVisible) {
+          if (!el.classList.contains('aos-animate')) {
+            el.classList.add('aos-animate')
+          }
+        } else {
+          // Offscreen: Reset aos-animate ONLY when safely outside the transform buffer
+          // (AOS max transform is 100px. Using 120px buffer prevents any flicker or infinite loop)
+          const isFarAbove = rect.bottom < -120
+          const isFarBelow = rect.top > windowHeight + 120
+
+          if (isFarAbove || isFarBelow) {
+            if (el.classList.contains('aos-animate')) {
+              el.classList.remove('aos-animate')
+            }
+          }
+        }
       })
     }
 
-    initAOS()
+    // Initial check on mount & after render cycles
+    updateAosAnimations()
+    const t1 = setTimeout(updateAosAnimations, 60)
+    const t2 = setTimeout(updateAosAnimations, 250)
 
-    let resizeTimer: NodeJS.Timeout
-    const handleResize = () => {
-      clearTimeout(resizeTimer)
-      resizeTimer = setTimeout(initAOS, 250)
+    let rafId: number | null = null
+    const handleScroll = () => {
+      if (rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          updateAosAnimations()
+          rafId = null
+        })
+      }
     }
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', updateAosAnimations, { passive: true })
+
     return () => {
-      window.removeEventListener('resize', handleResize)
-      clearTimeout(resizeTimer)
+      clearTimeout(t1)
+      clearTimeout(t2)
+      if (rafId !== null) cancelAnimationFrame(rafId)
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', updateAosAnimations)
     }
-  }, [])
-
-  // Refresh AOS saat data list berubah (toggle see more / language)
-  useEffect(() => {
-    AOS.refresh()
   }, [showAllProjects, showAllCertificates, lang])
 
   const handleLangChange = (newLang: 'id' | 'en') => {
