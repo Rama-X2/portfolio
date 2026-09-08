@@ -187,53 +187,53 @@ const translations = {
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: false, amount: 0.2 },
-  transition: { delay, duration: 0.4, ease: 'easeOut' },
+  viewport: { once: true, amount: 0.1 },
+  transition: { delay, duration: 0.35, ease: 'easeOut' },
 })
 
-const fadeUpAdaptive = (delay = 0, y = 25) => ({
+const fadeUpAdaptive = (delay = 0, y = 20) => ({
   initial: { opacity: 0, y },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: false, amount: 0.2 },
-  transition: { delay, duration: 0.45, ease: [0.25, 0.1, 0.25, 1] },
+  viewport: { once: true, amount: 0.1 },
+  transition: { delay, duration: 0.35, ease: [0.25, 0.1, 0.25, 1] },
 })
 
-const fadeSlideLeftAdaptive = (delay = 0, x = -30) => ({
-  initial: { opacity: 0, x, y: 15 },
+const fadeSlideLeftAdaptive = (delay = 0, x = -25) => ({
+  initial: { opacity: 0, x, y: 10 },
   whileInView: { opacity: 1, x: 0, y: 0 },
-  viewport: { once: false, amount: 0.2 },
-  transition: { delay, duration: 0.45, ease: [0.25, 0.1, 0.25, 1] },
+  viewport: { once: true, amount: 0.1 },
+  transition: { delay, duration: 0.35, ease: [0.25, 0.1, 0.25, 1] },
 })
 
-const fadeSlideRightAdaptive = (delay = 0, x = 30) => ({
-  initial: { opacity: 0, x, y: 15 },
+const fadeSlideRightAdaptive = (delay = 0, x = 25) => ({
+  initial: { opacity: 0, x, y: 10 },
   whileInView: { opacity: 1, x: 0, y: 0 },
-  viewport: { once: false, amount: 0.2 },
-  transition: { delay, duration: 0.45, ease: [0.25, 0.1, 0.25, 1] },
+  viewport: { once: true, amount: 0.1 },
+  transition: { delay, duration: 0.35, ease: [0.25, 0.1, 0.25, 1] },
 })
 
 const zoomInAdaptive = (delay = 0) => ({
-  initial: { opacity: 0, scale: 0.94, y: 20 },
+  initial: { opacity: 0, scale: 0.96, y: 15 },
   whileInView: { opacity: 1, scale: 1, y: 0 },
-  viewport: { once: false, amount: 0.2 },
-  transition: { delay, duration: 0.45, ease: [0.25, 0.1, 0.25, 1] },
+  viewport: { once: true, amount: 0.1 },
+  transition: { delay, duration: 0.35, ease: [0.25, 0.1, 0.25, 1] },
 })
 
 const cardScrollAlternating = (index: number) => ({
   initial: {
     opacity: 0,
-    x: index % 2 === 0 ? -30 : 30,
-    y: 20,
+    x: index % 2 === 0 ? -20 : 20,
+    y: 15,
   },
   whileInView: {
     opacity: 1,
     x: 0,
     y: 0,
   },
-  viewport: { once: false, amount: 0.2 },
+  viewport: { once: true, amount: 0.1 },
   transition: {
-    duration: 0.45,
-    delay: (index % 2) * 0.1,
+    duration: 0.35,
+    delay: Math.min((index % 2) * 0.08, 0.16),
     ease: [0.25, 0.1, 0.25, 1],
   },
 })
@@ -241,18 +241,17 @@ const cardScrollAlternating = (index: number) => ({
 const cardScrollVariant = (index: number) => ({
   initial: {
     opacity: 0,
-    y: 30,
-    x: index % 3 === 0 ? -20 : index % 3 === 2 ? 20 : 0,
+    y: 20,
   },
   whileInView: {
     opacity: 1,
     y: 0,
     x: 0,
   },
-  viewport: { once: false, margin: '-40px' },
+  viewport: { once: true, margin: '-20px' },
   transition: {
-    duration: 0.45,
-    delay: (index % 3) * 0.1,
+    duration: 0.35,
+    delay: Math.min((index % 3) * 0.08, 0.24),
     ease: [0.25, 0.1, 0.25, 1],
   },
 })
@@ -789,12 +788,12 @@ export default function Portfolio() {
                 {techStackList.map((item, i) => (
                   <motion.div
                     key={item.name}
-                    className="group relative flex items-center justify-center p-2 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 cursor-pointer"
+                    className="group relative flex items-center justify-center p-2 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-colors duration-200 cursor-pointer"
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: false }}
-                    transition={{ delay: 0.01 * i }}
-                    whileHover={{ scale: 1.15, y: -3 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.25, delay: Math.min(0.015 * i, 0.2) }}
+                    whileHover={{ scale: 1.15, y: -3, transition: { duration: 0.15, delay: 0 } }}
                   >
                     <img
                       src={`https://skillicons.dev/icons?i=${item.icon}`}
@@ -1231,9 +1230,9 @@ export default function Portfolio() {
                             href="https://www.google.com/maps/place/Sukabumi,+Sukabumi+Regency,+West+Java/@-6.9897,106.9268"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-pink-500/10 text-pink-400 text-xs font-semibold border border-pink-500/20 hover:bg-pink-500/20 transition-all"
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-pink-500/10 text-pink-400 text-xs font-semibold border border-pink-500/20 hover:bg-pink-500/20 hover:border-pink-500/40 hover:shadow-[0_0_15px_rgba(236,72,153,0.25)] transition-colors duration-150 cursor-pointer"
+                            whileHover={{ y: -2, scale: 1.02, transition: { duration: 0.15, ease: 'easeOut' } }}
+                            whileTap={{ scale: 0.97 }}
                           >
                             <Globe className="w-3.5 h-3.5" />
                             <span>{t.contactSec.openMaps}</span>
@@ -1250,32 +1249,31 @@ export default function Portfolio() {
                       <h4 className="font-bold text-white text-xs tracking-wider uppercase pl-1">{t.contactSec.socialsHeading}</h4>
                       <div className="grid grid-cols-2 gap-2.5">
                         {[
-                          { icon: Github,      href: personal.github,    label: 'GitHub',    color: '#ffffff', bg: 'rgba(255,255,255,0.06)', border: 'rgba(255,255,255,0.15)', title: 'GitHub: @Rama-X2' },
-                          { icon: Linkedin,    href: personal.linkedin,  label: 'LinkedIn',  color: '#0A66C2', bg: 'rgba(10,102,194,0.06)', border: 'rgba(10,102,194,0.15)', title: 'LinkedIn: Ade Ramadhani Putra' },
-                          { icon: Instagram,   href: personal.instagram, label: 'Instagram', color: '#E1306C', bg: 'rgba(225,48,108,0.06)', border: 'rgba(225,48,108,0.15)', title: 'Instagram: @rama_ext4' },
-                          { icon: DiscordIcon, href: personal.discord,   label: 'Discord',   color: '#5865F2', bg: 'rgba(88,101,242,0.08)', border: 'rgba(88,101,242,0.25)', title: 'Discord: @rama_ext' },
-                        ].map((s, idx) => (
+                          { icon: Github,      href: personal.github,    label: 'GitHub',    color: '#ffffff', bg: 'rgba(255,255,255,0.08)', border: 'rgba(255,255,255,0.3)',  glow: 'rgba(255,255,255,0.18)', title: 'GitHub: @Rama-X2' },
+                          { icon: Linkedin,    href: personal.linkedin,  label: 'LinkedIn',  color: '#38bdf8', bg: 'rgba(14,165,233,0.1)',   border: 'rgba(56,189,248,0.45)', glow: 'rgba(14,165,233,0.25)', title: 'LinkedIn: Ade Ramadhani Putra' },
+                          { icon: Instagram,   href: personal.instagram, label: 'Instagram', color: '#fb7185', bg: 'rgba(244,63,94,0.1)',   border: 'rgba(251,113,133,0.45)',glow: 'rgba(244,63,94,0.25)',  title: 'Instagram: @rama_ext4' },
+                          { icon: DiscordIcon, href: personal.discord,   label: 'Discord',   color: '#a5b4fc', bg: 'rgba(99,102,241,0.12)', border: 'rgba(165,180,252,0.45)', glow: 'rgba(99,102,241,0.3)',   title: 'Discord: @rama_ext' },
+                        ].map((s) => (
                           <motion.a
                             key={s.label}
                             href={s.href}
                             target="_blank"
                             rel="noopener noreferrer"
                             title={s.title}
-                            className="flex items-center gap-2.5 px-4 py-3 glass-card rounded-xl text-xs text-gray-300 hover:text-white transition-all justify-center border border-white/5"
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: false, amount: 0.2 }}
-                            transition={{ duration: 0.35, delay: 0.35 + idx * 0.07 }}
+                            className="flex items-center gap-2.5 px-4 py-3 glass-card rounded-xl text-xs text-gray-300 hover:text-white justify-center border border-white/10 cursor-pointer select-none"
                             whileHover={{ 
-                              scale: 1.05, 
+                              y: -3, 
+                              scale: 1.03, 
                               backgroundColor: s.bg, 
                               borderColor: s.border,
-                              boxShadow: `0 0 15px ${s.border}` 
+                              boxShadow: `0 6px 20px ${s.glow}`,
+                              transition: { duration: 0.15, ease: 'easeOut' } 
                             }}
-                            whileTap={{ scale: 0.95 }}
+                            whileTap={{ scale: 0.96 }}
+                            transition={{ duration: 0.15, ease: 'easeOut' }}
                           >
                             <s.icon className="w-4 h-4 flex-shrink-0" style={{ color: s.color }} />
-                            <span className="font-semibold">{s.label}</span>
+                            <span className="font-semibold tracking-wide">{s.label}</span>
                           </motion.a>
                         ))}
                       </div>
@@ -1416,8 +1414,9 @@ export default function Portfolio() {
                               type="submit"
                               disabled={isSubmitting}
                               className="btn-primary w-full flex items-center justify-center gap-2 py-2.5 rounded-xl font-bold text-sm shadow-glow-primary disabled:opacity-50 disabled:cursor-not-allowed"
-                              whileHover={isSubmitting ? {} : { scale: 1.02, y: -2 }}
+                              whileHover={isSubmitting ? {} : { scale: 1.02, y: -2, transition: { duration: 0.15, ease: 'easeOut' } }}
                               whileTap={isSubmitting ? {} : { scale: 0.98 }}
+                              transition={{ duration: 0.15, ease: 'easeOut' }}
                             >
                               {isSubmitting ? (
                                 <>
