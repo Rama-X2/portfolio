@@ -1,97 +1,111 @@
+﻿<div align="center">
+
 # 🌸 Rama Portfolio Web
 
-Website portofolio standalone milik **Ade Ramadhani Putra**, memuat rangkuman profil, keahlian, riwayat pengalaman, pencapaian sertifikasi, serta pameran proyek-proyek digital aktif.
+An interactive, modern, and high-performance personal portfolio website built with **Next.js 14**, **React 18**, **TypeScript**, and **Tailwind CSS**.
+
+[![Website](https://img.shields.io/badge/Live_Demo-rama--x2.my.id-6366f1?style=for-the-badge&logo=google-chrome&logoColor=white)](https://rama-x2.my.id)
+[![Next.js](https://img.shields.io/badge/Next.js_14-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer&logoColor=blue)](https://www.framer.com/motion/)
+
+</div>
 
 ---
 
-## Struktur Folder
+## 🌟 Overview
 
-```text
-portfolio-web/
-├── app/
-│   ├── globals.css       # Global styles + Tailwind (termasuk custom scrollbar & modal lock)
-│   ├── layout.tsx        # Root layout + metadata (konfigurasi nama situs & favicon)
-│   └── page.tsx          # Halaman utama (render Portfolio)
-├── components/
-│   └── Portfolio.tsx     # Komponen utama portfolio (semua section & modal)
-├── public/
-│   ├── favicon.png       # Favicon utama website
-│   ├── gambar-resume/
-│   │   └── cv-resume-ade-rama.png
-│   ├── gambar-sertifikat/
-│   └── images/
-│       └── portfolio/    # Aset gambar proyek & cover portfolio
-│           ├── foto_rama.png
-│           ├── banner_rama-store.png
-│           ├── banner_bumi-tani.png
-│           ├── banner_homelab.webp       # Screenshot web HomeLab (baru)
-│           ├── banner_rom-pixel.png
-│           ├── banner_rama_server.png
-│           ├── kernel_poco-f5.png
-│           ├── kernel.jpg
-│           ├── anya.jpg
-│           ├── patrick.jpg
-│           └── patrick_galon.jpg
-├── package.json
-├── tailwind.config.js
-├── postcss.config.js
-├── tsconfig.json
-└── next.config.js
+This repository contains the source code for the personal portfolio of **Ade Ramadhani Putra**. It highlights key accomplishments, professional IT experiences, featured full-stack and mobile projects, verified certifications, and interactive contact channels.
+
+Designed with a sleek **dark glassmorphism** aesthetic, the web application delivers a smooth and responsive experience across mobile, tablet, and desktop devices.
+
+---
+
+## ✨ Key Features
+
+- 🎨 **Dark Glassmorphism Interface**: Sleek translucent cards, custom ambient gradients, and responsive layout fine-tuned for high visual fidelity.
+- 🌐 **Bilingual Support (ID / EN)**: Instant language switcher allowing visitors to browse the portfolio in both Bahasa Indonesia and English.
+- 🎬 **Fluid Micro-interactions & Animations**: Driven by Framer Motion for smooth section reveal transitions, interactive cards, and responsive state changes.
+- 🚀 **Projects Showcase**: Interactive project gallery with live preview links, GitHub repository buttons, tags, and detailed modal popups.
+- 🎓 **Verified Achievements & Certifications**: Grid display for professional certifications with direct credential verification links (Credly, Microsoft Learn, etc.).
+- 📄 **Built-in Resume / CV Viewer**: Instant modal viewer allowing visitors to preview and download the CV without leaving the page.
+- 📬 **Serverless Contact Form**: Direct message delivery powered by Next.js API Routes and the Resend API with real-time validation and feedback states.
+- ⚡ **SEO & Performance Optimization**: Custom metadata, OpenGraph social sharing preview, and optimized next-gen image assets.
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technologies |
+| :--- | :--- |
+| **Framework** | [Next.js 14](https://nextjs.org/) (App Router) |
+| **Library** | [React 18](https://react.dev/) |
+| **Language** | [TypeScript](https://www.typescriptlang.org/) |
+| **Styling** | [Tailwind CSS](https://tailwindcss.com/) |
+| **Motion** | [Framer Motion](https://www.framer.com/motion/) |
+| **Icons** | [Lucide React](https://lucide.dev/), [SkillIcons](https://skillicons.dev/) |
+| **Email Service** | [Resend](https://resend.com/) |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (version 18.17.0 or higher recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) / [pnpm](https://pnpm.io/)
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Rama-X2/portfolio-web.git
+   cd portfolio-web
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables:**
+   Create a `.env.local` file in the root directory:
+   ```env
+   RESEND_API_KEY=your_resend_api_key
+   CONTACT_RECEIVER_EMAIL=your_inbox_email@example.com
+   ```
+
+4. **Run development server:**
+   ```bash
+   npm run dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+
+### Building for Production
+
+To create an optimized production build:
+
+```bash
+npm run build
+npm run start
 ```
 
 ---
 
-## Fitur & Struktur Portofolio
+## 👤 Author & Socials
 
-*   **About** - Profil profesional lengkap beserta biografi, rangkuman pendidikan, dan statistik stats keahlian.
-*   **Skills** - Progress bar dinamis beranimasi untuk representasi tingkat penguasaan setiap keahlian teknis.
-*   **Experience** - Timeline riwayat pengalaman kerja (IT Support & Web Dev) serta detail edukasi.
-*   **Contact (Upgraded)** - Bagian kontak interaktif premium:
-    *   **Saluran Langsung Terpisah**: Kartu WhatsApp & Email interaktif, dipisahkan secara utuh dari Lokasi.
-    *   **Peta Google Maps**: Kartu Lokasi & Jangkauan mandiri dilengkapi dengan tombol rute langsung ke Google Maps.
-    *   **Controlled Form & Validasi Real-time**: Input form Nama, Email, Subjek, dan Pesan dengan handling pesan error yang dinamis.
-    *   **State Pengiriman & Layar Sukses**: Spinner animasi memuat data ketika mengirim pesan, dan transisi layar konfirmasi sukses (*Success Screen*) pasca pengiriman.
-*   **Mobile Layout Stability** - Penanganan *scroll-lock* latar belakang layar saat modal proyek/sertifikat terbuka guna memastikan tampilan mobile stabil di platform Android/iOS.
+**Ade Ramadhani Putra**
+
+- 🌐 Website: [rama-x2.my.id](https://rama-x2.my.id)
+- 🐙 GitHub: [@Rama-X2](https://github.com/Rama-X2)
+- 💼 LinkedIn: [Ade Ramadhani Putra](https://www.linkedin.com/in/ade-ramadhani-putra-66270b22a)
+- 📸 Instagram: [@r.a.m.a_22](https://instagram.com/r.a.m.a_22)
+- 💬 Discord: `@ramaa_x`
 
 ---
 
-## Daftar Project Aktif (12 Project Showcase)
+## 📄 License
 
-1.  **BumiTani – Premium Agricultural E-Commerce** (Featured)
-    *   Website e-commerce pertanian modern premium: database 72 produk, filter pencarian real-time, keranjang belanja LocalStorage, checkout WhatsApp.
-2.  **HomeLab – Premium Powder Drink E-Commerce** (Featured)
-    *   Platform e-commerce & editorial web premium minuman bubuk: konsep desain minimalis modern, search real-time, LocalStorage cart, dan direct-to-checkout.
-3.  **Rama Store – Gaming Topup Platform** (Featured)
-    *   Modern gaming top-up platform dengan pemrosesan transaksi real-time, multi-game, dan animasi modern.
-4.  **Custom ROM by Rama – Basic AOSP** (Featured)
-    *   ROM kustom ringan berbasis Android 15 (Vanilla Ice Cream) yang disempurnakan dengan asisten AI cerdas.
-5.  **Rama Server Dashboard** (Featured)
-    *   Dashboard manajemen server lengkap, mengintegrasikan analitik, kontrol jaringan, dan wawasan performa server.
-6.  **RISING UI 2.5 – Evolution X for POCO F5**
-    *   Modul kustomisasi UI eksklusif untuk ROM kustom Evolution X pada perangkat POCO F5.
-7.  **Digital Image Compare Tools**
-    *   Aplikasi web pembanding citra digital side-by-side: uji kompresi, estimasi bit depth, dan analisis kualitas gambar.
-8.  **Thermal Breaker Miyabi Core**
-    *   Modul optimasi sistem Android untuk meminimalisir thermal throttling agresif pada perangkat keras.
-9.  **GMS Breaker Miyabi Core**
-    *   Modul optimasi proses latar belakang GMS untuk menghemat RAM dan meningkatkan efisiensi daya CPU.
-10. **Redmi 10A GPU Performance Unlock**
-    *   Modifikasi tingkat rendah untuk membuka performa GPU maksimal pada chipset Helio G25.
-11. **MTK WiFi MAC Randomization Fix**
-    *   Perbaikan sistem untuk menstabilkan alamat MAC WiFi pada ROM kustom Android 13.
-12. **Kernel Overclocking by Rama**
-    *   Modifikasi kernel Linux kustom untuk tuning CPU/GPU governor dan penjadwalan I/O.
-
----
-
-## 🔧 Teknologi Utama
-
-*   **Next.js 14** (App Router)
-*   **TypeScript**
-*   **Tailwind CSS**
-*   **Framer Motion**
-*   **Lucide React Icons**
-
----
-
-> Dibuat secara eksklusif oleh **Ade Ramadhani Putra** | [rama-x2.my.id](https://rama-x2.my.id)
+This project is created for personal portfolio purposes. All project assets, branding, and personal contents are protected under standard personal copyright.

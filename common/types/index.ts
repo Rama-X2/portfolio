@@ -5,8 +5,6 @@ export interface PersonalInfo {
   title: string
   avatar: string
   location: string
-  email: string
-  website: string
   github: string
   linkedin: string
   instagram: string
@@ -23,9 +21,9 @@ export interface ExperienceItem {
   positionEn: string
   period: string
   periodEn: string
-  color: string
   descriptions: string[]
   descriptionsEn: string[]
+  color: string
 }
 
 export interface EducationItem {
@@ -40,18 +38,28 @@ export interface EducationItem {
   ongoing: boolean
 }
 
+export interface StatItem {
+  icon: any
+  value: string
+  labelId: string
+  labelEn: string
+  descId: string
+  descEn: string
+  gradient: string
+  color: string
+  bg: string
+}
+
 export interface ProjectItem {
   id: number
   title: string
   description: string
   descriptionEn: string
-  longDescription?: string
-  longDescriptionEn?: string
-  category: string
-  technologies: string[]
   image: string
-  liveDemoUrl?: string
-  sourceCodeUrl?: string
+  technologies: string[]
+  liveUrl?: string
+  githubUrl?: string
+  category: string
   featured?: boolean
 }
 

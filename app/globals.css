@@ -82,7 +82,7 @@
 
   /* ── Gradient text ─── */
   .gradient-text {
-    @apply bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent inline-block;
   }
 
   /* ── Glass card (Stunning Glassmorphism Aesthetics) ─── */

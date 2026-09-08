@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://rama-x2.my.id'),
   title: 'Rama-X2',
   description:
     'Full Stack Developer & UI/UX Designer | Portfolio profesional Ade Ramadhani Putra. Spesialis web development, server management, dan optimasi sistem.',
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Rama-X2',
     description: 'Full Stack Developer & UI/UX Designer',
-    url: 'https://rama.server.my.id',
+    url: 'https://rama-x2.my.id',
     siteName: 'Ade Ramadhani Portfolio',
     locale: 'id_ID',
     type: 'website',
