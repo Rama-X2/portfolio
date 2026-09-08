@@ -89,7 +89,7 @@
   .glass-card {
     background: rgba(22, 13, 53, 0.65);
     border: 1px solid rgba(255, 255, 255, 0.10);
-    transition: all 0.25s ease;
+    transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   }
   .glass-card:hover {
     background: rgba(255, 255, 255, 0.08);
@@ -425,4 +425,21 @@ body.modal-open {
   .portfolio-modal.cert-modal-wrap {
     align-items: center !important;
   }
+}
+
+/* ─── AOS Optimization from Ekizr Portfolio ─── */
+[data-aos] {
+  will-change: transform, opacity !important;
+}
+
+@keyframes shine {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 200%;
+  }
+}
+.animate-shine {
+  animation: shine 1.5s ease-in-out infinite;
 }

@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
+import AOS from 'aos'
 import {
   User,
   Globe,
@@ -183,79 +184,6 @@ const translations = {
   },
 }
 
-// ─── Helpers ───────────────────────────────────────────────────────────────────
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.1 },
-  transition: { delay, duration: 0.35, ease: 'easeOut' },
-})
-
-const fadeUpAdaptive = (delay = 0, y = 20) => ({
-  initial: { opacity: 0, y },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.1 },
-  transition: { delay, duration: 0.35, ease: [0.25, 0.1, 0.25, 1] },
-})
-
-const fadeSlideLeftAdaptive = (delay = 0, x = -25) => ({
-  initial: { opacity: 0, x, y: 10 },
-  whileInView: { opacity: 1, x: 0, y: 0 },
-  viewport: { once: true, amount: 0.1 },
-  transition: { delay, duration: 0.35, ease: [0.25, 0.1, 0.25, 1] },
-})
-
-const fadeSlideRightAdaptive = (delay = 0, x = 25) => ({
-  initial: { opacity: 0, x, y: 10 },
-  whileInView: { opacity: 1, x: 0, y: 0 },
-  viewport: { once: true, amount: 0.1 },
-  transition: { delay, duration: 0.35, ease: [0.25, 0.1, 0.25, 1] },
-})
-
-const zoomInAdaptive = (delay = 0) => ({
-  initial: { opacity: 0, scale: 0.96, y: 15 },
-  whileInView: { opacity: 1, scale: 1, y: 0 },
-  viewport: { once: true, amount: 0.1 },
-  transition: { delay, duration: 0.35, ease: [0.25, 0.1, 0.25, 1] },
-})
-
-const cardScrollAlternating = (index: number) => ({
-  initial: {
-    opacity: 0,
-    x: index % 2 === 0 ? -20 : 20,
-    y: 15,
-  },
-  whileInView: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-  },
-  viewport: { once: true, amount: 0.1 },
-  transition: {
-    duration: 0.35,
-    delay: Math.min((index % 2) * 0.08, 0.16),
-    ease: [0.25, 0.1, 0.25, 1],
-  },
-})
-
-const cardScrollVariant = (index: number) => ({
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
-  whileInView: {
-    opacity: 1,
-    y: 0,
-    x: 0,
-  },
-  viewport: { once: true, margin: '-20px' },
-  transition: {
-    duration: 0.35,
-    delay: Math.min((index % 3) * 0.08, 0.24),
-    ease: [0.25, 0.1, 0.25, 1],
-  },
-})
-
 interface ToggleButtonProps {
   onClick: () => void
   isShowingMore: boolean
@@ -390,6 +318,37 @@ export default function Portfolio() {
       setLang(saved)
     }
   }, [])
+
+  // Optimized AOS initialization matching ekizr's portfolio behavior
+  useEffect(() => {
+    const initAOS = () => {
+      AOS.init({
+        once: false, // Animasi aktif berulang kali saat scroll ke atas & bawah
+        offset: 20,
+        duration: 800,
+        easing: 'ease-out-cubic',
+      })
+    }
+
+    initAOS()
+
+    let resizeTimer: NodeJS.Timeout
+    const handleResize = () => {
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(initAOS, 250)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      clearTimeout(resizeTimer)
+    }
+  }, [])
+
+  // Refresh AOS saat data list berubah (toggle see more / language)
+  useEffect(() => {
+    AOS.refresh()
+  }, [showAllProjects, showAllCertificates, lang])
 
   const handleLangChange = (newLang: 'id' | 'en') => {
     setLang(newLang)
@@ -709,13 +668,14 @@ export default function Portfolio() {
           >
 
             {/* Hero card */}
-            <motion.div {...zoomInAdaptive(0)} className="glass-card rounded-2xl p-5 md:p-8">
+            <div data-aos="fade-up" data-aos-duration="1000" className="glass-card rounded-2xl p-5 md:p-8">
               <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
                 {/* Avatar */}
-                <motion.div
-                  className="avatar-ring w-24 h-24 md:w-32 md:h-32 flex-shrink-0 mx-auto md:mx-0"
-                  {...fadeUp(0.1)}
-                  whileHover={{ scale: 1.05 }}
+                <div
+                  data-aos="zoom-in"
+                  data-aos-duration="800"
+                  data-aos-delay="200"
+                  className="avatar-ring w-24 h-24 md:w-32 md:h-32 flex-shrink-0 mx-auto md:mx-0 hover:scale-105 transition-transform duration-300"
                 >
                   <Image
                     src={personal.avatar}
@@ -725,25 +685,25 @@ export default function Portfolio() {
                     className="w-full h-full object-cover rounded-full"
                     priority
                   />
-                </motion.div>
+                </div>
 
                 {/* Text */}
                 <div className="flex-1 text-center md:text-left">
-                  <motion.p {...fadeUp(0.15)} className="text-sm text-primary font-semibold mb-1">
+                  <p data-aos="fade-up" data-aos-delay="250" className="text-sm text-primary font-semibold mb-1">
                     {t.personal.greeting}
-                  </motion.p>
-                  <motion.h1 {...fadeUp(0.2)} className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-2">
+                  </p>
+                  <h1 data-aos="fade-up" data-aos-delay="300" className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-2">
                     <span className="gradient-text">{personal.name}</span>
-                  </motion.h1>
-                  <motion.p {...fadeUp(0.25)} className="text-base md:text-lg text-gray-300 mb-3 font-medium">
+                  </h1>
+                  <p data-aos="fade-up" data-aos-delay="350" className="text-base md:text-lg text-gray-300 mb-3 font-medium">
                     {personal.title}
-                  </motion.p>
-                  <motion.p {...fadeUp(0.3)} className="text-sm text-gray-400 leading-relaxed max-w-xl mx-auto md:mx-0">
+                  </p>
+                  <p data-aos="fade-up" data-aos-delay="400" className="text-sm text-gray-400 leading-relaxed max-w-xl mx-auto md:mx-0">
                     {t.personal.bio}
-                  </motion.p>
+                  </p>
 
                   {/* CTA buttons */}
-                  <motion.div {...fadeUp(0.4)} className="flex flex-col sm:flex-row gap-3 mt-5 justify-center md:justify-start">
+                  <div data-aos="fade-up" data-aos-delay="450" className="flex flex-col sm:flex-row gap-3 mt-5 justify-center md:justify-start">
                     <motion.button
                       onClick={() => setShowResume(true)}
                       className="btn-primary flex items-center justify-center gap-2"
@@ -764,13 +724,13 @@ export default function Portfolio() {
                       <MessageCircle className="w-4 h-4" />
                       {t.personal.contactMe}
                     </motion.button>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Tech Stack & Tools */}
-            <motion.div {...zoomInAdaptive(0.1)} className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
+            <div data-aos="fade-up" data-aos-duration="1000" className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
                 <div>
                   <h2 className="text-xl font-bold text-white flex items-center gap-2">
@@ -786,14 +746,12 @@ export default function Portfolio() {
 
               <div className="flex flex-wrap gap-2.5 sm:gap-3 justify-center items-center">
                 {techStackList.map((item, i) => (
-                  <motion.div
+                  <div
                     key={item.name}
-                    className="group relative flex items-center justify-center p-2 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-colors duration-200 cursor-pointer"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.25, delay: Math.min(0.015 * i, 0.2) }}
-                    whileHover={{ scale: 1.15, y: -3, transition: { duration: 0.15, delay: 0 } }}
+                    data-aos="zoom-in"
+                    data-aos-delay={Math.min(i * 20, 300)}
+                    data-aos-duration="600"
+                    className="group relative flex items-center justify-center p-2 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-all duration-200 cursor-pointer hover:scale-115 hover:-translate-y-1"
                   >
                     <img
                       src={`https://skillicons.dev/icons?i=${item.icon}`}
@@ -804,10 +762,10 @@ export default function Portfolio() {
                     <div className="absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-gray-900/95 text-white text-[11px] font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none border border-white/10 shadow-lg z-20">
                       {item.name}
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </section>
 
           {/* ════════════════════════════════ ABOUT ═══ */}
@@ -816,44 +774,47 @@ export default function Portfolio() {
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
             {/* About Me Details (Balanced Professional Practitioner Text) */}
-            <motion.div
-              {...zoomInAdaptive(0)}
+            <div
+              data-aos="fade-up"
+              data-aos-duration="1000"
               className="glass-card rounded-2xl p-6 md:p-8 border border-white/10"
             >
               <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-5 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
-              <motion.h2
-                {...fadeSlideLeftAdaptive(0.1)}
+              <h2
+                data-aos="fade-right"
+                data-aos-duration="800"
                 className="text-2xl md:text-3xl font-extrabold mb-4 flex items-center gap-2.5 w-fit"
               >
                 <User className="w-6 h-6 text-indigo-400 flex-shrink-0" />
                 <span className="gradient-text">{lang === 'en' ? 'About Me' : 'Tentang Saya'}</span>
-              </motion.h2>
+              </h2>
               <div className="space-y-4 text-sm md:text-base text-gray-300 leading-relaxed font-normal">
-                <motion.p {...fadeSlideLeftAdaptive(0.15)}>
+                <p data-aos="fade-right" data-aos-duration="800" data-aos-delay="100">
                   {lang === 'en'
                     ? 'I am a Full Stack Web Developer, UI/UX Designer, and System Specialist based in Sukabumi, West Java. My core focus centers on designing modern web applications, managing Linux server infrastructures, and exploring low-level systems including AOSP Android customization and Linux Kernel tuning.'
                     : 'Saya adalah seorang Full Stack Web Developer, UI/UX Designer, dan System Specialist asal Sukabumi, Jawa Barat. Fokus utama saya berpusat pada perancangan aplikasi web modern, pengelolaan infrastruktur server berbasis Linux, serta eksplorasi sistem tingkat rendah (low-level) seperti kustomisasi Android AOSP dan optimasi Linux Kernel.'}
-                </motion.p>
-                <motion.p {...fadeSlideLeftAdaptive(0.25)}>
+                </p>
+                <p data-aos="fade-right" data-aos-duration="800" data-aos-delay="200">
                   {lang === 'en'
                     ? 'My technical journey stems from a deep passion for computing performance, hardware/electronics modification, and interface design. I bring this expertise to life through building modern e-commerce applications, interactive web platforms, server & network management, as well as designing optimization modules like Miyabi Core, CPU/GPU overclocking experiments, and custom ROMs focused on performance improvement and device efficiency.'
                     : 'Eksplorasi teknis saya berawal dari ketertarikan mendalam terhadap performa komputasi, modifikasi hardware/elektronika, dan desain antarmuka. Pengalaman ini saya wujudkan secara langsung melalui pembuatan aplikasi e-commerce modern, platform web interaktif, pengelolaan server & jaringan, hingga perancangan modul optimasi seperti Miyabi Core, eksperimen overclocking CPU/GPU, dan custom ROM yang difokuskan untuk peningkatan performa serta efisiensi perangkat.'}
-                </motion.p>
-                <motion.p {...fadeSlideLeftAdaptive(0.35)}>
+                </p>
+                <p data-aos="fade-right" data-aos-duration="800" data-aos-delay="300">
                   {lang === 'en'
                     ? 'In every project I develop, I prioritize clean code architecture, responsive system performance, and intuitive user interfaces. Whether building web applications, managing cloud servers, or sharing open-source projects on GitHub, my goal is to deliver stable, secure, and helpful digital solutions.'
                     : 'Dalam setiap proyek yang saya kembangkan, saya mengutamakan penerapan struktur kode yang rapi, performa yang responsif, serta antarmuka yang mudah digunakan. Baik saat membangun aplikasi web, mengelola server cloud, maupun membagikan proyek open-source di GitHub, dedikasi saya adalah menghadirkan solusi teknologi yang stabil, aman, dan bermanfaat.'}
-                </motion.p>
+                </p>
               </div>
 
               {/* Quick Stat Counters (Modern Tech Portfolio Stats) */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-6 pt-5 border-t border-white/10">
                 {statsData.map((stat, i) => (
-                  <motion.div
+                  <div
                     key={stat.labelEn}
-                    {...zoomInAdaptive(0.08 * i)}
-                    className="glass-card rounded-2xl p-4 sm:p-5 border border-white/10 hover:border-primary/40 relative overflow-hidden group transition-all duration-300 flex flex-col justify-between"
-                    whileHover={{ y: -4, scale: 1.02 }}
+                    data-aos="fade-up"
+                    data-aos-delay={i * 100}
+                    data-aos-duration="800"
+                    className="glass-card rounded-2xl p-4 sm:p-5 border border-white/10 hover:border-primary/40 relative overflow-hidden group transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 hover:scale-[1.02]"
                   >
                     <div className={`absolute -z-10 inset-0 bg-gradient-to-br ${stat.gradient} opacity-5 group-hover:opacity-15 transition-opacity duration-300`} />
                     <div className="flex items-center justify-between mb-3">
@@ -872,26 +833,27 @@ export default function Portfolio() {
                         {lang === 'en' ? stat.descEn : stat.descId}
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
             {/* Experience Timeline */}
             <div>
-              <motion.h2
-                {...fadeSlideLeftAdaptive(0)}
+              <h2
+                data-aos="fade-right"
+                data-aos-duration="800"
                 className="text-xl md:text-2xl font-bold mb-4 flex items-center gap-2 w-fit"
               >
                 <Briefcase className="w-6 h-6 text-primary flex-shrink-0" />
                 <span className="gradient-text">{t.aboutSec.experienceTitle}</span>
-              </motion.h2>
+              </h2>
               <div className="space-y-4">
                 {experiences.map((exp, i) => (
-                  <motion.div key={i}
-                    {...cardScrollAlternating(i)}
-                    className="glass-card rounded-xl p-5 md:p-6 relative overflow-hidden render-optimized"
-                    whileHover={{ y: -3, scale: 1.01 }}
+                  <div key={i}
+                    data-aos={i % 2 === 0 ? "fade-right" : "fade-left"}
+                    data-aos-duration="900"
+                    className="glass-card rounded-xl p-5 md:p-6 relative overflow-hidden render-optimized hover:-translate-y-1 hover:scale-[1.01] transition-all duration-300"
                   >
                     <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl" style={{ backgroundColor: exp.color }} />
                     <div className="pl-3">
@@ -911,26 +873,27 @@ export default function Portfolio() {
                         ))}
                       </ul>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
 
             {/* Education */}
             <div>
-              <motion.h2
-                {...fadeSlideLeftAdaptive(0)}
+              <h2
+                data-aos="fade-left"
+                data-aos-duration="800"
                 className="text-xl md:text-2xl font-bold mb-4 flex items-center gap-2 w-fit"
               >
                 <GraduationCap className="w-6 h-6 text-primary flex-shrink-0" />
                 <span className="gradient-text">{t.aboutSec.educationTitle}</span>
-              </motion.h2>
+              </h2>
               <div className="space-y-4">
                 {education.map((edu, i) => (
-                  <motion.div key={i}
-                    {...cardScrollAlternating(i)}
-                    className="glass-card rounded-xl p-5 flex items-start gap-4"
-                    whileHover={{ y: -3, scale: 1.01 }}
+                  <div key={i}
+                    data-aos={i % 2 === 0 ? "fade-right" : "fade-left"}
+                    data-aos-duration="900"
+                    className="glass-card rounded-xl p-5 flex items-start gap-4 hover:-translate-y-1 hover:scale-[1.01] transition-all duration-300"
                   >
                     {/* Logo / placeholder */}
                     <div className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden bg-white/10 flex items-center justify-center">
@@ -962,7 +925,7 @@ export default function Portfolio() {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
@@ -973,8 +936,9 @@ export default function Portfolio() {
             id="projects"
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
-            <motion.div
-              {...zoomInAdaptive(0)}
+            <div
+              data-aos="fade-up"
+              data-aos-duration="1000"
               className="glass-card rounded-2xl p-5 md:p-6 border border-white/10"
             >
               <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-4 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
@@ -983,15 +947,16 @@ export default function Portfolio() {
                 <span className="gradient-text">{t.projectsSec.title}</span>
               </h2>
               <p className="text-xs md:text-sm text-gray-400">{t.projectsSec.subtitle}</p>
-            </motion.div>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
               {displayedProjects.map((project, index) => (
-                <motion.div
+                <div
                   key={project.id}
-                  {...cardScrollVariant(index)}
-                  className="glass-card rounded-2xl overflow-hidden cursor-pointer group flex flex-col justify-between"
-                  whileHover={{ y: -5 }}
+                  data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
+                  data-aos-duration={index % 3 === 0 ? "800" : index % 3 === 1 ? "1000" : "800"}
+                  data-aos-delay={Math.min((index % 3) * 100, 200)}
+                  className="glass-card rounded-2xl overflow-hidden cursor-pointer group flex flex-col justify-between hover:-translate-y-1.5 transition-all duration-300"
                   onClick={() => setSelectedProject(project)}
                 >
                   <div>
@@ -1074,7 +1039,7 @@ export default function Portfolio() {
                       )}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
 
@@ -1096,8 +1061,9 @@ export default function Portfolio() {
             id="achievements"
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
-            <motion.div
-              {...zoomInAdaptive(0)}
+            <div
+              data-aos="fade-up"
+              data-aos-duration="1000"
               className="glass-card rounded-2xl p-5 md:p-6 border border-white/10"
             >
               <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-4 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
@@ -1106,15 +1072,16 @@ export default function Portfolio() {
                 <span className="gradient-text">{t.achievementsSec.title}</span>
               </h2>
               <p className="text-xs md:text-sm text-gray-400">{t.achievementsSec.subtitle}</p>
-            </motion.div>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
               {displayedAchievements.map((item, index) => (
-                <motion.div
+                <div
                   key={item.id}
-                  {...cardScrollVariant(index)}
-                  className="glass-card rounded-2xl overflow-hidden cursor-pointer group flex flex-col justify-between"
-                  whileHover={{ y: -5 }}
+                  data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
+                  data-aos-duration={index % 3 === 0 ? "800" : index % 3 === 1 ? "1000" : "800"}
+                  data-aos-delay={Math.min((index % 3) * 100, 200)}
+                  className="glass-card rounded-2xl overflow-hidden cursor-pointer group flex flex-col justify-between hover:-translate-y-1.5 transition-all duration-300"
                   onClick={() => setSelectedCert(item)}
                 >
                   <div>
@@ -1162,7 +1129,7 @@ export default function Portfolio() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
 
@@ -1192,8 +1159,9 @@ export default function Portfolio() {
                   <div className="lg:col-span-5 space-y-5">
                     
                     {/* Header Card */}
-                    <motion.div
-                      {...fadeSlideLeftAdaptive(0.1)}
+                    <div
+                      data-aos="fade-down"
+                      data-aos-duration="800"
                       className="glass-card rounded-2xl p-6 md:p-7 border border-white/10 space-y-3 group text-center flex flex-col items-center justify-center"
                     >
                       <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-1 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
@@ -1206,11 +1174,12 @@ export default function Portfolio() {
                       <p className="text-xs md:text-sm text-gray-300 leading-relaxed max-w-md mx-auto">
                         {t.contactSec.description}
                       </p>
-                    </motion.div>
+                    </div>
 
                     {/* Location Info Card */}
-                    <motion.div
-                      {...fadeSlideLeftAdaptive(0.2)}
+                    <div
+                      data-aos="fade-right"
+                      data-aos-duration="900"
                       className="glass-card rounded-2xl p-6 border border-white/10 hover:border-pink-500/30 hover:shadow-[0_0_20px_rgba(236,72,153,0.15)] transition-all relative overflow-hidden group"
                     >
                       <div className="absolute top-0 right-0 w-24 h-24 bg-pink-500/5 rounded-full blur-xl pointer-events-none" />
@@ -1226,65 +1195,131 @@ export default function Portfolio() {
                           <p className="text-xs text-gray-300 leading-relaxed">
                             {t.contactSec.locationDesc}
                           </p>
-                          <motion.a
+                          <a
                             href="https://www.google.com/maps/place/Sukabumi,+Sukabumi+Regency,+West+Java/@-6.9897,106.9268"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-pink-500/10 text-pink-400 text-xs font-semibold border border-pink-500/20 hover:bg-pink-500/20 hover:border-pink-500/40 hover:shadow-[0_0_15px_rgba(236,72,153,0.25)] transition-colors duration-150 cursor-pointer"
-                            whileHover={{ y: -2, scale: 1.02, transition: { duration: 0.15, ease: 'easeOut' } }}
-                            whileTap={{ scale: 0.97 }}
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-pink-500/10 text-pink-400 text-xs font-semibold border border-pink-500/20 hover:bg-pink-500/20 hover:border-pink-500/40 hover:shadow-[0_0_15px_rgba(236,72,153,0.25)] transition-all duration-200 cursor-pointer"
                           >
                             <Globe className="w-3.5 h-3.5" />
                             <span>{t.contactSec.openMaps}</span>
-                          </motion.a>
+                          </a>
                         </div>
                       </div>
-                    </motion.div>
+                    </div>
 
-                    {/* Social Media Connections */}
-                    <motion.div
-                      {...fadeSlideLeftAdaptive(0.3)}
+                    {/* Social Media Connections (Ekizr Style: Fast, Responsive & Sleek) */}
+                    <div
+                      data-aos="fade-right"
+                      data-aos-duration="1000"
                       className="glass-card rounded-2xl p-6 border border-white/10 space-y-4"
                     >
                       <h4 className="font-bold text-white text-xs tracking-wider uppercase pl-1">{t.contactSec.socialsHeading}</h4>
-                      <div className="grid grid-cols-2 gap-2.5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {[
-                          { icon: Github,      href: personal.github,    label: 'GitHub',    color: '#ffffff', bg: 'rgba(255,255,255,0.08)', border: 'rgba(255,255,255,0.3)',  glow: 'rgba(255,255,255,0.18)', title: 'GitHub: @Rama-X2' },
-                          { icon: Linkedin,    href: personal.linkedin,  label: 'LinkedIn',  color: '#38bdf8', bg: 'rgba(14,165,233,0.1)',   border: 'rgba(56,189,248,0.45)', glow: 'rgba(14,165,233,0.25)', title: 'LinkedIn: Ade Ramadhani Putra' },
-                          { icon: Instagram,   href: personal.instagram, label: 'Instagram', color: '#fb7185', bg: 'rgba(244,63,94,0.1)',   border: 'rgba(251,113,133,0.45)',glow: 'rgba(244,63,94,0.25)',  title: 'Instagram: @rama_ext4' },
-                          { icon: DiscordIcon, href: personal.discord,   label: 'Discord',   color: '#a5b4fc', bg: 'rgba(99,102,241,0.12)', border: 'rgba(165,180,252,0.45)', glow: 'rgba(99,102,241,0.3)',   title: 'Discord: @rama_ext' },
-                        ].map((s) => (
-                          <motion.a
+                          { 
+                            icon: Github,      
+                            href: personal.github,    
+                            label: 'GitHub',    
+                            subText: '@Rama-X2',
+                            color: '#ffffff', 
+                            gradient: 'from-gray-600 via-gray-700 to-gray-800', 
+                            title: 'GitHub: @Rama-X2' 
+                          },
+                          { 
+                            icon: Linkedin,    
+                            href: personal.linkedin,  
+                            label: 'LinkedIn',  
+                            subText: 'Ade Ramadhani Putra',
+                            color: '#38bdf8', 
+                            gradient: 'from-blue-600 to-cyan-600', 
+                            title: 'LinkedIn: Ade Ramadhani Putra' 
+                          },
+                          { 
+                            icon: Instagram,   
+                            href: personal.instagram, 
+                            label: 'Instagram', 
+                            subText: '@rama_ext4',
+                            color: '#fb7185', 
+                            gradient: 'from-pink-500 via-purple-500 to-orange-400', 
+                            title: 'Instagram: @rama_ext4' 
+                          },
+                          { 
+                            icon: DiscordIcon, 
+                            href: personal.discord,   
+                            label: 'Discord',   
+                            subText: '@rama_ext',
+                            color: '#a5b4fc', 
+                            gradient: 'from-indigo-500 to-purple-600', 
+                            title: 'Discord: @rama_ext' 
+                          },
+                        ].map((s, i) => (
+                          <a
                             key={s.label}
                             href={s.href}
                             target="_blank"
                             rel="noopener noreferrer"
                             title={s.title}
-                            className="flex items-center gap-2.5 px-4 py-3 glass-card rounded-xl text-xs text-gray-300 hover:text-white justify-center border border-white/10 cursor-pointer select-none"
-                            whileHover={{ 
-                              y: -3, 
-                              scale: 1.03, 
-                              backgroundColor: s.bg, 
-                              borderColor: s.border,
-                              boxShadow: `0 6px 20px ${s.glow}`,
-                              transition: { duration: 0.15, ease: 'easeOut' } 
-                            }}
-                            whileTap={{ scale: 0.96 }}
-                            transition={{ duration: 0.15, ease: 'easeOut' }}
+                            data-aos="fade-up"
+                            data-aos-delay={100 + i * 80}
+                            data-aos-duration="800"
+                            className="group relative flex items-center justify-between p-3.5 rounded-xl bg-white/5 border border-white/10 overflow-hidden hover:border-white/20 transition-all duration-300 cursor-pointer select-none"
                           >
-                            <s.icon className="w-4 h-4 flex-shrink-0" style={{ color: s.color }} />
-                            <span className="font-semibold tracking-wide">{s.label}</span>
-                          </motion.a>
+                            {/* Hover Gradient Background */}
+                            <div
+                              className={`absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-gradient-to-r ${s.gradient}`}
+                            />
+
+                            {/* Content Container */}
+                            <div className="relative flex items-center gap-3 min-w-0">
+                              {/* Icon Container with Glow */}
+                              <div className="relative flex items-center justify-center flex-shrink-0">
+                                <div
+                                  className="absolute inset-0 opacity-20 rounded-lg transition-all duration-300 group-hover:scale-125 group-hover:opacity-30"
+                                  style={{ backgroundColor: s.color }}
+                                />
+                                <div className="relative p-2 rounded-lg">
+                                  <s.icon
+                                    className="w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 group-hover:scale-110"
+                                    style={{ color: s.color }}
+                                  />
+                                </div>
+                              </div>
+
+                              {/* Text Container */}
+                              <div className="flex flex-col min-w-0">
+                                <span className="text-xs sm:text-sm font-bold text-gray-200 group-hover:text-white transition-colors duration-300 truncate">
+                                  {s.label}
+                                </span>
+                                <span className="text-[10px] sm:text-xs text-gray-400 truncate group-hover:text-gray-300 transition-colors duration-300">
+                                  {s.subText}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* External Link Icon */}
+                            <ExternalLink
+                              className="relative w-4 h-4 text-gray-500 group-hover:text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-0 -translate-x-1 flex-shrink-0"
+                            />
+
+                            {/* Traveling Shine Effect */}
+                            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none overflow-hidden">
+                              <div
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"
+                              />
+                            </div>
+                          </a>
                         ))}
                       </div>
-                    </motion.div>
+                    </div>
 
                   </div>
 
                   {/* Right Column: Contact Form / Success Screen (Span 7 on Desktop) */}
-                  <motion.div
+                  <div
                     className="lg:col-span-7"
-                    {...fadeSlideRightAdaptive(0.15)}
+                    data-aos="fade-left"
+                    data-aos-duration="1000"
                   >
                     <AnimatePresence mode="wait">
                       {submitSuccess ? (
@@ -1334,7 +1369,7 @@ export default function Portfolio() {
                           onSubmit={handleFormSubmit}
                           className="glass-card rounded-2xl p-5 md:p-6 space-y-4 border border-white/10 relative"
                         >
-                          <motion.div {...fadeUpAdaptive(0.1, 15)} className="space-y-1.5">
+                          <div data-aos="fade-up" data-aos-delay="100" data-aos-duration="800" className="space-y-1.5">
                             <div className="flex items-center gap-2.5">
                               <div className="p-2 rounded-lg bg-primary/10 text-primary">
                                 <Send className="w-4 h-4" />
@@ -1344,10 +1379,10 @@ export default function Portfolio() {
                             <p className="text-xs text-gray-400 leading-relaxed">
                               {t.contactSec.formDesc}
                             </p>
-                          </motion.div>
+                          </div>
 
                           <div className="space-y-3 mt-3">
-                            <motion.div {...fadeUpAdaptive(0.2, 20)} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="800" className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               <div className="space-y-1">
                                 <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">{t.contactSec.nameLabel}</label>
                                 <input
@@ -1376,9 +1411,9 @@ export default function Portfolio() {
                                   <p className="text-[10px] text-red-400 pl-1 font-semibold">{errors.email}</p>
                                 )}
                               </div>
-                            </motion.div>
+                            </div>
                             
-                            <motion.div {...fadeUpAdaptive(0.28, 20)} className="space-y-1">
+                            <div data-aos="fade-up" data-aos-delay="280" data-aos-duration="800" className="space-y-1">
                               <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">{t.contactSec.subjectLabel}</label>
                               <input
                                 type="text"
@@ -1391,9 +1426,9 @@ export default function Portfolio() {
                               {errors.subject && (
                                 <p className="text-[10px] text-red-400 pl-1 font-semibold">{errors.subject}</p>
                               )}
-                            </motion.div>
+                            </div>
                             
-                            <motion.div {...fadeUpAdaptive(0.36, 20)} className="space-y-1">
+                            <div data-aos="fade-up" data-aos-delay="360" data-aos-duration="800" className="space-y-1">
                               <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">{t.contactSec.messageLabel}</label>
                               <textarea
                                 rows={3}
@@ -1406,10 +1441,10 @@ export default function Portfolio() {
                               {errors.message && (
                                 <p className="text-[10px] text-red-400 pl-1 font-semibold">{errors.message}</p>
                               )}
-                            </motion.div>
+                            </div>
                           </div>
 
-                          <motion.div {...fadeUpAdaptive(0.44, 20)} className="mt-4 pt-1">
+                          <div data-aos="fade-up" data-aos-delay="440" data-aos-duration="800" className="mt-4 pt-1">
                             <motion.button
                               type="submit"
                               disabled={isSubmitting}
@@ -1430,24 +1465,25 @@ export default function Portfolio() {
                                 </>
                               )}
                             </motion.button>
-                          </motion.div>
+                          </div>
                         </motion.form>
                       )}
                     </AnimatePresence>
-                  </motion.div>
+                  </div>
                 </div>
 
               </section>
 
           {/* Footer */}
-          <motion.footer
-            {...fadeUpAdaptive(0, 20)}
+          <footer
+            data-aos="fade-up"
+            data-aos-duration="800"
             className="mt-12 pt-6 pb-24 md:pb-8 border-t border-white/10 text-center text-xs text-gray-400"
           >
             <p className="font-medium text-gray-300">
               Copyright © 2025 – {new Date().getFullYear()} <span className="font-bold text-white">{personal.name} (Rama-X2)</span>. {lang === 'en' ? 'All rights reserved.' : 'Hak cipta dilindungi undang-undang.'}
             </p>
-          </motion.footer>
+          </footer>
         </main>
       </div>
 
