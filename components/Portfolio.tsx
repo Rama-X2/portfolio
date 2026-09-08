@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
 import {
   User,
   Code,
@@ -36,6 +36,10 @@ import {
   Star,
   Loader2,
   ChevronDown,
+  ArrowUp,
+  Copy,
+  Check,
+  Sparkles,
 } from 'lucide-react'
 
 
@@ -168,6 +172,53 @@ const education = [
     locationEn: 'Sukabumi, West Java',
     logo: null,
     ongoing: false,
+  },
+]
+
+const statsData = [
+  {
+    icon: Folder,
+    value: '10+',
+    labelId: 'Proyek Selesai',
+    labelEn: 'Projects Built',
+    descId: 'Web App & Low-level System',
+    descEn: 'Web Apps & System Tools',
+    gradient: 'from-primary to-indigo-500',
+    color: 'text-primary',
+    bg: 'bg-primary/10',
+  },
+  {
+    icon: Award,
+    value: '12+',
+    labelId: 'Sertifikasi Resmi',
+    labelEn: 'Official Certs',
+    descId: 'Microsoft Learn & Dicoding',
+    descEn: 'Microsoft & Dicoding Verified',
+    gradient: 'from-amber-400 to-yellow-500',
+    color: 'text-yellow-400',
+    bg: 'bg-yellow-400/10',
+  },
+  {
+    icon: Clock,
+    value: '3+ Thn',
+    labelId: 'Jam Terbang Teknis',
+    labelEn: 'Technical Journey',
+    descId: 'Eksplorasi & IT Support',
+    descEn: 'System Tuning & Support',
+    gradient: 'from-emerald-400 to-teal-500',
+    color: 'text-emerald-400',
+    bg: 'bg-emerald-400/10',
+  },
+  {
+    icon: Cpu,
+    value: '25+',
+    labelId: 'Tech Stack & Tools',
+    labelEn: 'Tools & Platforms',
+    descId: 'Frontend, Backend, Linux & OS',
+    descEn: 'Full Stack & DevOps Tools',
+    gradient: 'from-purple-500 to-pink-500',
+    color: 'text-pink-400',
+    bg: 'bg-pink-400/10',
   },
 ]
 
@@ -592,8 +643,55 @@ const translations = {
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: false },
+  viewport: { once: false, amount: 0.2 },
   transition: { delay, duration: 0.4, ease: 'easeOut' },
+})
+
+const fadeUpAdaptive = (delay = 0, y = 25) => ({
+  initial: { opacity: 0, y },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: false, amount: 0.2 },
+  transition: { delay, duration: 0.45, ease: [0.25, 0.1, 0.25, 1] },
+})
+
+const fadeSlideLeftAdaptive = (delay = 0, x = -30) => ({
+  initial: { opacity: 0, x, y: 15 },
+  whileInView: { opacity: 1, x: 0, y: 0 },
+  viewport: { once: false, amount: 0.2 },
+  transition: { delay, duration: 0.45, ease: [0.25, 0.1, 0.25, 1] },
+})
+
+const fadeSlideRightAdaptive = (delay = 0, x = 30) => ({
+  initial: { opacity: 0, x, y: 15 },
+  whileInView: { opacity: 1, x: 0, y: 0 },
+  viewport: { once: false, amount: 0.2 },
+  transition: { delay, duration: 0.45, ease: [0.25, 0.1, 0.25, 1] },
+})
+
+const zoomInAdaptive = (delay = 0) => ({
+  initial: { opacity: 0, scale: 0.94, y: 20 },
+  whileInView: { opacity: 1, scale: 1, y: 0 },
+  viewport: { once: false, amount: 0.2 },
+  transition: { delay, duration: 0.45, ease: [0.25, 0.1, 0.25, 1] },
+})
+
+const cardScrollAlternating = (index: number) => ({
+  initial: {
+    opacity: 0,
+    x: index % 2 === 0 ? -30 : 30,
+    y: 20,
+  },
+  whileInView: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+  },
+  viewport: { once: false, amount: 0.2 },
+  transition: {
+    duration: 0.45,
+    delay: (index % 2) * 0.1,
+    ease: [0.25, 0.1, 0.25, 1],
+  },
 })
 
 const cardScrollVariant = (index: number) => ({
@@ -712,6 +810,37 @@ export default function Portfolio() {
   const [errors, setErrors] = useState<{ name?: string; email?: string; subject?: string; message?: string }>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+
+  // Scroll Progress & Floating Back to Top
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  })
+
+  const [showBackToTop, setShowBackToTop] = useState(false)
+  const [scrollPercentage, setScrollPercentage] = useState(0)
+  const [copiedEmail, setCopiedEmail] = useState(false)
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(personal.email)
+    setCopiedEmail(true)
+    setTimeout(() => setCopiedEmail(false), 2000)
+  }
+
+  useEffect(() => {
+    const handleScrollProgress = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight
+      if (totalHeight > 0) {
+        const progress = Math.min(100, Math.max(0, (window.scrollY / totalHeight) * 100))
+        setScrollPercentage(Math.round(progress))
+        setShowBackToTop(window.scrollY > 350)
+      }
+    }
+    window.addEventListener('scroll', handleScrollProgress, { passive: true })
+    return () => window.removeEventListener('scroll', handleScrollProgress)
+  }, [])
 
   useEffect(() => {
     const saved = localStorage.getItem('portfolio_lang') as 'id' | 'en'
@@ -864,6 +993,12 @@ export default function Portfolio() {
         <div className="blob blob-2" />
         <div className="blob blob-3" />
       </div>
+
+      {/* ── Top Neon Scroll Progress Bar ─── */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary via-secondary to-pink-500 origin-left z-50 shadow-[0_0_12px_rgba(99,102,241,0.8)]"
+        style={{ scaleX }}
+      />
 
       {/* ── Header Navigasi Atas (Navbar Header - Animasi Masuk 1x saat Web Dibuka) ─── */}
       <motion.header
@@ -1026,17 +1161,13 @@ export default function Portfolio() {
         <main ref={mainRef} className="flex-1 w-full max-w-[1720px] mx-auto p-3 sm:p-5 md:p-8 lg:p-10 min-w-0 space-y-12 md:space-y-16">
 
           {/* ════════════════════════════════ HOME ═══ */}
-          <motion.section
+          <section
             id="home"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5 }}
             className="scroll-mt-24 space-y-5 md:space-y-6"
           >
 
             {/* Hero card */}
-            <div className="glass-card rounded-2xl p-5 md:p-8">
+            <motion.div {...zoomInAdaptive(0)} className="glass-card rounded-2xl p-5 md:p-8">
               <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
                 {/* Avatar */}
                 <motion.div
@@ -1056,6 +1187,22 @@ export default function Portfolio() {
 
                 {/* Text */}
                 <div className="flex-1 text-center md:text-left">
+                  {/* Status Pill: Available for Freelance & Projects */}
+                  <motion.div
+                    {...fadeUp(0.08)}
+                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold mb-2 shadow-[0_0_15px_rgba(16,185,129,0.15)]"
+                  >
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span>
+                      {lang === 'en'
+                        ? 'Available for Freelance & Projects'
+                        : 'Tersedia untuk Freelance & Kolaborasi Proyek'}
+                    </span>
+                  </motion.div>
+
                   <motion.p {...fadeUp(0.15)} className="text-sm text-primary font-semibold mb-1">
                     {t.personal.greeting}
                   </motion.p>
@@ -1094,10 +1241,10 @@ export default function Portfolio() {
                   </motion.div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Tech Stack & Tools */}
-            <motion.div {...fadeUp(0.5)} className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
+            <motion.div {...zoomInAdaptive(0.1)} className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
                 <div>
                   <h2 className="text-xl font-bold text-white flex items-center gap-2">
@@ -1135,53 +1282,88 @@ export default function Portfolio() {
                 ))}
               </div>
             </motion.div>
-          </motion.section>
+          </section>
 
           {/* ════════════════════════════════ ABOUT ═══ */}
-          <motion.section
+          <section
             id="about"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
             {/* About Me Details (Balanced Professional Practitioner Text) */}
-            <div className="glass-card rounded-2xl p-6 md:p-8 border border-white/10">
+            <motion.div
+              {...zoomInAdaptive(0)}
+              className="glass-card rounded-2xl p-6 md:p-8 border border-white/10"
+            >
               <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-5 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
-              <h2 className="text-2xl md:text-3xl font-extrabold gradient-text mb-4 flex items-center gap-2.5">
+              <motion.h2
+                {...fadeSlideLeftAdaptive(0.1)}
+                className="text-2xl md:text-3xl font-extrabold gradient-text mb-4 flex items-center gap-2.5"
+              >
                 <User className="w-6 h-6 text-indigo-400" /> {lang === 'en' ? 'About Me' : 'Tentang Saya'}
-              </h2>
+              </motion.h2>
               <div className="space-y-4 text-sm md:text-base text-gray-300 leading-relaxed font-normal">
-                <p>
+                <motion.p {...fadeSlideLeftAdaptive(0.15)}>
                   {lang === 'en'
                     ? 'I am a Full Stack Web Developer, UI/UX Designer, and System Specialist based in Sukabumi, West Java. My core focus centers on designing modern web applications, managing Linux server infrastructures, and exploring low-level systems including AOSP Android customization and Linux Kernel tuning.'
                     : 'Saya adalah seorang Full Stack Web Developer, UI/UX Designer, dan System Specialist asal Sukabumi, Jawa Barat. Fokus utama saya berpusat pada perancangan aplikasi web modern, pengelolaan infrastruktur server berbasis Linux, serta eksplorasi sistem tingkat rendah (low-level) seperti kustomisasi Android AOSP dan optimasi Linux Kernel.'}
-                </p>
-                <p>
+                </motion.p>
+                <motion.p {...fadeSlideLeftAdaptive(0.25)}>
                   {lang === 'en'
                     ? 'My technical journey stems from a deep passion for computing performance, hardware/electronics modification, and interface design. I bring this expertise to life through building modern e-commerce applications, interactive web platforms, server & network management, as well as designing optimization modules like Miyabi Core, CPU/GPU overclocking experiments, and custom ROMs focused on performance improvement and device efficiency.'
                     : 'Eksplorasi teknis saya berawal dari ketertarikan mendalam terhadap performa komputasi, modifikasi hardware/elektronika, dan desain antarmuka. Pengalaman ini saya wujudkan secara langsung melalui pembuatan aplikasi e-commerce modern, platform web interaktif, pengelolaan server & jaringan, hingga perancangan modul optimasi seperti Miyabi Core, eksperimen overclocking CPU/GPU, dan custom ROM yang difokuskan untuk peningkatan performa serta efisiensi perangkat.'}
-                </p>
-                <p>
+                </motion.p>
+                <motion.p {...fadeSlideLeftAdaptive(0.35)}>
                   {lang === 'en'
                     ? 'In every project I develop, I prioritize clean code architecture, responsive system performance, and intuitive user interfaces. Whether building web applications, managing cloud servers, or sharing open-source projects on GitHub, my goal is to deliver stable, secure, and helpful digital solutions.'
                     : 'Dalam setiap proyek yang saya kembangkan, saya mengutamakan penerapan struktur kode yang rapi, performa yang responsif, serta antarmuka yang mudah digunakan. Baik saat membangun aplikasi web, mengelola server cloud, maupun membagikan proyek open-source di GitHub, dedikasi saya adalah menghadirkan solusi teknologi yang stabil, aman, dan bermanfaat.'}
-                </p>
+                </motion.p>
               </div>
-            </div>
+
+              {/* Quick Stat Counters (Modern Tech Portfolio Stats) */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-6 pt-5 border-t border-white/10">
+                {statsData.map((stat, i) => (
+                  <motion.div
+                    key={stat.labelEn}
+                    {...zoomInAdaptive(0.08 * i)}
+                    className="glass-card rounded-2xl p-4 sm:p-5 border border-white/10 hover:border-primary/40 relative overflow-hidden group transition-all duration-300 flex flex-col justify-between"
+                    whileHover={{ y: -4, scale: 1.02 }}
+                  >
+                    <div className={`absolute -z-10 inset-0 bg-gradient-to-br ${stat.gradient} opacity-5 group-hover:opacity-15 transition-opacity duration-300`} />
+                    <div className="flex items-center justify-between mb-3">
+                      <div className={`p-2.5 rounded-xl ${stat.bg} ${stat.color} group-hover:scale-110 transition-transform`}>
+                        <stat.icon className="w-5 h-5" />
+                      </div>
+                      <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                        {stat.value}
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-bold text-white mb-0.5">
+                        {lang === 'en' ? stat.labelEn : stat.labelId}
+                      </h4>
+                      <p className="text-[11px] text-gray-400 leading-snug">
+                        {lang === 'en' ? stat.descEn : stat.descId}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
 
             {/* Experience Timeline */}
             <div>
-              <h2 className="text-xl md:text-2xl font-bold gradient-text mb-4 flex items-center gap-2">
+              <motion.h2
+                {...fadeSlideLeftAdaptive(0)}
+                className="text-xl md:text-2xl font-bold gradient-text mb-4 flex items-center gap-2"
+              >
                 <Briefcase className="w-6 h-6 text-primary" /> {t.aboutSec.experienceTitle}
-              </h2>
+              </motion.h2>
               <div className="space-y-4">
                 {experiences.map((exp, i) => (
                   <motion.div key={i}
-                    {...fadeUp(i * 0.12)}
+                    {...cardScrollAlternating(i)}
                     className="glass-card rounded-xl p-5 md:p-6 relative overflow-hidden render-optimized"
-                    whileHover={{ y: -2 }}
+                    whileHover={{ y: -3, scale: 1.01 }}
                   >
                     <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl" style={{ backgroundColor: exp.color }} />
                     <div className="pl-3">
@@ -1208,15 +1390,18 @@ export default function Portfolio() {
 
             {/* Education */}
             <div>
-              <h2 className="text-xl md:text-2xl font-bold gradient-text mb-4 flex items-center gap-2">
+              <motion.h2
+                {...fadeSlideLeftAdaptive(0)}
+                className="text-xl md:text-2xl font-bold gradient-text mb-4 flex items-center gap-2"
+              >
                 <GraduationCap className="w-6 h-6 text-primary" /> {t.aboutSec.educationTitle}
-              </h2>
+              </motion.h2>
               <div className="space-y-4">
                 {education.map((edu, i) => (
                   <motion.div key={i}
-                    {...fadeUp(i * 0.1)}
+                    {...cardScrollAlternating(i)}
                     className="glass-card rounded-xl p-5 flex items-start gap-4"
-                    whileHover={{ y: -2 }}
+                    whileHover={{ y: -3, scale: 1.01 }}
                   >
                     {/* Logo / placeholder */}
                     <div className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden bg-white/10 flex items-center justify-center">
@@ -1252,24 +1437,23 @@ export default function Portfolio() {
                 ))}
               </div>
             </div>
-          </motion.section>
+          </section>
 
           {/* ════════════════════════════════ PROJECTS ═══ */}
-          <motion.section
+          <section
             id="projects"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
-            <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
+            <motion.div
+              {...zoomInAdaptive(0)}
+              className="glass-card rounded-2xl p-5 md:p-6 border border-white/10"
+            >
               <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-4 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
               <h2 className="text-2xl md:text-3xl font-extrabold gradient-text flex items-center gap-2.5 mb-1">
                 <Folder className="w-6 h-6 text-emerald-400" /> {t.projectsSec.title}
               </h2>
               <p className="text-xs md:text-sm text-gray-400">{t.projectsSec.subtitle}</p>
-            </div>
+            </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
               {displayedProjects.map((project, index) => (
@@ -1329,12 +1513,36 @@ export default function Portfolio() {
                     </div>
                   </div>
 
-                  {/* Action link */}
-                  <div className="px-4 pb-4 md:px-5 md:pb-5 pt-0 flex items-center justify-between border-t border-white/5 mt-auto text-xs text-gray-400">
+                  {/* Action link & direct shortcuts */}
+                  <div className="px-4 pb-4 md:px-5 md:pb-5 pt-3 flex items-center justify-between border-t border-white/5 mt-auto text-xs text-gray-400">
                     <span className="text-primary font-medium group-hover:underline flex items-center gap-1">
                       {lang === 'en' ? 'View Details' : 'Lihat Detail'}
+                      <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                     </span>
-                    <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          title={lang === 'en' ? 'Live Demo' : 'Lihat Demo'}
+                          className="p-1.5 rounded-lg bg-white/5 hover:bg-primary/20 text-gray-400 hover:text-white transition-colors"
+                        >
+                          <Globe className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          title="GitHub Repository"
+                          className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-gray-400 hover:text-white transition-colors"
+                        >
+                          <Github className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -1351,24 +1559,23 @@ export default function Portfolio() {
                 />
               </div>
             )}
-          </motion.section>
+          </section>
 
           {/* ════════════════════════════════ ACHIEVEMENTS ═══ */}
-          <motion.section
+          <section
             id="achievements"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10"
           >
-            <div className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
+            <motion.div
+              {...zoomInAdaptive(0)}
+              className="glass-card rounded-2xl p-5 md:p-6 border border-white/10"
+            >
               <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-4 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
               <h2 className="text-2xl md:text-3xl font-extrabold gradient-text flex items-center gap-2.5 mb-1">
                 <Award className="w-6 h-6 text-yellow-400" /> {t.achievementsSec.title}
               </h2>
               <p className="text-xs md:text-sm text-gray-400">{t.achievementsSec.subtitle}</p>
-            </div>
+            </motion.div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
               {displayedAchievements.map((item, index) => (
@@ -1439,15 +1646,11 @@ export default function Portfolio() {
                 />
               </div>
             )}
-          </motion.section>
+          </section>
 
           {/* ════════════════════════════════ CONTACT ═══ */}
-          <motion.section
+          <section
             id="contact"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5 }}
             className="scroll-mt-20 space-y-6 pt-6 md:pt-10 max-w-5xl mx-auto"
           >
 
@@ -1459,10 +1662,7 @@ export default function Portfolio() {
                     
                     {/* Header Card */}
                     <motion.div
-                      initial={{ opacity: 0, x: -30, y: 20 }}
-                      whileInView={{ opacity: 1, x: 0, y: 0 }}
-                      viewport={{ once: false, margin: '-20px' }}
-                      transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+                      {...fadeSlideLeftAdaptive(0.1)}
                       className="glass-card rounded-2xl p-6 md:p-7 border border-white/10 space-y-3 group text-center flex flex-col items-center justify-center"
                     >
                       <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-1 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
@@ -1479,10 +1679,7 @@ export default function Portfolio() {
 
                     {/* Location Info Card */}
                     <motion.div
-                      initial={{ opacity: 0, x: -30, y: 20 }}
-                      whileInView={{ opacity: 1, x: 0, y: 0 }}
-                      viewport={{ once: false, margin: '-20px' }}
-                      transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+                      {...fadeSlideLeftAdaptive(0.2)}
                       className="glass-card rounded-2xl p-6 border border-white/10 hover:border-pink-500/30 hover:shadow-[0_0_20px_rgba(236,72,153,0.15)] transition-all relative overflow-hidden group"
                     >
                       <div className="absolute top-0 right-0 w-24 h-24 bg-pink-500/5 rounded-full blur-xl pointer-events-none" />
@@ -1513,12 +1710,62 @@ export default function Portfolio() {
                       </div>
                     </motion.div>
 
+                    {/* Direct Email Card with Instant Copy Button */}
+                    <motion.div
+                      {...fadeSlideLeftAdaptive(0.25)}
+                      className="glass-card rounded-2xl p-6 border border-white/10 hover:border-indigo-500/30 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] transition-all relative overflow-hidden group"
+                    >
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-500/5 rounded-full blur-xl pointer-events-none" />
+                      <div className="flex items-start gap-4">
+                        <div className="p-3 rounded-xl bg-primary/10 text-primary flex-shrink-0 group-hover:scale-110 transition-transform">
+                          <Mail className="w-6 h-6" />
+                        </div>
+                        <div className="space-y-3 flex-1 min-w-0">
+                          <div>
+                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">
+                              {lang === 'en' ? 'Direct Email' : 'Email Langsung'}
+                            </p>
+                            <h4 className="font-extrabold text-white text-sm sm:text-base mt-0.5 truncate select-all">
+                              {personal.email}
+                            </h4>
+                          </div>
+                          <div className="flex flex-wrap gap-2 pt-1">
+                            <motion.button
+                              type="button"
+                              onClick={handleCopyEmail}
+                              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary/10 text-primary hover:bg-primary/20 text-xs font-semibold border border-primary/20 transition-all cursor-pointer"
+                              whileHover={{ scale: 1.03 }}
+                              whileTap={{ scale: 0.97 }}
+                            >
+                              {copiedEmail ? (
+                                <>
+                                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                                  <span className="text-emerald-400 font-medium">{lang === 'en' ? 'Copied!' : 'Tersalin!'}</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="w-3.5 h-3.5" />
+                                  <span>{lang === 'en' ? 'Copy Email' : 'Salin Email'}</span>
+                                </>
+                              )}
+                            </motion.button>
+                            <motion.a
+                              href={`mailto:${personal.email}`}
+                              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/5 text-gray-300 hover:text-white hover:bg-white/10 text-xs font-semibold border border-white/10 transition-all"
+                              whileHover={{ scale: 1.03 }}
+                              whileTap={{ scale: 0.97 }}
+                            >
+                              <ExternalLink className="w-3.5 h-3.5" />
+                              <span>{lang === 'en' ? 'Open Mail' : 'Buka Email'}</span>
+                            </motion.a>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+
                     {/* Social Media Connections */}
                     <motion.div
-                      initial={{ opacity: 0, x: -30, y: 20 }}
-                      whileInView={{ opacity: 1, x: 0, y: 0 }}
-                      viewport={{ once: false, margin: '-20px' }}
-                      transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
+                      {...fadeSlideLeftAdaptive(0.3)}
                       className="glass-card rounded-2xl p-6 border border-white/10 space-y-4"
                     >
                       <h4 className="font-bold text-white text-xs tracking-wider uppercase pl-1">{t.contactSec.socialsHeading}</h4>
@@ -1528,19 +1775,24 @@ export default function Portfolio() {
                           { icon: Linkedin,  href: personal.linkedin,  label: 'LinkedIn',  color: '#0A66C2', bg: 'rgba(10,102,194,0.06)', border: 'rgba(10,102,194,0.15)' },
                           { icon: Instagram, href: personal.instagram, label: 'Instagram', color: '#E1306C', bg: 'rgba(225,48,108,0.06)', border: 'rgba(225,48,108,0.15)' },
                           { icon: Globe,     href: personal.website,   label: 'Website',   color: '#6366f1', bg: 'rgba(99,102,241,0.06)', border: 'rgba(99,102,241,0.15)' },
-                        ].map((s) => (
+                        ].map((s, idx) => (
                           <motion.a
                             key={s.label}
                             href={s.href}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2.5 px-4 py-3 glass-card rounded-xl text-xs text-gray-300 hover:text-white transition-all justify-center border border-white/5"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: false, amount: 0.2 }}
+                            transition={{ duration: 0.35, delay: 0.35 + idx * 0.07 }}
                             whileHover={{ 
-                              scale: 1.03, 
+                              scale: 1.05, 
                               backgroundColor: s.bg, 
                               borderColor: s.border,
                               boxShadow: `0 0 15px ${s.border}` 
                             }}
+                            whileTap={{ scale: 0.95 }}
                           >
                             <s.icon className="w-4 h-4 flex-shrink-0" style={{ color: s.color }} />
                             <span className="font-semibold">{s.label}</span>
@@ -1554,10 +1806,7 @@ export default function Portfolio() {
                   {/* Right Column: Contact Form / Success Screen (Span 7 on Desktop) */}
                   <motion.div
                     className="lg:col-span-7"
-                    initial={{ opacity: 0, x: 30, y: 20 }}
-                    whileInView={{ opacity: 1, x: 0, y: 0 }}
-                    viewport={{ once: false, margin: '-20px' }}
-                    transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+                    {...fadeSlideRightAdaptive(0.15)}
                   >
                     <AnimatePresence mode="wait">
                       {submitSuccess ? (
@@ -1607,7 +1856,7 @@ export default function Portfolio() {
                           onSubmit={handleFormSubmit}
                           className="glass-card rounded-2xl p-5 md:p-6 space-y-4 border border-white/10 relative"
                         >
-                          <div className="space-y-1.5">
+                          <motion.div {...fadeUpAdaptive(0.1, 15)} className="space-y-1.5">
                             <div className="flex items-center gap-2.5">
                               <div className="p-2 rounded-lg bg-primary/10 text-primary">
                                 <Send className="w-4 h-4" />
@@ -1617,10 +1866,10 @@ export default function Portfolio() {
                             <p className="text-xs text-gray-400 leading-relaxed">
                               {t.contactSec.formDesc}
                             </p>
-                          </div>
+                          </motion.div>
 
                           <div className="space-y-3 mt-3">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <motion.div {...fadeUpAdaptive(0.2, 20)} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               <div className="space-y-1">
                                 <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">{t.contactSec.nameLabel}</label>
                                 <input
@@ -1649,9 +1898,9 @@ export default function Portfolio() {
                                   <p className="text-[10px] text-red-400 pl-1 font-semibold">{errors.email}</p>
                                 )}
                               </div>
-                            </div>
+                            </motion.div>
                             
-                            <div className="space-y-1">
+                            <motion.div {...fadeUpAdaptive(0.28, 20)} className="space-y-1">
                               <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">{t.contactSec.subjectLabel}</label>
                               <input
                                 type="text"
@@ -1664,9 +1913,9 @@ export default function Portfolio() {
                               {errors.subject && (
                                 <p className="text-[10px] text-red-400 pl-1 font-semibold">{errors.subject}</p>
                               )}
-                            </div>
+                            </motion.div>
                             
-                            <div className="space-y-1">
+                            <motion.div {...fadeUpAdaptive(0.36, 20)} className="space-y-1">
                               <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 pl-1">{t.contactSec.messageLabel}</label>
                               <textarea
                                 rows={3}
@@ -1679,10 +1928,10 @@ export default function Portfolio() {
                               {errors.message && (
                                 <p className="text-[10px] text-red-400 pl-1 font-semibold">{errors.message}</p>
                               )}
-                            </div>
+                            </motion.div>
                           </div>
 
-                          <div className="mt-4 pt-1">
+                          <motion.div {...fadeUpAdaptive(0.44, 20)} className="mt-4 pt-1">
                             <motion.button
                               type="submit"
                               disabled={isSubmitting}
@@ -1702,23 +1951,68 @@ export default function Portfolio() {
                                 </>
                               )}
                             </motion.button>
-                          </div>
+                          </motion.div>
                         </motion.form>
                       )}
                     </AnimatePresence>
                   </motion.div>
                 </div>
 
-              </motion.section>
+              </section>
 
           {/* Footer */}
-          <footer className="mt-12 pt-6 pb-24 md:pb-8 border-t border-white/10 text-center text-xs text-gray-400">
+          <motion.footer
+            {...fadeUpAdaptive(0, 20)}
+            className="mt-12 pt-6 pb-24 md:pb-8 border-t border-white/10 text-center text-xs text-gray-400"
+          >
             <p className="font-medium text-gray-300">
               Copyright © 2025 – {new Date().getFullYear()} <span className="font-bold text-white">{personal.name} (Rama-X2)</span>. {lang === 'en' ? 'All rights reserved.' : 'Hak cipta dilindungi undang-undang.'}
             </p>
-          </footer>
+          </motion.footer>
         </main>
       </div>
+
+      {/* ── Floating Back to Top Button with Circular Progress ─── */}
+      <AnimatePresence>
+        {showBackToTop && (
+          <motion.button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            initial={{ opacity: 0, scale: 0.7, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.7, y: 20 }}
+            whileHover={{ scale: 1.1, y: -2 }}
+            whileTap={{ scale: 0.9 }}
+            className="fixed bottom-20 md:bottom-8 right-5 md:right-8 z-40 w-12 h-12 rounded-full glass-card border border-white/20 bg-[#0c0a1e]/90 text-white flex items-center justify-center shadow-[0_0_20px_rgba(99,102,241,0.35)] hover:border-primary/60 hover:shadow-[0_0_25px_rgba(99,102,241,0.65)] transition-all group cursor-pointer"
+            title={lang === 'en' ? 'Back to top' : 'Kembali ke atas'}
+            aria-label="Back to top"
+          >
+            <svg className="absolute inset-0 w-full h-full -rotate-90 p-0.5" viewBox="0 0 44 44">
+              <circle
+                cx="22"
+                cy="22"
+                r="18"
+                className="text-white/10"
+                strokeWidth="2.5"
+                stroke="currentColor"
+                fill="transparent"
+              />
+              <circle
+                cx="22"
+                cy="22"
+                r="18"
+                className="text-primary"
+                strokeWidth="2.5"
+                strokeDasharray={113.1}
+                strokeDashoffset={113.1 - (113.1 * scrollPercentage) / 100}
+                strokeLinecap="round"
+                stroke="currentColor"
+                fill="transparent"
+              />
+            </svg>
+            <ArrowUp className="w-5 h-5 text-gray-300 group-hover:text-primary transition-colors relative z-10" />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* ── Bottom nav (mobile) ─── */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 mobile-bottom-nav">
