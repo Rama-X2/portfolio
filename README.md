@@ -1,111 +1,101 @@
-﻿<div align="center">
+<div align="center">
 
-# 🌸 Rama Portfolio Web
+# Ade Ramadhani Putra — Portfolio Website
 
-An interactive, modern, and high-performance personal portfolio website built with **Next.js 14**, **React 18**, **TypeScript**, and **Tailwind CSS**.
+**Modern, responsive, and performance-driven personal web portfolio.**
 
-[![Website](https://img.shields.io/badge/Live_Demo-rama--x2.my.id-6366f1?style=for-the-badge&logo=google-chrome&logoColor=white)](https://rama-x2.my.id)
-[![Next.js](https://img.shields.io/badge/Next.js_14-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer&logoColor=blue)](https://www.framer.com/motion/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-rama--x2.my.id-4f46e5?style=flat-square&logo=google-chrome&logoColor=white)](https://rama-x2.my.id)
+[![Next.js](https://img.shields.io/badge/Next.js%2014-black?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React%2018-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript%205-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS%203-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer%20Motion-0055FF?style=flat-square&logo=framer&logoColor=white)](https://www.framer.com/motion/)
+[![Resend](https://img.shields.io/badge/Resend%20API-000000?style=flat-square&logo=resend&logoColor=white)](https://resend.com/)
+
+[Explore Live Showcase](https://rama-x2.my.id) • [View Projects](https://rama-x2.my.id#projects) • [Contact](https://rama-x2.my.id#contact)
 
 </div>
 
 ---
 
-## 🌟 Overview
+## Project Overview
 
-This repository contains the source code for the personal portfolio of **Ade Ramadhani Putra**. It highlights key accomplishments, professional IT experiences, featured full-stack and mobile projects, verified certifications, and interactive contact channels.
+This repository hosts the source code and visual presentation layer for the personal portfolio of **Ade Ramadhani Putra** (Full Stack Developer & UI/UX Designer). The platform is engineered to exhibit real-world software engineering projects, industry-standard certifications, technical competencies, and an integrated direct communication channel.
 
-Designed with a sleek **dark glassmorphism** aesthetic, the web application delivers a smooth and responsive experience across mobile, tablet, and desktop devices.
-
----
-
-## ✨ Key Features
-
-- 🎨 **Dark Glassmorphism Interface**: Sleek translucent cards, custom ambient gradients, and responsive layout fine-tuned for high visual fidelity.
-- 🌐 **Bilingual Support (ID / EN)**: Instant language switcher allowing visitors to browse the portfolio in both Bahasa Indonesia and English.
-- 🎬 **Fluid Micro-interactions & Animations**: Driven by Framer Motion for smooth section reveal transitions, interactive cards, and responsive state changes.
-- 🚀 **Projects Showcase**: Interactive project gallery with live preview links, GitHub repository buttons, tags, and detailed modal popups.
-- 🎓 **Verified Achievements & Certifications**: Grid display for professional certifications with direct credential verification links (Credly, Microsoft Learn, etc.).
-- 📄 **Built-in Resume / CV Viewer**: Instant modal viewer allowing visitors to preview and download the CV without leaving the page.
-- 📬 **Serverless Contact Form**: Direct message delivery powered by Next.js API Routes and the Resend API with real-time validation and feedback states.
-- ⚡ **SEO & Performance Optimization**: Custom metadata, OpenGraph social sharing preview, and optimized next-gen image assets.
+Built with a modern dark glassmorphism design language, the application focuses on high visual fidelity, seamless micro-interactions, low-latency performance, and bilingual content presentation.
 
 ---
 
-## 🛠️ Tech Stack
+## Key Highlights
 
-| Category | Technologies |
-| :--- | :--- |
-| **Framework** | [Next.js 14](https://nextjs.org/) (App Router) |
-| **Library** | [React 18](https://react.dev/) |
-| **Language** | [TypeScript](https://www.typescriptlang.org/) |
-| **Styling** | [Tailwind CSS](https://tailwindcss.com/) |
-| **Motion** | [Framer Motion](https://www.framer.com/motion/) |
-| **Icons** | [Lucide React](https://lucide.dev/), [SkillIcons](https://skillicons.dev/) |
-| **Email Service** | [Resend](https://resend.com/) |
+- **Dark Glassmorphism Interface**: Multi-layered translucent glass panels, dynamic ambient gradients, and responsive layouts tailored for desktop, tablet, and mobile viewports.
+- **Bilingual Architecture**: Built-in Indonesian and English localization with client-side persistence via localStorage.
+- **Bidirectional Scroll Animations**: Responsive scroll detection triggering fluid entrance effects on both upward and downward viewport traversal without animation stutter.
+- **Interactive Project Showcase**: Curated showcase of production and full-stack software projects featuring modal details, live demonstration links, and repository access.
+- **Verified Credentials & Certifications**: Structured showcase of verified industry achievements from Cisco, Dicoding, and Microsoft Learn with direct credential links.
+- **In-App Resume Preview**: Native modal viewer enabling instant inspection and high-fidelity download of curriculum vitae documentation.
+- **Serverless Direct Messaging**: Server-side contact routing powered by Next.js API endpoints and the Resend API with real-time input sanitization, rate-limiting, and error handling.
+- **Performance & Asset Optimization**: Accelerated layout rendering, next-gen image formats, and zero-flicker CSS GPU layer management.
 
 ---
 
-## 🚀 Getting Started
+## Architecture & Technology Stack
 
-### Prerequisites
+| Layer | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Framework** | Next.js 14 (App Router) | Server-side rendering, routing, and static generation |
+| **Core Library** | React 18 | Declarative component-driven user interface |
+| **Language** | TypeScript 5 | Strict static typing and code reliability |
+| **Styling** | Tailwind CSS | Utility-first responsive design and custom glass tokens |
+| **Motion Engine** | Framer Motion | Smooth state transitions and micro-interactions |
+| **Animation Tokens** | AOS Stylesheet | Lightweight CSS keyframes and transform coordinates |
+| **Iconography** | Lucide React & SkillIcons | Unified vector icon assets |
+| **Email Gateway** | Resend API | Automated serverless transactional email dispatch |
 
-- [Node.js](https://nodejs.org/) (version 18.17.0 or higher recommended)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) / [pnpm](https://pnpm.io/)
+---
 
-### Installation
+## Directory Overview
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Rama-X2/portfolio-web.git
-   cd portfolio-web
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Configure Environment Variables:**
-   Create a `.env.local` file in the root directory:
-   ```env
-   RESEND_API_KEY=your_resend_api_key
-   CONTACT_RECEIVER_EMAIL=your_inbox_email@example.com
-   ```
-
-4. **Run development server:**
-   ```bash
-   npm run dev
-   ```
-
-   Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
-
-### Building for Production
-
-To create an optimized production build:
-
-```bash
-npm run build
-npm run start
+```text
+portfolio-web/
+├── app/
+│   ├── api/
+│   │   └── contact/        # Serverless contact dispatch endpoint
+│   ├── globals.css         # Global styling, scrollbar & animation tokens
+│   ├── layout.tsx          # Root layout, metadata & font definitions
+│   └── page.tsx            # Main page entry point
+├── components/
+│   └── Portfolio.tsx       # Core interactive portfolio component & data registry
+├── public/
+│   ├── certificates/       # High-resolution credential assets
+│   ├── cv/                 # Professional resume documentation
+│   ├── favicon.png         # Site branding and favicon
+│   └── images/             # Project previews and profile photography
+├── next.config.mjs         # Next.js compilation settings
+├── package.json            # Project dependencies and build scripts
+├── tailwind.config.ts      # Tailwind design system configuration
+└── tsconfig.json           # TypeScript configuration
 ```
 
 ---
 
-## 👤 Author & Socials
+## Author & Contact
 
-**Ade Ramadhani Putra**
+**Ade Ramadhani Putra**  
+Full Stack Developer & UI/UX Designer — Sukabumi, Indonesia
 
-- 🌐 Website: [rama-x2.my.id](https://rama-x2.my.id)
-- 🐙 GitHub: [@Rama-X2](https://github.com/Rama-X2)
-- 💼 LinkedIn: [Ade Ramadhani Putra](https://www.linkedin.com/in/ade-ramadhani-putra-66270b22a)
-- 📸 Instagram: [@r.a.m.a_22](https://instagram.com/r.a.m.a_22)
-- 💬 Discord: `@ramaa_x`
+- **Website**: [rama-x2.my.id](https://rama-x2.my.id)
+- **GitHub**: [@Rama-X2](https://github.com/Rama-X2)
+- **LinkedIn**: [Ade Ramadhani Putra](https://www.linkedin.com/in/ade-ramadhani-putra-66270b22a)
+- **Instagram**: [@rama_ext4](https://instagram.com/rama_ext4)
+- **Discord**: `@rama_ext`
 
 ---
 
-## 📄 License
+## Intellectual Property & License
 
-This project is created for personal portfolio purposes. All project assets, branding, and personal contents are protected under standard personal copyright.
+**Copyright © 2026 Ade Ramadhani Putra. All rights reserved.**
+
+The source code, custom design, visual assets, branding, and written content contained within this repository are proprietary. This repository is made publicly visible for portfolio presentation and code review purposes only.
+
+**Unauthorized copying, cloning, modification, distribution, redistribution, sublicensing, or deployment of this project in whole or in part is strictly prohibited without prior written permission from the copyright owner.**
