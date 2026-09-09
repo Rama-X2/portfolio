@@ -2,7 +2,8 @@
 
 import Image from 'next/image'
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
+import AOS from 'aos'
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'framer-motion'
 import {
   User,
   Globe,
@@ -287,24 +288,27 @@ export default function Portfolio() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
 
-  // Scroll Progress & Floating Back to Top
+  // Scroll Progress & Floating Back to Top (Hardware-accelerated MotionValues - 0 React re-renders while scrolling!)
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
   })
+  const circleOffset = useTransform(scrollYProgress, [0, 1], [113.1, 0])
 
   const [showBackToTop, setShowBackToTop] = useState(false)
-  const [scrollPercentage, setScrollPercentage] = useState(0)
 
   useEffect(() => {
+    let ticking = false
     const handleScrollProgress = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight
-      if (totalHeight > 0) {
-        const progress = Math.min(100, Math.max(0, (window.scrollY / totalHeight) * 100))
-        setScrollPercentage(Math.round(progress))
-        setShowBackToTop(window.scrollY > 350)
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const shouldShow = window.scrollY > 350
+          setShowBackToTop((prev) => (prev !== shouldShow ? shouldShow : prev))
+          ticking = false
+        })
+        ticking = true
       }
     }
     window.addEventListener('scroll', handleScrollProgress, { passive: true })
@@ -318,61 +322,29 @@ export default function Portfolio() {
     }
   }, [])
 
-  // Bidirectional Scroll Animations (Replays smoothly on both Scroll Up & Scroll Down)
+  // Official AOS Animation Engine (Exact same architecture as Ekizr Portfolio)
   useEffect(() => {
-    const updateAosAnimations = () => {
-      const elements = document.querySelectorAll<HTMLElement>('[data-aos]')
-      const windowHeight = window.innerHeight
+    AOS.init({
+      once: false,
+      mirror: true,
+      offset: 30,
+      duration: 800,
+      easing: 'ease-out-cubic',
+    })
 
-      elements.forEach((el) => {
-        const rect = el.getBoundingClientRect()
-        // Check if element enters the visible viewport (natural trigger)
-        const isVisible = rect.top < windowHeight - 20 && rect.bottom > 20
-
-        if (isVisible) {
-          if (!el.classList.contains('aos-animate')) {
-            el.classList.add('aos-animate')
-          }
-        } else {
-          // Offscreen: Reset aos-animate ONLY when safely outside the transform buffer
-          // (AOS max transform is 100px. Using 120px buffer prevents any flicker or infinite loop)
-          const isFarAbove = rect.bottom < -120
-          const isFarBelow = rect.top > windowHeight + 120
-
-          if (isFarAbove || isFarBelow) {
-            if (el.classList.contains('aos-animate')) {
-              el.classList.remove('aos-animate')
-            }
-          }
-        }
-      })
+    const handleResize = () => {
+      AOS.refresh()
     }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
-    // Initial check on mount & after render cycles
-    updateAosAnimations()
-    const t1 = setTimeout(updateAosAnimations, 60)
-    const t2 = setTimeout(updateAosAnimations, 250)
-
-    let rafId: number | null = null
-    const handleScroll = () => {
-      if (rafId === null) {
-        rafId = requestAnimationFrame(() => {
-          updateAosAnimations()
-          rafId = null
-        })
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', updateAosAnimations, { passive: true })
-
-    return () => {
-      clearTimeout(t1)
-      clearTimeout(t2)
-      if (rafId !== null) cancelAnimationFrame(rafId)
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', updateAosAnimations)
-    }
+  useEffect(() => {
+    // Refresh AOS positions when cards expand or language toggles
+    const timer = setTimeout(() => {
+      AOS.refreshHard()
+    }, 120)
+    return () => clearTimeout(timer)
   }, [showAllProjects, showAllCertificates, lang])
 
   const handleLangChange = (newLang: 'id' | 'en') => {
@@ -454,15 +426,22 @@ export default function Portfolio() {
 
   useEffect(() => {
     const sectionIds = ['home', 'about', 'projects', 'achievements', 'contact']
+    let ticking = false
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 160
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const id = sectionIds[i]
-        const el = document.getElementById(id)
-        if (el && scrollPosition >= el.offsetTop) {
-          setActiveSection(id)
-          break
-        }
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + 160
+          for (let i = sectionIds.length - 1; i >= 0; i--) {
+            const id = sectionIds[i]
+            const el = document.getElementById(id)
+            if (el && scrollPosition >= el.offsetTop) {
+              setActiveSection((prev) => (prev !== id ? id : prev))
+              break
+            }
+          }
+          ticking = false
+        })
+        ticking = true
       }
     }
 
@@ -501,12 +480,15 @@ export default function Portfolio() {
   useEffect(() => {
     const isModalOpen = showResume || !!selectedProject || !!selectedCert
     if (isModalOpen) {
+      document.documentElement.classList.add('modal-open')
       document.body.classList.add('modal-open')
     } else {
+      document.documentElement.classList.remove('modal-open')
       document.body.classList.remove('modal-open')
     }
 
     return () => {
+      document.documentElement.classList.remove('modal-open')
       document.body.classList.remove('modal-open')
     }
   }, [showResume, selectedProject, selectedCert])
@@ -1536,14 +1518,14 @@ export default function Portfolio() {
                 stroke="currentColor"
                 fill="transparent"
               />
-              <circle
+              <motion.circle
                 cx="22"
                 cy="22"
                 r="18"
                 className="text-primary"
                 strokeWidth="2.5"
                 strokeDasharray={113.1}
-                strokeDashoffset={113.1 - (113.1 * scrollPercentage) / 100}
+                style={{ strokeDashoffset: circleOffset }}
                 strokeLinecap="round"
                 stroke="currentColor"
                 fill="transparent"

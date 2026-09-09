@@ -19,21 +19,31 @@
 
   html {
     overflow-x: hidden;
+    overflow-y: auto;
     background-color: #0c0a1e;
     color: #ffffff;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(99, 102, 241, 0.4) rgba(12, 10, 30, 0.6);
+  }
+
+  /* Support Firefox scrollbar without triggering Windows arrows in Chrome */
+  @supports not selector(::-webkit-scrollbar) {
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(99, 102, 241, 0.4) rgba(12, 10, 30, 0.6);
+    }
   }
 
   body {
-    overflow-x: hidden;
+    /* CRITICAL: body must NEVER be a scroll container to eliminate double scrollbar & lag */
+    overflow: visible !important;
     background: #0c0a1e;
     color: #ffffff;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
   }
 
   /* Prevent copying, dragging & saving images via long-press or right-click */
@@ -446,6 +456,7 @@
 }
 
 /* Lock scroll when modal is open without resetting scroll position */
+html.modal-open,
 body.modal-open {
   overflow: hidden !important;
   touch-action: none;

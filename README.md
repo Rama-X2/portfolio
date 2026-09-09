@@ -76,7 +76,7 @@ portfolio-web/
 │   ├── cv/                 # Professional resume documentation
 │   ├── favicon.png         # Site branding and favicon
 │   └── images/             # Project previews and profile photography
-├── next.config.mjs         # Next.js compilation settings
+├── next.config.js          # Next.js compilation settings
 ├── package.json            # Project dependencies and build scripts
 ├── tailwind.config.ts      # Tailwind design system configuration
 └── tsconfig.json           # TypeScript configuration
@@ -92,30 +92,11 @@ portfolio-web/
 
 <br /><br />
 
-<table>
-  <tr>
-    <td align="center" width="160" valign="middle">
-      <img src="./public/images/portfolio/avatar-rounded.png" width="95" alt="Rama-X2" />
-      <br /><br />
-      <b>Rama-X2</b>
-      <br />
-      <sub>Ade Ramadhani Putra</sub>
-      <br />
-      <sub>Sukabumi, Indonesia</sub>
-    </td>
-    <td valign="middle">
-      <b>Full Stack Developer & UI/UX Designer</b>
-      <br />
-      <sub>Specializing in modern web applications, server infrastructure, and interactive UI systems.</sub>
-      <br /><br />
-      <a href="https://rama-x2.my.id"><img src="https://img.shields.io/badge/Website-rama--x2.my.id-4f46e5?style=flat&logo=google-chrome&logoColor=white" alt="Website" /></a>
-      <a href="https://github.com/Rama-X2"><img src="https://img.shields.io/badge/GitHub-@Rama--X2-181717?style=flat&logo=github&logoColor=white" alt="GitHub" /></a>
-      <a href="https://www.linkedin.com/in/ade-ramadhani-putra-66270b22a"><img src="https://img.shields.io/badge/LinkedIn-Ade_Ramadhani_Putra-0A66C2?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
-      <a href="https://instagram.com/rama_ext4"><img src="https://img.shields.io/badge/Instagram-@rama__ext4-E4405F?style=flat&logo=instagram&logoColor=white" alt="Instagram" /></a>
-      <a href="https://discord.com"><img src="https://img.shields.io/badge/Discord-@rama__ext-5865F2?style=flat&logo=discord&logoColor=white" alt="Discord" /></a>
-    </td>
-  </tr>
-</table>
+[![Website](https://img.shields.io/badge/Website-rama--x2.my.id-4f46e5?style=flat&logo=google-chrome&logoColor=white)](https://rama-x2.my.id)
+[![GitHub](https://img.shields.io/badge/GitHub-@Rama--X2-181717?style=flat&logo=github&logoColor=white)](https://github.com/Rama-X2)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Ade_Ramadhani_Putra-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ade-ramadhani-putra-66270b22a)
+[![Instagram](https://img.shields.io/badge/Instagram-@rama__ext4-E4405F?style=flat&logo=instagram&logoColor=white)](https://instagram.com/rama_ext4)
+[![Discord](https://img.shields.io/badge/Discord-@rama__ext-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.com)
 
 </div>
 
