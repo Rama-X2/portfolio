@@ -32,6 +32,7 @@ import {
   ChevronDown,
   ChevronRight,
   ArrowUp,
+  ArrowUpRight,
 } from 'lucide-react'
 
 
@@ -737,7 +738,7 @@ export default function Portfolio() {
             </div>
 
             {/* Tech Stack & Tools */}
-            <div data-aos="fade-up" data-aos-duration="1000" className="glass-card rounded-2xl p-5 md:p-6 border border-white/10">
+            <div id="tech-stack" data-aos="fade-up" data-aos-duration="1000" className="scroll-mt-24 glass-card rounded-2xl p-5 md:p-6 border border-white/10">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
                 <div>
                   <h2 className="text-xl font-bold text-white flex items-center gap-2">
@@ -813,35 +814,51 @@ export default function Portfolio() {
                 </p>
               </div>
 
-              {/* Quick Stat Counters (Modern Tech Portfolio Stats) */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-6 pt-5 border-t border-white/10">
-                {statsData.map((stat, i) => (
-                  <div
-                    key={stat.labelEn}
-                    data-aos="fade-up"
-                    data-aos-delay={i * 100}
-                    data-aos-duration="800"
-                    className="glass-card rounded-2xl p-4 sm:p-5 border border-white/10 hover:border-primary/40 relative overflow-hidden group transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 hover:scale-[1.02]"
-                  >
-                    <div className={`absolute -z-10 inset-0 bg-gradient-to-br ${stat.gradient} opacity-5 group-hover:opacity-15 transition-opacity duration-300`} />
-                    <div className="flex items-center justify-between mb-3">
-                      <div className={`p-2.5 rounded-xl ${stat.bg} ${stat.color} group-hover:scale-110 transition-transform`}>
-                        <stat.icon className="w-5 h-5" />
+              {/* Quick Stat Counters (Modern Tech Portfolio Stats - Ekizr Style) */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-8 pt-6 border-t border-white/10">
+                {statsData.map((stat, i) => {
+                  const Icon = stat.icon
+                  const animation = i === 0 ? 'fade-right' : i === 1 ? 'fade-up' : 'fade-left'
+                  return (
+                    <div
+                      key={stat.labelEn}
+                      data-aos={animation}
+                      data-aos-duration="1000"
+                      data-aos-delay={i * 100}
+                      className="glass-card rounded-2xl p-5 sm:p-6 border border-white/10 hover:border-primary/40 relative overflow-hidden group transition-all duration-300 flex flex-col justify-between hover:-translate-y-1.5 hover:scale-[1.02] cursor-pointer shadow-lg hover:shadow-2xl"
+                      onClick={() => {
+                        if (stat.targetId) {
+                          navClick(stat.targetId)
+                        }
+                      }}
+                    >
+                      <div className={`absolute -z-10 inset-0 bg-gradient-to-br ${stat.gradient} opacity-5 group-hover:opacity-15 transition-opacity duration-300`} />
+                      
+                      {/* Top row: Circular icon with glow on left, Big Number on right */}
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center bg-white/10 border border-white/10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 shadow-inner">
+                          <Icon className={`w-7 h-7 sm:w-8 sm:h-8 ${stat.color}`} />
+                        </div>
+                        <span className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                          {stat.value}
+                        </span>
                       </div>
-                      <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                        {stat.value}
-                      </span>
+
+                      {/* Bottom area: Title, Subtitle, and Arrow */}
+                      <div>
+                        <p className="text-xs sm:text-sm uppercase tracking-wider font-bold text-gray-200 mb-1">
+                          {lang === 'en' ? stat.labelEn : stat.labelId}
+                        </p>
+                        <div className="flex items-center justify-between gap-2">
+                          <p className="text-[11px] sm:text-xs text-gray-400 leading-snug">
+                            {lang === 'en' ? stat.descEn : stat.descId}
+                          </p>
+                          <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-white transition-colors flex-shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transform duration-200" />
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-white mb-0.5">
-                        {lang === 'en' ? stat.labelEn : stat.labelId}
-                      </h4>
-                      <p className="text-[11px] text-gray-400 leading-snug">
-                        {lang === 'en' ? stat.descEn : stat.descId}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
 

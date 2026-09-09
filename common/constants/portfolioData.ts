@@ -1,4 +1,4 @@
-import { Folder, Award, Clock, Cpu } from 'lucide-react'
+import { Code2, Award, Cpu } from 'lucide-react'
 import {
   PersonalInfo,
   TechStackItem,
@@ -147,53 +147,6 @@ export const education: EducationItem[] = [
     locationEn: 'Sukabumi, West Java',
     logo: null,
     ongoing: false,
-  },
-]
-
-export const statsData: StatItem[] = [
-  {
-    icon: Folder,
-    value: '10+',
-    labelId: 'Proyek Selesai',
-    labelEn: 'Projects Built',
-    descId: 'Web App & Low-level System',
-    descEn: 'Web Apps & System Tools',
-    gradient: 'from-primary to-indigo-500',
-    color: 'text-primary',
-    bg: 'bg-primary/10',
-  },
-  {
-    icon: Award,
-    value: '12+',
-    labelId: 'Sertifikasi Resmi',
-    labelEn: 'Official Certs',
-    descId: 'Microsoft Learn & Dicoding',
-    descEn: 'Microsoft & Dicoding Verified',
-    gradient: 'from-amber-400 to-yellow-500',
-    color: 'text-yellow-400',
-    bg: 'bg-yellow-400/10',
-  },
-  {
-    icon: Clock,
-    value: '3+ Thn',
-    labelId: 'Jam Terbang Teknis',
-    labelEn: 'Technical Journey',
-    descId: 'Eksplorasi & IT Support',
-    descEn: 'System Tuning & Support',
-    gradient: 'from-emerald-400 to-teal-500',
-    color: 'text-emerald-400',
-    bg: 'bg-emerald-400/10',
-  },
-  {
-    icon: Cpu,
-    value: '25+',
-    labelId: 'Tech Stack & Tools',
-    labelEn: 'Tools & Platforms',
-    descId: 'Frontend, Backend, Linux & OS',
-    descEn: 'Full Stack & DevOps Tools',
-    gradient: 'from-purple-500 to-pink-500',
-    color: 'text-pink-400',
-    bg: 'bg-pink-400/10',
   },
 ]
 
@@ -520,5 +473,51 @@ export const projects: ProjectItem[] = [
     githubUrl: 'https://github.com/Rama-X2',
     category: 'Kernel Development',
     featured: false,
+  },
+]
+
+/**
+ * ══════════════════════════════════════════════════════════════════════════════
+ * STATISTIK METRIK TEKNIS ADAPTIF (ADAPTIVE STATS - GAYA EKIZR)
+ * ══════════════════════════════════════════════════════════════════════════════
+ * Angka value dihitung otomatis secara adaptif dari jumlah proyek, sertifikat,
+ * dan tech stack yang terdaftar di file ini.
+ */
+export const statsData: StatItem[] = [
+  {
+    icon: Code2,
+    value: projects.length,
+    labelId: 'Total Proyek',
+    labelEn: 'Total Projects',
+    descId: 'Solusi web & aplikasi inovatif',
+    descEn: 'Innovative web solutions crafted',
+    gradient: 'from-[#6366f1] to-[#a855f7]',
+    color: 'text-indigo-400',
+    bg: 'bg-indigo-500/10',
+    targetId: 'projects',
+  },
+  {
+    icon: Award,
+    value: achievements.length,
+    labelId: 'Sertifikat',
+    labelEn: 'Certificates',
+    descId: 'Keahlian profesional terverifikasi',
+    descEn: 'Professional skills validated',
+    gradient: 'from-[#a855f7] to-[#6366f1]',
+    color: 'text-purple-400',
+    bg: 'bg-purple-500/10',
+    targetId: 'achievements',
+  },
+  {
+    icon: Cpu,
+    value: techStackList.length,
+    labelId: 'Tech Stack',
+    labelEn: 'Tech Stack',
+    descId: 'Ragam teknologi & tools dikuasai',
+    descEn: 'Modern tools & technologies mastered',
+    gradient: 'from-[#6366f1] to-[#ec4899]',
+    color: 'text-pink-400',
+    bg: 'bg-pink-500/10',
+    targetId: 'tech-stack',
   },
 ]

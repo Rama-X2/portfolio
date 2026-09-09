@@ -44,7 +44,7 @@ export interface EducationItem {
 
 export interface StatItem {
   icon: any
-  value: string
+  value: string | number
   labelId: string
   labelEn: string
   descId: string
@@ -52,6 +52,7 @@ export interface StatItem {
   gradient: string
   color: string
   bg: string
+  targetId?: string
 }
 
 export interface ProjectItem {
