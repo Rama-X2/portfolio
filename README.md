@@ -1,6 +1,6 @@
 <div align="center">
 
-# Ade Ramadhani Putra — Portfolio Website
+# Ade Ramadhani Putra - Portfolio Website
 
 **Modern, responsive, and performance-driven personal web portfolio.**
 
