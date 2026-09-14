@@ -260,9 +260,7 @@ export default function Portfolio() {
       setShowAllProjects(false)
       const el = document.getElementById('projects')
       if (el) {
-        const yOffset = -90
-        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
-        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' })
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
     } else {
       setShowAllProjects(true)
@@ -274,9 +272,7 @@ export default function Portfolio() {
       setShowAllCertificates(false)
       const el = document.getElementById('achievements')
       if (el) {
-        const yOffset = -90
-        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
-        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' })
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
     } else {
       setShowAllCertificates(true)
@@ -417,9 +413,7 @@ export default function Portfolio() {
     }
     const el = document.getElementById(id)
     if (el) {
-      const yOffset = -72
-      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
-      window.scrollTo({ top: y, behavior: 'smooth' })
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
 
