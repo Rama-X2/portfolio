@@ -23,7 +23,6 @@
     background-color: #0c0a1e;
     color: #ffffff;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    scroll-behavior: smooth;
   }
 
   /* Support Firefox scrollbar without triggering Windows arrows in Chrome */

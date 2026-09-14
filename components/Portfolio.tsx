@@ -255,13 +255,36 @@ export default function Portfolio() {
   const displayedProjects = showAllProjects ? projects : projects.slice(0, initialItems)
   const displayedAchievements = showAllCertificates ? achievements : achievements.slice(0, initialItems)
 
+  const scrollToTarget = (id: string) => {
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
+    const el = document.getElementById(id)
+    if (el) {
+      const header = document.querySelector('header')
+      const headerHeight = header ? header.offsetHeight : (window.innerWidth >= 768 ? 72 : 60)
+      let top = 0
+      let curr: HTMLElement | null = el
+      while (curr) {
+        top += curr.offsetTop
+        curr = curr.offsetParent as HTMLElement | null
+      }
+      if (top === 0) {
+        const rect = el.getBoundingClientRect()
+        top = rect.top + (window.pageYOffset || window.scrollY || document.documentElement.scrollTop || 0)
+      }
+      const isSection = el.tagName.toLowerCase() === 'section'
+      const extraPadding = isSection ? 0 : 16
+      const targetY = Math.max(0, top - headerHeight - extraPadding)
+      window.scrollTo({ top: targetY, behavior: 'smooth' })
+    }
+  }
+
   const handleToggleProjects = () => {
     if (showAllProjects) {
       setShowAllProjects(false)
-      const el = document.getElementById('projects')
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }
+      scrollToTarget('projects')
     } else {
       setShowAllProjects(true)
     }
@@ -270,10 +293,7 @@ export default function Portfolio() {
   const handleToggleCertificates = () => {
     if (showAllCertificates) {
       setShowAllCertificates(false)
-      const el = document.getElementById('achievements')
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }
+      scrollToTarget('achievements')
     } else {
       setShowAllCertificates(true)
     }
@@ -407,14 +427,7 @@ export default function Portfolio() {
   const navClick = (id: string) => {
     setActiveSection(id)
     setMenuOpen(false)
-    if (id === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-      return
-    }
-    const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
+    scrollToTarget(id)
   }
 
   const mainRef = useRef<HTMLElement>(null)
