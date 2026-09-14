@@ -603,26 +603,26 @@ export default function Portfolio() {
             </button>
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile hamburger button (Sleek Glass Container) */}
           <button
-            className="md:hidden p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
+            className="md:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-white/20 active:scale-95 transition-all flex items-center justify-center cursor-pointer shadow-sm"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
             {menuOpen ? (
-              <X className="w-6 h-6 text-white" />
+              <X className="w-5 h-5 text-white" />
             ) : (
-              <div className="space-y-1.5">
-                <div className="w-6 h-0.5 bg-current rounded-full" />
-                <div className="w-6 h-0.5 bg-current rounded-full" />
-                <div className="w-6 h-0.5 bg-current rounded-full" />
+              <div className="w-5 h-3.5 flex flex-col justify-between items-center">
+                <span className="w-5 h-0.5 bg-current rounded-full transition-all" />
+                <span className="w-5 h-0.5 bg-current rounded-full transition-all" />
+                <span className="w-5 h-0.5 bg-current rounded-full transition-all" />
               </div>
             )}
           </button>
         </div>
       </motion.header>
 
-      {/* Mobile dropdown nav (Animasi 100% Konsisten Slide-Fade Tanpa Scaling Morphing) */}
+      {/* Mobile dropdown nav (Rock-solid Premium Opaque Dark Styling - 0 Transparency Bleed) */}
       <AnimatePresence>
         {menuOpen && (
           <>
@@ -632,32 +632,47 @@ export default function Portfolio() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
-              className="fixed inset-0 z-30 md:hidden bg-black/30 pointer-events-auto"
+              className="fixed inset-0 z-40 md:hidden bg-black/60 backdrop-blur-xs pointer-events-auto"
               onClick={() => setMenuOpen(false)}
             />
 
             <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.15, ease: 'easeOut' }}
-              className="fixed top-[62px] right-4 w-44 md:hidden z-40 p-1.5 rounded-xl glass-card shadow-glow bg-[#0c0a1e]/95 border border-white/10 overflow-hidden"
+              initial={{ opacity: 0, scale: 0.95, y: -6 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -6 }}
+              transition={{ duration: 0.18, ease: 'easeOut' }}
+              className="fixed top-[62px] right-4 w-48 md:hidden z-50 p-2 rounded-2xl bg-[#0c0a1e] border border-white/15 shadow-[0_12px_36px_rgba(0,0,0,0.9),0_0_20px_rgba(99,102,241,0.25)] overflow-hidden"
             >
-              <div className="space-y-0.5">
-                {sections.map((s) => (
-                  <button
-                    key={s.id}
-                    onClick={() => navClick(s.id)}
-                    className={`w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg transition-all text-xs font-semibold ${
-                      activeSection === s.id
-                        ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-sm'
-                        : 'text-gray-400 hover:text-white hover:bg-white/10'
-                    }`}
-                  >
-                    <s.icon className={`w-4 h-4 ${activeSection === s.id ? 'text-white' : 'text-gray-400'}`} />
-                    <span>{s.name}</span>
-                  </button>
-                ))}
+              {/* Subtle Header Tag */}
+              <div className="px-2.5 py-1 mb-1 border-b border-white/10 flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                  {lang === 'en' ? 'Navigation' : 'Menu Navigasi'}
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              </div>
+
+              <div className="space-y-1">
+                {sections.map((s) => {
+                  const isActive = activeSection === s.id
+                  const Icon = s.icon
+                  return (
+                    <button
+                      key={s.id}
+                      onClick={() => navClick(s.id)}
+                      className={`w-full flex items-center space-x-2.5 px-3 py-2.5 rounded-xl transition-all duration-200 text-xs font-semibold cursor-pointer active:scale-[0.98] ${
+                        isActive
+                          ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-md shadow-primary/30'
+                          : 'text-gray-300 hover:text-white hover:bg-white/10 active:bg-white/15'
+                      }`}
+                    >
+                      <Icon className={`w-4 h-4 flex-shrink-0 transition-colors ${isActive ? 'text-white' : 'text-gray-400'}`} />
+                      <span className="flex-1 text-left">{s.name}</span>
+                      {isActive && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_white]" />
+                      )}
+                    </button>
+                  )
+                })}
               </div>
             </motion.div>
           </>

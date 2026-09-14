@@ -139,26 +139,28 @@ export default function Header({
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: -8 }}
+            initial={{ opacity: 0, scale: 0.95, y: -6 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: -8 }}
-            transition={{ duration: 0.1, ease: 'easeOut' }}
-            className="fixed top-[62px] right-4 w-44 md:hidden z-30 p-1.5 rounded-xl glass-card shadow-glow bg-[#0c0a1e]/95 origin-top-right"
+            exit={{ opacity: 0, scale: 0.95, y: -6 }}
+            transition={{ duration: 0.18, ease: 'easeOut' }}
+            className="fixed top-[62px] right-4 w-48 md:hidden z-50 p-2 rounded-2xl bg-[#0c0a1e] border border-white/15 shadow-[0_12px_36px_rgba(0,0,0,0.9),0_0_20px_rgba(99,102,241,0.25)] origin-top-right overflow-hidden"
           >
-            {sections.map((s) => (
-              <button
-                key={s.id}
-                onClick={() => navClick(s.id)}
-                className={`w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg mb-0.5 transition-all text-xs ${
-                  activeSection === s.id
-                    ? 'bg-gradient-to-r from-primary to-secondary text-white'
-                    : 'text-gray-400 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                <s.icon className="w-4 h-4" />
-                <span className="font-medium">{s.name}</span>
-              </button>
-            ))}
+            <div className="space-y-1">
+              {sections.map((s) => (
+                <button
+                  key={s.id}
+                  onClick={() => navClick(s.id)}
+                  className={`w-full flex items-center space-x-2.5 px-3 py-2.5 rounded-xl transition-all text-xs font-semibold ${
+                    activeSection === s.id
+                      ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-md shadow-primary/30'
+                      : 'text-gray-300 hover:text-white hover:bg-white/10 active:bg-white/15'
+                  }`}
+                >
+                  <s.icon className={`w-4 h-4 ${activeSection === s.id ? 'text-white' : 'text-gray-400'}`} />
+                  <span className="font-medium">{s.name}</span>
+                </button>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
