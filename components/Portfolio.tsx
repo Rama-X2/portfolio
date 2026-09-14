@@ -27,12 +27,15 @@ import {
   GraduationCap,
   Calendar,
   CheckCircle,
+  CheckCircle2,
   Star,
   Loader2,
   ChevronDown,
   ChevronRight,
   ArrowUp,
   ArrowUpRight,
+  Layers,
+  Sparkles,
 } from 'lucide-react'
 
 
@@ -465,6 +468,31 @@ export default function Portfolio() {
         setShowResume(false)
         setMenuOpen(false)
       }
+
+      const target = e.target as HTMLElement | null
+      const isInput = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')
+      if (isInput) return
+
+      // Prevent copy shortcut (Ctrl+C, Cmd+C)
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C')) {
+        e.preventDefault()
+      }
+      // Prevent select all shortcut (Ctrl+A, Cmd+A)
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'a' || e.key === 'A')) {
+        e.preventDefault()
+      }
+      // Prevent save page shortcut (Ctrl+S, Cmd+S)
+      if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+        e.preventDefault()
+      }
+      // Prevent view source shortcut (Ctrl+U, Cmd+U)
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U')) {
+        e.preventDefault()
+      }
+      // Prevent print shortcut (Ctrl+P, Cmd+P)
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P')) {
+        e.preventDefault()
+      }
     },
     [],
   )
@@ -473,6 +501,51 @@ export default function Portfolio() {
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [handleKeyDown])
+
+  // Prevent right-click context menu, dragging images/text, text selection & clipboard copy
+  useEffect(() => {
+    const handleContextMenu = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null
+      const isInput = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')
+      if (!isInput) {
+        e.preventDefault()
+      }
+    }
+
+    const handleDragStart = (e: DragEvent) => {
+      e.preventDefault()
+    }
+
+    const handleSelectStart = (e: Event) => {
+      const target = e.target as HTMLElement | null
+      const isInput = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')
+      if (!isInput) {
+        e.preventDefault()
+      }
+    }
+
+    const handleCopyOrCut = (e: ClipboardEvent) => {
+      const target = e.target as HTMLElement | null
+      const isInput = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')
+      if (!isInput) {
+        e.preventDefault()
+      }
+    }
+
+    document.addEventListener('contextmenu', handleContextMenu)
+    document.addEventListener('dragstart', handleDragStart)
+    document.addEventListener('selectstart', handleSelectStart)
+    document.addEventListener('copy', handleCopyOrCut)
+    document.addEventListener('cut', handleCopyOrCut)
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu)
+      document.removeEventListener('dragstart', handleDragStart)
+      document.removeEventListener('selectstart', handleSelectStart)
+      document.removeEventListener('copy', handleCopyOrCut)
+      document.removeEventListener('cut', handleCopyOrCut)
+    }
+  }, [])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -1599,121 +1672,306 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* ── Project Detail Modal ─── */}
+      {/* ── Project Detail Modal (Premium Adaptive Showcase) ─── */}
       <AnimatePresence>
         {selectedProject && (
-          <motion.div className="portfolio-modal" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            onClick={() => setSelectedProject(null)}>
-            <motion.div className="portfolio-modal-content" onClick={(e) => e.stopPropagation()}
-              initial={{ scale: 0.88, y: 40 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 40 }}>
+          <motion.div
+            className="portfolio-modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              className="portfolio-modal-content"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.92, y: 30, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.92, y: 30, opacity: 0 }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
+            >
+              {/* Top Gradient Accent Bar */}
+              <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-5 shadow-[0_0_12px_rgba(99,102,241,0.6)]" />
 
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex-1 pr-4">
-                  <h2 className="text-xl md:text-2xl font-bold mb-0.5 w-fit">
+              {/* Header: Title, Category & Close Button */}
+              <div className="flex justify-between items-start gap-4 mb-5">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/15 text-indigo-300 border border-primary/30 uppercase tracking-wider">
+                      {selectedProject.category}
+                    </span>
+                    {selectedProject.featured && (
+                      <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                        <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                        <span>{lang === 'en' ? 'Featured Project' : 'Proyek Unggulan'}</span>
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold leading-tight">
                     <span className="gradient-text">{selectedProject.title}</span>
                   </h2>
-                  <p className="text-xs text-primary">{selectedProject.category}</p>
                 </div>
-                <motion.button onClick={() => setSelectedProject(null)}
-                  className="p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg transition-all"
-                  whileHover={{ scale: 1.05, rotate: 90 }}
-                  whileTap={{ scale: 0.95 }}
+                <motion.button
+                  onClick={() => setSelectedProject(null)}
+                  className="p-2.5 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all flex-shrink-0 cursor-pointer shadow-sm"
+                  whileHover={{ scale: 1.08, rotate: 90 }}
+                  whileTap={{ scale: 0.92 }}
                   title="Close"
+                  aria-label="Close modal"
                 >
                   <X className="w-5 h-5" />
                 </motion.button>
               </div>
 
-              <div className="relative h-44 md:h-56 rounded-xl mb-5 overflow-hidden">
-                <Image src={selectedProject.image} alt={selectedProject.title} fill className="object-cover" />
-                {selectedProject.featured && (
-                  <div className="absolute top-3 right-3 px-3 py-1 bg-yellow-500/90 text-black rounded-full text-xs font-bold">
-                    {t.projectsSec.featured}
+              {/* Adaptive Mockup Showcase Canvas (Zero Cropping - Fits 16:9, Ultra-wide, or Tall naturally) */}
+              <div className="modal-showcase-canvas mb-6">
+                {/* Showcase Mockup Topbar */}
+                <div className="modal-showcase-bar">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]/90 shadow-[0_0_6px_rgba(255,95,86,0.5)]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]/90 shadow-[0_0_6px_rgba(255,189,46,0.5)]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]/90 shadow-[0_0_6px_rgba(39,201,63,0.5)]" />
                   </div>
-                )}
+
+                  <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-black/50 border border-white/10 text-[11px] text-gray-300 font-mono max-w-[200px] sm:max-w-[340px] truncate">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
+                    <span className="truncate">
+                      {selectedProject.liveUrl && !selectedProject.liveUrl.includes('github.com')
+                        ? selectedProject.liveUrl.replace(/^https?:\/\//, '')
+                        : selectedProject.githubUrl
+                        ? selectedProject.githubUrl.replace(/^https?:\/\//, '')
+                        : selectedProject.title}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 text-[11px] text-gray-400 font-medium">
+                    <span className="hidden sm:inline-block px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[10px] text-gray-300">
+                      Live Preview
+                    </span>
+                  </div>
+                </div>
+
+                {/* Adaptive Image Wrapper (w-full h-auto, object-contain, natural aspect ratio) */}
+                <div className="relative w-full p-2.5 sm:p-5 flex items-center justify-center min-h-[160px] max-h-[460px] md:max-h-[520px] overflow-hidden bg-black/20">
+                  <img
+                    src={selectedProject.image}
+                    alt={selectedProject.title}
+                    className="w-full h-auto max-h-[400px] md:max-h-[480px] object-contain rounded-xl drop-shadow-[0_16px_36px_rgba(0,0,0,0.85)] border border-white/5 transition-transform duration-300"
+                    loading="eager"
+                  />
+                </div>
               </div>
 
-              <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                {lang === 'en' ? selectedProject.descriptionEn : selectedProject.description}
-              </p>
+              {/* Project Quick Info Strip */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3.5 sm:p-4 rounded-2xl bg-white/[0.03] border border-white/10 mb-6 text-xs shadow-inner">
+                <div>
+                  <span className="text-gray-400 block text-[10px] uppercase font-bold tracking-wider mb-1">
+                    {lang === 'en' ? 'Category' : 'Kategori'}
+                  </span>
+                  <span className="text-white font-semibold flex items-center gap-1.5">
+                    <Code2 className="w-3.5 h-3.5 text-primary" />
+                    {selectedProject.category}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-gray-400 block text-[10px] uppercase font-bold tracking-wider mb-1">
+                    {lang === 'en' ? 'Core Technology' : 'Teknologi Utama'}
+                  </span>
+                  <span className="text-white font-semibold flex items-center gap-1.5">
+                    <Layers className="w-3.5 h-3.5 text-purple-400" />
+                    {selectedProject.technologies[0] || 'Modern Tech'}
+                  </span>
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <span className="text-gray-400 block text-[10px] uppercase font-bold tracking-wider mb-1">
+                    {lang === 'en' ? 'Project Status' : 'Status Proyek'}
+                  </span>
+                  <span className="text-emerald-400 font-semibold flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    {lang === 'en' ? 'Completed & Deployed' : 'Selesai & Aktif'}
+                  </span>
+                </div>
+              </div>
 
-              <div className="mb-4">
-                <h3 className="font-bold text-white mb-2 text-sm">{t.projectsSec.technologies}</h3>
+              {/* Description */}
+              <div className="mb-6 space-y-2">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-primary" />
+                  {lang === 'en' ? 'About This Project' : 'Tentang Proyek Ini'}
+                </h3>
+                <p className="text-gray-200 text-sm sm:text-base leading-relaxed font-normal">
+                  {lang === 'en' ? selectedProject.descriptionEn : selectedProject.description}
+                </p>
+              </div>
+
+              {/* Tech Stack */}
+              <div className="mb-6">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2.5 flex items-center gap-1.5">
+                  <Cpu className="w-3.5 h-3.5 text-indigo-400" />
+                  {t.projectsSec.technologies}
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {selectedProject.technologies.map((tech) => (
-                    <span key={tech} className="px-3 py-1 bg-primary/20 text-primary rounded-full text-xs font-medium border border-primary/30">{tech}</span>
+                    <span
+                      key={tech}
+                      className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-primary/15 text-gray-200 hover:text-white text-xs font-medium border border-white/10 hover:border-primary/40 transition-all shadow-sm"
+                    >
+                      {tech}
+                    </span>
                   ))}
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
-                <motion.a href={selectedProject.liveUrl} target="_blank" rel="noreferrer"
-                  className="flex-1 btn-primary flex items-center justify-center gap-2"
-                  whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <ExternalLink className="w-4 h-4" /> {t.projectsSec.liveDemo}
-                </motion.a>
-                <motion.a href={selectedProject.githubUrl} target="_blank" rel="noreferrer"
-                  className="flex-1 btn-outline flex items-center justify-center gap-2"
-                  whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Github className="w-4 h-4" /> {t.projectsSec.sourceCode}
-                </motion.a>
+              {/* Action Buttons (Smart Logic - Avoids duplicate buttons for GitHub-only projects) */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-2 border-t border-white/10">
+                {selectedProject.liveUrl &&
+                selectedProject.githubUrl &&
+                selectedProject.liveUrl !== selectedProject.githubUrl &&
+                !selectedProject.liveUrl.includes('github.com') ? (
+                  <>
+                    <motion.a
+                      href={selectedProject.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex-1 btn-primary flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-xl shadow-lg shadow-primary/20"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <ExternalLink className="w-4 h-4" /> {t.projectsSec.liveDemo}
+                    </motion.a>
+                    <motion.a
+                      href={selectedProject.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex-1 btn-outline flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-xl"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Github className="w-4 h-4" /> {t.projectsSec.sourceCode}
+                    </motion.a>
+                  </>
+                ) : selectedProject.liveUrl || selectedProject.githubUrl ? (
+                  <motion.a
+                    href={selectedProject.githubUrl || selectedProject.liveUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-1 btn-primary flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-xl shadow-lg shadow-primary/20"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Github className="w-4 h-4" />
+                    <span>
+                      {(selectedProject.githubUrl || selectedProject.liveUrl || '').includes('github.com')
+                        ? (lang === 'en' ? 'View on GitHub' : 'Lihat Repositori di GitHub')
+                        : t.projectsSec.liveDemo}
+                    </span>
+                    <ArrowUpRight className="w-4 h-4" />
+                  </motion.a>
+                ) : null}
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ── Certificate Modal ─── */}
+      {/* ── Certificate Modal (Official Credential Presentation) ─── */}
       <AnimatePresence>
         {selectedCert && (
-          <motion.div className="portfolio-modal cert-modal-wrap" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            onClick={() => setSelectedCert(null)}>
-            <motion.div className="portfolio-modal-content" onClick={(e) => e.stopPropagation()}
-              initial={{ scale: 0.88, y: 40 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 40 }}>
+          <motion.div
+            className="portfolio-modal cert-modal-wrap"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedCert(null)}
+          >
+            <motion.div
+              className="portfolio-modal-content"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.92, y: 30, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.92, y: 30, opacity: 0 }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
+            >
+              {/* Top Gradient Accent Bar */}
+              <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-5 shadow-[0_0_12px_rgba(99,102,241,0.6)]" />
 
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex-1 pr-4">
-                  <h2 className="text-base md:text-lg font-bold leading-snug w-fit">
+              {/* Header: Verified Status, Title & Close Button */}
+              <div className="flex justify-between items-start gap-4 mb-4">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold w-fit mb-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>{lang === 'en' ? 'Verified Official Credential' : 'Kredensial Resmi Terverifikasi'}</span>
+                  </div>
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold leading-snug">
                     <span className="gradient-text">{selectedCert.title}</span>
                   </h2>
-                  <p className="text-xs text-primary mt-0.5">{selectedCert.issuer}</p>
+                  <p className="text-xs sm:text-sm text-gray-400 mt-1 font-medium flex items-center gap-1.5">
+                    <Award className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span>{selectedCert.issuer}</span>
+                  </p>
                 </div>
-                <motion.button onClick={() => setSelectedCert(null)}
-                  className="p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg transition-all"
-                  whileHover={{ scale: 1.05, rotate: 90 }}
-                  whileTap={{ scale: 0.95 }}
+                <motion.button
+                  onClick={() => setSelectedCert(null)}
+                  className="p-2.5 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all flex-shrink-0 cursor-pointer shadow-sm"
+                  whileHover={{ scale: 1.08, rotate: 90 }}
+                  whileTap={{ scale: 0.92 }}
                   title="Close"
+                  aria-label="Close modal"
                 >
                   <X className="w-5 h-5" />
                 </motion.button>
               </div>
 
-              <div className="relative rounded-xl overflow-hidden mb-4" style={{ aspectRatio: '1.414/1' }}>
-                <Image src={selectedCert.image} alt={selectedCert.title} fill className="object-contain bg-white/5" />
+              {/* Adaptive Certificate Showcase (Fits A4 Landscape, 16:9, or any aspect ratio naturally) */}
+              <div className="modal-showcase-canvas my-5 p-3 sm:p-6 flex items-center justify-center bg-gradient-to-b from-[#0e0a24] to-[#080518]">
+                <img
+                  src={selectedCert.image}
+                  alt={selectedCert.title}
+                  className="w-auto h-auto max-w-full max-h-[55vh] md:max-h-[500px] object-contain rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] border border-white/10"
+                  loading="eager"
+                />
               </div>
 
-              <div className="flex items-center justify-between gap-3 text-sm text-gray-400">
-                <div className="flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4" />
-                  <span>{lang === 'en' && selectedCert.dateEn ? selectedCert.dateEn : selectedCert.date}</span>
-                </div>
-                {(selectedCert as any).verifyUrl && (
-                  <motion.a
-                    href={(selectedCert as any).verifyUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30 text-xs font-semibold transition-all"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    <span>
-                      {(selectedCert as any).verifyUrl.includes('learn.microsoft.com') || selectedCert.issuer.includes('Microsoft')
-                        ? (lang === 'en' ? 'Verify on Microsoft Learn' : 'Verifikasi di Microsoft Learn')
-                        : (lang === 'en' ? 'Verify on Credly' : 'Verifikasi di Credly')}
+              {/* Credential Metadata & Official Verification Action Bar */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-white/10">
+                <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-300">
+                  <div className="p-2 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                    <Calendar className="w-4 h-4 text-primary" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-gray-400 block">
+                      {lang === 'en' ? 'Date Issued' : 'Tanggal Penerbitan'}
                     </span>
-                  </motion.a>
-                )}
+                    <span className="font-semibold text-white">
+                      {lang === 'en' && selectedCert.dateEn ? selectedCert.dateEn : selectedCert.date}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  {(selectedCert as any).verifyUrl ? (
+                    <motion.a
+                      href={(selectedCert as any).verifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary flex items-center justify-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold rounded-xl shadow-lg shadow-primary/25 w-full sm:w-auto"
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span>
+                        {(selectedCert as any).verifyUrl.includes('learn.microsoft.com') || selectedCert.issuer.includes('Microsoft')
+                          ? (lang === 'en' ? 'Verify on Microsoft Learn' : 'Verifikasi di Microsoft Learn')
+                          : (lang === 'en' ? 'Verify on Credly' : 'Verifikasi di Credly')}
+                      </span>
+                    </motion.a>
+                  ) : (
+                    <div className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-gray-300 font-medium">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                      <span>{lang === 'en' ? 'Registered Certificate' : 'Sertifikat Resmi Terdaftar'}</span>
+                    </div>
+                  )}
+                </div>
               </div>
             </motion.div>
           </motion.div>
@@ -1723,20 +1981,34 @@ export default function Portfolio() {
       {/* ── Resume Modal ─── */}
       <AnimatePresence>
         {showResume && (
-          <motion.div className="portfolio-modal" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            onClick={() => setShowResume(false)}>
-            <motion.div className="resume-modal-content" onClick={(e) => e.stopPropagation()}
-              initial={{ scale: 0.88, y: 40 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 40 }}>
+          <motion.div
+            className="portfolio-modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowResume(false)}
+          >
+            <motion.div
+              className="resume-modal-content"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.92, y: 30 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.92, y: 30 }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
+            >
+              {/* Top Accent Bar */}
+              <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-4 shadow-[0_0_12px_rgba(99,102,241,0.6)] flex-shrink-0" />
 
               {/* Header */}
               <div className="flex justify-between items-center mb-4 flex-shrink-0">
-                <h2 className="text-lg font-bold w-fit">
+                <h2 className="text-lg sm:text-xl font-bold w-fit">
                   <span className="gradient-text">{t.resumeModal.title}</span>
                 </h2>
-                <motion.button onClick={() => setShowResume(false)}
-                  className="p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg transition-all"
-                  whileHover={{ scale: 1.05, rotate: 90 }}
-                  whileTap={{ scale: 0.95 }}
+                <motion.button
+                  onClick={() => setShowResume(false)}
+                  className="p-2.5 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all flex-shrink-0 cursor-pointer shadow-sm"
+                  whileHover={{ scale: 1.08, rotate: 90 }}
+                  whileTap={{ scale: 0.92 }}
                   title="Close"
                 >
                   <X className="w-5 h-5" />
@@ -1744,11 +2016,11 @@ export default function Portfolio() {
               </div>
 
               {/* Scrollable image area */}
-              <div className="resume-img-scroll">
+              <div className="resume-img-scroll rounded-xl border border-white/10">
                 <img
                   src="/gambar-resume/cv-resume-ade-rama.webp"
                   alt="Resume Ade Ramadhani Putra"
-                  className="resume-img allow-download"
+                  className="resume-img"
                 />
               </div>
 
@@ -1757,7 +2029,7 @@ export default function Portfolio() {
                 <motion.a
                   href="/gambar-resume/cv-resume-ade-rama.webp"
                   download="CV-Resume-Ade-Ramadhani-Putra.webp"
-                  className="btn-primary flex-1 flex items-center justify-center gap-2 allow-download"
+                  className="btn-primary flex-1 flex items-center justify-center gap-2 py-2.5 text-xs sm:text-sm font-semibold rounded-xl"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -1767,7 +2039,7 @@ export default function Portfolio() {
                   href="/gambar-resume/cv-resume-ade-rama.webp"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-outline flex-1 flex items-center justify-center gap-2 allow-download"
+                  className="btn-outline flex-1 flex items-center justify-center gap-2 py-2.5 text-xs sm:text-sm font-semibold rounded-xl"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
