@@ -1672,7 +1672,7 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* ── Project Detail Modal (Premium Adaptive Showcase) ─── */}
+      {/* ── Project Detail Modal (Premium Adaptive Showcase - Desktop Horizontal & Zero Scroll) ─── */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
@@ -1683,198 +1683,179 @@ export default function Portfolio() {
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
-              className="portfolio-modal-content"
+              className="portfolio-modal-content project-modal-wide relative"
               onClick={(e) => e.stopPropagation()}
               initial={{ scale: 0.92, y: 30, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.92, y: 30, opacity: 0 }}
               transition={{ duration: 0.22, ease: 'easeOut' }}
             >
+              {/* Close Button Top Right */}
+              <motion.button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all z-20 cursor-pointer shadow-md"
+                whileHover={{ scale: 1.08, rotate: 90 }}
+                whileTap={{ scale: 0.92 }}
+                title="Close"
+                aria-label="Close modal"
+              >
+                <X className="w-5 h-5" />
+              </motion.button>
+
               {/* Top Gradient Accent Bar */}
               <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-5 shadow-[0_0_12px_rgba(99,102,241,0.6)]" />
 
-              {/* Header: Title, Category & Close Button */}
-              <div className="flex justify-between items-start gap-4 mb-5">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-2 flex-wrap">
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/15 text-indigo-300 border border-primary/30 uppercase tracking-wider">
-                      {selectedProject.category}
-                    </span>
-                    {selectedProject.featured && (
-                      <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
-                        <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                        <span>{lang === 'en' ? 'Featured Project' : 'Proyek Unggulan'}</span>
+              {/* Responsive Grid: Horizontal 2-Columns on Desktop (lg:), Stacked on Mobile */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+                {/* Left Column (Desktop 7 cols): Big Project Image Showcase (Zero Mockup Bar, Clean, Full Size) */}
+                <div className="lg:col-span-7 flex flex-col justify-center">
+                  <div className="modal-showcase-canvas w-full h-full min-h-[220px] sm:min-h-[280px] lg:min-h-[440px] max-h-[480px] lg:max-h-[540px] p-3 sm:p-5 flex items-center justify-center bg-black/25 rounded-2xl border border-white/10 relative overflow-hidden">
+                    <img
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      className="w-full h-auto max-h-[380px] sm:max-h-[420px] lg:max-h-[480px] object-contain rounded-xl drop-shadow-[0_16px_36px_rgba(0,0,0,0.85)] border border-white/5 transition-transform duration-300"
+                      loading="eager"
+                    />
+                  </div>
+                </div>
+
+                {/* Right Column (Desktop 5 cols): Complete Project Details, Info, Tech Stack, & Actions */}
+                <div className="lg:col-span-5 flex flex-col justify-between pr-0 lg:pr-2">
+                  <div>
+                    {/* Category & Featured Badge */}
+                    <div className="flex items-center gap-2 mb-2.5 flex-wrap pr-10">
+                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/15 text-indigo-300 border border-primary/30 uppercase tracking-wider">
+                        {selectedProject.category}
                       </span>
-                    )}
+                      {selectedProject.featured && (
+                        <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                          <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                          <span>{lang === 'en' ? 'Featured Project' : 'Proyek Unggulan'}</span>
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Project Title */}
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold leading-tight mb-3.5 pr-8">
+                      <span className="gradient-text">{selectedProject.title}</span>
+                    </h2>
+
+                    {/* Project Quick Info Strip */}
+                    <div className="grid grid-cols-2 gap-2.5 p-3 rounded-2xl bg-white/[0.03] border border-white/10 mb-4 text-xs shadow-inner">
+                      <div>
+                        <span className="text-gray-400 block text-[10px] uppercase font-bold tracking-wider mb-0.5">
+                          {lang === 'en' ? 'Category' : 'Kategori'}
+                        </span>
+                        <span className="text-white font-semibold flex items-center gap-1.5 truncate">
+                          <Code2 className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                          <span className="truncate">{selectedProject.category}</span>
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-gray-400 block text-[10px] uppercase font-bold tracking-wider mb-0.5">
+                          {lang === 'en' ? 'Core Technology' : 'Teknologi Utama'}
+                        </span>
+                        <span className="text-white font-semibold flex items-center gap-1.5 truncate">
+                          <Layers className="w-3.5 h-3.5 text-purple-400 flex-shrink-0" />
+                          <span className="truncate">{selectedProject.technologies[0] || 'Modern Tech'}</span>
+                        </span>
+                      </div>
+                      <div className="col-span-2 pt-1 border-t border-white/5 flex items-center justify-between">
+                        <span className="text-gray-400 text-[10px] uppercase font-bold tracking-wider">
+                          {lang === 'en' ? 'Project Status' : 'Status Proyek'}
+                        </span>
+                        <span className="text-emerald-400 font-semibold flex items-center gap-1.5 text-[11px]">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          {lang === 'en' ? 'Completed & Deployed' : 'Selesai & Aktif'}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    <div className="mb-4 space-y-1.5">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-primary" />
+                        {lang === 'en' ? 'About This Project' : 'Tentang Proyek Ini'}
+                      </h3>
+                      <p className="text-gray-200 text-xs sm:text-sm leading-relaxed font-normal">
+                        {lang === 'en' ? selectedProject.descriptionEn : selectedProject.description}
+                      </p>
+                    </div>
+
+                    {/* Tech Stack */}
+                    <div className="mb-4">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 flex items-center gap-1.5">
+                        <Cpu className="w-3.5 h-3.5 text-indigo-400" />
+                        {t.projectsSec.technologies}
+                      </h3>
+                      <div className="flex flex-wrap gap-1.5">
+                        {selectedProject.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-primary/15 text-gray-200 hover:text-white text-xs font-medium border border-white/10 hover:border-primary/40 transition-all shadow-sm"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold leading-tight">
-                    <span className="gradient-text">{selectedProject.title}</span>
-                  </h2>
-                </div>
-                <motion.button
-                  onClick={() => setSelectedProject(null)}
-                  className="p-2.5 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all flex-shrink-0 cursor-pointer shadow-sm"
-                  whileHover={{ scale: 1.08, rotate: 90 }}
-                  whileTap={{ scale: 0.92 }}
-                  title="Close"
-                  aria-label="Close modal"
-                >
-                  <X className="w-5 h-5" />
-                </motion.button>
-              </div>
 
-              {/* Adaptive Mockup Showcase Canvas (Zero Cropping - Fits 16:9, Ultra-wide, or Tall naturally) */}
-              <div className="modal-showcase-canvas mb-6">
-                {/* Showcase Mockup Topbar */}
-                <div className="modal-showcase-bar">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]/90 shadow-[0_0_6px_rgba(255,95,86,0.5)]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]/90 shadow-[0_0_6px_rgba(255,189,46,0.5)]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]/90 shadow-[0_0_6px_rgba(39,201,63,0.5)]" />
+                  {/* Action Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-3 pt-3 border-t border-white/10 mt-auto">
+                    {selectedProject.liveUrl &&
+                    selectedProject.githubUrl &&
+                    selectedProject.liveUrl !== selectedProject.githubUrl &&
+                    !selectedProject.liveUrl.includes('github.com') ? (
+                      <>
+                        <motion.a
+                          href={selectedProject.liveUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex-1 btn-primary flex items-center justify-center gap-2 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold rounded-xl shadow-lg shadow-primary/20"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <ExternalLink className="w-4 h-4" /> {t.projectsSec.liveDemo}
+                        </motion.a>
+                        <motion.a
+                          href={selectedProject.githubUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex-1 btn-outline flex items-center justify-center gap-2 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold rounded-xl"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <Github className="w-4 h-4" /> {t.projectsSec.sourceCode}
+                        </motion.a>
+                      </>
+                    ) : selectedProject.liveUrl || selectedProject.githubUrl ? (
+                      <motion.a
+                        href={selectedProject.githubUrl || selectedProject.liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 btn-primary flex items-center justify-center gap-2 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold rounded-xl shadow-lg shadow-primary/20"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <Github className="w-4 h-4" />
+                        <span>
+                          {(selectedProject.githubUrl || selectedProject.liveUrl || '').includes('github.com')
+                            ? (lang === 'en' ? 'View on GitHub' : 'Lihat Repositori di GitHub')
+                            : t.projectsSec.liveDemo}
+                        </span>
+                        <ArrowUpRight className="w-4 h-4" />
+                      </motion.a>
+                    ) : null}
                   </div>
-
-                  <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-black/50 border border-white/10 text-[11px] text-gray-300 font-mono max-w-[200px] sm:max-w-[340px] truncate">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
-                    <span className="truncate">
-                      {selectedProject.liveUrl && !selectedProject.liveUrl.includes('github.com')
-                        ? selectedProject.liveUrl.replace(/^https?:\/\//, '')
-                        : selectedProject.githubUrl
-                        ? selectedProject.githubUrl.replace(/^https?:\/\//, '')
-                        : selectedProject.title}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 text-[11px] text-gray-400 font-medium">
-                    <span className="hidden sm:inline-block px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[10px] text-gray-300">
-                      Live Preview
-                    </span>
-                  </div>
                 </div>
-
-                {/* Adaptive Image Wrapper (w-full h-auto, object-contain, natural aspect ratio) */}
-                <div className="relative w-full p-2.5 sm:p-5 flex items-center justify-center min-h-[160px] max-h-[460px] md:max-h-[520px] overflow-hidden bg-black/20">
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.title}
-                    className="w-full h-auto max-h-[400px] md:max-h-[480px] object-contain rounded-xl drop-shadow-[0_16px_36px_rgba(0,0,0,0.85)] border border-white/5 transition-transform duration-300"
-                    loading="eager"
-                  />
-                </div>
-              </div>
-
-              {/* Project Quick Info Strip */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3.5 sm:p-4 rounded-2xl bg-white/[0.03] border border-white/10 mb-6 text-xs shadow-inner">
-                <div>
-                  <span className="text-gray-400 block text-[10px] uppercase font-bold tracking-wider mb-1">
-                    {lang === 'en' ? 'Category' : 'Kategori'}
-                  </span>
-                  <span className="text-white font-semibold flex items-center gap-1.5">
-                    <Code2 className="w-3.5 h-3.5 text-primary" />
-                    {selectedProject.category}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-gray-400 block text-[10px] uppercase font-bold tracking-wider mb-1">
-                    {lang === 'en' ? 'Core Technology' : 'Teknologi Utama'}
-                  </span>
-                  <span className="text-white font-semibold flex items-center gap-1.5">
-                    <Layers className="w-3.5 h-3.5 text-purple-400" />
-                    {selectedProject.technologies[0] || 'Modern Tech'}
-                  </span>
-                </div>
-                <div className="col-span-2 sm:col-span-1">
-                  <span className="text-gray-400 block text-[10px] uppercase font-bold tracking-wider mb-1">
-                    {lang === 'en' ? 'Project Status' : 'Status Proyek'}
-                  </span>
-                  <span className="text-emerald-400 font-semibold flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    {lang === 'en' ? 'Completed & Deployed' : 'Selesai & Aktif'}
-                  </span>
-                </div>
-              </div>
-
-              {/* Description */}
-              <div className="mb-6 space-y-2">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-primary" />
-                  {lang === 'en' ? 'About This Project' : 'Tentang Proyek Ini'}
-                </h3>
-                <p className="text-gray-200 text-sm sm:text-base leading-relaxed font-normal">
-                  {lang === 'en' ? selectedProject.descriptionEn : selectedProject.description}
-                </p>
-              </div>
-
-              {/* Tech Stack */}
-              <div className="mb-6">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2.5 flex items-center gap-1.5">
-                  <Cpu className="w-3.5 h-3.5 text-indigo-400" />
-                  {t.projectsSec.technologies}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {selectedProject.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-primary/15 text-gray-200 hover:text-white text-xs font-medium border border-white/10 hover:border-primary/40 transition-all shadow-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action Buttons (Smart Logic - Avoids duplicate buttons for GitHub-only projects) */}
-              <div className="flex flex-col sm:flex-row gap-3 pt-2 border-t border-white/10">
-                {selectedProject.liveUrl &&
-                selectedProject.githubUrl &&
-                selectedProject.liveUrl !== selectedProject.githubUrl &&
-                !selectedProject.liveUrl.includes('github.com') ? (
-                  <>
-                    <motion.a
-                      href={selectedProject.liveUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex-1 btn-primary flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-xl shadow-lg shadow-primary/20"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <ExternalLink className="w-4 h-4" /> {t.projectsSec.liveDemo}
-                    </motion.a>
-                    <motion.a
-                      href={selectedProject.githubUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex-1 btn-outline flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-xl"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <Github className="w-4 h-4" /> {t.projectsSec.sourceCode}
-                    </motion.a>
-                  </>
-                ) : selectedProject.liveUrl || selectedProject.githubUrl ? (
-                  <motion.a
-                    href={selectedProject.githubUrl || selectedProject.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex-1 btn-primary flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-xl shadow-lg shadow-primary/20"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Github className="w-4 h-4" />
-                    <span>
-                      {(selectedProject.githubUrl || selectedProject.liveUrl || '').includes('github.com')
-                        ? (lang === 'en' ? 'View on GitHub' : 'Lihat Repositori di GitHub')
-                        : t.projectsSec.liveDemo}
-                    </span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </motion.a>
-                ) : null}
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ── Certificate Modal (Official Credential Presentation) ─── */}
+      {/* ── Certificate Modal (Official Credential Presentation - Zero Scroll Direct Full View) ─── */}
       <AnimatePresence>
         {selectedCert && (
           <motion.div
@@ -1885,7 +1866,7 @@ export default function Portfolio() {
             onClick={() => setSelectedCert(null)}
           >
             <motion.div
-              className="portfolio-modal-content"
+              className="portfolio-modal-content cert-modal-content"
               onClick={(e) => e.stopPropagation()}
               initial={{ scale: 0.92, y: 30, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
@@ -1893,26 +1874,26 @@ export default function Portfolio() {
               transition={{ duration: 0.22, ease: 'easeOut' }}
             >
               {/* Top Gradient Accent Bar */}
-              <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-5 shadow-[0_0_12px_rgba(99,102,241,0.6)]" />
+              <div className="w-full h-1 rounded-full bg-gradient-to-r from-primary via-secondary to-pink-500 mb-3 sm:mb-4 shadow-[0_0_12px_rgba(99,102,241,0.6)] flex-shrink-0" />
 
               {/* Header: Verified Status, Title & Close Button */}
-              <div className="flex justify-between items-start gap-4 mb-4">
+              <div className="flex justify-between items-start gap-4 mb-2 sm:mb-3 flex-shrink-0">
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold w-fit mb-2">
+                  <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold w-fit mb-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                     <span>{lang === 'en' ? 'Verified Official Credential' : 'Kredensial Resmi Terverifikasi'}</span>
                   </div>
-                  <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold leading-snug">
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold leading-snug">
                     <span className="gradient-text">{selectedCert.title}</span>
                   </h2>
-                  <p className="text-xs sm:text-sm text-gray-400 mt-1 font-medium flex items-center gap-1.5">
-                    <Award className="w-4 h-4 text-primary flex-shrink-0" />
+                  <p className="text-xs text-gray-400 mt-0.5 font-medium flex items-center gap-1.5">
+                    <Award className="w-3.5 h-3.5 text-primary flex-shrink-0" />
                     <span>{selectedCert.issuer}</span>
                   </p>
                 </div>
                 <motion.button
                   onClick={() => setSelectedCert(null)}
-                  className="p-2.5 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all flex-shrink-0 cursor-pointer shadow-sm"
+                  className="p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all flex-shrink-0 cursor-pointer shadow-sm"
                   whileHover={{ scale: 1.08, rotate: 90 }}
                   whileTap={{ scale: 0.92 }}
                   title="Close"
@@ -1922,20 +1903,20 @@ export default function Portfolio() {
                 </motion.button>
               </div>
 
-              {/* Adaptive Certificate Showcase (Fits A4 Landscape, 16:9, or any aspect ratio naturally) */}
-              <div className="modal-showcase-canvas my-5 p-3 sm:p-6 flex items-center justify-center bg-gradient-to-b from-[#0e0a24] to-[#080518]">
+              {/* Adaptive Certificate Showcase (Direct Full View, Fits Screen Naturally, No Scroll) */}
+              <div className="modal-showcase-canvas flex-1 min-h-0 my-2 sm:my-3 p-2 sm:p-4 flex items-center justify-center bg-gradient-to-b from-[#0e0a24] to-[#080518] rounded-2xl border border-white/10 overflow-hidden">
                 <img
                   src={selectedCert.image}
                   alt={selectedCert.title}
-                  className="w-auto h-auto max-w-full max-h-[55vh] md:max-h-[500px] object-contain rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] border border-white/10"
+                  className="w-auto h-auto max-w-full max-h-[48vh] sm:max-h-[52vh] md:max-h-[56vh] object-contain rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] border border-white/10"
                   loading="eager"
                 />
               </div>
 
               {/* Credential Metadata & Official Verification Action Bar */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-white/10">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-white/10 flex-shrink-0">
                 <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-300">
-                  <div className="p-2 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                  <div className="p-1.5 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
                     <Calendar className="w-4 h-4 text-primary" />
                   </div>
                   <div>
@@ -1954,7 +1935,7 @@ export default function Portfolio() {
                       href={(selectedCert as any).verifyUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-primary flex items-center justify-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold rounded-xl shadow-lg shadow-primary/25 w-full sm:w-auto"
+                      className="btn-primary flex items-center justify-center gap-2 px-5 py-2 text-xs sm:text-sm font-semibold rounded-xl shadow-lg shadow-primary/25 w-full sm:w-auto"
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
                     >
@@ -1966,7 +1947,7 @@ export default function Portfolio() {
                       </span>
                     </motion.a>
                   ) : (
-                    <div className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-gray-300 font-medium">
+                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs text-gray-300 font-medium">
                       <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                       <span>{lang === 'en' ? 'Registered Certificate' : 'Sertifikat Resmi Terdaftar'}</span>
                     </div>
